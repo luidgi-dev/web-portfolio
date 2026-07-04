@@ -10,6 +10,39 @@ A running log of things I learn while building this project. Short entries, newe
 
 ## Entries
 
+### 2026-07-04 — CI, Vitest, and next-intl bootstrap (ci, vitest, i18n, next-intl)
+
+Three bootstrap issues landed together. Key patterns for this subfolder repo:
+
+**GitHub Actions CI** — workflow at repo root, app in `web-portfolio/`:
+
+```yaml
+defaults:
+  run:
+    working-directory: web-portfolio
+# setup-node cache-dependency-path: web-portfolio/package-lock.json
+```
+
+Steps: `npm ci` → `npm run lint` → `npm run test:run`. Use `test:run` (not `test`) in CI — Vitest watch mode hangs in CI.
+
+**Branch protection (manual):** GitHub → Settings → Branches → rule on `main` → require status check **quality** (the CI job name). YAML alone does not block merges.
+
+**Vitest smoke test:** Extract UI into a sync Client Component (`components/home-page-content.tsx`). Vitest cannot render async Server Components. Mock `next/image` and `next/navigation` in `vitest.setup.ts`.
+
+**next-intl routing:** `i18n/routing.ts` + `i18n/request.ts` + `proxy.ts` + `app/[locale]/layout.tsx`. Default locale `en`; `/` redirects to `/en`. Root `app/layout.tsx` is pass-through only; `<html>` / `<body>` live in `[locale]/layout.tsx`.
+
+**Testing translations:** Wrap component in `NextIntlClientProvider` with locale + messages JSON in tests:
+
+```tsx
+<NextIntlClientProvider locale="fr" messages={frMessages}>
+  <HomePageContent />
+</NextIntlClientProvider>
+```
+
+**Next.js 16 note:** Locale routing lives in `proxy.ts` (formerly `middleware.ts`). Same `createMiddleware` from next-intl — only the file name changed. Default export works as-is.
+
+Takeaway: Vitest before CI (needs `test:run` script); i18n last (moves routes and updates tests). Point CI at the app subfolder explicitly.
+
 ### 2026-07-04 — ESLint, Prettier, Husky in a subfolder app (eslint, prettier, husky, lint-staged)
 
 Set up code quality tooling for LUI-116. The app lives in `web-portfolio/` while `.git` is at the repo root, so a few patterns differ from a standard single-folder Next.js project.

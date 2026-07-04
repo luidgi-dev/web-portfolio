@@ -1,0 +1,12 @@
+.bg-texture-teak {
+  background: repeating-linear-gradient(
+    89deg,
+    #4a2e12 0px,
+    #5c3a1e 2px,
+    #6b4520 4px,
+    #5c3a1e 6px,
+    #4a2e12 10px,
+    #563518 12px,
+    #4a2e12 16px
+  );
+}

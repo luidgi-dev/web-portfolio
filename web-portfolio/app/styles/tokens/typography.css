@@ -1,0 +1,5 @@
+/*
+ * Font family tokens are mapped in globals.css @theme.
+ * next/font CSS variables (--font-playfair-display, --font-dm-sans, --font-dm-mono)
+ * are injected on <html> in app/[locale]/layout.tsx.
+ */

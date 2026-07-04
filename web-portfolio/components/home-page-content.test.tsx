@@ -7,9 +7,9 @@ import frMessages from '@/messages/fr.json';
 
 describe('HomePageContent', () => {
   it.each([
-    ['en', enMessages, 'To get started, edit the page.tsx file.'],
-    ['fr', frMessages, 'Pour commencer, modifiez le fichier page.tsx.'],
-  ] as const)('renders translated title in %s', (locale, messages, title) => {
+    ['en', enMessages, 'Crafting Digital Experiences with Warm Precision'],
+    ['fr', frMessages, 'Créer des Expériences numériques avec précision'],
+  ] as const)('renders translated hero heading in %s', (locale, messages, title) => {
     render(
       <NextIntlClientProvider locale={locale} messages={messages}>
         <HomePageContent />
@@ -17,5 +17,15 @@ describe('HomePageContent', () => {
     );
 
     expect(screen.getByRole('heading', { level: 1, name: title })).toBeInTheDocument();
+  });
+
+  it('renders the bento grid layout container', () => {
+    render(
+      <NextIntlClientProvider locale="en" messages={enMessages}>
+        <HomePageContent />
+      </NextIntlClientProvider>
+    );
+
+    expect(screen.getByTestId('bento-grid')).toBeInTheDocument();
   });
 });

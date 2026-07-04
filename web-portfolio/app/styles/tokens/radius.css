@@ -1,0 +1,6 @@
+:root {
+  /* Base radius: rounded-lg (0.5rem) for chips and buttons */
+  --radius: 0.5rem;
+  /* Bento card radius: rounded-2xl (1rem) */
+  --radius-bento: 1rem;
+}

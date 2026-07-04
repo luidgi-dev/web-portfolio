@@ -39,7 +39,9 @@ Steps: `npm ci` → `npm run lint` → `npm run test:run`. Use `test:run` (not `
 </NextIntlClientProvider>
 ```
 
-**Next.js 16 note:** Locale routing lives in `proxy.ts` (formerly `middleware.ts`). Same `createMiddleware` from next-intl — only the file name changed. Default export works as-is.
+**Next.js 16 note:** Locale routing lives in `proxy.ts` (formerly `middleware.ts`). Use a named `export function proxy` (not only a default export). Same `createMiddleware` from next-intl.
+
+**Vercel 404 on `/`:** With only `app/[locale]/page.tsx`, the root path has no page unless the proxy redirects. On Vercel, if the proxy edge layer fails, `/` returns 404. Fixes: (1) set **Root Directory** to `web-portfolio` in Vercel project settings, (2) add `app/page.tsx` with `redirect('/en')` and/or `redirects` in `next.config.ts` as fallbacks, (3) redeploy after proxy fixes. Check build logs for `ƒ Proxy` and routes `/en`, `/fr`.
 
 Takeaway: Vitest before CI (needs `test:run` script); i18n last (moves routes and updates tests). Point CI at the app subfolder explicitly.
 

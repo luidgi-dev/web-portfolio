@@ -1,0 +1,2 @@
+cd web-portfolio
+npx lint-staged

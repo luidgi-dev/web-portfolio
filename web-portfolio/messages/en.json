@@ -1,21 +1,12 @@
 {
   "HomePage": {
-    "heroLabel": "Introduction",
-    "heroTitleBefore": "Crafting Digital",
-    "heroKeyword": "Experiences",
-    "heroTitleAfter": "with Warm Precision",
-    "heroDescription": "A Mid-Century Modern portfolio space: structured like a bento grid, built with intentional typography and material-inspired color tokens.",
-    "aboutLabel": "About",
-    "aboutDescription": "Product-minded engineer focused on interfaces that feel curated, not generic. Every surface follows the design system tokens.",
-    "tagsLabel": "Focus",
-    "themeLabel": "Ambiance",
-    "tagDesign": "Design Systems",
-    "tagEngineering": "Engineering",
-    "contactLabel": "Contact",
-    "contactDescription": "Reach out to discuss collaborations, product work, or creative engineering projects.",
-    "ctaText": "Get in touch",
-    "formLabel": "Inquiry",
-    "emailPlaceholder": "your@email.com",
-    "submitButton": "Send message"
+    "mockWideLabel": "Shell validation",
+    "mockWideTitleBefore": "Crafting",
+    "mockWideKeyword": "Digital",
+    "mockWideTitleAfter": "Experiences",
+    "mockWideDescription": "Wide bento cell (2 columns) validating the reusable shell: typography tokens, spacing, and theme-aware surfaces.",
+    "mockNarrowLabel": "Compact cell",
+    "mockNarrowDescription": "Narrow bento cell (1 column) using the same shell at a smaller grid span.",
+    "themeLabel": "Ambiance"
   }
 }

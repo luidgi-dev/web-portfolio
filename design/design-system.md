@@ -224,7 +224,39 @@ gap: 12px; /* Tailwind gap-3 */
 
 ## Components
 
-### Card / Bento Cell
+### BentoCard shell
+
+Reusable server component at [`web-portfolio/components/bento/bento-card.tsx`](../web-portfolio/components/bento/bento-card.tsx). All bento tiles compose this shell with their own `children` (text, interactive controls, or decorative SVG). No generic `title`/`content` props.
+
+```tsx
+<BentoCard colSpan={2} rowSpan={1} label="Featured Work" padded>
+  {/* card-specific layout */}
+</BentoCard>
+
+/* Edge-to-edge decorative art (future MCMArt cards) */
+<BentoCard colSpan={1} padded={false}>
+  <McmGeometryArt />
+</BentoCard>
+```
+
+| Prop | Type | Default | Notes |
+|------|------|---------|-------|
+| `colSpan` | `1–4` | `1` | Desktop grid span via literal Tailwind lookup |
+| `rowSpan` | `1–2` | `1` | Desktop row span via lookup |
+| `label` | `string?` | — | DM Mono `// LABEL` header; omit for unlabeled cells |
+| `padded` | `boolean` | `true` | `false` for edge-to-edge decorative content |
+| `className` | `string?` | — | Extra classes merged with `cn()` |
+| `children` | `ReactNode` | — | Composed content (Client Components allowed as children) |
+
+Grid span classes live in [`bento-grid-spans.ts`](../web-portfolio/components/bento/bento-grid-spans.ts) (no template-string interpolation).
+
+Concrete cards live under [`web-portfolio/components/bento/cards/`](../web-portfolio/components/bento/cards/).
+
+**Base shell styles:** `rounded-2xl border border-border bg-card transition-colors duration-200`, hover/focus-within `border-primary/40`.
+
+**Decorative cards:** use `padded={false}` and theme tokens `--art-*`, `--ornament-color` inside children (see moodboards).
+
+### Card / Bento Cell (legacy markup reference)
 
 ```tsx
 <div className="rounded-2xl border border-border bg-card p-6 flex flex-col">

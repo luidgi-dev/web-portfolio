@@ -1,10 +1,31 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
-import { describe, expect, it } from 'vitest';
-import { ThemeProvider } from './theme-provider';
+import { describe, expect, it, vi } from 'vitest';
+import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeSelector } from '@/components/ui/theme-selector';
 import { HomePageContent } from './home-page-content';
 import enMessages from '@/messages/en.json';
 import frMessages from '@/messages/fr.json';
+
+vi.mock('@/components/bento/cards/mock-wide-card', () => ({
+  MockWideCard: () => (
+    <section data-testid="mock-wide-card">
+      <h2>Crafting Digital Experiences</h2>
+    </section>
+  ),
+}));
+
+vi.mock('@/components/bento/cards/mock-narrow-card', () => ({
+  MockNarrowCard: () => <section data-testid="mock-narrow-card">Compact cell</section>,
+}));
+
+vi.mock('@/components/bento/cards/theme-card', () => ({
+  ThemeCard: () => (
+    <section data-testid="theme-card">
+      <ThemeSelector />
+    </section>
+  ),
+}));
 
 function renderHomePage(locale: 'en' | 'fr', messages: typeof enMessages) {
   return render(
@@ -17,19 +38,27 @@ function renderHomePage(locale: 'en' | 'fr', messages: typeof enMessages) {
 }
 
 describe('HomePageContent', () => {
-  it.each([
-    ['en', enMessages, 'Crafting Digital Experiences with Warm Precision'],
-    ['fr', frMessages, 'Créer des Expériences numériques avec précision'],
-  ] as const)('renders translated hero heading in %s', (locale, messages, title) => {
-    renderHomePage(locale, messages);
+  it('renders mock wide card heading in en', () => {
+    renderHomePage('en', enMessages);
 
-    expect(screen.getByRole('heading', { level: 1, name: title })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Crafting Digital Experiences' })
+    ).toBeInTheDocument();
   });
 
-  it('renders the bento grid layout container', () => {
+  it('renders mock wide card on fr locale', () => {
+    renderHomePage('fr', frMessages);
+
+    expect(screen.getByTestId('mock-wide-card')).toBeInTheDocument();
+  });
+
+  it('renders the bento grid with three shell cells', () => {
     renderHomePage('en', enMessages);
 
     expect(screen.getByTestId('bento-grid')).toBeInTheDocument();
+    expect(screen.getByTestId('mock-wide-card')).toBeInTheDocument();
+    expect(screen.getByTestId('mock-narrow-card')).toBeInTheDocument();
+    expect(screen.getByTestId('theme-card')).toBeInTheDocument();
   });
 
   it('renders the theme selector inside the bento grid', () => {

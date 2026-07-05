@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# web-portfolio — app
 
-## Getting Started
+The Next.js application behind my personal portfolio: a modern, ultra-clean, i18n-ready
+front end built with an emphasis on architecture and design detail.
 
-First, run the development server:
+> This is the app folder. The project vision and repo layout live in the
+> [root README](../README.md).
+
+## Tech stack
+
+| Area      | Choice                                                     |
+| --------- | ---------------------------------------------------------- |
+| Framework | [Next.js 16](https://nextjs.org) (App Router, Turbopack)   |
+| Language  | TypeScript 5                                               |
+| UI        | React 19                                                   |
+| Styling   | Tailwind CSS 4, [Geist](https://vercel.com/font) fonts     |
+| i18n      | [next-intl](https://next-intl.dev) — `en` (default) & `fr` |
+| Testing   | Vitest 4 + Testing Library (jsdom)                         |
+| Quality   | ESLint 9 (flat config) + Prettier, Husky + lint-staged     |
+| CI        | GitHub Actions (lint + tests)                              |
+| Hosting   | Vercel                                                     |
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The app redirects `/` → `/en`;
+localized pages live at `/en` and `/fr`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev           # dev server (Turbopack)
+npm run build         # production build
+npm run start         # serve the production build
+npm run lint          # ESLint
+npm run format        # Prettier --write
+npm run test          # Vitest (watch)
+npm run test:run      # Vitest (single run, used in CI)
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── layout.tsx            # root pass-through layout
+├── page.tsx              # redirects / → /en
+└── [locale]/
+    ├── layout.tsx        # <html>/<body>, fonts, NextIntlClientProvider
+    └── page.tsx          # home page
+components/
+└── home-page-content.tsx # sync Client Component (renders the home UI)
+i18n/
+├── routing.ts            # locales + default locale
+└── request.ts            # per-request messages
+messages/
+├── en.json               # English strings
+└── fr.json               # French strings
+proxy.ts                  # locale routing (Next 16 renamed middleware → proxy)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Internationalization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Routing is driven by `i18n/routing.ts` and applied in `proxy.ts` (Next.js 16 renamed
+`middleware.ts` → `proxy.ts`). Add a locale by extending `routing.locales` and adding a
+matching `messages/<locale>.json`. UI is extracted into a sync Client Component so it can
+render translations both in the app and in Vitest (which cannot render async Server
+Components).
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deployed on Vercel. Since the app is nested in the repo, set **Framework Preset →
+`Next.js`**, **Root Directory → `web-portfolio`**, and **Production Branch → `main`**.
+A build that "succeeds" but 404s on every route usually means the Framework Preset is
+still `Other` — see [`../TIL.md`](../TIL.md).

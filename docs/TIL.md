@@ -10,6 +10,20 @@ A running log of things I learn while building this project. Short entries, newe
 
 ## Entries
 
+### 2026-07-04 — Vercel: Framework Preset must be set explicitly (vercel, deploy, nextjs)
+
+The build "succeeded" on Vercel but every route returned 404 — including `/en`, not just `/`. Cause: **Framework Preset was set to `Other`**, so Vercel treated the output as plain static files and never applied the Next.js routing manifest (redirects, middleware/proxy, SSG routes). A green deploy that 404s everywhere = wrong preset, not a code bug.
+
+Fix: Vercel → Settings → General → **Framework Preset = `Next.js`**, then redeploy.
+
+Debug checklist when a Vercel deploy 404s but the app runs fine locally (`next start` → `/` 307 → `/en` 200):
+
+- Check the URL/branch/date first — a stale **preview** deployment from another branch (e.g. `dev`) can 404 while `main` is fine. The log header shows `Environment`, `Branch`, `Started`.
+- `curl -I /en` vs `curl -I /` — if `/en` 404s too, Vercel isn't serving the Next build → **Preset** or **Root Directory** wrong. If only `/` 404s → redirect/middleware issue.
+- Read the Build Logs: the Next route table (`ƒ Proxy`, `● /[locale]` → `/en /fr`) must appear. If it doesn't, Vercel didn't build Next.
+
+Takeaway: for this subfolder app, three Vercel settings must all be right — Root Directory `web-portfolio`, **Framework Preset `Next.js`**, and Production Branch `main`.
+
 ### 2026-07-04 — CI, Vitest, and next-intl bootstrap (ci, vitest, i18n, next-intl)
 
 Three bootstrap issues landed together. Key patterns for this subfolder repo:

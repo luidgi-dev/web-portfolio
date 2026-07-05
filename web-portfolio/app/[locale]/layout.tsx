@@ -1,4 +1,4 @@
-import { DM_Mono, DM_Sans, Playfair_Display } from 'next/font/google';
+import { DM_Mono, DM_Sans, Playfair_Display, Sora } from 'next/font/google';
 import '../globals.css';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
@@ -24,6 +24,12 @@ const dmMono = DM_Mono({
   variable: '--font-dm-mono',
   subsets: ['latin', 'latin-ext'],
   weight: ['400'],
+});
+
+const sora = Sora({
+  variable: '--font-sora',
+  subsets: ['latin', 'latin-ext'],
+  weight: ['600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -53,7 +59,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${playfairDisplay.variable} ${dmSans.variable} ${dmMono.variable} theme-03 h-full antialiased`}
+      className={`${playfairDisplay.variable} ${dmSans.variable} ${dmMono.variable} ${sora.variable} theme-03 h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <FilmNoiseOverlay />

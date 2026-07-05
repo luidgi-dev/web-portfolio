@@ -7,6 +7,7 @@
 @import './styles/tokens/radius.css';
 @import './styles/tokens/motion.css';
 @import './styles/utilities/bento-grid.css';
+@import './styles/utilities/materials.css';
 @import './styles/utilities/textures.css';
 
 @theme inline {
@@ -45,6 +46,7 @@
   --font-display: var(--font-playfair-display), Georgia, serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
   --font-mono: var(--font-dm-mono), 'Courier New', monospace;
+  --font-strive: var(--font-sora), var(--font-dm-sans), system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -76,5 +78,9 @@
   h2,
   h3 {
     @apply font-display;
+  }
+
+  .font-strive {
+    font-family: var(--font-strive);
   }
 }

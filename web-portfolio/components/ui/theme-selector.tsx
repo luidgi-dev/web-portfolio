@@ -29,18 +29,27 @@ export function ThemeSelector() {
             aria-label={`${theme.number} ${label}`}
             onClick={() => setThemeId(theme.id)}
             className={cn(
-              'flex min-h-[44px] flex-col items-center justify-center gap-1.5 rounded-lg border px-2 py-2.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
+              'group flex min-h-[44px] flex-col items-center gap-1.5 rounded-lg p-0.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
               isActive
-                ? 'border-primary bg-primary/5 shadow-[0_0_0_1px_var(--primary)]'
-                : 'border-border hover:border-primary/40'
+                ? 'ring-2 ring-primary ring-offset-1 ring-offset-card'
+                : 'opacity-45 hover:opacity-75'
             )}
           >
             <span
-              className="h-5 w-5 rounded-full border border-border"
-              style={{ backgroundColor: theme.swatch }}
+              className={cn(
+                'h-12 w-full rounded-xl border border-border/60 transition-transform duration-200',
+                isActive && 'scale-[1.03] shadow-sm',
+                !isActive && 'group-hover:scale-[1.02]'
+              )}
+              style={{ background: theme.swatchGradient }}
               aria-hidden="true"
             />
-            <span className="font-mono text-[8px] tracking-wider uppercase">
+            <span
+              className={cn(
+                'w-full text-center font-mono text-[7px] leading-tight tracking-wider uppercase',
+                isActive ? 'text-primary' : 'text-muted-foreground'
+              )}
+            >
               {theme.number} · {label}
             </span>
           </button>

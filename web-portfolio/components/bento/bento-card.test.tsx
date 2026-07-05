@@ -61,7 +61,7 @@ describe('BentoCard', () => {
     );
 
     const section = screen.getByText('Padded content').closest('section');
-    expect(section).toHaveClass('p-6');
+    expect(section).toHaveClass('p-4');
   });
 
   it('removes padding when padded is false', () => {
@@ -72,7 +72,7 @@ describe('BentoCard', () => {
     );
 
     const section = screen.getByText('Edge content').closest('section');
-    expect(section).not.toHaveClass('p-6');
+    expect(section).not.toHaveClass('p-4');
   });
 
   it('uses theme token classes only on the shell', () => {

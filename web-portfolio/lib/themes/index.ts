@@ -6,6 +6,7 @@ export interface ThemeMeta {
   nameEn: string;
   nameFr: string;
   swatch: string;
+  swatchGradient: string;
   colorScheme: 'light' | 'dark';
 }
 
@@ -20,6 +21,7 @@ export const themes: ThemeMeta[] = [
     nameEn: 'White Plaster',
     nameFr: 'Plâtre Blanc',
     swatch: '#6B8060',
+    swatchGradient: 'linear-gradient(180deg, #6B8060 0%, #7A9070 48%, #A07840 100%)',
     colorScheme: 'light',
   },
   {
@@ -28,6 +30,7 @@ export const themes: ThemeMeta[] = [
     nameEn: 'Terracotta Sand',
     nameFr: 'Sable Terracotta',
     swatch: '#C4472A',
+    swatchGradient: 'linear-gradient(180deg, #C4472A 0%, #D4892A 45%, #E2D3BA 100%)',
     colorScheme: 'light',
   },
   {
@@ -36,6 +39,7 @@ export const themes: ThemeMeta[] = [
     nameEn: 'Amber Chocolate',
     nameFr: 'Chocolat Ambré',
     swatch: '#C8963E',
+    swatchGradient: 'linear-gradient(180deg, #C8963E 0%, #9B6240 42%, #342010 100%)',
     colorScheme: 'dark',
   },
   {
@@ -44,6 +48,7 @@ export const themes: ThemeMeta[] = [
     nameEn: 'Oxblood Night',
     nameFr: 'Oxblood Nuit',
     swatch: '#922828',
+    swatchGradient: 'linear-gradient(180deg, #922828 0%, #5A1818 45%, #C08030 100%)',
     colorScheme: 'dark',
   },
 ];

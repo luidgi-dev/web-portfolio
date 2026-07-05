@@ -1,378 +1,409 @@
-# Design System Specification: Portfolio MCM
-
-Mid-Century Modern, Bento Grid architecture, dark warm theme.
-Version 1.1, production-ready spec.
-
----
-
-## 1. Aesthetic Foundations and Guardrails
-
-This design system translates the warmth, texture, and architectural proportions of Mid-Century Modern (MCM) interior design (circa 1950s to 1970s) into a digital workspace. The core directive is to build an environment that mirrors a curated Eames or Knoll interior, completely bypassing generic SaaS dashboard tropes.
-
-### Banned elements
-
-To protect the authenticity of this design system, the following are hard banned:
-
-- SaaS or tech palettes: no neon purples, tech blues (#0066FF), or high contrast corporate gradients.
-- Generic components: no sharp white cards on sterile light gray backgrounds.
-- Tech cliches: no generic utility icons (rocket ships, AI brains, gear icons).
-- Overused fonts: Inter (for headings), IBM Plex, Space Grotesk, Bebas Neue.
+# Design System — Portfolio MCM
+**Mid-Century Modern · Bento Grid · Warm Ambiances**
+*Version 0.2 — July 2025*
 
 ---
 
-## 2. Design Tokens: Colors
+## Aesthetic Direction
 
-Color tokens map authentic MCM materials (teak, brass, smoked oak) to Shadcn CSS variables. Values are stored as RGB channels (space separated, no `rgb()` wrapper) so Tailwind opacity modifiers such as `bg-primary/40` work correctly.
+The portfolio draws from **Mid-Century Modern** interiors (1950s–70s) — not generic SaaS design. Guiding idea: a showcase space that feels like an Eames apartment, not a Notion dashboard. Warmth, texture, material, controlled proportions.
 
-### Core structural palette (dark theme, default and only theme)
+**Visual references:** teak and walnut furniture, aged cognac leather, polished brass, Nelson lamps, Danish sideboards, Bauhaus geometry, warm golden light.
 
-| Token | RGB | Hex reference | Material | Usage |
-|---|---|---|---|---|
-| `--background` | 31 17 8 | #1F1108 | Dark Chocolate | Main app background canvas |
-| `--card` | 39 21 9 | #271509 | Deep Walnut | Bento grid card surfaces and panels |
-| `--foreground` | 240 230 208 | #F0E6D0 | Warm Cream | High contrast body copy and primary typography |
-| `--primary` | 200 150 62 | #C8963E | Brass Gold | Interactive accents, CTAs, italic highlights |
-| `--primary-foreground` | 31 17 8 | #1F1108 | - | Text on solid `--primary` surfaces |
-| `--secondary` | 58 34 16 | #3A2210 | Walnut Brown | Secondary surfaces, nested containers |
-| `--secondary-foreground` | 240 230 208 | #F0E6D0 | - | Text on `--secondary` surfaces |
-| `--muted` | 44 26 9 | #2C1A09 | Smoked Oak | Low priority surfaces, inactive tabs, form inputs |
-| `--muted-foreground` | 156 139 110 | #9C8B6E | Aged Parchment | Editorial labels, captions, metadata |
-| `--accent` | 155 98 64 | #9B6240 | Aged Leather | Secondary accents, hover backgrounds |
-| `--accent-foreground` | 240 230 208 | #F0E6D0 | - | Text on `--accent` surfaces |
-| `--border` | 200 150 62 (at 14% opacity) | rgba(200,150,62,0.14) | Brass Hairline | Structural lines and grid dividers |
-| `--ring` | 200 150 62 | #C8963E | Brass | Focus indicator for keyboard accessibility |
-| `--destructive` | 160 78 48 | #A04E30 | Terracotta | Destructive actions, error states |
-| `--destructive-foreground` | 240 230 208 | #F0E6D0 | - | Text on `--destructive` surfaces |
-
-### Utility accent palette (badges and content tags only, not core surface tokens)
-
-| Name | RGB | Hex | Usage |
-|---|---|---|---|
-| Mustard Yellow | 212 137 42 | #D4892A | High energy, active status badges |
-| Olive Green | 74 88 48 | #4A5830 | Operational tags, secondary metrics |
-| Terracotta | 160 78 48 | #A04E30 | Soft error alerts, destructive actions |
-| Teak Accent | 92 58 30 | #5C3A1E | Purely decorative borders and backgrounds |
-
-Accessibility note: if `--background` (31 17 8) feels too heavy in user testing, swap to Option Mid (40 22 10 / #28160A) to preserve the warm register while raising mid tone contrast.
-
-### Contrast check (WCAG, against background 31 17 8)
-
-| Pair | Ratio | Result |
-|---|---|---|
-| foreground on background | ~14.8:1 | Passes AAA |
-| primary on background | ~6.9:1 | Passes AA (normal text) |
-| muted-foreground on background | ~5.5:1 | Passes AA (normal text) |
-| card on background | ~1.05:1 | Nearly invisible, separation relies on border, not on contrast |
-
-Recommendation: whenever a component needs a visible surface break (not just a nested container), add a `border-hairline` rather than relying on the background shift alone.
+**What we absolutely avoid:**
+- SaaS blue `#0066FF` or purple
+- White cards on gray backgrounds
+- "Rocket" or "AI brain" icons
+- Magenta/cyan gradients
+- Overused Google Fonts: IBM Plex, Space Grotesk, Bebas Neue
 
 ---
 
-## 3. Typography Architecture
+## Ambiance System — 4 MCM Tones
 
-Three Google Fonts, loaded via `next/font`, with the `latin-ext` subset enabled for correct rendering of French accented characters (bilingual FR/EN content).
+The portfolio offers 4 interchangeable ambiances via a "timeline" selector. Same aesthetic, same typographic logic — only the tones change. From lightest to deepest.
 
-```typescript
-// tailwind.config.ts, fontFamily extension
-fontFamily: {
-  display: ["var(--font-display)", "Georgia", "serif"],
-  sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-  mono: ["var(--font-mono)", "Courier New", "monospace"],
-},
+```
+○━━━━●━━━━○━━━━○
+01    02    03    04
 ```
 
-### Semantic roles
+| # | Name | Background | Primary | Interior Inspiration |
+|---|------|-----------|---------|----------------------|
+| **01** | White Plaster | `#F4EFE6` | `#6B8060` Sage | Mediterranean white, arches, linen |
+| **02** | Terracotta Sand | `#F5EAD8` | `#C4472A` Terracotta | Moroccan kitchen, sand tadelakt |
+| **03** | Amber Chocolate | `#271608` | `#C8963E` Brass | MCM living room, olive sofa, pendant light |
+| **04** | Oxblood Night | `#160606` | `#922828` Oxblood | Burgundy bathroom, tiling, aged brass |
 
-- **Playfair Display** (display font): exclusively for h1, h2, h3. Always Bold (700) or Black (900). Use `font-style: italic` on exactly one critical keyword per hero line, mimicking vintage editorial layouts (for example, "Crafting Digital Experiences"). Tight tracking (`tracking-tight` or -0.02em) required above 32px.
-- **DM Sans** (body font): long form paragraphs, descriptions, UI controls. Light (300), Regular (400), or Medium (500). Readable line height (`leading-relaxed`, 1.6 to 1.7).
-- **DM Mono** (code and metadata font): technical details, timestamps, tags, small labels. Mandatory uppercase and wide tracking (`tracking-[0.3em]`) when used as a top level card tag.
+### React / CSS Implementation
 
-### Typographic scale matrix
+Themes are defined in [`web-portfolio/app/styles/tokens/themes.css`](../web-portfolio/app/styles/tokens/themes.css) as four CSS classes:
 
-| Use | Token | Tailwind classes | Tracking |
-|---|---|---|---|
-| Page hero | h1 | `text-display font-bold text-5xl md:text-7xl` | -0.02em |
-| Section header | h2 | `text-display font-bold text-2xl md:text-4xl` | -0.01em |
-| Bento card title | h3 | `text-display font-semibold text-lg md:text-xl` | 0 |
-| Body / paragraph | p | `text-sans font-normal text-base leading-relaxed` | 0 |
-| Small metadata / label | span | `text-mono font-normal text-[10px] uppercase` | 0.35em |
-| Code snippet | code | `text-mono font-normal text-xs` | 0 |
+| Class | Ambiance | Mode | Default |
+|-------|----------|------|---------|
+| `.theme-01` | Plâtre Blanc | light | |
+| `.theme-02` | Sable Terracotta | light | |
+| `.theme-03` | Chocolat Ambré | dark | yes |
+| `.theme-04` | Oxblood Nuit | dark | |
+
+Apply the active class on `<html>`. Shadcn components read standard tokens (`--background`, `--primary`, etc.) automatically. Extended MCM tokens (`--glow-color`, `--ornament-color`, `--project-gradient`, `--art-*`) are theme-scoped for decoration and future project cards.
+
+```tsx
+// ThemeProvider (web-portfolio/components/theme-provider.tsx)
+// - Applies .theme-01 … .theme-04 on document.documentElement
+// - Persists choice in localStorage (key: mcm-theme)
+// - Default: theme-03 (Chocolat Ambré)
+```
+
+Each theme block defines:
+
+- **Shadcn standard tokens**: `--background`, `--card`, `--foreground`, `--primary`, `--border`, `--ring`, etc.
+- **Extended MCM tokens**: `--glow-color`, `--glow-color-strong`, `--ornament-color`, `--card-frosted`, `--project-gradient`, `--tech-bg-start`, `--art-*`, …
+
+Transition on theme switch: `background-color 0.55s ease`, `color 0.4s ease` on `<html>`.
+
+### Ambiance Selector
+
+`ThemeSelector` lives inside a bento cell (2×2 grid of swatches) for local testing and contrast validation:
+
+```tsx
+<BentoCard label="Ambiance">
+  <ThemeSelector />
+</BentoCard>
+```
+
+Each swatch shows the theme primary color, number, and localized name. Active state: `border-primary`, `bg-primary/5`, focus ring. Layout is flexible (timeline or bento grid); current implementation uses a compact 2×2 square.
+
+Reference moodboards: [`design/moodboards/`](moodboards/) (one folder per ambiance).
 
 ---
 
-## 4. Structural Layout and Spacing
+## Colors
 
-### The asymmetric bento grid
+Token values are **per theme** (see `themes.css`). Below: summary per ambiance. Full values live in code and moodboards.
 
-Explicit 4 column asymmetric CSS grid container. Layouts must never look uniform, vary column and row spans to control visual interest and flow.
+### 01 · Plâtre Blanc (light)
+
+| Token | Hex | Notes |
+|-------|-----|-------|
+| `--background` | `#F4EFE6` | Mediterranean plaster |
+| `--primary` | `#6B8060` | Sage green |
+| `--foreground` | `#2A1E0E` | Dark espresso text |
+| `--border` | `rgba(107,128,96,0.20)` | Sage hairline |
+
+Accents: Honey `#A07840`, Stone `#C4B090`, Olive `#7A9070`.
+
+### 02 · Sable Terracotta (light)
+
+| Token | Hex | Notes |
+|-------|-----|-------|
+| `--background` | `#F5EAD8` | Warm sand |
+| `--primary` | `#C4472A` | Terracotta |
+| `--foreground` | `#2C1408` | Dark walnut text |
+| `--accent` | `#5A6B30` | Olive green |
+| `--border` | `rgba(196,71,42,0.16)` | Terracotta hairline |
+
+Accents: Sunset `#D4892A`, Chile Rojo `#A03020`.
+
+### 03 · Chocolat Ambré (dark, default)
+
+| Token | Hex | Notes |
+|-------|-----|-------|
+| `--background` | `#271608` | MCM lounge |
+| `--primary` | `#C8963E` | Brass gold |
+| `--foreground` | `#F0E2C8` | Warm cream |
+| `--accent` | `#9B6240` | Cognac leather |
+| `--border` | `rgba(200,150,62,0.16)` | Brass hairline |
+
+Accents: Mustard `#D4892A`, Olive `#4A5828`.
+
+### 04 · Oxblood Nuit (dark)
+
+| Token | Hex | Notes |
+|-------|-----|-------|
+| `--background` | `#160606` | Deep burgundy shadow |
+| `--primary` | `#922828` | Oxblood |
+| `--foreground` | `#E8D4B8` | Aged parchment |
+| `--secondary` | `#5A1818` | Deep bordeaux |
+| `--accent` | `#C08030` | Aged brass |
+| `--border` | `rgba(146,40,40,0.22)` | Oxblood hairline |
+
+### Shared token rules
+
+- Components must use semantic classes: `bg-background`, `bg-card`, `text-foreground`, `text-primary`, `border-border`.
+- Never hardcode hex in components; change ambiance via `.theme-0X` on `<html>`.
+- `--glow-color` / `--glow-color-strong` drive `WarmAmbientGlow` and hero halos.
+- `--ornament-color` drives SVG strokes and decorative lines (use `var(--ornament-color)`, not fixed brass).
+
+---
+
+## Typography
+
+### Font stack
+
+```
+Display  →  Playfair Display (Google Fonts)
+Body     →  DM Sans (Google Fonts)
+Mono     →  DM Mono (Google Fonts)
+```
+
+**Google Fonts import:**
+```css
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@300;400;500&display=swap');
+```
+
+**Custom Tailwind classes:**
+```css
+.font-display { font-family: "Playfair Display", Georgia, serif; }
+.font-body    { font-family: "DM Sans", system-ui, sans-serif; }
+.font-code    { font-family: "DM Mono", "Courier New", monospace; }
+```
+
+### Role of each font
+
+**Playfair Display** → All H1–H3 headings. Always bold (700) or extra-bold (900). Italic is a weapon: use it on one keyword to make it shine (e.g. *Digital*, *Craft*, *Studio*). Negative letter-spacing: `-0.02em`.
+
+**DM Sans** → Body copy, descriptions, paragraphs. Weights 400 (normal) and 500 (medium). Generous line-height: `1.6–1.7`. It's the neutral backdrop that lets the serif headings breathe.
+
+**DM Mono** → Labels, captions, metadata, tags, code snippets, timestamps. Always uppercase + wide letter-spacing (`0.3em–0.5em`) when used as a label. Weight 400 or 300 for secondary information.
+
+### Typographic scale (recommended)
+
+| Usage | Size | Font | Weight | Tracking |
+|-------|--------|------|-------|---------|
+| Hero H1 | `clamp(3rem, 6vw, 6rem)` | Playfair Display | 700 | `-0.02em` |
+| Section H2 | `clamp(1.8rem, 3vw, 2.8rem)` | Playfair Display | 700 | `-0.01em` |
+| Card Title H3 | `1.25rem–1.5rem` | Playfair Display | 600 | `0` |
+| Body | `0.875rem–1rem` | DM Sans | 400 | `0` |
+| Small metadata / Label | `0.625rem–0.75rem` | DM Mono | 400 | `0.35em` |
+| Code | `0.75rem` | DM Mono | 400 | `0` |
+
+---
+
+## Spacing & Layout
+
+### Grid — Bento
+
+The page structure is an **asymmetric CSS Grid**, not a grid of identical cards. Cells have varied sizes (`col-span`, `row-span`) to create visual rhythm.
 
 ```css
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 12px; /* Tailwind gap-3 */
-}
-
-@media (min-width: 768px) {
-  .bento-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
+/* Base bento grid */
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 12px; /* Tailwind gap-3 */
 ```
 
-### Spacing scale
+**Composition principles:**
+- 1 large "hero" cell (2–3 columns) always present
+- Mix heights and widths — never a 100% uniform grid
+- Important cells = more surface area
+- Breathing room: minimum inner padding `1.25rem` (p-5), typically `1.5rem` (p-6)
 
-| Tailwind variable | Value | Usage |
-|---|---|---|
-| `gap-1` | 4px | Micro spacing (inner chip layout, icon spacing) |
-| `gap-2` | 8px | Inner cell structural layout (label to title) |
-| `gap-3` | 12px | Canonical bento grid gutter |
-| `p-4` | 16px | Inner padding for compact bento units |
-| `p-6` | 24px | Canonical inner padding for standard bento units |
-| `p-8` | 32px | Hero / feature showcase padding |
-| `mb-10` | 40px | Structural distance between major layout sections |
+### Recurring spacing values
 
-### Corner radii policy
+| Value | Usage |
+|--------|-------|
+| `4px` (gap-1) | Very tight inner spacing (tags, chips) |
+| `8px` (gap-2) | Between elements within the same cell |
+| `12px` (gap-3) | Gap between bento cells |
+| `16px` (p-4) | Padding for compact cells |
+| `24px` (p-6) | Padding for standard cells |
+| `36px` (p-9) | Padding for hero cells |
+| `40px` (mb-10) | Separation between major sections |
 
-To replicate the soft, organic lines of Mid Century wooden furniture:
-
-- Main bento cards: fixed at `rounded-2xl` (1rem / 16px).
-- Sub elements, chips, buttons: `rounded-lg` (0.5rem) or `rounded-full`.
-
-### Elevation and motion tokens (recommended addition)
-
-The original spec used ad hoc `duration-200` values with no shared scale. Standardizing avoids drift as more components are built.
+### Border-radius
 
 ```css
-:root {
-  /* motion */
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 150ms;
-  --duration-standard: 200ms;
-  --duration-slow: 320ms;
-
-  /* elevation, used sparingly, MCM favors flat surfaces over drop shadows */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.24);
-  --shadow-modal: 0 12px 32px rgba(0, 0, 0, 0.45);
-}
-```
-
-Guidance: reserve `--shadow-modal` for the full screen modal (LUI-130) only. Bento cards rely on the border token for separation, not shadows.
-
----
-
-## 5. Primitive Component Specifications
-
-### Component A: Core Bento Grid Cell (`BentoCard.tsx`)
-
-```tsx
-import React from "react";
-
-interface BentoCardProps {
-  label: string;
-  children: React.ReactNode;
-  className?: string;
-}
-
-export const BentoCard: React.FC<BentoCardProps> = ({ label, children, className = "" }) => {
-  return (
-    <section
-      className={`group relative rounded-2xl border border-border bg-card p-6 flex flex-col overflow-hidden transition-all duration-200 ease-out hover:border-primary/40 ${className}`}
-    >
-      {/* Structural label, mandatory system rule */}
-      <span className="font-mono text-[9px] tracking-[0.4em] text-muted-foreground uppercase mb-4 block">
-        // {label}
-      </span>
-      <div className="flex-1 w-full">{children}</div>
-    </section>
-  );
-};
-```
-
-### Component B: Editorial Category Badge (`McmTag.tsx`)
-
-```tsx
-import React from "react";
-
-interface McmTagProps {
-  children: React.ReactNode;
-  variant?: "default" | "accent";
-}
-
-export const McmTag: React.FC<McmTagProps> = ({ children, variant = "default" }) => {
-  const baseStyle =
-    "font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full border transition-colors duration-200";
-  const styles =
-    variant === "accent"
-      ? `${baseStyle} border-primary/30 text-primary bg-primary/5`
-      : `${baseStyle} border-border text-muted-foreground bg-transparent`;
-
-  return <span className={styles}>{children}</span>;
-};
-```
-
-### Component C: Typographic Call to Action Link (`CtaLink.tsx`)
-
-```tsx
-import React from "react";
-
-interface CtaLinkProps {
-  href: string;
-  text: string;
-}
-
-export const CtaLink: React.FC<CtaLinkProps> = ({ href, text }) => {
-  return (
-    <a
-      href={href}
-      className="inline-flex items-center gap-2 min-h-[44px] text-foreground/80 group hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors duration-200"
-    >
-      <span className="font-mono uppercase tracking-widest text-[9px]">{text}</span>
-      <span
-        className="font-sans text-xs transform transition-transform duration-200 ease-out group-hover:translate-x-1"
-        aria-hidden="true"
-      >
-        &#8594;
-      </span>
-    </a>
-  );
-};
-```
-
-Note: `min-h-[44px]` added to meet the project's touch target requirement. The original spec had no minimum size on this interactive element.
-
-### Component D: Primary Button (`Button.tsx`, recommended addition)
-
-The original spec had no button, despite CTAs being a core part of the flagship and contact sections.
-
-```tsx
-import React from "react";
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "destructive";
-}
-
-export const Button: React.FC<ButtonProps> = ({ variant = "primary", className = "", children, ...props }) => {
-  const base =
-    "inline-flex items-center justify-center gap-2 min-h-[44px] px-6 rounded-lg font-mono text-[10px] uppercase tracking-widest transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-40 disabled:pointer-events-none";
-
-  const variants = {
-    primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-    destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-  };
-
-  return (
-    <button className={`${base} ${variants[variant]} ${className}`} {...props}>
-      {children}
-    </button>
-  );
-};
-```
-
-### Component E: Form Input (`Input.tsx`, recommended addition)
-
-The original spec assigned `--muted` to form inputs but never specified the component.
-
-```tsx
-import React from "react";
-
-export const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = ({ className = "", ...props }) => {
-  return (
-    <input
-      className={`min-h-[44px] w-full rounded-lg border border-border bg-muted px-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring aria-[invalid=true]:border-destructive ${className}`}
-      {...props}
-    />
-  );
-};
+--radius: 1rem; /* 16px — standard border-radius */
+/* Main cards: rounded-2xl (1rem) */
+/* Tags / chips: rounded-lg or rounded-full */
+/* Color swatches: rounded-lg */
 ```
 
 ---
 
-## 6. Micro-Interactions and CSS Materials
+## Components
 
-### Behavioral state table
-
-| Target UI node | Trigger | Animation blueprint |
-|---|---|---|
-| BentoCard box | mouseenter / focus-within | Smooth border color interpolation to `primary/40`. `duration-200 ease-out`. No scaling. |
-| CtaLink indicator | mouseenter / focus-visible | Horizontal translation: `transform: translateX(4px)` applied to the arrow character only. |
-| Color swatch component | mouseenter | Vector scaling `scale(1.06)` combined with a soft warm ambient drop shadow. |
-| Any interactive element | focus-visible | 2px `--ring` outline, never removed via `outline-none` without a replacement ring. |
-
-Note: hover only interactions do not work on touch devices. Every hover effect above must have a `focus-visible` equivalent, already reflected in the `CtaLink`, `Button`, and `Input` components.
-
-### Teak wood texture (SVG/CSS hybrid)
-
-```css
-.bg-texture-teak {
-  background: repeating-linear-gradient(
-    89deg,
-    #4a2e12 0px,
-    #5c3a1e 2px,
-    #6b4520 4px,
-    #5c3a1e 6px,
-    #4a2e12 10px,
-    #563518 12px,
-    #4a2e12 16px
-  );
-}
-```
-
-### Matte textured film overlay (global page overlay)
-
-Place at the core layout root (`layout.tsx`), right beneath the opening body tag:
+### Card / Bento Cell
 
 ```tsx
-export const FilmNoiseOverlay = () => (
-  <div
-    className="fixed inset-0 pointer-events-none z-50 opacity-[0.022]"
-    style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-    }}
-  />
+<div className="rounded-2xl border border-border bg-card p-6 flex flex-col">
+  <span className="font-code text-[9px] tracking-[0.4em] text-muted-foreground uppercase mb-4">
+    Label Section
+  </span>
+  {/* content */}
+</div>
+```
+
+**Rule:** Every cell starts with a small `DM Mono uppercase tracking-wide` label in `muted-foreground`. It's the design system's signature.
+
+### Tag / Chip
+
+```tsx
+<span className="font-code text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-border text-muted-foreground">
+  Next.js
+</span>
+
+/* Brass accent variant */
+<span className="... border-primary/30 text-primary/80">
+  Featured
+</span>
+```
+
+### CTA Button
+
+```tsx
+<button className="flex items-center gap-2 text-foreground/80 text-xs group hover:text-primary transition-colors">
+  <span className="font-code uppercase tracking-widest text-[9px]">View Project</span>
+  <span className="transition-transform group-hover:translate-x-1">→</span>
+</button>
+```
+
+No solid-filled rectangular button except in exceptional cases. CTAs are discreet and typographic — the `→` arrow is the only affordance.
+
+### Section Divider
+
+```tsx
+<div className="flex items-center gap-3">
+  <span className="font-code text-[9px] tracking-[0.4em] text-primary/70 uppercase">Featured Work</span>
+  <div className="flex-1 h-px bg-border" />
+  <span className="font-code text-[9px] text-muted-foreground">2024</span>
+</div>
+```
+
+---
+
+## Textures & Materials (CSS)
+
+### Teak Wood Grain
+
+```css
+background: repeating-linear-gradient(
+  89deg,
+  #4A2E12 0px, #5C3A1E 2px, #6B4520 4px,
+  #5C3A1E 6px, #4A2E12 10px, #563518 12px, #4A2E12 16px
 );
 ```
 
-### Warm architectural ambient glow (inner highlights)
+### Leather (aged)
+
+```css
+background-color: #7A4828;
+background-image:
+  radial-gradient(ellipse at 25% 35%, rgba(255,255,255,0.12) 0%, transparent 55%),
+  radial-gradient(ellipse at 75% 65%, rgba(0,0,0,0.2) 0%, transparent 50%),
+  repeating-linear-gradient(120deg, transparent 0px, rgba(0,0,0,0.04) 1px, transparent 2px);
+```
+
+### Brass (gradient)
+
+```css
+background: linear-gradient(145deg, #D4A83A 0%, #A87B2E 40%, #C8963E 70%, #8B6422 100%);
+```
+
+### Noise grain (full-page overlay)
 
 ```tsx
-export const WarmAmbientGlow = () => (
-  <div
-    className="absolute -top-24 -right-24 w-64 h-64 rounded-full pointer-events-none mix-blend-screen opacity-20 filter blur-xl"
-    style={{ background: "radial-gradient(circle, rgba(214,137,42,0.4), transparent 70%)" }}
-  />
-);
+<div
+  className="fixed inset-0 pointer-events-none z-50 opacity-[0.025]"
+  style={{
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+  }}
+/>
 ```
 
 ---
 
-## 7. Icon System (recommended addition)
+## MCM Decorative Elements
 
-The original spec banned generic utility icons but did not specify a replacement system, which risks inconsistent choices later (LUI-132 tech stack tile, LUI-130 modal tabs).
+### Concentric circles (brass ornament)
 
-Recommendation: `lucide-react` (already available in the stack) restricted to a small, curated subset. Do not use icons for decoration, only for genuine affordances (close, external link, locale switch). Size fixed at `16px` or `20px`, colored with `text-muted-foreground` by default, `text-primary` on hover or active state, never a filled/solid icon style (keeps the line based, architectural feel).
+Use SVGs of circles, arcs, and lines for background decoration. Always `opacity-[0.06]` to `opacity-10`. Never aggressive, never strongly colored.
+
+```tsx
+<svg className="absolute -bottom-16 -right-16 w-80 h-80 opacity-[0.06]" viewBox="0 0 300 300">
+  <circle cx="200" cy="200" r="180" fill="none" stroke="#C8963E" strokeWidth="1.5" />
+  <circle cx="200" cy="200" r="130" fill="none" stroke="#C8963E" strokeWidth="1" />
+  <circle cx="200" cy="200" r="80" fill="#C8963E" opacity="0.5" />
+  <line x1="0" y1="200" x2="300" y2="200" stroke="#C8963E" strokeWidth="0.75" />
+  <line x1="200" y1="0" x2="200" y2="300" stroke="#C8963E" strokeWidth="0.75" />
+</svg>
+```
+
+### MCM geometric art (Bauhaus)
+
+Composition of half-circles, solid rectangles, dividing lines. Palette: Mustard + Brass + Cream + Olive. Inspiration: Bauhaus posters, Alexander Girard artworks.
+
+```tsx
+<svg viewBox="0 0 200 220">
+  <rect width="200" height="220" fill="#1E1009" />
+  <rect x="0" y="140" width="200" height="80" fill="#3A2210" />
+  <circle cx="100" cy="95" r="70" fill="#D4892A" />
+  <circle cx="100" cy="78" r="48" fill="#C8963E" />
+  <path d="M 52 78 A 48 48 0 0 1 148 78" fill="#F0E6D0" />
+  <circle cx="100" cy="60" r="22" fill="#130A04" />
+  <rect x="0" y="155" width="90" height="65" fill="#4A5830" />
+  <line x1="100" y1="0" x2="100" y2="220" stroke="#130A04" strokeWidth="4" />
+</svg>
+```
+
+### Warm glow (ambiance halo)
+
+Uses theme token `--glow-color-strong`:
+
+```tsx
+<div
+  className="absolute -top-16 -right-16 w-48 h-48 rounded-full pointer-events-none blur-xl"
+  style={{ background: "radial-gradient(circle, var(--glow-color-strong), transparent 70%)" }}
+/>
+```
 
 ---
 
-## 8. Accessibility Requirements
+## Micro-interactions
 
-- All interactive elements: minimum `44px` touch target (`min-h-[44px]`, matched with adequate horizontal padding).
-- All interactive elements: visible `focus-visible` ring using the `--ring` token, never suppressed without replacement.
-- All hover only effects must have a keyboard or touch equivalent (`focus-visible`, `focus-within`, or an active state).
-- ARIA roles required on the modal (LUI-130) and tabs, per the project's technical constraints.
-- Verify diacritic rendering (French accents) for Playfair Display and DM Sans using the `latin-ext` subset.
+| Element | Behavior |
+|---------|-------------|
+| Color swatch | `scale(1.08)` on hover + displays name/hex |
+| Card cell | `border-color` shifts to `primary/40` on hover |
+| CTA arrow | `translateX(4px)` on hover on the `→` |
+| Tech tag | `border-color` shifts to `primary/40`, `color` shifts to `primary` |
+| Transitions | Always `duration-200`, `ease-out` — never a bounce |
 
 ---
 
-## 9. QA Checklist
+## Editorial Rules (copy)
 
-Before shipping any UI component, confirm every item:
+- **Headlines**: short, affirmative, never a verb — "Crafting Experiences", "Studio Platform", "Digital Craft"
+- **Display italics**: 1 keyword per headline can be italicized in Playfair for an editorial effect
+- **Mono labels**: always UPPERCASE + wide tracking. E.g.: `FEATURED PROJECT`, `STACK`, `2024`
+- **Body**: conversational, direct, light — no tech buzzwords
+- **Language**: mixing FR/EN is acceptable in this portfolio context
 
-- [ ] The block leads with a small DM Mono label styled as an uppercase, tracked string.
-- [ ] Primary copy uses Playfair Display for headlines and DM Sans for paragraphs.
-- [ ] All container structures use theme variables (`bg-background`, `bg-card`, `border-border`).
-- [ ] Curves are restricted to `rounded-2xl` on structural cells.
-- [ ] No high contrast tech gradients or banned utility icon styles.
-- [ ] Every interactive element has a `focus-visible` state and a `min-h-[44px]` touch target.
-- [ ] Component supports `next-intl` localization without text clipping (test with the longer of the two locales).
+---
+
+## Checklist Before Building a Component
+
+- [ ] Does the component's label use `DM Mono uppercase tracking-wide muted-foreground`?
+- [ ] Is the main heading in `Playfair Display`?
+- [ ] Does the background use theme tokens `bg-background` / `bg-card`?
+- [ ] Are borders `border-border` (brass rgba)?
+- [ ] Is there a subtle MCM decorative element (circle, glow, line)?
+- [ ] Are transitions `duration-200`?
+- [ ] Is the density generous (no cramped content)?
+- [ ] Does the component work on **all four ambiances** (light 01–02 and dark 03–04)?
+
+---
+
+## Upcoming / Design TODO
+
+- [x] Four ambiance token sets (01–04) in `themes.css`
+- [x] ThemeProvider + ThemeSelector for local validation
+- [ ] WCAG contrast audit per ambiance (foreground/background, primary/background)
+- [ ] Standardized `ProjectCard` component
+- [ ] `TechBadge` component with variants per theme accent swatches
+- [ ] Portfolio navigation / header
+- [ ] Project detail page (editorial layout, MCM)
+- [ ] Responsive mode: breakpoint 768px (2-column bento) and 480px (1 column)
+- [ ] Bento cell entrance animation (light stagger, `motion`)
+- [ ] Decide production default ambiance and whether to hide ThemeSelector

@@ -5,6 +5,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { FilmNoiseOverlay } from '@/components/film-noise-overlay';
+import { ThemeProvider } from '@/components/theme-provider';
 import { routing } from '@/i18n/routing';
 
 const playfairDisplay = Playfair_Display({
@@ -52,11 +53,13 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${playfairDisplay.variable} ${dmSans.variable} ${dmMono.variable} h-full antialiased`}
+      className={`${playfairDisplay.variable} ${dmSans.variable} ${dmMono.variable} theme-03 h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <FilmNoiseOverlay />
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

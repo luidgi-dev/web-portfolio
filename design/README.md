@@ -6,29 +6,47 @@ This folder is the source of truth for the visual direction of the portfolio. It
 
 ```
 design/
-  inspirations/       reference images collected for the Bento / MCM aesthetic
-  design-system.md     the design system spec (tokens, typography, components, QA checklist)
-  README.md            this file
+  inspirations/          layout, palette, and typography reference screenshots
+  moodboards/            four ambiance boards (one folder per theme)
+    white-plaster/       01 · Plâtre Blanc (light)
+    terracota-sand/      02 · Sable Terracotta (light)
+    amber-chocolate/     03 · Chocolat Ambré (dark, default)
+    oxblood-night/       04 · Oxblood Nuit (dark)
+  design-system.md       tokens, typography, components, multi-theme spec
+  README.md              this file
 ```
 
 ### `inspirations/`
 
-Reference material used to build the moodboard and lock the aesthetic direction: layout references, color/material studies, typography pairings, and anything else that shaped the MCM Bento Grid direction.
+Reference material for layout, color studies, typography pairings, and MCM interior architecture. Saved as local PNG/JPEG copies (not hotlinked Pinterest URLs).
 
-For now this holds saved screenshots (PNGs). More will be added over time.
+### `moodboards/`
 
-Note on Pinterest: avoid linking directly to Pinterest posts or pins. Links can break or disappear, and the images themselves aren't ours to redistribute by reference. Save a local copy of the image instead (screenshot or download) and, if useful, add a short caption noting what it was used for (palette, layout, texture, etc). Treat this folder as private working reference, not something meant to be published as-is.
+One folder per ambiance. Each moodboard defines the palette, typography pairing, and component tone for that theme. Token values are transcribed into [`web-portfolio/app/styles/tokens/themes.css`](../web-portfolio/app/styles/tokens/themes.css).
 
 ### `design-system.md`
 
-The production-ready design system spec: color tokens, typography scale, spacing/grid rules, component specs, micro-interactions, accessibility requirements, and a QA checklist. This is the document that gets translated into actual code (`globals.css`, `tailwind.config.ts`, component files) in `web-portfolio`.
+Production-ready spec: four interchangeable ambiances, Shadcn-compatible CSS variables, extended MCM tokens, typography, bento grid, components, and QA checklist.
+
+## Multi-theme architecture
+
+The portfolio uses **four CSS theme classes** (`.theme-01` … `.theme-04`) applied on `<html>`. Same components, same typography, different warm interior palettes.
+
+| Class | Ambiance | Mode |
+|-------|----------|------|
+| `.theme-01` | Plâtre Blanc | light |
+| `.theme-02` | Sable Terracotta | light |
+| `.theme-03` | Chocolat Ambré | dark (default) |
+| `.theme-04` | Oxblood Nuit | dark |
+
+Local testing: `ThemeSelector` bento cell on the homepage switches themes and persists choice in `localStorage` (`mcm-theme`).
 
 ## How this connects to the code
 
 `web-portfolio` should never invent visual decisions on the fly. The rule is:
 
-1. Visual direction is explored and locked here first (moodboard, references, `design-system.md`).
-2. Implementation in `web-portfolio` (tokens, components, layout) follows what's written here.
-3. If something needs to change during implementation (a token doesn't work in practice, a component needs an addition), update `design-system.md` first, then the code, so this folder stays the accurate reference rather than going stale.
+1. Visual direction is explored and locked here first (moodboards, references, `design-system.md`).
+2. Implementation in `web-portfolio` (tokens in `themes.css`, components, layout) follows what's written here.
+3. If something needs to change during implementation (a token doesn't work in practice, contrast fails WCAG), update `design-system.md` and moodboards first, then the code.
 
 In short: `design/` is the why and what, `web-portfolio` is the how.

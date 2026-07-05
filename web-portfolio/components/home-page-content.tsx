@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { CtaLink } from '@/components/ui/cta-link';
 import { Input } from '@/components/ui/input';
 import { McmTag } from '@/components/ui/mcm-tag';
+import { ThemeSelector } from '@/components/ui/theme-selector';
 
 export function HomePageContent() {
   const t = useTranslations('HomePage');
@@ -36,6 +37,10 @@ export function HomePageContent() {
             <McmTag variant="accent">{t('tagDesign')}</McmTag>
             <McmTag>{t('tagEngineering')}</McmTag>
           </div>
+        </BentoCard>
+
+        <BentoCard label={t('themeLabel')} className="md:col-span-1">
+          <ThemeSelector />
         </BentoCard>
 
         <BentoCard label={t('contactLabel')} className="md:col-span-2">

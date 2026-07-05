@@ -1,0 +1,267 @@
+/*
+ * MCM Portfolio — 4-Tone Design System
+ * Shadcn-compatible CSS custom properties + extended MCM tokens
+ *
+ * Apply .theme-01 | .theme-02 | .theme-03 | .theme-04 on <html>.
+ * Shadcn components read the standard tokens automatically.
+ * Extended tokens (--glow-color, --ornament-color, etc.) are consumed
+ * by WarmAmbientGlow, decoration components, and future MCM art blocks.
+ *
+ * Theme scale (light → dark):
+ *   01 · Plâtre Blanc      light   Mediterranean white plaster, sage, linen
+ *   02 · Sable Terracotta  light   Warm sand, terracotta, tadelakt
+ *   03 · Chocolat Ambré    dark    MCM lounge, brass, cognac leather
+ *   04 · Oxblood Nuit      dark    Deep burgundy tile, aged brass, shadow wood
+ */
+
+/* ── 01 · PLÂTRE BLANC (light) ── */
+.theme-01 {
+  color-scheme: light;
+
+  --background: #f4efe6;
+  --foreground: #2a1e0e;
+  --card: #eae4d8;
+  --card-foreground: #2a1e0e;
+  --popover: #eae4d8;
+  --popover-foreground: #2a1e0e;
+  --primary: #6b8060;
+  --primary-foreground: #f4efe6;
+  --secondary: #c4b090;
+  --secondary-foreground: #2a1e0e;
+  --muted: #ddd6c8;
+  --muted-foreground: #8b7a62;
+  --accent: #a07840;
+  --accent-foreground: #f4efe6;
+  --destructive: #b84030;
+  --destructive-foreground: #f4efe6;
+  --border: rgba(107, 128, 96, 0.2);
+  --input: #ddd6c8;
+  --ring: #6b8060;
+  --radius: 1rem;
+  --sidebar: #eae4d8;
+  --sidebar-foreground: #2a1e0e;
+  --sidebar-primary: #6b8060;
+  --sidebar-primary-foreground: #f4efe6;
+  --sidebar-accent: #ddd6c8;
+  --sidebar-accent-foreground: #2a1e0e;
+  --sidebar-border: rgba(107, 128, 96, 0.2);
+  --sidebar-ring: #6b8060;
+  --chart-1: #6b8060;
+  --chart-2: #a07840;
+  --chart-3: #7a9070;
+  --chart-4: #c4b090;
+  --chart-5: #b84030;
+
+  --glow-color: rgba(107, 128, 96, 0.12);
+  --glow-color-strong: rgba(107, 128, 96, 0.22);
+  --ornament-color: #6b8060;
+  --card-frosted: rgba(244, 239, 230, 0.9);
+  --teak-overlay: rgba(107, 128, 96, 0.08);
+  --project-gradient: linear-gradient(155deg, #6b8060 0%, #4e6648 55%, #3a5235 100%);
+  --project-text: #f4efe6;
+  --project-text-muted: rgba(244, 239, 230, 0.65);
+  --project-border: rgba(244, 239, 230, 0.22);
+  --tech-bg-start: #ddd6c8;
+  --tech-bg-end: #d4ccbf;
+  --tech-text: #6b5a3e;
+  --tech-border: rgba(107, 128, 96, 0.22);
+  --hero-arc-color: #6b8060;
+  --hero-arc-opacity: 0.07;
+  --art-bg: #eae4d8;
+  --art-circle-1: #a07840;
+  --art-circle-2: #6b8060;
+  --art-arc: #f4efe6;
+  --art-block-olive: #7a9070;
+  --art-block-bold: #c4b090;
+  --art-divider: #2a1e0e;
+  --art-rule: #6b8060;
+}
+
+/* ── 02 · SABLE TERRACOTTA (light) ── */
+.theme-02 {
+  color-scheme: light;
+
+  --background: #f5ead8;
+  --foreground: #2c1408;
+  --card: #ede0c8;
+  --card-foreground: #2c1408;
+  --popover: #ede0c8;
+  --popover-foreground: #2c1408;
+  --primary: #c4472a;
+  --primary-foreground: #f5ead8;
+  --secondary: #8b6040;
+  --secondary-foreground: #f5ead8;
+  --muted: #e2d3ba;
+  --muted-foreground: #7a5c3a;
+  --accent: #5a6b30;
+  --accent-foreground: #f5ead8;
+  --destructive: #a03020;
+  --destructive-foreground: #f5ead8;
+  --border: rgba(196, 71, 42, 0.16);
+  --input: #e2d3ba;
+  --ring: #c4472a;
+  --radius: 1rem;
+  --sidebar: #ede0c8;
+  --sidebar-foreground: #2c1408;
+  --sidebar-primary: #c4472a;
+  --sidebar-primary-foreground: #f5ead8;
+  --sidebar-accent: #e2d3ba;
+  --sidebar-accent-foreground: #2c1408;
+  --sidebar-border: rgba(196, 71, 42, 0.16);
+  --sidebar-ring: #c4472a;
+  --chart-1: #c4472a;
+  --chart-2: #d4892a;
+  --chart-3: #5a6b30;
+  --chart-4: #8b6040;
+  --chart-5: #a03020;
+
+  --glow-color: rgba(196, 71, 42, 0.1);
+  --glow-color-strong: rgba(196, 71, 42, 0.2);
+  --ornament-color: #c4472a;
+  --card-frosted: rgba(245, 234, 216, 0.9);
+  --teak-overlay: rgba(196, 71, 42, 0.06);
+  --project-gradient: linear-gradient(155deg, #c4472a 0%, #9a3520 55%, #7a2818 100%);
+  --project-text: #f5ead8;
+  --project-text-muted: rgba(245, 234, 216, 0.65);
+  --project-border: rgba(245, 234, 216, 0.22);
+  --tech-bg-start: #e2d3ba;
+  --tech-bg-end: #d9ccaf;
+  --tech-text: #7a5c3a;
+  --tech-border: rgba(196, 71, 42, 0.18);
+  --hero-arc-color: #c4472a;
+  --hero-arc-opacity: 0.07;
+  --art-bg: #ede0c8;
+  --art-circle-1: #c4472a;
+  --art-circle-2: #d4892a;
+  --art-arc: #f5ead8;
+  --art-block-olive: #5a6b30;
+  --art-block-bold: #a03020;
+  --art-divider: #2c1408;
+  --art-rule: #c4472a;
+}
+
+/* ── 03 · CHOCOLAT AMBRÉ (dark) ── */
+.theme-03 {
+  color-scheme: dark;
+
+  --background: #271608;
+  --foreground: #f0e2c8;
+  --card: #342010;
+  --card-foreground: #f0e2c8;
+  --popover: #342010;
+  --popover-foreground: #f0e2c8;
+  --primary: #c8963e;
+  --primary-foreground: #271608;
+  --secondary: #4a3020;
+  --secondary-foreground: #f0e2c8;
+  --muted: #1e1006;
+  --muted-foreground: #a08060;
+  --accent: #9b6240;
+  --accent-foreground: #f0e2c8;
+  --destructive: #b05a3a;
+  --destructive-foreground: #f0e2c8;
+  --border: rgba(200, 150, 62, 0.16);
+  --input: #1e1006;
+  --ring: #c8963e;
+  --radius: 1rem;
+  --sidebar: #342010;
+  --sidebar-foreground: #f0e2c8;
+  --sidebar-primary: #c8963e;
+  --sidebar-primary-foreground: #271608;
+  --sidebar-accent: #1e1006;
+  --sidebar-accent-foreground: #f0e2c8;
+  --sidebar-border: rgba(200, 150, 62, 0.16);
+  --sidebar-ring: #c8963e;
+  --chart-1: #c8963e;
+  --chart-2: #d4892a;
+  --chart-3: #4a5828;
+  --chart-4: #9b6240;
+  --chart-5: #b05a3a;
+
+  --glow-color: rgba(200, 150, 62, 0.12);
+  --glow-color-strong: rgba(200, 150, 62, 0.24);
+  --ornament-color: #c8963e;
+  --card-frosted: rgba(39, 22, 8, 0.85);
+  --teak-overlay: rgba(200, 150, 62, 0.05);
+  --project-gradient: linear-gradient(155deg, #342010 0%, #4a3020 50%, #271608 100%);
+  --project-text: #f0e2c8;
+  --project-text-muted: rgba(240, 226, 200, 0.6);
+  --project-border: rgba(240, 226, 200, 0.18);
+  --tech-bg-start: #1e1006;
+  --tech-bg-end: #271608;
+  --tech-text: #a08060;
+  --tech-border: rgba(200, 150, 62, 0.16);
+  --hero-arc-color: #c8963e;
+  --hero-arc-opacity: 0.065;
+  --art-bg: #342010;
+  --art-circle-1: #d4892a;
+  --art-circle-2: #c8963e;
+  --art-arc: #f0e2c8;
+  --art-block-olive: #4a5828;
+  --art-block-bold: #9b6240;
+  --art-divider: #150a02;
+  --art-rule: #c8963e;
+}
+
+/* ── 04 · OXBLOOD NUIT (dark) ── */
+.theme-04 {
+  color-scheme: dark;
+
+  --background: #160606;
+  --foreground: #e8d4b8;
+  --card: #200c0c;
+  --card-foreground: #e8d4b8;
+  --popover: #200c0c;
+  --popover-foreground: #e8d4b8;
+  --primary: #922828;
+  --primary-foreground: #e8d4b8;
+  --secondary: #5a1818;
+  --secondary-foreground: #e8d4b8;
+  --muted: #1c0808;
+  --muted-foreground: #8b5c48;
+  --accent: #c08030;
+  --accent-foreground: #e8d4b8;
+  --destructive: #782020;
+  --destructive-foreground: #e8d4b8;
+  --border: rgba(146, 40, 40, 0.22);
+  --input: #1c0808;
+  --ring: #922828;
+  --radius: 1rem;
+  --sidebar: #200c0c;
+  --sidebar-foreground: #e8d4b8;
+  --sidebar-primary: #922828;
+  --sidebar-primary-foreground: #e8d4b8;
+  --sidebar-accent: #1c0808;
+  --sidebar-accent-foreground: #e8d4b8;
+  --sidebar-border: rgba(146, 40, 40, 0.22);
+  --sidebar-ring: #922828;
+  --chart-1: #922828;
+  --chart-2: #c08030;
+  --chart-3: #384020;
+  --chart-4: #782020;
+  --chart-5: #5a1818;
+
+  --glow-color: rgba(146, 40, 40, 0.15);
+  --glow-color-strong: rgba(146, 40, 40, 0.28);
+  --ornament-color: #922828;
+  --card-frosted: rgba(22, 6, 6, 0.88);
+  --teak-overlay: rgba(146, 40, 40, 0.06);
+  --project-gradient: linear-gradient(155deg, #5a1818 0%, #922828 55%, #3a1010 100%);
+  --project-text: #e8d4b8;
+  --project-text-muted: rgba(232, 212, 184, 0.6);
+  --project-border: rgba(232, 212, 184, 0.18);
+  --tech-bg-start: #1c0808;
+  --tech-bg-end: #200c0c;
+  --tech-text: #8b5c48;
+  --tech-border: rgba(146, 40, 40, 0.22);
+  --hero-arc-color: #922828;
+  --hero-arc-opacity: 0.065;
+  --art-bg: #200c0c;
+  --art-circle-1: #922828;
+  --art-circle-2: #c08030;
+  --art-arc: #e8d4b8;
+  --art-block-olive: #384020;
+  --art-block-bold: #782020;
+  --art-divider: #0c0202;
+  --art-rule: #922828;
+}

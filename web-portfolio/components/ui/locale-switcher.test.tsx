@@ -88,7 +88,7 @@ describe('LocaleSwitcher', () => {
     );
 
     const activeButton = screen.getByRole('radio', { name: 'English' });
-    expect(activeButton.className).toMatch(/bg-primary/);
+    expect(activeButton.className).toMatch(/lang-toggle-active/);
     expect(activeButton.className).toMatch(/text-primary-foreground/);
     expect(activeButton.className).not.toMatch(/#[0-9a-f]{3,8}/i);
   });

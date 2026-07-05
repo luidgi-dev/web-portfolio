@@ -52,7 +52,7 @@ export function LocaleSwitcher() {
               'flex min-h-[52px] flex-col items-center justify-center gap-0.5 px-3 transition-all duration-200 focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
               index > 0 && 'border-t border-border',
               isActive
-                ? 'bg-primary text-primary-foreground shadow-[inset_0_1px_0_var(--glow-color)]'
+                ? 'lang-toggle-active text-primary-foreground'
                 : 'bg-transparent text-muted-foreground opacity-50 hover:bg-muted/40 hover:text-foreground hover:opacity-100'
             )}
           >

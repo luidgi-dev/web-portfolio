@@ -7,6 +7,9 @@ export async function ThemeCard() {
 
   return (
     <BentoCard colSpan={1} label={t('themeLabel')}>
+      <p className="mb-3 font-mono text-[9px] tracking-[0.25em] text-muted-foreground uppercase">
+        {t('themeHint')}
+      </p>
       <ThemeSelector />
     </BentoCard>
   );

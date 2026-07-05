@@ -13,8 +13,14 @@ export async function BauhausGeometryCard() {
         className="relative flex h-full min-h-[180px] flex-col"
         data-testid="bauhaus-geometry-card"
       >
-        <BauhausGeometryArt className="absolute inset-0 h-full w-full" />
-        <div className="relative mt-auto flex items-end justify-between gap-3 px-4 py-3">
+        <BauhausGeometryArt
+          className="absolute inset-0 h-full w-full"
+          aria-label={t('bauhausArtLabel')}
+        />
+        <div
+          className="relative mt-auto border-t border-border/50 bg-card/85 px-4 py-3 backdrop-blur-[2px]"
+          aria-hidden="false"
+        >
           <nav
             className="flex flex-wrap items-center gap-x-2 gap-y-1"
             aria-label={t('bauhausNavLabel')}
@@ -22,26 +28,26 @@ export async function BauhausGeometryCard() {
             <a
               href={siteLinks.privacy}
               className={cn(
-                'font-mono text-[8px] tracking-wider text-muted-foreground/80 uppercase transition-colors hover:text-primary'
+                'font-mono text-[9px] tracking-[0.18em] text-foreground/80 uppercase transition-colors hover:text-primary'
               )}
             >
               {t('bauhausPrivacy')}
             </a>
-            <span className="text-muted-foreground/40" aria-hidden="true">
+            <span className="text-foreground/35" aria-hidden="true">
               ·
             </span>
             <a
               href={siteLinks.terms}
               className={cn(
-                'font-mono text-[8px] tracking-wider text-muted-foreground/80 uppercase transition-colors hover:text-primary'
+                'font-mono text-[9px] tracking-[0.18em] text-foreground/80 uppercase transition-colors hover:text-primary'
               )}
             >
               {t('bauhausTerms')}
             </a>
-            <span className="text-muted-foreground/40" aria-hidden="true">
+            <span className="text-foreground/35" aria-hidden="true">
               ·
             </span>
-            <span className="font-mono text-[8px] tracking-wider text-muted-foreground/60 uppercase">
+            <span className="font-mono text-[9px] tracking-[0.18em] text-muted-foreground uppercase">
               © 2026
             </span>
           </nav>

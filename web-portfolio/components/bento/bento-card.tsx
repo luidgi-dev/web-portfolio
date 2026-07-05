@@ -24,7 +24,7 @@ export function BentoCard({
         'group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-200 ease-out hover:border-primary/40 focus-within:border-primary/40',
         colSpanClasses[colSpan],
         rowSpanClasses[rowSpan],
-        padded && 'p-6',
+        padded && 'p-4 md:p-5',
         className
       )}
     >

@@ -1,10 +1,18 @@
-export function BauhausGeometryArt({ className }: { className?: string }) {
+export function BauhausGeometryArt({
+  className,
+  'aria-label': ariaLabel,
+}: {
+  className?: string;
+  'aria-label'?: string;
+}) {
   return (
     <svg
       className={className}
       viewBox="0 0 200 220"
       preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
+      role={ariaLabel ? 'img' : undefined}
+      aria-hidden={ariaLabel ? undefined : true}
+      aria-label={ariaLabel}
     >
       <rect width="200" height="220" fill="var(--art-bg)" />
       <rect x="0" y="140" width="200" height="80" fill="var(--art-block-bold)" opacity="0.35" />

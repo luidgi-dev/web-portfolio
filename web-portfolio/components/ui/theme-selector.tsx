@@ -32,7 +32,7 @@ export function ThemeSelector() {
               'group flex min-h-[44px] flex-col items-center gap-1.5 rounded-lg p-0.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
               isActive
                 ? 'ring-2 ring-primary ring-offset-1 ring-offset-card'
-                : 'opacity-45 hover:opacity-75'
+                : 'opacity-70 hover:opacity-100'
             )}
           >
             <span
@@ -46,8 +46,8 @@ export function ThemeSelector() {
             />
             <span
               className={cn(
-                'w-full text-center font-mono text-[7px] leading-tight tracking-wider uppercase',
-                isActive ? 'text-primary' : 'text-muted-foreground'
+                'w-full text-center font-mono text-[9px] leading-snug tracking-[0.18em] uppercase',
+                isActive ? 'font-medium text-primary' : 'text-muted-foreground'
               )}
             >
               {theme.number} · {label}

@@ -18,7 +18,9 @@ function TabsList({ className, ...props }: TabsPrimitive.List.Props) {
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        'flex flex-wrap items-end gap-1.5 border-b border-(--border-strong)',
+        // Scrolls sideways on narrow screens. The baseline is an inset shadow because
+        // overflow clips anything drawn outside the list, like a negative margin.
+        'flex items-end gap-1.5 overflow-x-auto overscroll-x-contain shadow-[inset_0_-1px_0_var(--border-strong)] [scrollbar-width:none]',
         className
       )}
       {...props}
@@ -32,7 +34,7 @@ function TabsTab({ className, ...props }: TabsPrimitive.Tab.Props) {
     <TabsPrimitive.Tab
       data-slot="tabs-tab"
       className={cn(
-        '-mb-px min-h-11 rounded-t-lg border border-border border-b-(--border-strong) bg-[color-mix(in_srgb,var(--foreground)_4%,var(--card))] px-4 font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase transition-colors duration-200 ease-out',
+        'min-h-11 shrink-0 rounded-t-lg border border-border border-b-(--border-strong) bg-[color-mix(in_srgb,var(--foreground)_4%,var(--card))] px-3 font-mono text-[10px] tracking-[0.2em] whitespace-nowrap text-muted-foreground uppercase transition-colors duration-200 ease-out sm:px-4 sm:tracking-[0.3em]',
         'hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset',
         'data-active:border-(--border-strong) data-active:border-b-card data-active:bg-card data-active:text-foreground',
         className

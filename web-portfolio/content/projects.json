@@ -1,0 +1,470 @@
+{
+  "strive": {
+    "meta": {
+      "url": "https://striveapp.cc",
+      "year": 2026,
+      "figures": [
+        {
+          "id": "rhythm",
+          "width": 840,
+          "height": 1440,
+          "src": {
+            "light": "/strive/screens/rhythm-light.png",
+            "dark": "/strive/screens/rhythm-dark.png"
+          }
+        },
+        {
+          "id": "arc",
+          "width": 840,
+          "height": 1440,
+          "src": {
+            "light": "/strive/screens/arc-light.png",
+            "dark": "/strive/screens/arc-dark.png"
+          }
+        },
+        {
+          "id": "chat",
+          "width": 840,
+          "height": 1440,
+          "src": {
+            "light": "/strive/screens/chat-light.png",
+            "dark": "/strive/screens/chat-dark.png"
+          }
+        },
+        {
+          "id": "circle",
+          "width": 840,
+          "height": 1824,
+          "src": {
+            "light": "/strive/screens/circle-light.png",
+            "dark": "/strive/screens/circle-dark.png"
+          }
+        }
+      ]
+    },
+    "content": {
+      "en": {
+        "title": "Strive",
+        "tagline": "Find your rhythm.",
+        "summary": "Strive started as a habit tracker I built for myself. It has since become my playground for experimenting with product ideas, full-stack engineering and AI-assisted development.",
+        "type": "Personal work",
+        "tags": ["AI", "PWA", "Lifestyle"],
+        "overview": {
+          "problem": "You missed one day. The streak resets. You quit.",
+          "lead": "Strive replaces guilt-inducing streaks with momentum that never resets to zero.",
+          "paragraphs": [
+            "It was a scope before it was an idea: build one application end to end, alone, from the visual direction to the database to deployment. The subject came from my own notes app, which was the habit tracker I was actually using.",
+            "An AI coach turns numbers the database has already computed into weekly insights, and small circles of up to eight people share progress without a leaderboard."
+          ],
+          "pillars": {
+            "heading": "Three pillars",
+            "items": [
+              {
+                "title": "Flexible targets",
+                "body": "Miss a day, still win the week. Each ritual aims for a weekly count, not a perfect run."
+              },
+              {
+                "title": "Zero-friction logging",
+                "body": "One tap, or just tell the AI, in a sentence or a voice message."
+              },
+              {
+                "title": "Momentum, not streaks",
+                "body": "Progress that decays slowly and never resets to zero."
+              }
+            ]
+          },
+          "facts": {
+            "role": "Solo, end to end: product, design, code, AI, deployment",
+            "timeline": "March to July 2026, maintained since",
+            "platform": "Installable web app (PWA), English and French",
+            "status": "Live, version 1.0"
+          }
+        },
+        "product": {
+          "figures": {
+            "rhythm": {
+              "alt": "Strive Today screen with three rituals, their weekly progress and momentum status",
+              "caption": "Rhythm. Today's rituals, each logged in one tap."
+            },
+            "arc": {
+              "alt": "Ritual detail with a Strong momentum status, a twelve-week curve and the current week",
+              "caption": "The Arc. Twelve weeks of one ritual, rest days included."
+            },
+            "chat": {
+              "alt": "My Strive chat logging a voice message, asking which ritual to log and showing weekly momentum",
+              "caption": "My Strive. Logging by sentence or voice, with an undo."
+            },
+            "circle": {
+              "alt": "Circle detail with a nudge, three members and their shared rituals for the week",
+              "caption": "Circles. A few shared rituals, nudges, no leaderboard."
+            }
+          },
+          "insights": {
+            "heading": "Your history, understood.",
+            "body": "Premium adds weekly and monthly cards that surface patterns in your own rhythm. The AI never invents a number: it only phrases what the data already proves.",
+            "caption": "Two Insight cards, with example data.",
+            "cards": [
+              {
+                "kind": "Correlation",
+                "title": "Sleep and Sport move together.",
+                "body": "In weeks you log Sleep 5+ days, Sport completion rises 24%.",
+                "period": "Last 8 weeks"
+              },
+              {
+                "kind": "Strength",
+                "title": "Read 30 min is your anchor.",
+                "body": "Logged 82% of weeks, your steadiest ritual.",
+                "period": "Last 12 weeks"
+              }
+            ]
+          },
+          "features": [
+            "Opt-in push reminders, three a day at most",
+            "English and French, light and dark",
+            "Installable as a PWA on iOS and Android",
+            "A demo account, reset every night"
+          ]
+        },
+        "engineering": {
+          "intro": "Next.js 16 on Vercel, Supabase for Postgres and auth, Gemini through the Vercel AI SDK. The part worth reading is where the logic lives: in the database, not in the model.",
+          "numbers": [
+            {
+              "value": "17/17",
+              "label": "tables behind Row Level Security"
+            },
+            {
+              "value": "0",
+              "label": "stored momentum values, views compute them"
+            },
+            {
+              "value": "5",
+              "label": "AI chat tools, none destructive"
+            },
+            {
+              "value": "21.7k",
+              "label": "lines of TypeScript"
+            }
+          ],
+          "stack": [
+            {
+              "label": "App",
+              "items": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "next-intl"]
+            },
+            {
+              "label": "Data",
+              "items": ["Supabase", "PostgreSQL", "Row Level Security", "pg_cron"]
+            },
+            {
+              "label": "AI",
+              "items": ["Vercel AI SDK", "Gemini 2.5 Flash"]
+            },
+            {
+              "label": "Ops",
+              "items": ["Vercel", "Sentry", "Web Push", "Vitest"]
+            }
+          ],
+          "pipeline": {
+            "heading": "From a log to an insight",
+            "steps": [
+              {
+                "title": "Log",
+                "body": "A tap, a sentence or a voice message. The chat matches loose wording to the right ritual."
+              },
+              {
+                "title": "Compute",
+                "body": "Postgres views derive momentum and the weekly facts. Nothing is stored twice."
+              },
+              {
+                "title": "Phrase",
+                "body": "Gemini receives the computed facts and writes a headline and one sentence."
+              },
+              {
+                "title": "Show",
+                "body": "The app renders a card. Facts below a confidence threshold never reach the model."
+              }
+            ]
+          },
+          "decisions": [
+            {
+              "title": "Momentum is computed, never stored",
+              "body": "It has no table and no column. Views derive it from the logs, so a retroactive edit can't leave a stale score behind, and \"never resets to zero\" stays true by construction."
+            },
+            {
+              "title": "The model phrases, the database decides",
+              "body": "The chat works through five narrow tools, and Insights are calculated in TypeScript before Gemini writes a word. A tracker that invents your history is worthless."
+            },
+            {
+              "title": "Isolation at the database",
+              "body": "Row Level Security on every user table, the user ID read from the server session and never from the request, no destructive tool exposed to the AI, and a per-user credit refunded when a call fails."
+            }
+          ]
+        },
+        "buildLog": {
+          "stats": [
+            {
+              "value": "~100",
+              "label": "hours, evenings and weekends"
+            },
+            {
+              "value": "610",
+              "label": "commits"
+            },
+            {
+              "value": "100",
+              "label": "merged pull requests"
+            },
+            {
+              "value": "36",
+              "label": "days with commits"
+            }
+          ],
+          "story": {
+            "heading": "The rebuild that mattered",
+            "paragraphs": [
+              "Momentum was the answer to streaks, and my first implementation reintroduced the reset anyway. It was computed on the calendar week, so every Monday it started over.",
+              "It also erred the other way: after two idle weeks, a single Monday log read as one out of one and scored Strong. I moved the status to a rolling window sized to each ritual's cadence, seven days for daily and weekly rituals, thirty for monthly ones. Version one had been live for twelve days."
+            ],
+            "before": "Calendar week: momentum starts over every Monday.",
+            "after": "Rolling seven days: the last week always counts.",
+            "quote": "I had rebuilt the problem I was solving, inside the feature named after the solution."
+          },
+          "results": [
+            "Live and feature complete at v1.0, in my own daily use: 293 logs across 15 rituals over 94 days.",
+            "In a synthetic beta, three of three AI personas put \"momentum over streaks\" in their own words without being told, and logged by typing a sentence on the first try.",
+            "Visitors from the US, Brazil, Japan, Norway and Canada with no marketing at all, one of them referred by ChatGPT.",
+            "One Sentry issue in three months, traced to clock skew between two Supabase services, not to app code."
+          ],
+          "lessons": [
+            {
+              "title": "Product decisions drove the technical ones",
+              "body": "Momentum is a view, the AI never computes a number, the window rolls. None of these started as an engineering preference."
+            },
+            {
+              "title": "AI helped most where I argued with it",
+              "body": "I treated every first proposal as a draft to push against. Several screens exist in their current form because I rejected three versions and said why."
+            },
+            {
+              "title": "Tests should find out, not confirm",
+              "body": "One test asserting that a single log after two idle weeks is not Strong would have caught momentum v1 before it shipped."
+            },
+            {
+              "title": "Rigour belongs with real users first",
+              "body": "A synthetic study with three AI personas got a protocol and a severity scale. The test with real people was a link sent to friends. That is backwards."
+            }
+          ]
+        }
+      },
+      "fr": {
+        "title": "Strive",
+        "tagline": "Trouve ton rythme.",
+        "summary": "Strive est né d'un tracker d'habitudes que j'ai développé pour moi. C'est devenu mon principal terrain d'expérimentation pour les idées produit, l'ingénierie full-stack et le développement assisté par l'IA.",
+        "type": "Travail personnel",
+        "tags": ["IA", "PWA", "Lifestyle"],
+        "overview": {
+          "problem": "Un jour manqué. La série retombe à zéro. On abandonne.",
+          "lead": "Strive remplace les séries culpabilisantes par un momentum qui ne retombe jamais à zéro.",
+          "paragraphs": [
+            "C'était un périmètre avant d'être une idée : construire une application de bout en bout, seul, de la direction visuelle à la base de données jusqu'au déploiement. Le sujet est venu de mon application de notes, qui était en réalité mon tracker d'habitudes.",
+            "Un coach IA transforme des chiffres déjà calculés par la base en insights hebdomadaires, et de petits cercles de huit personnes au plus partagent leur progression sans classement."
+          ],
+          "pillars": {
+            "heading": "Trois piliers",
+            "items": [
+              {
+                "title": "Des objectifs flexibles",
+                "body": "Un jour manqué, la semaine reste gagnable. Chaque rituel vise un nombre par semaine, pas un parcours parfait."
+              },
+              {
+                "title": "Un enregistrement sans friction",
+                "body": "Un geste, ou une phrase à l'IA, écrite ou en message vocal."
+              },
+              {
+                "title": "Le momentum, pas les séries",
+                "body": "Une progression qui décroît lentement et ne retombe jamais à zéro."
+              }
+            ]
+          },
+          "facts": {
+            "role": "Solo, de bout en bout : produit, design, code, IA, déploiement",
+            "timeline": "De mars à juillet 2026, maintenu depuis",
+            "platform": "Application web installable (PWA), en anglais et en français",
+            "status": "En ligne, version 1.0"
+          }
+        },
+        "product": {
+          "figures": {
+            "rhythm": {
+              "alt": "Écran Aujourd'hui de Strive avec trois rituels, leur progression de la semaine et leur statut de momentum",
+              "caption": "Rhythm. Les rituels du jour, chacun enregistré d'un geste."
+            },
+            "arc": {
+              "alt": "Détail d'un rituel avec un momentum Strong, une courbe sur douze semaines et la semaine en cours",
+              "caption": "The Arc. Douze semaines d'un rituel, jours de repos compris."
+            },
+            "chat": {
+              "alt": "Chat My Strive qui enregistre un message vocal, demande quel rituel choisir et affiche le momentum de la semaine",
+              "caption": "My Strive. Enregistrer par une phrase ou à la voix, avec annulation possible."
+            },
+            "circle": {
+              "alt": "Détail d'un cercle avec un encouragement, trois membres et leurs rituels partagés de la semaine",
+              "caption": "Circles. Quelques rituels partagés, des encouragements, aucun classement."
+            }
+          },
+          "insights": {
+            "heading": "Votre historique, décrypté.",
+            "body": "Premium ajoute des cartes hebdomadaires et mensuelles qui révèlent les tendances de votre propre rythme. L'IA n'invente jamais un chiffre : elle formule seulement ce que les données prouvent déjà.",
+            "caption": "Deux cartes Insights, avec des données d'exemple.",
+            "cards": [
+              {
+                "kind": "Corrélation",
+                "title": "Sommeil et Sport avancent ensemble.",
+                "body": "Les semaines où vous enregistrez Sommeil au moins 5 jours, Sport progresse de 24 %.",
+                "period": "8 dernières semaines"
+              },
+              {
+                "kind": "Point fort",
+                "title": "Lecture 30 min est votre pilier.",
+                "body": "Enregistré 82 % des semaines, votre rituel le plus régulier.",
+                "period": "12 dernières semaines"
+              }
+            ]
+          },
+          "features": [
+            "Rappels push activables, trois par jour au plus",
+            "Anglais et français, clair et sombre",
+            "Installable en PWA sur iOS et Android",
+            "Un compte de démo, réinitialisé chaque nuit"
+          ]
+        },
+        "engineering": {
+          "intro": "Next.js 16 sur Vercel, Supabase pour Postgres et l'authentification, Gemini via le Vercel AI SDK. Le plus intéressant, c'est l'endroit où vit la logique : dans la base de données, pas dans le modèle.",
+          "numbers": [
+            {
+              "value": "17/17",
+              "label": "tables protégées par Row Level Security"
+            },
+            {
+              "value": "0",
+              "label": "valeur de momentum stockée, des vues la calculent"
+            },
+            {
+              "value": "5",
+              "label": "outils pour le chat IA, aucun destructif"
+            },
+            {
+              "value": "21,7 k",
+              "label": "lignes de TypeScript"
+            }
+          ],
+          "stack": [
+            {
+              "label": "Application",
+              "items": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "next-intl"]
+            },
+            {
+              "label": "Données",
+              "items": ["Supabase", "PostgreSQL", "Row Level Security", "pg_cron"]
+            },
+            {
+              "label": "IA",
+              "items": ["Vercel AI SDK", "Gemini 2.5 Flash"]
+            },
+            {
+              "label": "Exploitation",
+              "items": ["Vercel", "Sentry", "Web Push", "Vitest"]
+            }
+          ],
+          "pipeline": {
+            "heading": "D'un enregistrement à un insight",
+            "steps": [
+              {
+                "title": "Enregistrer",
+                "body": "Un geste, une phrase ou un message vocal. Le chat retrouve le bon rituel même quand la formulation est approximative."
+              },
+              {
+                "title": "Calculer",
+                "body": "Des vues Postgres dérivent le momentum et les faits de la semaine. Rien n'est stocké en double."
+              },
+              {
+                "title": "Formuler",
+                "body": "Gemini reçoit les faits calculés et écrit un titre et une phrase."
+              },
+              {
+                "title": "Afficher",
+                "body": "L'app affiche une carte. Les faits sous un seuil de confiance n'atteignent jamais le modèle."
+              }
+            ]
+          },
+          "decisions": [
+            {
+              "title": "Le momentum est calculé, jamais stocké",
+              "body": "Il n'a ni table ni colonne. Des vues le dérivent des enregistrements, donc une modification rétroactive ne laisse jamais de score périmé, et « ne retombe jamais à zéro » reste vrai par construction."
+            },
+            {
+              "title": "Le modèle formule, la base décide",
+              "body": "Le chat passe par cinq outils ciblés, et les insights sont calculés en TypeScript avant que Gemini n'écrive un mot. Un tracker qui invente votre historique ne vaut rien."
+            },
+            {
+              "title": "L'isolation dans la base de données",
+              "body": "Row Level Security sur chaque table utilisateur, l'identifiant lu dans la session serveur et jamais dans la requête, aucun outil destructif exposé à l'IA, et un crédit par utilisateur remboursé quand un appel échoue."
+            }
+          ]
+        },
+        "buildLog": {
+          "stats": [
+            {
+              "value": "~100",
+              "label": "heures, soirs et week-ends"
+            },
+            {
+              "value": "610",
+              "label": "commits"
+            },
+            {
+              "value": "100",
+              "label": "pull requests fusionnées"
+            },
+            {
+              "value": "36",
+              "label": "jours avec des commits"
+            }
+          ],
+          "story": {
+            "heading": "La refonte qui a compté",
+            "paragraphs": [
+              "Le momentum devait remplacer les séries, et ma première implémentation a réintroduit la remise à zéro. Il était calculé sur la semaine calendaire, donc il repartait de zéro chaque lundi.",
+              "Il se trompait aussi dans l'autre sens : après deux semaines d'inactivité, un seul enregistrement le lundi comptait comme un sur un et obtenait Strong. J'ai basculé le statut sur une fenêtre glissante calée sur la cadence de chaque rituel, sept jours pour les rituels quotidiens et hebdomadaires, trente pour les mensuels. La première version était en ligne depuis douze jours."
+            ],
+            "before": "Semaine calendaire : le momentum repart de zéro chaque lundi.",
+            "after": "Sept jours glissants : la dernière semaine compte toujours.",
+            "quote": "J'avais reconstruit le problème que je voulais résoudre, dans la fonctionnalité qui portait le nom de la solution."
+          },
+          "results": [
+            "En ligne et complète en v1.0, dans mon usage quotidien : 293 enregistrements sur 15 rituels en 94 jours.",
+            "Lors d'une bêta synthétique, les trois personas IA ont reformulé « le momentum plutôt que les séries » sans qu'on le leur explique, et ont enregistré un rituel en tapant une phrase dès le premier essai.",
+            "Des visiteurs aux États-Unis, au Brésil, au Japon, en Norvège et au Canada sans aucun marketing, dont un envoyé par ChatGPT.",
+            "Un seul incident Sentry en trois mois, dû à un décalage d'horloge entre deux services Supabase, pas au code de l'app."
+          ],
+          "lessons": [
+            {
+              "title": "Le produit a guidé la technique",
+              "body": "Le momentum est une vue, l'IA ne calcule jamais un chiffre, la fenêtre glisse. Aucun de ces choix n'est parti d'une préférence d'ingénieur."
+            },
+            {
+              "title": "L'IA m'a le plus servi quand je la contredisais",
+              "body": "J'ai traité chaque première proposition comme un brouillon à challenger. Plusieurs écrans existent sous leur forme actuelle parce que j'ai refusé trois versions en expliquant pourquoi."
+            },
+            {
+              "title": "Un test doit découvrir, pas confirmer",
+              "body": "Un seul test vérifiant qu'un enregistrement après deux semaines d'inactivité n'est pas Strong aurait bloqué la première version du momentum avant sa mise en ligne."
+            },
+            {
+              "title": "La rigueur d'abord avec les vrais utilisateurs",
+              "body": "Une étude synthétique sur trois personas IA a eu droit à un protocole et à une échelle de sévérité. Le test avec de vraies personnes, lui, s'est résumé à un lien envoyé à des amis. C'est l'inverse qu'il fallait."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

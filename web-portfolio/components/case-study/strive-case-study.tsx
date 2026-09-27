@@ -1,10 +1,13 @@
 import { useTranslations } from 'next-intl';
 import { BentoLink } from '@/components/bento/bento-link';
+import { CatalogList } from '@/components/case-study/catalog-list';
+import { ChapterHeading } from '@/components/case-study/chapter-heading';
 import { FigurePlate, Plate } from '@/components/case-study/figure-plate';
 import { PullQuote } from '@/components/case-study/pull-quote';
+import { SampleChips } from '@/components/case-study/sample-chips';
 import { SectionLabel } from '@/components/case-study/section-label';
 import { SpecList, SpecRow } from '@/components/case-study/spec-list';
-import { StatStrip } from '@/components/case-study/stat-strip';
+import { StackCapsules } from '@/components/case-study/stack-capsules';
 import { Steps } from '@/components/case-study/steps';
 import {
   InsightCards,
@@ -31,11 +34,7 @@ const facts = [
 
 const bodyText = 'text-[15px] leading-relaxed text-foreground/90';
 
-function EditorialHeading({ children }: { children: string }) {
-  return (
-    <h3 className="font-display text-2xl leading-tight font-bold tracking-tight">{children}</h3>
-  );
-}
+type Chapter = (typeof chapters)[number]['value'];
 
 interface StriveCaseStudyProps {
   meta: ProjectMeta;
@@ -46,6 +45,18 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
   const t = useTranslations('CaseStudy');
   const { overview, product, engineering, buildLog } = content;
   const figureLabel = (index: number) => `${t('figureLabel')} ${toOrdinal(index)}`;
+  const chapterIndex = (value: Chapter) => chapters.findIndex((chapter) => chapter.value === value);
+  const chapterNumber = (value: Chapter) => toOrdinal(chapterIndex(value));
+  const chapterHeading = (value: Chapter, title: string) => {
+    const number = chapterNumber(value);
+    const name = t(chapters[chapterIndex(value)].label);
+
+    return (
+      <ChapterHeading number={number} kicker={t('chapterKicker', { number, name })}>
+        {title}
+      </ChapterHeading>
+    );
+  };
 
   return (
     <Tabs defaultValue="overview">
@@ -92,8 +103,8 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
           </div>
         </div>
         <div className="mt-12">
-          <EditorialHeading>{overview.pillars.heading}</EditorialHeading>
-          <Steps items={overview.pillars.items} className="mt-5 lg:grid-cols-3" />
+          {chapterHeading('overview', overview.pillars.heading)}
+          <Steps items={overview.pillars.items} className="mt-8 lg:grid-cols-3" />
         </div>
       </TabsPanel>
 
@@ -112,8 +123,8 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
         </div>
         <div className="mt-12 grid items-start gap-8 lg:grid-cols-[1fr_1.3fr] lg:gap-14">
           <div>
-            <EditorialHeading>{product.insights.heading}</EditorialHeading>
-            <p className={cn('mt-4', bodyText)}>{product.insights.body}</p>
+            {chapterHeading('product', product.insights.heading)}
+            <p className={cn('mt-6', bodyText)}>{product.insights.body}</p>
           </div>
           <Plate label={figureLabel(meta.figures.length)} caption={product.insights.caption}>
             <InsightCards cards={product.insights.cards} />
@@ -121,49 +132,30 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
         </div>
         <div className="mt-12">
           <SectionLabel>{t('alsoShipped')}</SectionLabel>
-          <ul className="mt-3 grid gap-x-8 sm:grid-cols-2">
-            {product.features.map((feature) => (
-              <li key={feature} className="border-b border-border py-2.5 text-sm">
-                {feature}
-              </li>
-            ))}
-          </ul>
+          <CatalogList items={product.features} prefix={t('itemPrefix')} className="mt-3" />
         </div>
       </TabsPanel>
 
       <TabsPanel value="engineering">
-        <div className="grid items-start gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
-          <p className="font-display text-xl leading-snug font-bold tracking-tight md:text-2xl">
-            {engineering.intro}
-          </p>
-          <StatStrip stats={engineering.numbers} className="md:grid-cols-2" />
-        </div>
+        <p className="max-w-3xl font-display text-xl leading-snug font-bold tracking-tight md:text-2xl">
+          {engineering.intro}
+        </p>
+        <SampleChips
+          items={engineering.numbers}
+          code={chapterNumber('engineering')}
+          className="mt-8"
+        />
         <div className="mt-12">
           <SectionLabel>{t('stack')}</SectionLabel>
-          <dl className="mt-3 grid gap-x-8 gap-y-5 border-t border-border pt-4 sm:grid-cols-2 lg:grid-cols-4">
-            {engineering.stack.map((group) => (
-              <div key={group.label}>
-                <dt className="font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase">
-                  {group.label}
-                </dt>
-                <dd className="mt-3">
-                  <ul className="flex flex-wrap gap-1.5">
-                    {group.items.map((item) => (
-                      <li key={item}>
-                        <span className="bento-chip">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-4">
+            <StackCapsules groups={engineering.stack} />
+          </div>
         </div>
         <div className="mt-12">
-          <EditorialHeading>{engineering.pipeline.heading}</EditorialHeading>
+          {chapterHeading('engineering', engineering.pipeline.heading)}
           <Steps
             items={engineering.pipeline.steps}
-            className="mt-5 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-8 sm:grid-cols-2 lg:grid-cols-4"
           />
         </div>
         <div className="mt-12">
@@ -174,16 +166,10 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
 
       <TabsPanel value="buildLog">
         <SectionLabel>{t('inNumbers')}</SectionLabel>
-        <StatStrip stats={buildLog.stats} className="mt-3" />
+        <SampleChips items={buildLog.stats} code={chapterNumber('buildLog')} className="mt-3" />
         <div className="mt-12">
           <SectionLabel>{t('whereItStands')}</SectionLabel>
-          <ul className="mt-3 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
-            {buildLog.results.map((result) => (
-              <li key={result} className="border-t border-border py-3 text-sm leading-relaxed">
-                {result}
-              </li>
-            ))}
-          </ul>
+          <CatalogList items={buildLog.results} prefix={t('itemPrefix')} className="mt-3" />
         </div>
         <div className="mt-12">
           <SectionLabel>{t('lessons')}</SectionLabel>
@@ -191,9 +177,9 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
         </div>
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
           <div>
-            <EditorialHeading>{buildLog.story.heading}</EditorialHeading>
+            {chapterHeading('buildLog', buildLog.story.heading)}
             {buildLog.story.paragraphs.map((paragraph) => (
-              <p key={paragraph} className={cn('mt-4', bodyText)}>
+              <p key={paragraph} className={cn('mt-5', bodyText)}>
                 {paragraph}
               </p>
             ))}

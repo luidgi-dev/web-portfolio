@@ -15,11 +15,6 @@ export async function StriveCard() {
 
   return (
     <BentoCard colSpan={1} rowSpan={2} label={content.type} className="relative overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-1"
-        style={{ background: 'var(--project-gradient)' }}
-        aria-hidden="true"
-      />
       <div className="relative flex h-full flex-col" data-testid="strive-card">
         <div className="flex items-start justify-between gap-3">
           <Image

@@ -13,6 +13,7 @@ export interface TitledItem {
 export interface Stat {
   value: string;
   label: string;
+  note: string;
 }
 
 export interface ProjectFigure {

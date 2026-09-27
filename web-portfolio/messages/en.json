@@ -70,6 +70,8 @@
     "before": "Before",
     "after": "After",
     "whereItStands": "Where it stands",
-    "lessons": "Lessons"
+    "lessons": "Lessons",
+    "chapterKicker": "Chapter {number} · {name}",
+    "itemPrefix": "No."
   }
 }

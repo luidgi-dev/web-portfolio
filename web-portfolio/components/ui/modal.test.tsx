@@ -43,6 +43,29 @@ describe('Modal', () => {
     expect(dialog).toHaveAccessibleDescription('Find your rhythm.');
   });
 
+  it('lets a project swap the title and description typography', () => {
+    render(
+      <Modal defaultOpen>
+        <ModalContent
+          title="Strive"
+          description="Find your rhythm."
+          closeLabel="Close"
+          titleClassName="font-strive"
+          descriptionClassName="font-strive not-italic"
+        />
+      </Modal>
+    );
+
+    const title = screen.getByRole('heading', { name: 'Strive' });
+    expect(title).toHaveClass('font-strive');
+    expect(title).not.toHaveClass('font-display');
+
+    const description = screen.getByText('Find your rhythm.');
+    expect(description).toHaveClass('font-strive', 'not-italic');
+    expect(description).not.toHaveClass('font-display');
+    expect(description).not.toHaveClass('italic');
+  });
+
   it('renders the optional kicker inside the dialog', () => {
     const { dialog } = openDialog();
 

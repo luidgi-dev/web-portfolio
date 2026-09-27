@@ -24,6 +24,8 @@ interface ModalContentProps extends DialogPrimitive.Popup.Props {
   kicker?: string;
   description?: string;
   closeLabel: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 }
 
 function ModalContent({
@@ -31,6 +33,8 @@ function ModalContent({
   kicker,
   description,
   closeLabel,
+  titleClassName,
+  descriptionClassName,
   className,
   children,
   ...props
@@ -65,11 +69,21 @@ function ModalContent({
                 {kicker}
               </p>
             ) : null}
-            <DialogPrimitive.Title className="font-display text-4xl leading-none font-bold tracking-tight md:text-[44px]">
+            <DialogPrimitive.Title
+              className={cn(
+                'font-display text-4xl leading-none font-bold tracking-tight md:text-[44px]',
+                titleClassName
+              )}
+            >
               {title}
             </DialogPrimitive.Title>
             {description ? (
-              <DialogPrimitive.Description className="mt-2 font-display text-lg text-foreground/80 italic">
+              <DialogPrimitive.Description
+                className={cn(
+                  'mt-2 font-display text-lg text-foreground/80 italic',
+                  descriptionClassName
+                )}
+              >
                 {description}
               </DialogPrimitive.Description>
             ) : null}
@@ -81,7 +95,9 @@ function ModalContent({
             <X className="size-5" aria-hidden="true" />
           </DialogPrimitive.Close>
         </header>
-        <div className="relative z-10 min-h-0 flex-1 overflow-y-auto px-6 pt-2 pb-8 md:px-10 md:pb-10">
+        {/* Scrolls inside the mat, so content never crosses its line. Padding + margin
+            keep the text aligned with the header. */}
+        <div className="relative z-10 mx-3 mb-3 min-h-0 flex-1 overflow-y-auto rounded-b-[10px] px-3 pt-2 pb-5 md:px-7 md:pb-7">
           {children}
         </div>
       </DialogPrimitive.Popup>

@@ -152,11 +152,12 @@ Mono     →  DM Mono (Google Fonts)
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@300;400;500&display=swap');
 ```
 
-**Custom Tailwind classes:**
-```css
-.font-display { font-family: "Playfair Display", Georgia, serif; }
-.font-body    { font-family: "DM Sans", system-ui, sans-serif; }
-.font-code    { font-family: "DM Mono", "Courier New", monospace; }
+**Tailwind font utilities** (mapped in `@theme`, [`web-portfolio/app/globals.css`](../web-portfolio/app/globals.css)):
+```
+font-display  →  Playfair Display, Georgia, serif
+font-sans     →  DM Sans, system-ui, sans-serif
+font-mono     →  DM Mono, "Courier New", monospace
+font-strive   →  Sora (Strive project only)
 ```
 
 ### Role of each font
@@ -260,7 +261,7 @@ Concrete cards live under [`web-portfolio/components/bento/cards/`](../web-portf
 
 ```tsx
 <div className="rounded-2xl border border-border bg-card p-6 flex flex-col">
-  <span className="font-code text-[9px] tracking-[0.4em] text-muted-foreground uppercase mb-4">
+  <span className="font-mono text-[9px] tracking-[0.4em] text-muted-foreground uppercase mb-4">
     Label Section
   </span>
   {/* content */}
@@ -272,7 +273,7 @@ Concrete cards live under [`web-portfolio/components/bento/cards/`](../web-portf
 ### Tag / Chip
 
 ```tsx
-<span className="font-code text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-border text-muted-foreground">
+<span className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-border text-muted-foreground">
   Next.js
 </span>
 
@@ -286,22 +287,46 @@ Concrete cards live under [`web-portfolio/components/bento/cards/`](../web-portf
 
 ```tsx
 <button className="flex items-center gap-2 text-foreground/80 text-xs group hover:text-primary transition-colors">
-  <span className="font-code uppercase tracking-widest text-[9px]">View Project</span>
+  <span className="font-mono uppercase tracking-widest text-[9px]">View Project</span>
   <span className="transition-transform group-hover:translate-x-1">→</span>
 </button>
 ```
 
-No solid-filled rectangular button except in exceptional cases. CTAs are discreet and typographic — the `→` arrow is the only affordance.
+No solid-filled rectangular button except in exceptional cases (the one sanctioned exception is the project plaque, see Modal). CTAs are discreet and typographic: the `→` arrow is the only affordance.
 
 ### Section Divider
 
 ```tsx
 <div className="flex items-center gap-3">
-  <span className="font-code text-[9px] tracking-[0.4em] text-primary/70 uppercase">Featured Work</span>
+  <span className="font-mono text-[9px] tracking-[0.4em] text-primary/70 uppercase">Featured Work</span>
   <div className="flex-1 h-px bg-border" />
-  <span className="font-code text-[9px] text-muted-foreground">2024</span>
+  <span className="font-mono text-[9px] text-muted-foreground">2024</span>
 </div>
 ```
+
+### Modal
+
+Reusable overlay at [`web-portfolio/components/ui/modal.tsx`](../web-portfolio/components/ui/modal.tsx), built on Base UI Dialog. Composable parts: `Modal` (root), `ModalTrigger`, `ModalContent`. First consumer: the Strive tile, which stretches an invisible trigger over the whole card ([`strive-card.tsx`](../web-portfolio/components/bento/cards/strive-card.tsx)). Other tiles can reuse the same three parts with any content.
+
+**Direction: "Case Study House".** A framed print hung on a plaster wall, after the *Arts & Architecture* Case Study House program. It was picked over two other MCM directions: "Nelson sideboard" (teak drawers, too much like a piece of furniture) and "Brass pill mirror" (its arched top only makes sense if you know the reference). The rule that came out of it: **borrow a reference only if it reads without its caption.** All three directions, and the borrowings tested on top of Case Study House, live in [`mockups/modal-directions.html`](mockups/modal-directions.html).
+
+| Element | Spec |
+|---------|------|
+| Size | `80vw × 80dvh` from `md`; full viewport minus a 1rem margin below |
+| Frame | `rounded-2xl`, `border-(--border-strong)`, `bg-card`, `--shadow-modal` |
+| Mat | hairline `border-border` inset 12px (`before:inset-3`), like the mat of a framed print |
+| Backdrop | `bg-background/60` + lamp glow (radial `--glow-color-strong` from the top) + `backdrop-blur-md` |
+| Motion | opacity + drop from `-10px`, `duration-200 ease-out`, mirrored on exit |
+| Header | optional DM Mono kicker, Playfair title, Playfair italic tagline; no divider line |
+| Close | round knob, `.modal-knob` in `materials.css` (concentric ring, inset highlight) |
+| Ornament | `HeroArcOrnament` in the bottom-right corner, clipped by the frame |
+| Layering | `z-40`, below the noise grain (`z-50`) so the texture stays on top |
+
+**Tabs** ([`ui/tabs.tsx`](../web-portfolio/components/ui/tabs.tsx)): folder tabs. The active tab merges with the `bg-card` surface below it, so they assume a card surface (add a variant before using them elsewhere). Chapters are numbered `01`, `02` in `text-accent` and marked `aria-hidden`, so tab names stay clean for screen readers. Panels fade in on switch (`animate-in fade-in-0 slide-in-from-bottom-1`).
+
+**Project CTA:** `.project-plaque` in `materials.css` (`--project-gradient`, `--project-text`, `--project-border`). It carries the project's own color, which is why it is allowed to be a filled button.
+
+**Tailwind v4 note:** `scale-*` and `translate-*` set the CSS `scale` / `translate` properties, not `transform`. List them explicitly in the transition (`transition-[opacity,translate]`), otherwise the motion snaps and only the fade animates.
 
 ---
 
@@ -436,6 +461,8 @@ Uses theme token `--glow-color-strong`:
 - [ ] `TechBadge` component with variants per theme accent swatches
 - [ ] Portfolio navigation / header
 - [ ] Project detail page (editorial layout, MCM)
+- [x] Project case study modal (see Components > Modal)
+- [ ] Theme 03: Strive `--project-gradient` is too close to `--card`, the project plaque lacks contrast
 - [ ] Responsive mode: breakpoint 768px (2-column bento) and 480px (1 column)
 - [ ] Bento cell entrance animation (light stagger, `motion`)
 - [ ] Decide production default ambiance and whether to hide ThemeSelector

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
-import { BentoLink } from '@/components/bento/bento-link';
 import { BentoCard } from '@/components/bento/bento-card';
-import { siteLinks } from '@/lib/site';
+import { StriveCaseStudy } from '@/components/bento/cards/strive-case-study';
+import { Modal, ModalContent, ModalTrigger } from '@/components/ui/modal';
 import { striveTags } from '@/lib/strive';
 
 export async function StriveCard() {
@@ -50,12 +50,27 @@ export async function StriveCard() {
         <p className="mt-3 font-mono text-[9px] tracking-wider text-muted-foreground uppercase">
           {t('striveAvailability')}
         </p>
-        <div className="mt-4">
-          <BentoLink href={siteLinks.strive} external>
-            {t('striveCta')}
-          </BentoLink>
-        </div>
+        <p
+          className="mt-4 inline-flex items-center gap-2 text-foreground/80 transition-colors group-hover:text-primary"
+          aria-hidden="true"
+        >
+          <span className="font-mono text-[9px] tracking-widest uppercase">{t('striveCta')}</span>
+          <span className="transition-transform group-hover:translate-x-1">→</span>
+        </p>
       </div>
+      <Modal>
+        <ModalTrigger
+          aria-label={t('striveOpenLabel')}
+          className="absolute inset-0 z-10 rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+        />
+        <ModalContent
+          title={t('striveTitle')}
+          description={t('striveTagline')}
+          closeLabel={t('dialogClose')}
+        >
+          <StriveCaseStudy />
+        </ModalContent>
+      </Modal>
     </BentoCard>
   );
 }

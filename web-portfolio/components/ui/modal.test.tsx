@@ -8,7 +8,12 @@ function renderDialog() {
       <button type="button">Outside</button>
       <Modal>
         <ModalTrigger aria-label="Open case study" />
-        <ModalContent title="Strive" description="Find your rhythm." closeLabel="Close">
+        <ModalContent
+          title="Strive"
+          kicker="Case study No. 01"
+          description="Find your rhythm."
+          closeLabel="Close"
+        >
           <button type="button">Inside</button>
         </ModalContent>
       </Modal>
@@ -36,6 +41,12 @@ describe('Modal', () => {
 
     expect(dialog).toHaveAccessibleName('Strive');
     expect(dialog).toHaveAccessibleDescription('Find your rhythm.');
+  });
+
+  it('renders the optional kicker inside the dialog', () => {
+    const { dialog } = openDialog();
+
+    expect(dialog).toContainElement(screen.getByText('Case study No. 01'));
   });
 
   it('moves focus inside the dialog when opened', async () => {

@@ -93,6 +93,44 @@
     z-index: 1;
   }
 
+  .modal-knob {
+    position: relative;
+    border: 1px solid var(--border-strong);
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle at 50% 30%,
+      color-mix(in srgb, var(--foreground) 10%, var(--card)),
+      var(--card) 70%
+    );
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--foreground) 14%, transparent),
+      var(--shadow-card);
+  }
+
+  .modal-knob::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--border);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .project-plaque {
+    border: 1px solid var(--project-border);
+    border-radius: 6px;
+    background: var(--project-gradient);
+    color: var(--project-text);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--project-text) 20%, transparent),
+      var(--shadow-card);
+    transition: filter 200ms ease-out;
+  }
+
+  .project-plaque:hover {
+    filter: brightness(1.1);
+  }
+
   .lang-toggle-active {
     color: var(--primary-foreground);
     background-color: var(--primary);

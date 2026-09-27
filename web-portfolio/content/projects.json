@@ -130,19 +130,23 @@
           "numbers": [
             {
               "value": "17/17",
-              "label": "tables behind Row Level Security"
+              "label": "tables behind Row Level Security",
+              "note": "Scope · every table"
             },
             {
               "value": "0",
-              "label": "stored momentum values, views compute them"
+              "label": "stored momentum values, views compute them",
+              "note": "Instead · SQL views"
             },
             {
               "value": "5",
-              "label": "AI chat tools, none destructive"
+              "label": "AI chat tools, none destructive",
+              "note": "Scope · log, create, read"
             },
             {
               "value": "21.7k",
-              "label": "lines of TypeScript"
+              "label": "lines of TypeScript",
+              "note": "Excluding · tests"
             }
           ],
           "stack": [
@@ -203,19 +207,23 @@
           "stats": [
             {
               "value": "~100",
-              "label": "hours, evenings and weekends"
+              "label": "hours, evenings and weekends",
+              "note": "Method · commit timestamps"
             },
             {
               "value": "610",
-              "label": "commits"
+              "label": "commits",
+              "note": "Source · git"
             },
             {
               "value": "100",
-              "label": "merged pull requests"
+              "label": "merged pull requests",
+              "note": "Source · GitHub"
             },
             {
               "value": "36",
-              "label": "days with commits"
+              "label": "days with commits",
+              "note": "Peak · May and June"
             }
           ],
           "story": {
@@ -341,19 +349,23 @@
           "numbers": [
             {
               "value": "17/17",
-              "label": "tables protégées par Row Level Security"
+              "label": "tables protégées par Row Level Security",
+              "note": "Périmètre · toutes les tables"
             },
             {
               "value": "0",
-              "label": "valeur de momentum stockée, des vues la calculent"
+              "label": "valeur de momentum stockée, des vues la calculent",
+              "note": "À la place · des vues SQL"
             },
             {
               "value": "5",
-              "label": "outils pour le chat IA, aucun destructif"
+              "label": "outils pour le chat IA, aucun destructif",
+              "note": "Périmètre · noter, créer, lire"
             },
             {
               "value": "21,7 k",
-              "label": "lignes de TypeScript"
+              "label": "lignes de TypeScript",
+              "note": "Hors · tests"
             }
           ],
           "stack": [
@@ -414,19 +426,23 @@
           "stats": [
             {
               "value": "~100",
-              "label": "heures, soirs et week-ends"
+              "label": "heures, soirs et week-ends",
+              "note": "Méthode · horodatage des commits"
             },
             {
               "value": "610",
-              "label": "commits"
+              "label": "commits",
+              "note": "Source · git"
             },
             {
               "value": "100",
-              "label": "pull requests fusionnées"
+              "label": "pull requests fusionnées",
+              "note": "Source · GitHub"
             },
             {
               "value": "36",
-              "label": "jours avec des commits"
+              "label": "jours avec des commits",
+              "note": "Pic · mai et juin"
             }
           ],
           "story": {

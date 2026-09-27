@@ -13,35 +13,32 @@ export const momentumWindows = {
   after: { from: TODAY - 6, to: TODAY },
 } as const;
 
+// A textile band: each day is a stamped oval, the counted window is stitched round.
 export function MomentumWindow({ from, to }: { from: number; to: number }) {
   return (
-    <div className="grid grid-cols-14" aria-hidden="true">
-      {loggedDays.map((logged, day) => {
-        const inWindow = day >= from && day <= to;
-
-        return (
+    <div className="swatch-2 grid grid-cols-14" aria-hidden="true">
+      {loggedDays.map((logged, day) => (
+        <span
+          key={day}
+          className="row-start-1 grid h-10 place-items-center"
+          style={{ gridColumn: day + 1 }}
+        >
           <span
-            key={day}
             className={cn(
-              'grid h-7 place-items-center',
-              // Week boundary: the calendar window restarts here.
-              day === 7 && 'shadow-[inset_1px_0_0_var(--border-strong)]',
-              inWindow && 'bg-accent/15',
-              day === from && 'rounded-l-full',
-              day === to && 'rounded-r-full'
+              'h-7 w-[58%] rounded-full border-[1.5px] sm:h-8',
+              day > TODAY
+                ? 'border-dotted border-foreground/35'
+                : logged
+                  ? 'border-transparent bg-(--swatch)'
+                  : 'border-foreground/45'
             )}
-          >
-            <span
-              className={cn(
-                'size-2.5 rounded-full border border-foreground/70',
-                logged && 'bg-foreground/80',
-                day > TODAY && 'border-dashed opacity-40',
-                day <= TODAY && !inWindow && 'opacity-35'
-              )}
-            />
-          </span>
-        );
-      })}
+          />
+        </span>
+      ))}
+      <span
+        className="pointer-events-none row-start-1 rounded-[14px] border-2 border-dashed border-primary"
+        style={{ gridColumn: `${from + 1} / ${to + 2}` }}
+      />
     </div>
   );
 }

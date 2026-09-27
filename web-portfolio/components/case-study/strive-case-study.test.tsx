@@ -101,12 +101,21 @@ describe('StriveCaseStudy', () => {
     for (const item of [...engineering.pipeline.steps, ...engineering.decisions]) {
       expect(within(panel).getByRole('heading', { name: item.title })).toBeInTheDocument();
     }
-    for (const tech of engineering.stack.flatMap((group) => group.items)) {
-      expect(within(panel).getByText(tech)).toBeInTheDocument();
+    for (const group of engineering.stack) {
+      expect(within(panel).getByRole('heading', { name: group.label })).toBeInTheDocument();
+      for (const tech of group.items) {
+        expect(within(panel).getByText(tech)).toBeInTheDocument();
+      }
     }
-    for (const number of engineering.numbers) {
+    engineering.numbers.forEach((number, index) => {
       expect(within(panel).getByText(number.label)).toBeInTheDocument();
-    }
+      expect(within(panel).getByText(number.note)).toBeInTheDocument();
+      expect(within(panel).getByText(`03-${'ABCD'[index]}`)).toBeInTheDocument();
+    });
+    expect(
+      within(panel).getByRole('heading', { name: engineering.pipeline.heading })
+    ).toBeInTheDocument();
+    expect(within(panel).getByText('Chapter 03 · Engineering')).toBeInTheDocument();
   });
 
   it('tells the build log with numbers, the rebuild and the lessons', () => {
@@ -114,13 +123,16 @@ describe('StriveCaseStudy', () => {
 
     const panel = openChapter('Build log');
     const { buildLog } = content.en;
-    for (const stat of buildLog.stats) {
+    buildLog.stats.forEach((stat, index) => {
       expect(within(panel).getByText(stat.value)).toBeInTheDocument();
-    }
+      expect(within(panel).getByText(stat.note)).toBeInTheDocument();
+      expect(within(panel).getByText(`04-${'ABCD'[index]}`)).toBeInTheDocument();
+    });
     expect(within(panel).getByText(buildLog.story.quote)).toBeInTheDocument();
-    for (const result of buildLog.results) {
+    buildLog.results.forEach((result, index) => {
       expect(within(panel).getByText(result)).toBeInTheDocument();
-    }
+      expect(within(panel).getByText(`No. 0${index + 1}`)).toBeInTheDocument();
+    });
     for (const lesson of buildLog.lessons) {
       expect(within(panel).getByRole('heading', { name: lesson.title })).toBeInTheDocument();
     }

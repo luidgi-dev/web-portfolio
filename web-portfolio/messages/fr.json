@@ -70,6 +70,8 @@
     "before": "Avant",
     "after": "Après",
     "whereItStands": "Où en est le projet",
-    "lessons": "Ce que j'en retiens"
+    "lessons": "Ce que j'en retiens",
+    "chapterKicker": "Chapitre {number} · {name}",
+    "itemPrefix": "N°"
   }
 }

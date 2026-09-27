@@ -10,6 +10,15 @@ A running log of things I learn while building this project. Short entries, newe
 
 ## Entries
 
+### 2026-09-27 — Design references must read without their caption; compare them in HTML (design, process)
+
+While designing the project modal, I explored three mid-century directions (Nelson sideboard, Case Study House, brass pill mirror) and mixed pieces between them.
+
+- In this project, a reference that is too niche, or that only makes sense once you know where it comes from, needs rethinking. The brass mirror's arched top looked like an inconsistency to anyone who doesn't know the mirror. Keep what a new visitor gets without the backstory; reformulate or drop the rest.
+- To iterate on a design, a standalone HTML mockup beats building in the app: directions side by side, switchable themes, real tokens linked, no churn in components. The good directions came from brainstorming while rereading `design/` (moodboards, inspirations), so keeping that folder complete pays off in the quality of the ideas.
+
+Takeaway: a reference has to survive without its caption, and directions get compared in HTML (`design/mockups/`) before any component is written.
+
 ### 2026-07-04 — Vercel: Framework Preset must be set explicitly (vercel, deploy, nextjs)
 
 The build "succeeded" on Vercel but every route returned 404 — including `/en`, not just `/`. Cause: **Framework Preset was set to `Other`**, so Vercel treated the output as plain static files and never applied the Next.js routing manifest (redirects, middleware/proxy, SSG routes). A green deploy that 404s everywhere = wrong preset, not a code bug.

@@ -65,6 +65,7 @@ export async function StriveCard() {
         />
         <ModalContent
           title={t('striveTitle')}
+          kicker={t('striveKicker')}
           description={t('striveTagline')}
           closeLabel={t('dialogClose')}
         >

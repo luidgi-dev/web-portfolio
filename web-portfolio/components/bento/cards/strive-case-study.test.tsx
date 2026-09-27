@@ -29,9 +29,12 @@ describe('StriveCaseStudy', () => {
     const panel = screen.getByRole('tabpanel');
     expect(within(panel).getByText(enMessages.HomePage.striveVisualsHint)).toBeInTheDocument();
     expect(within(panel).getAllByRole('img', { name: 'Strive logo' })).toHaveLength(2);
+    expect(within(panel).getAllByRole('figure')).toHaveLength(2);
+    expect(within(panel).getByText('Logo, dark')).toBeInTheDocument();
+    expect(within(panel).getByText('Logo, light')).toBeInTheDocument();
   });
 
-  it('switches to the technical panel with the live site link', () => {
+  it('switches to the technical panel with a spec table and the live site link', () => {
     renderCaseStudy();
 
     fireEvent.click(screen.getByRole('tab', { name: 'Technical details' }));
@@ -39,6 +42,13 @@ describe('StriveCaseStudy', () => {
     const panel = screen.getByRole('tabpanel');
     expect(within(panel).getByText(enMessages.HomePage.striveDescription)).toBeInTheDocument();
     expect(within(panel).queryByText(enMessages.HomePage.striveVisualsHint)).toBeNull();
+
+    const terms = within(panel)
+      .getAllByRole('term')
+      .map((term) => term.textContent);
+    expect(terms).toEqual(['Type', 'Project tags', 'Availability']);
+    expect(within(panel).getByText('Personal work')).toBeInTheDocument();
+    expect(within(panel).getByText('striveapp.cc')).toBeInTheDocument();
 
     const liveLink = within(panel).getByRole('link', { name: /Open the live app/ });
     expect(liveLink).toHaveAttribute('href', siteLinks.strive);

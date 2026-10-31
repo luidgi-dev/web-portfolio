@@ -8,7 +8,7 @@ export async function HeroCard() {
   return (
     <BentoCard colSpan={2} rowSpan={2} className="relative min-h-[280px] md:min-h-[340px]">
       <BreezeBlockSunlight />
-      <div className="relative flex h-full flex-col justify-between" data-testid="hero-card">
+      <div className="relative flex h-full flex-col justify-between gap-6" data-testid="hero-card">
         <p className="font-sans text-sm font-medium text-muted-foreground">{t('heroName')}</p>
         <div>
           <h1 className="font-display text-3xl leading-[1.05] font-bold tracking-tight md:text-5xl">

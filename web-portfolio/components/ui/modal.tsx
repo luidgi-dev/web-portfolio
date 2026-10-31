@@ -2,7 +2,6 @@
 
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog';
 import { X } from 'lucide-react';
-import { HeroArcOrnament } from '@/components/bento/decor/hero-arc-ornament';
 import { cn } from '@/lib/utils';
 
 function Modal(props: DialogPrimitive.Root.Props) {
@@ -61,7 +60,6 @@ function ModalContent({
         )}
         {...props}
       >
-        <HeroArcOrnament className="pointer-events-none absolute -right-10 -bottom-10 size-64" />
         <header className="flex shrink-0 items-start justify-between gap-4 px-6 pt-8 pb-4 md:px-10 md:pt-10">
           <div className="min-w-0">
             {kicker ? (

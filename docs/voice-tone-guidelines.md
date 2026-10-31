@@ -87,3 +87,4 @@ The portfolio speaks like a capable engineer explaining their work to a peer or 
 - [ ] Is there a shorter way to say this?
 - [ ] Is "I" used only in long-form content, not in UI strings?
 - [ ] Any banned buzzword slipped in? (see Don't list above)
+- [ ] Does it avoid the generated-copy patterns listed in [Avoid the generated look](../design/design-system.md#avoid-the-generated-look)?

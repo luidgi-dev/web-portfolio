@@ -65,7 +65,7 @@ function ModalContent({
         <header className="flex shrink-0 items-start justify-between gap-4 px-6 pt-8 pb-4 md:px-10 md:pt-10">
           <div className="min-w-0">
             {kicker ? (
-              <p className="mb-3 font-mono text-[9px] tracking-[0.4em] text-muted-foreground uppercase">
+              <p className="mb-3 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
                 {kicker}
               </p>
             ) : null}

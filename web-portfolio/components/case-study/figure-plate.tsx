@@ -15,7 +15,7 @@ export function Plate({ label, caption, children }: PlateProps) {
         {children}
       </div>
       <figcaption className="mt-2.5 text-xs leading-relaxed text-foreground/85">
-        <span className="mr-2 font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase">
+        <span className="mr-2 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
           {label}
         </span>
         {caption}

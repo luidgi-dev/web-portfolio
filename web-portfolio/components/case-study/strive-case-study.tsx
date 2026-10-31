@@ -189,7 +189,7 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
               {(['before', 'after'] as const).map((key) => (
                 <div key={key} className="grid gap-3">
                   <p className="text-sm">
-                    <span className="mr-2 font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase">
+                    <span className="mr-2 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
                       {t(key)}
                     </span>
                     {buildLog.story[key]}

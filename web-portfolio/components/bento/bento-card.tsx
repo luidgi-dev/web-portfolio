@@ -39,7 +39,7 @@ export function BentoCard({
       ) : null}
       {label && labelStyle === 'chip' ? (
         // Name written next to a paint sample.
-        <span className="mb-4 flex items-center gap-2 font-sans text-xs font-medium text-muted-foreground">
+        <span className="mb-4 flex items-center gap-2 font-sans text-[11px] font-medium tracking-[0.1em] text-muted-foreground uppercase">
           <span aria-hidden className="swatch-primary h-3 w-3 rounded-[3px] bg-(--swatch)" />
           {label}
         </span>

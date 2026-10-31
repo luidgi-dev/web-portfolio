@@ -27,7 +27,7 @@ export async function ContactCard() {
         <p className="font-display text-lg font-bold tracking-tight leading-snug md:text-xl">
           {t('contactHeadline')}
         </p>
-        <p className="mt-2 font-mono text-[9px] tracking-[0.25em] text-muted-foreground uppercase">
+        <p className="mt-2 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
           {t('contactHint')}
         </p>
         <nav className="contact-tile-grid mt-4" aria-label={t('contactLabel')}>
@@ -45,7 +45,7 @@ export async function ContactCard() {
                   className="h-4 w-4 transition-transform duration-200 group-hover:scale-110"
                   aria-hidden="true"
                 />
-                <span className="text-center font-mono text-[9px] tracking-[0.2em] uppercase">
+                <span className="text-center font-mono text-[9px] tracking-[0.12em] uppercase">
                   {linkLabel}
                 </span>
               </a>

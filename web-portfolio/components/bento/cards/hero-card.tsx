@@ -1,11 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
+import { BreezeBlockSunlight } from '@/components/bento/decor/breeze-block-sunlight';
 
 export async function HeroCard() {
   const t = await getTranslations('HomePage');
 
   return (
     <BentoCard colSpan={2} rowSpan={2} className="relative min-h-[280px] md:min-h-[340px]">
+      <BreezeBlockSunlight />
       <div className="relative flex h-full flex-col justify-between" data-testid="hero-card">
         <p className="font-sans text-sm font-medium text-muted-foreground">{t('heroName')}</p>
         <div>

@@ -4,7 +4,7 @@
  *
  * Apply .theme-01 | .theme-02 | .theme-03 | .theme-04 on <html>.
  * Shadcn components read the standard tokens automatically.
- * Extended tokens (--glow-color-strong, --ornament-color, etc.) are consumed
+ * Extended tokens (--glow-color-strong, --sunlight, --ornament-color, etc.) are consumed
  * by the modal backdrop, decoration components, and future MCM art blocks.
  *
  * Theme scale (light → dark):
@@ -54,6 +54,8 @@
   --chart-5: #b84030;
 
   --glow-color-strong: rgba(107, 128, 96, 0.22);
+  --sunlight: rgba(255, 250, 236, 0.8);
+  --sunlight-shade: rgba(42, 30, 14, 0.05);
   --ornament-color: #6b8060;
   --card-frosted: rgba(244, 239, 230, 0.9);
   --teak-overlay: rgba(107, 128, 96, 0.08);
@@ -122,6 +124,8 @@
   --chart-5: #a03020;
 
   --glow-color-strong: rgba(196, 71, 42, 0.2);
+  --sunlight: rgba(255, 246, 226, 0.8);
+  --sunlight-shade: rgba(44, 20, 8, 0.06);
   --ornament-color: #c4472a;
   --card-frosted: rgba(245, 234, 216, 0.9);
   --teak-overlay: rgba(196, 71, 42, 0.06);
@@ -190,6 +194,8 @@
   --chart-5: #b05a3a;
 
   --glow-color-strong: rgba(200, 150, 62, 0.24);
+  --sunlight: rgba(255, 206, 140, 0.13);
+  --sunlight-shade: rgba(0, 0, 0, 0.16);
   --ornament-color: #c8963e;
   --card-frosted: rgba(39, 22, 8, 0.85);
   --teak-overlay: rgba(200, 150, 62, 0.05);
@@ -258,6 +264,8 @@
   --chart-5: #5a1818;
 
   --glow-color-strong: rgba(146, 40, 40, 0.28);
+  --sunlight: rgba(255, 190, 120, 0.11);
+  --sunlight-shade: rgba(0, 0, 0, 0.2);
   --ornament-color: #922828;
   --card-frosted: rgba(22, 6, 6, 0.88);
   --teak-overlay: rgba(146, 40, 40, 0.06);

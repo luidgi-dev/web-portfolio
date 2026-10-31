@@ -391,6 +391,14 @@ Composition of half-circles, solid rectangles, dividing lines. Palette: Mustard 
 </svg>
 ```
 
+### Breeze block sunlight (hero only)
+
+Afternoon sun crossing a perforated concrete screen (the breeze blocks of 1950s houses) and landing on the hero card. Same mood as the plaster rooms in sunlight (`image-6` to `image-8`). Component: `components/bento/decor/breeze-block-sunlight.tsx`, styles in `textures.css` › `.sunlight-breeze`, colors from `--sunlight` and `--sunlight-shade`.
+
+- It is a light, not an object: no lamp or window is drawn. Shade dominates, the openings are the warm patches.
+- What keeps it from reading as a generated dot grid: the block motif (a round opening with a quarter opening at each corner), skewed and tilted like low sun on a wall, with a blurred penumbra. The patch melts into the card through two slanted linear fades that follow the light, so no edge shows. Never a radial fade.
+- Hero only. The light has one source; repeating it on other cards would turn it back into a recipe.
+
 ---
 
 ## Micro-interactions

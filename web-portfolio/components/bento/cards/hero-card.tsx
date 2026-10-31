@@ -11,9 +11,7 @@ export async function HeroCard() {
       <WarmAmbientGlow />
       <HeroArcOrnament className="pointer-events-none absolute -top-8 -right-10 h-56 w-56 md:-right-6 md:h-64 md:w-64" />
       <div className="relative flex h-full flex-col justify-between" data-testid="hero-card">
-        <p className="font-mono text-[9px] tracking-[0.45em] text-muted-foreground uppercase">
-          {t('heroName')}
-        </p>
+        <p className="font-sans text-sm font-medium text-muted-foreground">{t('heroName')}</p>
         <div>
           <h1 className="font-display text-3xl leading-[1.05] font-bold tracking-tight md:text-5xl">
             {t('heroTitle')}

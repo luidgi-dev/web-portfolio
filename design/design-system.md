@@ -46,7 +46,7 @@ Themes are defined in [`web-portfolio/app/styles/tokens/themes.css`](../web-port
 | `.theme-03` | Chocolat Ambré | dark | yes |
 | `.theme-04` | Oxblood Nuit | dark | |
 
-Apply the active class on `<html>`. Shadcn components read standard tokens (`--background`, `--primary`, etc.) automatically. Extended MCM tokens (`--glow-color`, `--ornament-color`, `--project-gradient`, `--art-*`) are theme-scoped for decoration and future project cards.
+Apply the active class on `<html>`. Shadcn components read standard tokens (`--background`, `--primary`, etc.) automatically. Extended MCM tokens (`--glow-color-strong`, `--ornament-color`, `--project-gradient`, `--art-*`) are theme-scoped for decoration and future project cards.
 
 ```tsx
 // ThemeProvider (web-portfolio/components/theme-provider.tsx)
@@ -58,7 +58,7 @@ Apply the active class on `<html>`. Shadcn components read standard tokens (`--b
 Each theme block defines:
 
 - **Shadcn standard tokens**: `--background`, `--card`, `--foreground`, `--primary`, `--border`, `--ring`, etc.
-- **Extended MCM tokens**: `--glow-color`, `--glow-color-strong`, `--ornament-color`, `--card-frosted`, `--project-gradient`, `--tech-bg-start`, `--art-*`, …
+- **Extended MCM tokens**: `--glow-color-strong`, `--ornament-color`, `--card-frosted`, `--project-gradient`, `--tech-bg-start`, `--art-*`, …
 
 Transition on theme switch: `background-color 0.55s ease`, `color 0.4s ease` on `<html>`.
 
@@ -132,7 +132,7 @@ Accents: Mustard `#D4892A`, Olive `#4A5828`.
 
 - Components must use semantic classes: `bg-background`, `bg-card`, `text-foreground`, `text-primary`, `border-border`.
 - Never hardcode hex in components; change ambiance via `.theme-0X` on `<html>`.
-- `--glow-color` / `--glow-color-strong` drive `WarmAmbientGlow` and hero halos.
+- `--glow-color-strong` drives the lamp glow of the modal backdrop, the only glow on the site.
 - `--ornament-color` drives SVG strokes and decorative lines (use `var(--ornament-color)`, not fixed brass).
 
 ---
@@ -166,7 +166,7 @@ font-strive   →  Sora (Strive project only)
 
 **DM Sans** → Body copy, descriptions, paragraphs. Weights 400 (normal) and 500 (medium). Generous line-height: `1.6–1.7`. It's the neutral backdrop that lets the serif headings breathe.
 
-**DM Mono** → Labels, captions, metadata, tags, code snippets, timestamps. Always uppercase + wide letter-spacing (`0.3em–0.5em`) when used as a label. Weight 400 or 300 for secondary information.
+**DM Mono** → Labels, captions, metadata, tags, code snippets, timestamps. Uppercase with light letter-spacing (`0.1em` to `0.12em`) when used as a label. Wider tracking reads as a generated template (see Avoid the generated look). Weight 400 or 300 for secondary information.
 
 ### Typographic scale (recommended)
 
@@ -176,7 +176,7 @@ font-strive   →  Sora (Strive project only)
 | Section H2 | `clamp(1.8rem, 3vw, 2.8rem)` | Playfair Display | 700 | `-0.01em` |
 | Card Title H3 | `1.25rem–1.5rem` | Playfair Display | 600 | `0` |
 | Body | `0.875rem–1rem` | DM Sans | 400 | `0` |
-| Small metadata / Label | `0.625rem–0.75rem` | DM Mono | 400 | `0.35em` |
+| Small metadata / Label | `0.625rem` to `0.75rem` | DM Mono | 400 | `0.12em` |
 | Code | `0.75rem` | DM Mono | 400 | `0` |
 
 ---
@@ -244,7 +244,8 @@ Reusable server component at [`web-portfolio/components/bento/bento-card.tsx`](.
 |------|------|---------|-------|
 | `colSpan` | `1–4` | `1` | Desktop grid span via literal Tailwind lookup |
 | `rowSpan` | `1–2` | `1` | Desktop row span via lookup |
-| `label` | `string?` | — | DM Mono `// LABEL` header; omit for unlabeled cells |
+| `label` | `string?` | none | Card name, see Card labels below; omit when the content names itself |
+| `labelStyle` | `'block' \| 'chip'` | `'block'` | `block` for static cards, `chip` for interactive ones |
 | `padded` | `boolean` | `true` | `false` for edge-to-edge decorative content |
 | `className` | `string?` | — | Extra classes merged with `cn()` |
 | `children` | `ReactNode` | — | Composed content (Client Components allowed as children) |
@@ -257,18 +258,16 @@ Concrete cards live under [`web-portfolio/components/bento/cards/`](../web-portf
 
 **Decorative cards:** use `padded={false}` and theme tokens `--art-*`, `--ornament-color` inside children (see moodboards).
 
-### Card / Bento Cell (legacy markup reference)
+### Card labels
 
-```tsx
-<div className="rounded-2xl border border-border bg-card p-6 flex flex-col">
-  <span className="font-mono text-[9px] tracking-[0.4em] text-muted-foreground uppercase mb-4">
-    Label Section
-  </span>
-  {/* content */}
-</div>
-```
+Two treatments, both in DM Sans `11px` medium, uppercase, `0.1em` tracking, `muted-foreground`. They differ by the mark next to the name, taken from two real objects:
 
-**Rule:** Every cell starts with a small `DM Mono uppercase tracking-wide` label in `muted-foreground`. It's the design system's signature.
+| Style | Mark | Source | Used on |
+|---|---|---|---|
+| `block` | name, then a hairline to the card edge | title block of an architectural drawing | static cards: About, Professional work, Stack |
+| `chip` | small `--primary` swatch, then the name | paint sample chip (`design/inspirations`) | interactive cards: Strive, Contact, Language, Ambiance |
+
+Not every cell has a label: the hero and the Bauhaus art name themselves. Never prefix a label with `//` or any code syntax.
 
 ### Tag / Chip
 
@@ -298,7 +297,7 @@ No solid-filled rectangular button except in exceptional cases (the one sanction
 
 ```tsx
 <div className="flex items-center gap-3">
-  <span className="font-mono text-[9px] tracking-[0.4em] text-primary/70 uppercase">Featured Work</span>
+  <span className="font-mono text-[9px] tracking-[0.12em] text-primary/70 uppercase">Featured Work</span>
   <div className="flex-1 h-px bg-border" />
   <span className="font-mono text-[9px] text-muted-foreground">2024</span>
 </div>
@@ -319,7 +318,7 @@ Reusable overlay at [`web-portfolio/components/ui/modal.tsx`](../web-portfolio/c
 | Motion | opacity + drop from `-10px`, `duration-200 ease-out`, mirrored on exit |
 | Header | optional DM Mono kicker, Playfair title, Playfair italic tagline; no divider line |
 | Close | round knob, `.modal-knob` in `materials.css` (concentric ring, inset highlight) |
-| Ornament | `HeroArcOrnament` in the bottom-right corner, clipped by the frame |
+| Ornament | none: the inner mat is the decoration |
 | Layering | `z-40`, below the noise grain (`z-50`) so the texture stays on top |
 
 **Tabs** ([`ui/tabs.tsx`](../web-portfolio/components/ui/tabs.tsx)): folder tabs. The active tab merges with the `bg-card` surface below it, so they assume a card surface (add a variant before using them elsewhere). Chapters are numbered `01`, `02` in `text-accent` and marked `aria-hidden`, so tab names stay clean for screen readers. Panels fade in on switch (`animate-in fade-in-0 slide-in-from-bottom-1`).
@@ -373,19 +372,7 @@ background: linear-gradient(145deg, #D4A83A 0%, #A87B2E 40%, #C8963E 70%, #8B642
 
 ## MCM Decorative Elements
 
-### Concentric circles (brass ornament)
-
-Use SVGs of circles, arcs, and lines for background decoration. Always `opacity-[0.06]` to `opacity-10`. Never aggressive, never strongly colored.
-
-```tsx
-<svg className="absolute -bottom-16 -right-16 w-80 h-80 opacity-[0.06]" viewBox="0 0 300 300">
-  <circle cx="200" cy="200" r="180" fill="none" stroke="#C8963E" strokeWidth="1.5" />
-  <circle cx="200" cy="200" r="130" fill="none" stroke="#C8963E" strokeWidth="1" />
-  <circle cx="200" cy="200" r="80" fill="#C8963E" opacity="0.5" />
-  <line x1="0" y1="200" x2="300" y2="200" stroke="#C8963E" strokeWidth="0.75" />
-  <line x1="200" y1="0" x2="200" y2="300" stroke="#C8963E" strokeWidth="0.75" />
-</svg>
-```
+Decoration must come from a real object or material found in `design/inspirations`: a paint sample chip, a teak grain, a brass plate, a Bauhaus poster. Abstract SVG ornaments (concentric circles, radar crosshairs, generic stems) were removed in LUI-178: they read as filler from a template, not as part of an interior.
 
 ### MCM geometric art (Bauhaus)
 
@@ -404,16 +391,13 @@ Composition of half-circles, solid rectangles, dividing lines. Palette: Mustard 
 </svg>
 ```
 
-### Warm glow (ambiance halo)
+### Breeze block sunlight (hero only)
 
-Uses theme token `--glow-color-strong`:
+Afternoon sun crossing a perforated concrete screen (the breeze blocks of 1950s houses) and landing on the hero card. Same mood as the plaster rooms in sunlight (`image-6` to `image-8`). Component: `components/bento/decor/breeze-block-sunlight.tsx`, styles in `textures.css` › `.sunlight-breeze`, colors from `--sunlight` and `--sunlight-shade`.
 
-```tsx
-<div
-  className="absolute -top-16 -right-16 w-48 h-48 rounded-full pointer-events-none blur-xl"
-  style={{ background: "radial-gradient(circle, var(--glow-color-strong), transparent 70%)" }}
-/>
-```
+- It is a light, not an object: no lamp or window is drawn. Shade dominates, the openings are the warm patches.
+- What keeps it from reading as a generated dot grid: the block motif (a round opening with a quarter opening at each corner), skewed and tilted like low sun on a wall, with a blurred penumbra. The patch melts into the card through two slanted linear fades that follow the light, so no edge shows. Never a radial fade.
+- Hero only. The light has one source; repeating it on other cards would turn it back into a recipe.
 
 ---
 
@@ -431,21 +415,42 @@ Uses theme token `--glow-color-strong`:
 
 ## Editorial Rules (copy)
 
-- **Headlines**: short, affirmative, never a verb — "Crafting Experiences", "Studio Platform", "Digital Craft"
-- **Display italics**: 1 keyword per headline can be italicized in Playfair for an editorial effect
-- **Mono labels**: always UPPERCASE + wide tracking. E.g.: `FEATURED PROJECT`, `STACK`, `2024`
+- **Headlines**: short and plain, a sentence a person would say. Detail goes in the body text, not in a longer headline.
+- **No stressed keyword**: no italic or colored word inside a headline.
+- **Mono labels**: UPPERCASE with light tracking (`0.12em`). E.g.: `FEATURED PROJECT`, `STACK`, `2024`
 - **Body**: conversational, direct, light — no tech buzzwords
 - **Language**: mixing FR/EN is acceptable in this portfolio context
 
 ---
 
+## Avoid the generated look
+
+An audit (LUI-178) found the site read as "generated in one click" despite the avoid list above. The tells are patterns, not single choices, so each rule names the pattern.
+
+**Visual**
+- One recipe per element type everywhere (same label, same radius, same heading on every card) reads as a template. Vary treatments by role, as the two card labels do.
+- Decoration comes from a real object in `design/inspirations` and reads without its caption. No abstract SVG filler.
+- One atmosphere effect per surface. The page keeps the film grain; the modal keeps its lamp glow and blur. No glow behind cards.
+- No widely tracked mono caps (`0.3em` and up), no `//` kickers, no name set as a spaced-out logotype.
+- Avoiding purple and Space Grotesk is not enough: Playfair + DM Sans + bento + grain is the newer generated look, so the MCM materials have to carry the identity.
+
+**Copy** (details and examples in [`docs/voice-tone-guidelines.md`](../docs/voice-tone-guidelines.md) and the 2026-10-31 entry of [`docs/TIL.md`](../docs/TIL.md))
+- No stressed word, no staccato fragments, no "X, not Y" contrast.
+- No slogan heading with a full stop, no clever symmetrical sentence, no closing aphorism.
+- No triad of abstract nouns, no "Let's" call to action, no resume-speak qualities.
+- Concrete nouns and real facts (stack, teams, counts) instead of qualities.
+- FR is written natively, not translated from the EN structure.
+
+---
+
 ## Checklist Before Building a Component
 
-- [ ] Does the component's label use `DM Mono uppercase tracking-wide muted-foreground`?
+- [ ] Does the card need a label, and is it the right style (`block` static, `chip` interactive)?
 - [ ] Is the main heading in `Playfair Display`?
 - [ ] Does the background use theme tokens `bg-background` / `bg-card`?
 - [ ] Are borders `border-border` (brass rgba)?
-- [ ] Is there a subtle MCM decorative element (circle, glow, line)?
+- [ ] If there is decoration, does it come from a real object in `design/inspirations`?
+- [ ] Does it pass the Avoid the generated look rules?
 - [ ] Are transitions `duration-200`?
 - [ ] Is the density generous (no cramped content)?
 - [ ] Does the component work on **all four ambiances** (light 01–02 and dark 03–04)?

@@ -56,7 +56,7 @@ export function LocaleSwitcher() {
                 : 'bg-transparent text-muted-foreground opacity-50 hover:bg-muted/40 hover:text-foreground hover:opacity-100'
             )}
           >
-            <span className="font-mono text-[8px] tracking-[0.35em]">{codeLabel}</span>
+            <span className="font-mono text-[8px] tracking-[0.12em]">{codeLabel}</span>
             <span className={cn('font-sans text-sm', isActive ? 'font-medium' : 'font-normal')}>
               {endonym}
             </span>

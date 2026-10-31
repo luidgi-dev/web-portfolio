@@ -10,3 +10,24 @@
     #4a2e12 16px
   );
 }
+
+/*
+ * Sun through a breeze block screen, cast on the card. Two slanted linear fades melt the
+ * patch into the card along the light's direction; a radial fade would read as a generic
+ * dot-grid background.
+ */
+.sunlight-breeze {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 66%;
+  pointer-events: none;
+  filter: blur(2.4px);
+  mask-image:
+    linear-gradient(105deg, transparent 5%, #000 50%),
+    linear-gradient(to top, transparent 0%, #000 60%);
+  mask-composite: intersect;
+}
+.sunlight-breeze > svg {
+  width: 100%;
+  height: 100%;
+}

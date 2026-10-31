@@ -30,15 +30,14 @@ export function ThemeSelector() {
             onClick={() => setThemeId(theme.id)}
             className={cn(
               'group flex min-h-[44px] flex-col items-center gap-1.5 rounded-lg p-0.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
-              isActive
-                ? 'ring-2 ring-primary ring-offset-1 ring-offset-card'
-                : 'opacity-70 hover:opacity-100'
+              !isActive && 'opacity-70 hover:opacity-100'
             )}
           >
             <span
               className={cn(
                 'h-12 w-full rounded-xl border border-border/60 transition-transform duration-200',
-                isActive && 'scale-[1.03] shadow-sm',
+                // The active swatch is punched like a paint sample chip.
+                isActive && 'sample-chip scale-[1.03]',
                 !isActive && 'group-hover:scale-[1.02]'
               )}
               style={{ background: theme.swatchGradient }}
@@ -46,7 +45,7 @@ export function ThemeSelector() {
             />
             <span
               className={cn(
-                'w-full text-center font-mono text-[9px] leading-snug tracking-[0.18em] uppercase',
+                'w-full text-center font-mono text-[9px] leading-snug tracking-[0.12em] uppercase',
                 isActive ? 'font-medium text-primary' : 'text-muted-foreground'
               )}
             >

@@ -49,12 +49,12 @@ export function InsightCards({ cards }: { cards: Product['insights']['cards'] })
     <div className="grid gap-3 rounded-[2px] border border-border bg-background p-3 sm:grid-cols-2">
       {cards.map((card) => (
         <div key={card.title} className="rounded-lg border border-border bg-card p-4">
-          <p className="font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase">
+          <p className="font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
             {card.kind}
           </p>
           <p className="mt-2 font-strive text-[15px] leading-snug font-semibold">{card.title}</p>
           <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">{card.body}</p>
-          <p className="mt-3 font-mono text-[9px] tracking-[0.2em] text-muted-foreground uppercase">
+          <p className="mt-3 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
             {card.period}
           </p>
         </div>

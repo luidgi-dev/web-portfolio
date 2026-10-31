@@ -29,7 +29,7 @@ export function SampleChips({ items, code, className }: SampleChipsProps) {
           >
             {code}-{String.fromCharCode(65 + index)}
           </span>
-          <dt className="order-2 mt-2 font-mono text-[9px] tracking-[0.25em] uppercase">
+          <dt className="order-2 mt-2 font-mono text-[9px] tracking-[0.12em] uppercase">
             {item.label}
           </dt>
           <dd className="order-1 mt-auto font-display text-4xl leading-none font-bold tracking-tight">

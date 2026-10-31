@@ -17,7 +17,7 @@ export function CatalogList({ items, prefix, className }: CatalogListProps) {
           className="grid grid-cols-[3.5rem_1fr] gap-3 border-t border-(--border-strong) py-3"
         >
           <span
-            className="pt-0.5 font-mono text-[9px] tracking-[0.2em] text-accent uppercase"
+            className="pt-0.5 font-mono text-[9px] tracking-[0.12em] text-accent uppercase"
             aria-hidden="true"
           >
             {prefix} {toOrdinal(index)}

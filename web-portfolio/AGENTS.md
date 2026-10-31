@@ -29,3 +29,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Locale routing lives in `proxy.ts` (Next.js 16 renamed `middleware.ts` → `proxy.ts`); use a named `export function proxy`.
 - Locales and default are defined in `i18n/routing.ts`. Add a locale by extending `routing.locales` and adding a matching `messages/<locale>.json`.
 - `app/[locale]/layout.tsx` owns `<html>`/`<body>`; the root `app/layout.tsx` is pass-through only.
+
+## Copy and visuals: avoid the generated look
+
+Full rules and examples: `design/design-system.md` (Avoid the generated look) and the 2026-10-31 entry of `docs/TIL.md`.
+
+- Copy: no stressed keyword (italic or colored), no staccato fragments, no "X, not Y" contrast, no slogan heading with a full stop, no clever symmetrical sentence, no closing aphorism, no triad of abstract nouns, no "Let's" call to action, no resume-speak qualities.
+- Titles stay short; detail goes in the body text, not in a longer title.
+- Use concrete nouns and real facts from the project (stack, teams, counts) instead of qualities. Don't overclaim (traffic, users) what can't be backed.
+- Propose 2 options per string with the before shown; the user approves before wiring in. Length problems only show on the page.
+- Write FR natively, not as a translation of the EN structure.
+- Visuals: decoration comes from a real object or material in `design/inspirations`, never abstract SVG filler. Vary treatments by role instead of one recipe everywhere. No `//` kickers, no mono caps tracked wider than `0.12em`.

@@ -2,7 +2,7 @@ import { DM_Mono, DM_Sans, Playfair_Display, Sora } from 'next/font/google';
 import '../globals.css';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { FilmNoiseOverlay } from '@/components/film-noise-overlay';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -32,11 +32,6 @@ const sora = Sora({
   weight: ['600', '700'],
 });
 
-export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'Mid-Century Modern portfolio showcasing digital craft and experience design.',
-};
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -45,6 +40,16 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Omit<Props, 'children'>): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;

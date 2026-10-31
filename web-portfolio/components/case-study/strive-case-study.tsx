@@ -74,7 +74,7 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
       <TabsPanel value="overview">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
           <div>
-            <p className="font-display text-lg text-muted-foreground italic">{overview.problem}</p>
+            <p className="font-display text-lg text-muted-foreground">{overview.problem}</p>
             <p className="mt-4 font-display text-2xl leading-snug font-bold tracking-tight md:text-3xl">
               {overview.lead}
             </p>
@@ -189,7 +189,7 @@ export function StriveCaseStudy({ meta, content }: StriveCaseStudyProps) {
               {(['before', 'after'] as const).map((key) => (
                 <div key={key} className="grid gap-3">
                   <p className="text-sm">
-                    <span className="mr-2 font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase">
+                    <span className="mr-2 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
                       {t(key)}
                     </span>
                     {buildLog.story[key]}

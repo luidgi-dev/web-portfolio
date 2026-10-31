@@ -18,7 +18,7 @@ export async function BauhausGeometryCard() {
           aria-label={t('bauhausArtLabel')}
         />
         <div
-          className="relative mt-auto border-t border-border/50 bg-card/85 px-4 py-3 backdrop-blur-[2px]"
+          className="relative mt-auto border-t border-border/50 bg-card/90 px-4 py-3"
           aria-hidden="false"
         >
           <nav

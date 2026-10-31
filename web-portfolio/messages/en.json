@@ -5,8 +5,8 @@
   },
   "HomePage": {
     "heroName": "Luidgi JOSEPH",
-    "heroTitle": "I build apps and tools people use every day, from the idea to production.",
-    "heroDescription": "I work in Python and TypeScript, on web apps, automation and API integrations. Most projects here start with a problem I'd like to solve myself.",
+    "heroTitle": "I build apps people use every day.",
+    "heroDescription": "Web apps, internal tools and automation in Python and TypeScript, from the idea to production. Most projects here start with a problem I'd like to solve myself.",
     "striveAvailability": "Available at {host}",
     "striveCta": "See how it works",
     "striveTagsLabel": "Project tags",

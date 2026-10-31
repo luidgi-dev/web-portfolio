@@ -5,8 +5,8 @@
   },
   "HomePage": {
     "heroName": "Luidgi JOSEPH",
-    "heroTitle": "Je développe des applications et des outils utilisés au quotidien, de l'idée à la mise en production.",
-    "heroDescription": "Je travaille en Python et TypeScript, sur des applications web, de l'automatisation et des intégrations API. La plupart des projets présentés ici sont nés d'un problème que je voulais résoudre moi-même.",
+    "heroTitle": "Je développe des applis utilisées au quotidien.",
+    "heroDescription": "Applications web, outils internes et automatisation en Python et TypeScript, de l'idée à la mise en production. La plupart des projets présentés ici sont nés d'un problème que je voulais résoudre moi-même.",
     "striveAvailability": "Disponible sur {host}",
     "striveCta": "Voir comment ça fonctionne",
     "striveTagsLabel": "Tags projet",

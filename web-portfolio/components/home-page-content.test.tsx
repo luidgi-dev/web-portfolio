@@ -10,7 +10,7 @@ import frMessages from '@/messages/fr.json';
 vi.mock('@/components/bento/cards/hero-card', () => ({
   HeroCard: () => (
     <section data-testid="hero-card">
-      <h1>I build apps and tools people use every day, from the idea to production.</h1>
+      <h1>I build apps people use every day.</h1>
     </section>
   ),
 }));
@@ -78,7 +78,7 @@ describe('HomePageContent', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /I build apps and tools people use every day/i,
+        name: /I build apps people use every day/i,
       })
     ).toBeInTheDocument();
   });

@@ -50,8 +50,8 @@
         "type": "Personal work",
         "tags": ["AI", "PWA", "Lifestyle"],
         "overview": {
-          "problem": "Most habit trackers count streaks: miss one day and the count goes back to zero, which is often when people give up.",
-          "lead": "Strive tracks momentum, which drops slowly after a missed day and never starts over.",
+          "problem": "Streaks punish a single missed day.",
+          "lead": "Strive tracks momentum instead.",
           "paragraphs": [
             "I wanted to build one application alone, end to end: visual direction, database, deployment. The subject came from my notes app, where I was already tracking my habits by hand.",
             "An AI coach turns numbers the database has already computed into weekly insights, and small circles of up to eight people share progress without a leaderboard."
@@ -269,8 +269,8 @@
         "type": "Travail personnel",
         "tags": ["IA", "PWA", "Lifestyle"],
         "overview": {
-          "problem": "La plupart des trackers comptent des séries : un jour manqué et le compteur repart à zéro, souvent le moment où l'on abandonne.",
-          "lead": "Strive suit un momentum, qui baisse doucement après un jour manqué et ne repart jamais de zéro.",
+          "problem": "Les séries punissent un seul jour manqué.",
+          "lead": "Strive suit plutôt un momentum.",
           "paragraphs": [
             "Je voulais construire une application seul, de bout en bout : direction visuelle, base de données, déploiement. Le sujet est venu de mon appli de notes, où je suivais déjà mes habitudes à la main.",
             "Un coach IA transforme des chiffres déjà calculés par la base en insights hebdomadaires, et de petits cercles de huit personnes au plus partagent leur progression sans classement."

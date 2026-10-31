@@ -1,12 +1,12 @@
 {
+  "Metadata": {
+    "title": "Luidgi Joseph, software engineer",
+    "description": "Web apps, automation and internal tools by Luidgi Joseph, with a case study of Strive, a habit tracker."
+  },
   "HomePage": {
     "heroName": "Luidgi JOSEPH",
-    "heroLabel": "Web portfolio",
-    "heroLine1": "Building software",
-    "heroLine2Before": "people ",
-    "heroLine2Accent": "actually",
-    "heroLine2After": " use.",
-    "heroDescription": "I build web applications, automation tools and software by combining engineering, product thinking and modern development workflows. Most projects here start with a problem I'd like to solve myself.",
+    "heroTitle": "I build apps and tools people use every day, from the idea to production.",
+    "heroDescription": "I work in Python and TypeScript, on web apps, automation and API integrations. Most projects here start with a problem I'd like to solve myself.",
     "striveAvailability": "Available at {host}",
     "striveCta": "See how it works",
     "striveTagsLabel": "Project tags",
@@ -14,13 +14,13 @@
     "dialogClose": "Close",
     "professionalWorkLabel": "Professional work",
     "professionalWorkTitle": "Professional work",
-    "professionalWorkDescription": "I build internal tools that support customer service, sales and production teams. My work ranges from Python applications and API integrations to automation and data workflows on Google Cloud, always with the goal of delivering practical software that makes everyday work simpler.",
+    "professionalWorkDescription": "Python apps, API integrations and data workflows on Google Cloud, for customer service, sales and production teams. Most replace a spreadsheet or a manual step.",
     "professionalWorkDisciplinesLabel": "Disciplines",
-    "professionalDisciplineInternal": "Internal software",
+    "professionalDisciplineInternal": "Internal tools",
     "professionalDisciplineAutomation": "Automation",
     "professionalDisciplineIntegrations": "API integrations",
-    "professionalDisciplineCrossFunctional": "Cross-functional",
-    "professionalDisciplineOwnership": "End-to-end delivery",
+    "professionalDisciplineData": "Data workflows",
+    "professionalDisciplineCloud": "Google Cloud",
     "profileLabel": "About",
     "profileTitle": "Software Engineer",
     "profileDescription": "French engineering graduate. I enjoy building products end-to-end, from understanding the problem to shipping and maintaining the solution.",
@@ -34,7 +34,7 @@
     "stackBackend": "Backend",
     "stackCloud": "Cloud",
     "contactLabel": "Get in touch",
-    "contactHeadline": "Let's build something useful.",
+    "contactHeadline": "A project or an opportunity in mind? Write to me.",
     "contactHint": "Pick a channel",
     "contactEmail": "Email",
     "contactCv": "CV",
@@ -47,7 +47,7 @@
     "localeEn": "English",
     "localeFr": "Français",
     "themeLabel": "Ambiance",
-    "themeHint": "Select your ambiance"
+    "themeHint": "Pick a palette, taken from mid-century interiors"
   },
   "CaseStudy": {
     "kicker": "Case study No. {number} · {type}",

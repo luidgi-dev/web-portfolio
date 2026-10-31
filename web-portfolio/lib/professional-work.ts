@@ -1,7 +1,7 @@
 export const professionalDisciplines = [
-  { key: 'internal-software', labelKey: 'professionalDisciplineInternal' as const },
+  { key: 'internal-tools', labelKey: 'professionalDisciplineInternal' as const },
   { key: 'automation', labelKey: 'professionalDisciplineAutomation' as const },
   { key: 'integrations', labelKey: 'professionalDisciplineIntegrations' as const },
-  { key: 'cross-functional', labelKey: 'professionalDisciplineCrossFunctional' as const },
-  { key: 'ownership', labelKey: 'professionalDisciplineOwnership' as const },
+  { key: 'data', labelKey: 'professionalDisciplineData' as const },
+  { key: 'cloud', labelKey: 'professionalDisciplineCloud' as const },
 ] as const;

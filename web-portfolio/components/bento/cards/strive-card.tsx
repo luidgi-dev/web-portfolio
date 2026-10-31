@@ -14,7 +14,13 @@ export async function StriveCard() {
   const { meta, content, number } = getProject('strive', locale);
 
   return (
-    <BentoCard colSpan={1} rowSpan={2} label={content.type} className="relative overflow-hidden">
+    <BentoCard
+      colSpan={1}
+      rowSpan={2}
+      label={content.type}
+      labelStyle="chip"
+      className="relative overflow-hidden"
+    >
       <div className="relative flex h-full flex-col" data-testid="strive-card">
         <div className="flex items-start justify-between gap-3">
           <Image

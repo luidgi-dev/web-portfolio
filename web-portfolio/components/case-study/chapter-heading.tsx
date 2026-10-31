@@ -15,7 +15,7 @@ export function ChapterHeading({ number, kicker, children }: ChapterHeadingProps
         {number}
       </span>
       <div className="min-w-0">
-        <p className="font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase">
+        <p className="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
           {kicker}
         </p>
         <h3 className="mt-1.5 font-display text-3xl leading-tight font-bold tracking-tight md:text-4xl">

@@ -9,15 +9,26 @@ function renderBentoCard(ui: React.ReactElement) {
 }
 
 describe('BentoCard', () => {
-  it('renders the structural mono label when provided', () => {
+  it('renders the label as plain text, without a code-comment prefix', () => {
     renderBentoCard(
       <BentoCard label="Introduction">
         <p>Content</p>
       </BentoCard>
     );
 
-    expect(screen.getByText('// Introduction')).toBeInTheDocument();
+    expect(screen.getByText('Introduction')).toBeInTheDocument();
+    expect(screen.queryByText(/\/\//)).not.toBeInTheDocument();
     expect(screen.getByText('Content')).toBeInTheDocument();
+  });
+
+  it.each(['block', 'chip'] as const)('renders the label in the %s style', (labelStyle) => {
+    renderBentoCard(
+      <BentoCard label="Contact" labelStyle={labelStyle}>
+        <p>Content</p>
+      </BentoCard>
+    );
+
+    expect(screen.getByText('Contact')).toBeInTheDocument();
   });
 
   it('omits the label when not provided', () => {
@@ -27,7 +38,7 @@ describe('BentoCard', () => {
       </BentoCard>
     );
 
-    expect(screen.queryByText(/^\/\//)).not.toBeInTheDocument();
+    expect(screen.getByText('Content only').closest('section')?.children).toHaveLength(1);
     expect(screen.getByText('Content only')).toBeInTheDocument();
   });
 

@@ -6,7 +6,7 @@ export async function LanguageCard() {
   const t = await getTranslations('HomePage');
 
   return (
-    <BentoCard colSpan={1} label={t('languageLabel')}>
+    <BentoCard colSpan={1} label={t('languageLabel')} labelStyle="chip">
       <LocaleSwitcher />
     </BentoCard>
   );

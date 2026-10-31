@@ -5,7 +5,7 @@
  * Apply .theme-01 | .theme-02 | .theme-03 | .theme-04 on <html>.
  * Shadcn components read the standard tokens automatically.
  * Extended tokens (--glow-color, --ornament-color, etc.) are consumed
- * by WarmAmbientGlow, decoration components, and future MCM art blocks.
+ * by the modal backdrop, decoration components, and future MCM art blocks.
  *
  * Theme scale (light → dark):
  *   01 · Plâtre Blanc      light   Mediterranean white plaster, sage, linen

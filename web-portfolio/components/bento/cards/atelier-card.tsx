@@ -1,5 +1,4 @@
 import { getTranslations } from 'next-intl/server';
-import { RadarOrnament } from '@/components/bento/decor/radar-ornament';
 import { BentoCard } from '@/components/bento/bento-card';
 
 export async function AtelierCard() {
@@ -13,7 +12,6 @@ export async function AtelierCard() {
           className="absolute inset-0 bg-gradient-to-b from-background/15 via-transparent to-background/75"
           aria-hidden="true"
         />
-        <RadarOrnament className="pointer-events-none absolute -top-2 -right-2 h-20 w-20 opacity-[0.1]" />
         <div className="relative mt-auto p-3">
           <p className="font-mono text-[8px] tracking-[0.12em] text-foreground/75 uppercase">
             {t('atelierLabel')}

@@ -1,6 +1,5 @@
 import { FileDown, Mail } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { RadarOrnament } from '@/components/bento/decor/radar-ornament';
 import { BentoCard } from '@/components/bento/bento-card';
 import { GitHubIcon, LinkedInIcon } from '@/components/icons/contact-icons';
 import { siteLinks } from '@/lib/site';
@@ -22,7 +21,6 @@ export async function ContactCard() {
       labelStyle="chip"
       className="relative overflow-hidden"
     >
-      <RadarOrnament className="pointer-events-none absolute -bottom-4 -left-4 h-28 w-28 opacity-[0.07]" />
       <div className="relative" data-testid="contact-card">
         <p className="font-display text-lg font-bold tracking-tight leading-snug md:text-xl">
           {t('contactHeadline')}

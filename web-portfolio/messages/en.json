@@ -73,5 +73,14 @@
     "lessons": "Lessons",
     "chapterKicker": "Chapter {number} · {name}",
     "itemPrefix": "No."
+  },
+  "ErrorPage": {
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The address may contain a typo, or the page has moved. The rest of the site is on the homepage.",
+    "errorTitle": "Something went wrong on this page",
+    "errorBody": "Try loading it again. If it still fails, the rest of the site is on the homepage.",
+    "retry": "Try again",
+    "home": "Back to the homepage",
+    "reference": "Ref."
   }
 }

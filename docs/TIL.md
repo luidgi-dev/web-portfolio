@@ -10,6 +10,14 @@ A running log of things I learn while building this project. Short entries, newe
 
 ## Entries
 
+### 2026-10-31: npm ci fails on CI when the lockfile comes from a newer npm (npm, ci, node)
+
+CI failed with "Missing: @swc/helpers@0.5.23 from lock file" while everything worked locally. Cause: the Mac runs Node 24 (npm 11), which no longer writes optional peer dependencies such as `@swc/helpers` into the lockfile; the CI ran Node 22 (npm 10), which still expects them in `npm ci`. Reproduce locally with `npx npm@10 ci --dry-run`.
+
+Fix: same Node major everywhere: `node-version` in the CI workflow and `"engines": { "node": "24.x" }` in `package.json` (Vercel reads it). Regenerating the lock with npm 10 doesn't last: the next local `npm install` removes the entry again.
+
+Takeaway: when `npm ci` fails only on CI, compare npm versions before touching dependencies.
+
 ### 2026-10-31: AI-assisted copy and visuals have recognizable tells (copy, design, ai, process)
 
 An audit (LUI-178) showed the site still read as "generated in one click" despite the hygiene rules (no purple, no emoji, no em dash). The tells are patterns, not words, so a banned-word list never catches them.

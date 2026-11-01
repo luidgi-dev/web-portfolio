@@ -1,7 +1,7 @@
-import type { ProjectContent } from '@/lib/projects';
+import type { StriveContent } from '@/lib/projects';
 import { cn } from '@/lib/utils';
 
-type Product = ProjectContent['product'];
+type Product = StriveContent['product'];
 
 // Two weeks of a daily ritual, today being the second Thursday. The calendar week
 // only counts since Monday; the rolling window always counts the last seven days.

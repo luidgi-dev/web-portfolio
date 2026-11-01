@@ -29,8 +29,9 @@ export interface ProjectMeta {
   figures: ProjectFigure[];
 }
 
-// Case study prose for one locale. Chapters are fixed keys, not a discriminated
-// array: JSON imports widen string literals, so tsc could not check a union.
+// Case study prose for one locale, shared by every project. Chapters are fixed
+// keys, not a discriminated array: JSON imports widen string literals, so tsc
+// could not check a union.
 export interface ProjectContent {
   title: string;
   tagline: string;
@@ -43,16 +44,6 @@ export interface ProjectContent {
     paragraphs: string[];
     pillars: { heading: string; items: TitledItem[] };
     facts: { role: string; timeline: string; platform: string; status: string };
-  };
-  product: {
-    figures: Record<string, { alt: string; caption: string }>;
-    insights: {
-      heading: string;
-      body: string;
-      caption: string;
-      cards: { kind: string; title: string; body: string; period: string }[];
-    };
-    features: string[];
   };
   engineering: {
     intro: string;
@@ -69,18 +60,37 @@ export interface ProjectContent {
   };
 }
 
-export interface Project {
+// Chapter 02 differs per project, so each slug gets its own content type.
+export interface StriveContent extends ProjectContent {
+  product: {
+    figures: Record<string, { alt: string; caption: string }>;
+    insights: {
+      heading: string;
+      body: string;
+      caption: string;
+      cards: { kind: string; title: string; body: string; period: string }[];
+    };
+    features: string[];
+  };
+}
+
+interface ContentBySlug {
+  strive: StriveContent;
+}
+
+export interface Project<Content extends ProjectContent = ProjectContent> {
   meta: ProjectMeta;
-  content: Record<Locale, ProjectContent>;
+  content: Record<Locale, Content>;
 }
 
 export type ProjectSlug = keyof typeof data;
 
-// The annotation is what makes tsc validate content/projects.json.
-export const projects: Record<ProjectSlug, Project> = data;
+// The annotation is what makes tsc validate content/projects.json, and a slug
+// without an entry in ContentBySlug fails here.
+export const projects: { [Slug in ProjectSlug]: Project<ContentBySlug[Slug]> } = data;
 
-export function getProject(slug: ProjectSlug, locale: string) {
-  const { meta, content } = projects[slug];
+export function getProject<Slug extends ProjectSlug>(slug: Slug, locale: string) {
+  const { meta, content }: Project<ContentBySlug[Slug]> = projects[slug];
   const index = Object.keys(projects).indexOf(slug);
 
   return {

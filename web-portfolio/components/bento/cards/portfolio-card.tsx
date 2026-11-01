@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
+import { CaseStudyCta, CaseStudyModal } from '@/components/bento/case-study-modal';
 import { PortfolioCaseStudy } from '@/components/case-study/portfolio-case-study';
-import { Modal, ModalContent, ModalTrigger } from '@/components/ui/modal';
 import { getProject } from '@/lib/projects';
 import { cn } from '@/lib/utils';
 
@@ -65,30 +65,16 @@ export async function PortfolioCard() {
         <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-foreground/90">
           {content.summary}
         </p>
-        <p
-          className="mt-4 inline-flex items-center gap-2 text-foreground/80 transition-colors group-hover:text-primary"
-          aria-hidden="true"
-        >
-          <span className="font-mono text-[9px] tracking-widest uppercase">
-            {t('caseStudyCta')}
-          </span>
-          <span className="transition-transform group-hover:translate-x-1">→</span>
-        </p>
+        <CaseStudyCta />
       </div>
-      <Modal>
-        <ModalTrigger
-          aria-label={t('portfolioOpenLabel')}
-          className="absolute inset-0 z-10 rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
-        />
-        <ModalContent
-          title={content.title}
-          kicker={tCaseStudy('kicker', { number, type: content.type })}
-          description={content.tagline}
-          closeLabel={t('dialogClose')}
-        >
-          <PortfolioCaseStudy meta={meta} content={content} />
-        </ModalContent>
-      </Modal>
+      <CaseStudyModal
+        openLabel={t('portfolioOpenLabel')}
+        title={content.title}
+        kicker={tCaseStudy('kicker', { number, type: content.type })}
+        description={content.tagline}
+      >
+        <PortfolioCaseStudy meta={meta} content={content} />
+      </CaseStudyModal>
     </BentoCard>
   );
 }

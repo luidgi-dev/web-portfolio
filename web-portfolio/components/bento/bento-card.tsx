@@ -7,6 +7,7 @@ interface BentoCardProps {
   label?: string;
   labelStyle?: 'block' | 'chip';
   padded?: boolean;
+  interactive?: boolean;
   className?: string;
   children: React.ReactNode;
 }
@@ -17,16 +18,20 @@ export function BentoCard({
   label,
   labelStyle = 'block',
   padded = true,
+  interactive = false,
   className,
   children,
 }: BentoCardProps) {
   return (
     <section
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-200 ease-out hover:border-primary/40 focus-within:border-primary/40',
+        'group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[color,background-color,border-color,box-shadow,translate] duration-200 ease-out hover:border-primary/40 focus-within:border-primary/40',
         colSpanClasses[colSpan],
         rowSpanClasses[rowSpan],
         padded && 'p-4 md:p-5',
+        // Lift only what opens on click, so the motion means something.
+        interactive &&
+          'hover:shadow-(--shadow-card-hover) focus-within:shadow-(--shadow-card-hover) motion-safe:hover:-translate-y-0.5 motion-safe:focus-within:-translate-y-0.5',
         className
       )}
     >

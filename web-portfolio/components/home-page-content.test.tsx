@@ -49,6 +49,10 @@ vi.mock('@/components/bento/cards/professional-work-card', () => ({
   ),
 }));
 
+vi.mock('@/components/bento/cards/portfolio-card', () => ({
+  PortfolioCard: () => <section data-testid="portfolio-card">This portfolio</section>,
+}));
+
 vi.mock('@/components/bento/cards/bauhaus-geometry-card', () => ({
   BauhausGeometryCard: () => <section data-testid="bauhaus-geometry-card">Geometry</section>,
 }));
@@ -102,6 +106,7 @@ describe('HomePageContent', () => {
     expect(screen.getByTestId('theme-card')).toBeInTheDocument();
     expect(screen.getByTestId('atelier-card')).toBeInTheDocument();
     expect(screen.getByTestId('professional-work-card')).toBeInTheDocument();
+    expect(screen.getByTestId('portfolio-card')).toBeInTheDocument();
     expect(screen.getByTestId('bauhaus-geometry-card')).toBeInTheDocument();
   });
 

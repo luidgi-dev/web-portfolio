@@ -7,7 +7,7 @@ export async function BauhausGeometryCard() {
   const t = await getTranslations('HomePage');
 
   return (
-    <BentoCard colSpan={2} padded={false} className="min-h-[180px]">
+    <BentoCard colSpan={1} rowSpan={2} padded={false} className="min-h-[180px]">
       <div
         className="relative flex h-full min-h-[180px] flex-col"
         data-testid="bauhaus-geometry-card"

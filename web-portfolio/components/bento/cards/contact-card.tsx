@@ -1,15 +1,6 @@
-import { FileDown, Mail } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
-import { GitHubIcon, LinkedInIcon } from '@/components/icons/contact-icons';
-import { siteLinks } from '@/lib/site';
-
-const contactItems = [
-  { href: siteLinks.linkedin, label: 'LinkedIn', icon: LinkedInIcon, external: true },
-  { href: siteLinks.github, label: 'GitHub', icon: GitHubIcon, external: true },
-  { href: siteLinks.email, labelKey: 'contactEmail' as const, icon: Mail, external: false },
-  { href: siteLinks.cv, labelKey: 'contactCv' as const, icon: FileDown, external: false },
-];
+import { ContactTiles } from '@/components/bento/contact-tiles';
 
 export async function ContactCard() {
   const t = await getTranslations('HomePage');
@@ -28,28 +19,7 @@ export async function ContactCard() {
         <p className="mt-2 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
           {t('contactHint')}
         </p>
-        <nav className="contact-tile-grid mt-4" aria-label={t('contactLabel')}>
-          {contactItems.map(({ href, label, labelKey, icon: Icon, external }) => {
-            const linkLabel = labelKey ? t(labelKey) : label!;
-
-            return (
-              <a
-                key={href}
-                href={href}
-                className="contact-tile group"
-                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              >
-                <Icon
-                  className="h-4 w-4 transition-transform duration-200 group-hover:scale-110"
-                  aria-hidden="true"
-                />
-                <span className="text-center font-mono text-[9px] tracking-[0.12em] uppercase">
-                  {linkLabel}
-                </span>
-              </a>
-            );
-          })}
-        </nav>
+        <ContactTiles className="mt-4" />
       </div>
     </BentoCard>
   );

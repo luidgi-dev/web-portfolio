@@ -28,6 +28,19 @@
   mask-composite: intersect;
 }
 .sunlight-breeze > svg {
-  width: 100%;
-  height: 100%;
+  width: 130%;
+  height: 130%;
+}
+
+/* The sun moves across the screen: the pattern drifts under a fixed mask, like light over the afternoon. */
+@keyframes sunlight-drift {
+  to {
+    transform: translate(-12%, -7%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sunlight-breeze > svg {
+    animation: sunlight-drift 40s ease-in-out infinite alternate;
+  }
 }

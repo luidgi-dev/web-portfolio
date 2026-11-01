@@ -17,6 +17,7 @@ export async function StriveCard() {
     <BentoCard
       colSpan={1}
       rowSpan={2}
+      interactive
       label={content.type}
       labelStyle="chip"
       className="relative overflow-hidden"

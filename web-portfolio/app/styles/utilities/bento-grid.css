@@ -10,3 +10,28 @@
     gap: 14px;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Slatted screen: the slats slide sideways, as if the panel were pushed. */
+  .atelier-material {
+    transition: background-position 900ms var(--ease-standard);
+  }
+  .group:hover .atelier-material {
+    background-position: 33px 0;
+  }
+
+  .bauhaus-art :is(.bauhaus-sun, .bauhaus-arc, .bauhaus-block) {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 700ms var(--ease-standard);
+  }
+  .group:hover .bauhaus-sun {
+    transform: translateY(-10px);
+  }
+  .group:hover .bauhaus-arc {
+    transform: rotate(-14deg);
+  }
+  .group:hover .bauhaus-block {
+    transform: translateX(14px);
+  }
+}

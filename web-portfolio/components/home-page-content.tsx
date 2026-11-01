@@ -3,6 +3,7 @@ import { BauhausGeometryCard } from '@/components/bento/cards/bauhaus-geometry-c
 import { ContactCard } from '@/components/bento/cards/contact-card';
 import { HeroCard } from '@/components/bento/cards/hero-card';
 import { LanguageCard } from '@/components/bento/cards/language-card';
+import { PortfolioCard } from '@/components/bento/cards/portfolio-card';
 import { ProfessionalWorkCard } from '@/components/bento/cards/professional-work-card';
 import { ProfileCard } from '@/components/bento/cards/profile-card';
 import { StackCard } from '@/components/bento/cards/stack-card';
@@ -22,6 +23,7 @@ export function HomePageContent() {
         <StackCard />
         <ThemeCard />
         <BauhausGeometryCard />
+        <PortfolioCard />
         <ProfessionalWorkCard />
       </main>
     </div>

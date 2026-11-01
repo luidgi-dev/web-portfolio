@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server';
+import { getFormatter, getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
 
 const CASES = [
@@ -10,15 +10,16 @@ const CASES = [
   { label: 'professionalCase2Label', body: 'professionalCase2Body' },
 ] as const;
 
+// Counts as numbers so each locale gets its own separator (1,100 in EN, 1 100 in FR).
 const STATS = [
-  { value: '1,100+', label: 'professionalStatOrders' },
-  { value: '~1,500', label: 'professionalStatMessages' },
-  { value: '~450', label: 'professionalStatTodos' },
-  { value: '4', label: 'professionalStatBrands' },
+  { value: 1100, suffix: '+', label: 'professionalStatOrders' },
+  { value: 1500, prefix: '~', label: 'professionalStatMessages' },
+  { value: 450, prefix: '~', label: 'professionalStatTodos' },
+  { value: 4, label: 'professionalStatBrands' },
 ] as const;
 
 export async function ProfessionalWorkCard() {
-  const t = await getTranslations('HomePage');
+  const [t, format] = await Promise.all([getTranslations('HomePage'), getFormatter()]);
 
   return (
     <BentoCard colSpan={2} rowSpan={2} label={t('professionalWorkLabel')}>
@@ -51,7 +52,11 @@ export async function ProfessionalWorkCard() {
               <dt className="mt-1 font-sans text-[11px] leading-snug text-muted-foreground">
                 {t(stat.label)}
               </dt>
-              <dd className="font-display text-2xl font-bold tracking-tight">{stat.value}</dd>
+              <dd className="font-display text-2xl font-bold tracking-tight">
+                {'prefix' in stat ? stat.prefix : null}
+                {format.number(stat.value)}
+                {'suffix' in stat ? stat.suffix : null}
+              </dd>
             </div>
           ))}
         </dl>

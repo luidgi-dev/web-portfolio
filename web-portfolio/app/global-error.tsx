@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { ErrorPage } from '@/components/error/error-page';
-import { StaticErrorDocument } from '@/components/error/static-error-document';
+import { DocumentShell } from '@/components/document-shell';
 import messages from '@/messages/en.json';
 
 const t = messages.ErrorPage;
@@ -20,8 +20,7 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <StaticErrorDocument>
-      <title>{t.errorTitle}</title>
+    <DocumentShell lang="en">
       <ErrorPage
         code="500"
         title={t.errorTitle}
@@ -30,6 +29,6 @@ export default function GlobalError({
         retry={{ label: t.retry, onRetry: unstable_retry }}
         reference={error.digest && `${t.reference} ${error.digest}`}
       />
-    </StaticErrorDocument>
+    </DocumentShell>
   );
 }

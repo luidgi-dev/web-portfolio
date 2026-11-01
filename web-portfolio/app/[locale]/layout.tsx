@@ -1,12 +1,10 @@
-import '../globals.css';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { FilmNoiseOverlay } from '@/components/film-noise-overlay';
+import { DocumentShell } from '@/components/document-shell';
 import { ThemeProvider } from '@/components/theme-provider';
 import { routing } from '@/i18n/routing';
-import { fontVariables } from '../fonts';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -38,13 +36,10 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${fontVariables} theme-03 h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
-        <FilmNoiseOverlay />
-        <ThemeProvider>
-          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <DocumentShell lang={locale}>
+      <ThemeProvider>
+        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+      </ThemeProvider>
+    </DocumentShell>
   );
 }

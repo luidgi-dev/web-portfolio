@@ -1,4 +1,3 @@
-import { DM_Mono, DM_Sans, Playfair_Display, Sora } from 'next/font/google';
 import '../globals.css';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
@@ -7,30 +6,7 @@ import { notFound } from 'next/navigation';
 import { FilmNoiseOverlay } from '@/components/film-noise-overlay';
 import { ThemeProvider } from '@/components/theme-provider';
 import { routing } from '@/i18n/routing';
-
-const playfairDisplay = Playfair_Display({
-  variable: '--font-playfair-display',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['700', '900'],
-});
-
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['300', '400', '500'],
-});
-
-const dmMono = DM_Mono({
-  variable: '--font-dm-mono',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400'],
-});
-
-const sora = Sora({
-  variable: '--font-sora',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['600', '700'],
-});
+import { fontVariables } from '../fonts';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -62,10 +38,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${playfairDisplay.variable} ${dmSans.variable} ${dmMono.variable} ${sora.variable} theme-03 h-full antialiased`}
-    >
+    <html lang={locale} className={`${fontVariables} theme-03 h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <FilmNoiseOverlay />
         <ThemeProvider>

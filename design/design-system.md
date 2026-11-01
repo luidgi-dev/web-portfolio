@@ -399,6 +399,16 @@ Afternoon sun crossing a perforated concrete screen (the breeze blocks of 1950s 
 - What keeps it from reading as a generated dot grid: the block motif (a round opening with a quarter opening at each corner), skewed and tilted like low sun on a wall, with a blurred penumbra. The patch melts into the card through two slanted linear fades that follow the light, so no edge shows. Never a radial fade.
 - Hero only. The light has one source; repeating it on other cards would turn it back into a recipe.
 
+### Error poster (error pages only)
+
+The 404 and error pages show a printed Bauhaus exhibition poster (`image-27`) where the status code is drawn with the same shapes as the Bauhaus art: half discs, bars, a dividing rule. Mockup: [`mockups/error-pages.html`](mockups/error-pages.html). Component: `components/error/error-poster.tsx`.
+
+- One poster series, one colorway per code, as the Panton posters (`image-22`): 404 uses brass or honey with olive (something is missing), 500 the ambiance's red family (something broke). Colors come from `--error-404-a/b` and `--error-500-a/b`, the rest from `--art-*`.
+- The printed footer does a job: it shows the requested path (404) or the error reference (500), never the error message.
+- Near-square corners (2px): it is a sheet of paper, so it doesn't share the cards' radius.
+- The text beside it stays plain: a heading with no stressed word, no mono kicker above it, the code only on the poster.
+- Global error and the fallback 404 outside a locale have no theme provider: they are pinned to ambiance 03.
+
 ---
 
 ## Micro-interactions

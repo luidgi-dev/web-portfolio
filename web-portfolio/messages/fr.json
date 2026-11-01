@@ -73,5 +73,14 @@
     "lessons": "Ce que j'en retiens",
     "chapterKicker": "Chapitre {number} · {name}",
     "itemPrefix": "N°"
+  },
+  "ErrorPage": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundBody": "L'adresse contient peut-être une faute, ou la page a changé de place. Le reste du site est sur la page d'accueil.",
+    "errorTitle": "Un problème est survenu sur cette page",
+    "errorBody": "Essayez de la recharger. Si l'erreur persiste, le reste du site est accessible depuis l'accueil.",
+    "retry": "Réessayer",
+    "home": "Retour à l'accueil",
+    "reference": "Réf."
   }
 }

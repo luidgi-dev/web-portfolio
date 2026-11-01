@@ -7,6 +7,7 @@ import { OverviewChapter } from '@/components/case-study/chapters/overview-chapt
 import { DesignChapter } from '@/components/case-study/design-chapter';
 import { evidenceShots } from '@/components/case-study/portfolio-visuals';
 import type { PortfolioContent, ProjectMeta } from '@/lib/projects';
+import { toOrdinal } from '@/lib/utils';
 
 interface PortfolioCaseStudyProps {
   meta: ProjectMeta;
@@ -16,6 +17,8 @@ interface PortfolioCaseStudyProps {
 export function PortfolioCaseStudy({ meta, content }: PortfolioCaseStudyProps) {
   const t = useTranslations('CaseStudy');
   const { overview, design, engineering, buildLog } = content;
+  // Engineering is the third chapter; its chips are coded 03-A, 03-B in both places.
+  const engineeringNumber = toOrdinal(2);
   // The caption above each shot already describes it.
   const evidence = (key: keyof typeof evidenceShots) => (
     <Image
@@ -46,7 +49,11 @@ export function PortfolioCaseStudy({ meta, content }: PortfolioCaseStudyProps) {
           value: 'design',
           label: 'tabDesign',
           render: (chapter) => (
-            <DesignChapter chapter={chapter} design={design} numbers={engineering.numbers} />
+            <DesignChapter
+              chapter={chapter}
+              design={design}
+              chips={{ items: engineering.numbers, code: engineeringNumber }}
+            />
           ),
         },
         {

@@ -16,7 +16,7 @@ import { SampleChips } from '@/components/case-study/sample-chips';
 import { SectionLabel } from '@/components/case-study/section-label';
 import { ErrorPoster } from '@/components/error/error-poster';
 import type { DirectionId, PairId, PortfolioContent, Stat } from '@/lib/projects';
-import { themes } from '@/lib/themes';
+import { themeName, themes } from '@/lib/themes';
 import { cn, toOrdinal } from '@/lib/utils';
 
 // Read from inside each ambiance's own theme class, so all four palettes show at once.
@@ -25,11 +25,12 @@ const swatchTokens = ['bg-background', 'bg-card', 'bg-secondary', 'bg-primary', 
 interface DesignChapterProps {
   chapter: ChapterInfo;
   design: PortfolioContent['design'];
-  // The case study's own figures, shown on the paint chips they inspired.
-  numbers: Stat[];
+  // Figures from another chapter, shown on the paint chips they inspired, with
+  // that chapter's code so each chip reads the same in both places.
+  chips: { items: Stat[]; code: string };
 }
 
-export function DesignChapter({ chapter, design, numbers }: DesignChapterProps) {
+export function DesignChapter({ chapter, design, chips }: DesignChapterProps) {
   const t = useTranslations('CaseStudy');
   const locale = useLocale();
   const { references, ambiances, pairs, dropped } = design;
@@ -51,7 +52,15 @@ export function DesignChapter({ chapter, design, numbers }: DesignChapterProps) 
         </div>
       ),
     },
-    bauhaus: { frame: 'aspect-[3/4]', component: <ErrorPoster code="404" reference="/404" /> },
+    bauhaus: {
+      frame: 'aspect-[3/4]',
+      // ErrorPoster is a figure of its own; the plate caption already describes it.
+      component: (
+        <div aria-hidden="true">
+          <ErrorPoster code="404" reference="/404" />
+        </div>
+      ),
+    },
     tiles: {
       frame: 'aspect-[4/3]',
       component: (
@@ -67,12 +76,13 @@ export function DesignChapter({ chapter, design, numbers }: DesignChapterProps) 
     paintChips: {
       frame: 'aspect-[4/3]',
       component: (
-        <SampleChips items={numbers.slice(0, 2)} code={chapter.number} className="md:grid-cols-2" />
+        <SampleChips items={chips.items.slice(0, 2)} code={chips.code} className="md:grid-cols-2" />
       ),
     },
   };
-  const pairIds = Object.keys(pairs.items) as PairId[];
-  const directionIds = Object.keys(dropped.items) as DirectionId[];
+  // Keys come from code, so the order and the set of figures are the same in every locale.
+  const pairIds = Object.keys(pairPhotos) as PairId[];
+  const directionIds = Object.keys(directionShots) as DirectionId[];
 
   return (
     <>
@@ -92,7 +102,7 @@ export function DesignChapter({ chapter, design, numbers }: DesignChapterProps) 
             return (
               <Plate
                 key={theme.id}
-                label={`${theme.number} · ${locale === 'fr' ? theme.nameFr : theme.nameEn}`}
+                label={`${theme.number} · ${themeName(theme, locale)}`}
                 caption={<Captioned caption={caption} credit={credit(photo)} />}
               >
                 <PhotoFrame

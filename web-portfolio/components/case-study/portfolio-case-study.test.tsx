@@ -78,6 +78,8 @@ describe('PortfolioCaseStudy', () => {
     expect(within(panel).getByText('Joost Schmidt, 1923, public domain')).toBeInTheDocument();
     expect(within(panel).getByRole('navigation', { name: 'Get in touch' })).toBeInTheDocument();
     expect(within(panel).getByText('/404')).toBeInTheDocument();
+    // The paint chips show Engineering figures, coded as in the Engineering chapter.
+    expect(within(panel).getByText('03-A')).toBeInTheDocument();
   });
 
   it('shows the three dropped directions next to the mirror reference', () => {

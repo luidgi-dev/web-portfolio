@@ -1,6 +1,7 @@
 import { hasLocale } from 'next-intl';
 import data from '@/content/projects.json';
 import { routing } from '@/i18n/routing';
+import type { ThemeId } from '@/lib/themes';
 import { toOrdinal } from '@/lib/utils';
 
 export type Locale = (typeof routing.locales)[number];
@@ -74,8 +75,33 @@ export interface StriveContent extends ProjectContent {
   };
 }
 
+// An image with its caption and alt text; the file itself lives in code.
+export interface Illustrated {
+  caption: string;
+  alt: string;
+}
+
+export type PairId = 'sunlight' | 'bauhaus' | 'tiles' | 'wood' | 'paintChips';
+export type DirectionId = 'nelson' | 'caseStudyHouse' | 'brassMirror' | 'pillMirrors';
+
+interface IllustratedSection<Id extends string> {
+  heading: string;
+  body: string;
+  items: Record<Id, Illustrated>;
+}
+
+export interface PortfolioContent extends ProjectContent {
+  design: {
+    references: { heading: string; body: string };
+    ambiances: IllustratedSection<ThemeId>;
+    pairs: IllustratedSection<PairId>;
+    dropped: IllustratedSection<DirectionId>;
+  };
+}
+
 interface ContentBySlug {
   strive: StriveContent;
+  portfolio: PortfolioContent;
 }
 
 export interface Project<Content extends ProjectContent = ProjectContent> {

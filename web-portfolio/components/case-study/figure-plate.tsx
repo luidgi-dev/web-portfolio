@@ -3,7 +3,7 @@ import type { ProjectFigure } from '@/lib/projects';
 
 interface PlateProps {
   label: string;
-  caption: string;
+  caption: React.ReactNode;
   children: React.ReactNode;
 }
 

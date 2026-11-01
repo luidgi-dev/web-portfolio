@@ -56,7 +56,9 @@ export async function StriveCard() {
           className="mt-4 inline-flex items-center gap-2 text-foreground/80 transition-colors group-hover:text-primary"
           aria-hidden="true"
         >
-          <span className="font-mono text-[9px] tracking-widest uppercase">{t('striveCta')}</span>
+          <span className="font-mono text-[9px] tracking-widest uppercase">
+            {t('caseStudyCta')}
+          </span>
           <span className="transition-transform group-hover:translate-x-1">→</span>
         </p>
       </div>

@@ -1,7 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import { CtaLink } from '@/components/ui/cta-link';
 import { ErrorPoster, type ErrorCode } from './error-poster';
 
@@ -15,9 +14,20 @@ interface ErrorPageProps {
   reference?: string;
 }
 
+const noSubscription = () => () => {};
+
+// Read from the browser only: a prerendered page (root not-found) would otherwise print the path it was built for.
+function useRequestedPath() {
+  return useSyncExternalStore(
+    noSubscription,
+    () => window.location.pathname,
+    () => undefined
+  );
+}
+
 /** Shared layout of the 404, error and global error pages. Takes plain strings: two of them have no intl provider. */
 export function ErrorPage({ code, title, body, home, retry, reference }: ErrorPageProps) {
-  const pathname = usePathname();
+  const requestedPath = useRequestedPath();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   // Screen reader and keyboard users land on what happened, not on the top of a page they didn't ask for.
@@ -27,8 +37,9 @@ export function ErrorPage({ code, title, body, home, retry, reference }: ErrorPa
 
   return (
     <main className="mx-auto grid w-full max-w-5xl flex-1 grid-cols-[minmax(0,1fr)] content-center items-center gap-7 px-5 py-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] md:gap-12 md:px-12 md:py-12">
+      <title>{title}</title>
       <meta name="robots" content="noindex" />
-      <ErrorPoster code={code} reference={code === '404' ? pathname : reference} />
+      <ErrorPoster code={code} reference={code === '404' ? requestedPath : reference} />
       <div>
         <h1
           ref={headingRef}

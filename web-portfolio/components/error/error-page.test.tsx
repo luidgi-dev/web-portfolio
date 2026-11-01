@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { usePathname } from 'next/navigation';
 import { describe, expect, it, vi } from 'vitest';
 import { ErrorPage } from './error-page';
 
@@ -12,6 +11,12 @@ describe('ErrorPage', () => {
     const heading = screen.getByRole('heading', { level: 1, name: 'Page not found' });
     expect(heading).toHaveFocus();
     expect(screen.getByText('Body')).toBeInTheDocument();
+  });
+
+  it('names the browser tab after the error', () => {
+    render(<ErrorPage code="404" title="Page not found" body="Body" home={home} />);
+
+    expect(document.title).toBe('Page not found');
   });
 
   it('links back to the given homepage and has no retry action by default', () => {
@@ -42,14 +47,14 @@ describe('ErrorPage', () => {
   });
 
   it('prints the requested path on a 404 poster', () => {
-    vi.mocked(usePathname).mockReturnValueOnce('/en/does-not-exist');
+    window.history.pushState({}, '', '/en/does-not-exist');
     render(<ErrorPage code="404" title="Page not found" body="Body" home={home} />);
 
     expect(screen.getByText('/en/does-not-exist')).toBeInTheDocument();
   });
 
   it('prints the reference on a 500 poster, not the path', () => {
-    vi.mocked(usePathname).mockReturnValueOnce('/en/projects');
+    window.history.pushState({}, '', '/en/projects');
     render(
       <ErrorPage
         code="500"

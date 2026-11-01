@@ -26,7 +26,7 @@ export function ErrorPage({ code, title, body, home, retry, reference }: ErrorPa
   }, []);
 
   return (
-    <main className="mx-auto grid w-full max-w-5xl flex-1 content-center items-center gap-7 px-5 py-8 md:grid-cols-[0.9fr_1fr] md:gap-12 md:px-12 md:py-12">
+    <main className="mx-auto grid w-full max-w-5xl flex-1 grid-cols-[minmax(0,1fr)] content-center items-center gap-7 px-5 py-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] md:gap-12 md:px-12 md:py-12">
       <meta name="robots" content="noindex" />
       <ErrorPoster code={code} reference={code === '404' ? pathname : reference} />
       <div>

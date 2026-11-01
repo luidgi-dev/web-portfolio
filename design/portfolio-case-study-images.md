@@ -6,6 +6,23 @@ License: [Pexels license](https://www.pexels.com/license/): free, commercial use
 
 Preview URL pattern: `https://images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg?w=600`
 
+## Published (`public/portfolio/refs/`)
+
+Re-encoded at 1000 px wide max, JPEG quality 78, metadata stripped. Credits checked on the Pexels photo pages on 2026-11-01.
+
+| File | Source | Credit |
+|---|---|---|
+| `plaster.jpg` | Pexels 6615808 | Ksenia Chernaya |
+| `terracotta.jpg` | Pexels 9143738 | Moussa Idrissi |
+| `chocolate.jpg` | Pexels 18657168 | Stephen Leonardi |
+| `oxblood.jpg` | Pexels 12805508 | Tiffany Christie Freeman |
+| `sunlight.jpg` | Pexels 36192529 | wal_ 172619 |
+| `tiles.jpg` | Pexels 19020592 | Sami Abdullah |
+| `wood.jpg` | Pexels 9654670 | Diana ✨ (shown as "Diana") |
+| `paint-chips.jpg` | Pexels 6474450 | Tima Miroshnichenko |
+| `pill-mirrors.jpg` | Pexels 37793333 | Shojol Islam |
+| `bauhaus-poster.jpg` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Joost_Schmidt_Bauhausausstellung_1923.jpg) | Joost Schmidt, 1923, public domain (Public Domain Mark 1.0; the author died in 1948) |
+
 ## Shortlist
 
 | Pair (reference → on the site) | Candidate | Status |

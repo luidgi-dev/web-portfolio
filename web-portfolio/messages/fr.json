@@ -9,7 +9,7 @@
     "heroDescription": "Applications web, outils internes et automatisation en Python et TypeScript, de l'idée à la mise en production. La plupart des projets présentés ici sont nés d'un problème que je voulais résoudre moi-même.",
     "striveAvailability": "Disponible sur {host}",
     "striveCta": "Voir comment ça fonctionne",
-    "striveTagsLabel": "Tags projet",
+    "projectTagsLabel": "Tags projet",
     "striveOpenLabel": "Ouvrir l'étude de cas Strive",
     "dialogClose": "Fermer",
     "portfolioType": "Projet perso",

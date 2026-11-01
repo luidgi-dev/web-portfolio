@@ -25,12 +25,13 @@ export function BentoCard({
   return (
     <section
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[translate,border-color,box-shadow] duration-200 ease-out hover:border-primary/40 focus-within:border-primary/40',
+        'group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[color,background-color,border-color,box-shadow,translate] duration-200 ease-out hover:border-primary/40 focus-within:border-primary/40',
         colSpanClasses[colSpan],
         rowSpanClasses[rowSpan],
         padded && 'p-4 md:p-5',
         // Lift only what opens on click, so the motion means something.
-        interactive && 'hover:-translate-y-0.5 hover:shadow-(--shadow-card-hover)',
+        interactive &&
+          'hover:shadow-(--shadow-card-hover) focus-within:shadow-(--shadow-card-hover) motion-safe:hover:-translate-y-0.5 motion-safe:focus-within:-translate-y-0.5',
         className
       )}
     >

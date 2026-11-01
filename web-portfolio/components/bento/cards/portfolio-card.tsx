@@ -26,7 +26,7 @@ export async function PortfolioCard() {
         <div
           role="img"
           aria-label={t('portfolioMapLabel')}
-          className="grid h-24 grid-cols-4 grid-rows-5 gap-1 rounded-xl border border-border/60 p-1.5"
+          className="hidden h-24 grid-cols-4 md:grid grid-rows-5 gap-1 rounded-xl border border-border/60 p-1.5"
         >
           {PAGE_MAP.map(({ col, row, self }, index) => (
             <span
@@ -36,7 +36,7 @@ export async function PortfolioCard() {
             />
           ))}
         </div>
-        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={t('striveTagsLabel')}>
+        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={t('projectTagsLabel')}>
           {(t.raw('portfolioTags') as string[]).map((tag) => (
             <li key={tag}>
               <span className="bento-chip">{tag}</span>

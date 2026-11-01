@@ -33,7 +33,7 @@ export async function StriveCard() {
           />
           <ul
             className="flex max-w-[5.5rem] flex-wrap justify-end gap-1.5"
-            aria-label={t('striveTagsLabel')}
+            aria-label={t('projectTagsLabel')}
           >
             {content.tags.map((tag) => (
               <li key={tag}>

@@ -9,7 +9,7 @@
     "heroDescription": "Web apps, internal tools and automation in Python and TypeScript, from the idea to production. Most projects here start with a problem I'd like to solve myself.",
     "striveAvailability": "Available at {host}",
     "striveCta": "See how it works",
-    "striveTagsLabel": "Project tags",
+    "projectTagsLabel": "Project tags",
     "striveOpenLabel": "Open the Strive case study",
     "dialogClose": "Close",
     "portfolioType": "Personal work",

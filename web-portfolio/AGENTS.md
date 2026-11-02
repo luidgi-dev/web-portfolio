@@ -9,10 +9,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Working rules
 
-- **Do not auto commit or push.** Make the changes, then let me review and commit myself. Never run `git commit` or `git push` unless I explicitly ask.
+- **Commits:** commit and push freely on a feature branch that goes through a PR. Never commit or push to `dev` or `main` directly unless I ask.
 - **Write everything in English** — code, identifiers, comments, commit messages, docs.
 - **Avoid em-dashes (`—`).** This matters most in user-facing copy (UI strings, translations); in internal docs it is less critical but still preferred. Use a colon, a comma, or parentheses instead.
-- **Follow clean-code conventions:** KISS and DRY, keep functions small and single-purpose, add tests for new behavior, and keep the CI green (lint + tests) before considering a change done.
+- **Follow clean-code conventions:** KISS and DRY, keep functions small and single-purpose, add tests for new behavior, and keep the CI green (lint, typecheck, tests) before considering a change done.
 
 ## Repo layout
 

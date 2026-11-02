@@ -94,6 +94,17 @@ describe('ProfessionalWorkStudy', () => {
     }
   });
 
+  it('lists what I learned under its summary', () => {
+    renderStudy();
+
+    const panel = openChapter('Takeaways');
+    const { learned } = experience.en.takeaways;
+    for (const point of learned.points) {
+      expect(within(panel).getByRole('heading', { name: point.title })).toBeInTheDocument();
+      expect(within(panel).getByText(point.body)).toBeInTheDocument();
+    }
+  });
+
   it('renders in French with French number formatting', () => {
     renderStudy('fr');
 

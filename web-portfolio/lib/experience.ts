@@ -28,7 +28,7 @@ export interface ExperienceContent {
     choices: { heading: string; items: TitledItem[] };
   };
   takeaways: {
-    learned: TitledItem;
+    learned: TitledItem & { points: TitledItem[] };
     today: TitledItem;
   };
 }

@@ -11,12 +11,12 @@ Facts used, from Luidgi on 2026-11-02: permanent contract since July 2024, hired
 ## 01 · Overview
 
 **problem**
-- EN: Shipment tracking, customer reminders, payment links: much of it ran on spreadsheets and manual sending.
-- FR : Suivi des expéditions, relances clients, liens de paiement : beaucoup de choses passaient par des tableurs et des envois à la main.
+- EN: Orders were tracked in spreadsheets, and reminders with payment links went out partly by hand.
+- FR : Les commandes étaient suivies dans des tableurs, et les relances avec lien de paiement partaient en partie à la main.
 
 **lead**
-- EN: I was hired as a no-code maker to build internal apps in AppSheet. Today I mostly write code: Python jobs, and a Next.js app on the way.
-- FR : J'ai été recruté comme maker no-code pour faire des apps internes sur AppSheet. Aujourd'hui j'écris surtout du code : des jobs Python, et une app Next.js en cours.
+- EN: I build the tools that customer service and logistics use every day. I started in no-code with AppSheet and now write most of them in Python and Next.js.
+- FR : Je construis les outils que le service client et la logistique utilisent au quotidien. J'ai commencé en no-code avec AppSheet, et j'en écris aujourd'hui la plupart en Python et Next.js.
 
 **paragraphs**
 1. EN: We are about five developers, each working with a few teams. Mine are customer service and logistics, and production at times. I gather their needs, build the tools, train users on new versions, and keep everything running.
@@ -117,6 +117,12 @@ Same shape for each project: problem, what I built, result.
 **learned.body**
 - EN: I come from a general engineering school (ESTIA), with some Python and Java. Here I learned the job end to end: the need, the spec, the code, tests, CI, deployment, maintenance.
 - FR : Je viens d'une école d'ingénieur généraliste (ESTIA), avec des bases en Python et Java. Ici, j'ai appris le métier de bout en bout : le besoin, la spec, le code, les tests, la CI, le déploiement, la maintenance.
+
+**learned.points**
+1. EN Working with business teams: Customer service and logistics describe a need in their own words. I learned to turn their requests into a spec, then train them on each new version.
+   FR Travailler avec les équipes métier : Le service client et la logistique décrivent un besoin avec leurs mots. J'ai appris à transformer leurs demandes en spec, puis à les former à chaque nouvelle version.
+2. EN Running what I ship: A job that stops means a customer without their payment link. That is why every sensitive job now has checks and an alert, and why a third of my time goes to monitoring.
+   FR Faire tourner ce que je livre : Un job qui s'arrête, c'est un client qui ne reçoit pas son lien de paiement. C'est pour ça que chaque job sensible a maintenant des vérifications et une alerte, et qu'un tiers de mon temps va au monitoring.
 
 **today.heading**: EN What I would do today · FR Ce que je ferais aujourd'hui
 

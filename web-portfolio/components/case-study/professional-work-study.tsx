@@ -114,7 +114,8 @@ function ProjectsChapter({ chapter, projects }: ProjectsChapterProps) {
   );
 }
 
-function TitledProse({ items }: { items: TitledItem[] }) {
+// Items with long bodies side by side; an item's points are listed under it.
+function TitledProse({ items }: { items: (TitledItem & { points?: TitledItem[] })[] }) {
   return (
     <div className="grid gap-10 md:grid-cols-2 lg:gap-14">
       {items.map((item) => (
@@ -123,6 +124,7 @@ function TitledProse({ items }: { items: TitledItem[] }) {
             {item.title}
           </h3>
           <p className={cn('mt-3', bodyText)}>{item.body}</p>
+          {item.points ? <Steps items={item.points} className="mt-8" /> : null}
         </section>
       ))}
     </div>

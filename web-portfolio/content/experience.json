@@ -1,8 +1,8 @@
 {
   "en": {
     "overview": {
-      "problem": "Shipment tracking, customer reminders, payment links: much of it ran on spreadsheets and manual sending.",
-      "lead": "I was hired as a no-code maker to build internal apps in AppSheet. Today I mostly write code: Python jobs, and a Next.js app on the way.",
+      "problem": "Orders were tracked in spreadsheets, and reminders with payment links went out partly by hand.",
+      "lead": "I build the tools that customer service and logistics use every day. I started in no-code with AppSheet and now write most of them in Python and Next.js.",
       "paragraphs": [
         "We are about five developers, each working with a few teams. Mine are customer service and logistics, and production at times. I gather their needs, build the tools, train users on new versions, and keep everything running."
       ],
@@ -81,7 +81,17 @@
     "takeaways": {
       "learned": {
         "title": "What I learned",
-        "body": "I come from a general engineering school (ESTIA), with some Python and Java. Here I learned the job end to end: the need, the spec, the code, tests, CI, deployment, maintenance."
+        "body": "I come from a general engineering school (ESTIA), with some Python and Java. Here I learned the job end to end: the need, the spec, the code, tests, CI, deployment, maintenance.",
+        "points": [
+          {
+            "title": "Working with business teams",
+            "body": "Customer service and logistics describe a need in their own words. I learned to turn their requests into a spec, then train them on each new version."
+          },
+          {
+            "title": "Running what I ship",
+            "body": "A job that stops means a customer without their payment link. That is why every sensitive job now has checks and an alert, and why a third of my time goes to monitoring."
+          }
+        ]
       },
       "today": {
         "title": "What I would do today",
@@ -91,8 +101,8 @@
   },
   "fr": {
     "overview": {
-      "problem": "Suivi des expéditions, relances clients, liens de paiement : beaucoup de choses passaient par des tableurs et des envois à la main.",
-      "lead": "J'ai été recruté comme maker no-code pour faire des apps internes sur AppSheet. Aujourd'hui j'écris surtout du code : des jobs Python, et une app Next.js en cours.",
+      "problem": "Les commandes étaient suivies dans des tableurs, et les relances avec lien de paiement partaient en partie à la main.",
+      "lead": "Je construis les outils que le service client et la logistique utilisent au quotidien. J'ai commencé en no-code avec AppSheet, et j'en écris aujourd'hui la plupart en Python et Next.js.",
       "paragraphs": [
         "On est environ cinq développeurs, chacun avec quelques équipes. Les miennes : le service client, la logistique, et parfois la production. Je recueille leurs besoins, je construis les outils, je forme les utilisateurs aux nouvelles versions et je m'assure que tout tourne."
       ],
@@ -171,7 +181,17 @@
     "takeaways": {
       "learned": {
         "title": "Ce que j'ai appris",
-        "body": "Je viens d'une école d'ingénieur généraliste (ESTIA), avec des bases en Python et Java. Ici, j'ai appris le métier de bout en bout : le besoin, la spec, le code, les tests, la CI, le déploiement, la maintenance."
+        "body": "Je viens d'une école d'ingénieur généraliste (ESTIA), avec des bases en Python et Java. Ici, j'ai appris le métier de bout en bout : le besoin, la spec, le code, les tests, la CI, le déploiement, la maintenance.",
+        "points": [
+          {
+            "title": "Travailler avec les équipes métier",
+            "body": "Le service client et la logistique décrivent un besoin avec leurs mots. J'ai appris à transformer leurs demandes en spec, puis à les former à chaque nouvelle version."
+          },
+          {
+            "title": "Faire tourner ce que je livre",
+            "body": "Un job qui s'arrête, c'est un client qui ne reçoit pas son lien de paiement. C'est pour ça que chaque job sensible a maintenant des vérifications et une alerte, et qu'un tiers de mon temps va au monitoring."
+          }
+        ]
       },
       "today": {
         "title": "Ce que je ferais aujourd'hui",

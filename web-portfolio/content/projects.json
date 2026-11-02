@@ -545,8 +545,8 @@
                 "alt": "A living room with terracotta walls crossed by the shadow of a lattice"
               },
               "theme-03": {
-                "caption": "Walnut, brass and an amber lamp.",
-                "alt": "A living room with a wood ceiling, a lounge chair and an orange sofa"
+                "caption": "Rust velvet and an amber lamp.",
+                "alt": "A dim room with a rust velvet armchair, a round low table and a pendant lamp"
               },
               "theme-04": {
                 "caption": "Oxblood tiles and aged brass.",
@@ -568,7 +568,7 @@
               },
               "tiles": {
                 "caption": "The contact links are laid out like a tiled wall.",
-                "alt": "A wall of green glazed tiles"
+                "alt": "A bathroom wall of small green glazed tiles"
               },
               "wood": {
                 "caption": "The teak surfaces on the site are CSS gradients that follow the grain of a real plank.",
@@ -576,7 +576,7 @@
               },
               "paintChips": {
                 "caption": "The numbers in the case studies sit on paint chips, like a sample card from a hardware store.",
-                "alt": "A hand holding a fan of paint samples"
+                "alt": "Colour sample cards with a punched hole, spread on a table"
               }
             }
           },
@@ -795,8 +795,8 @@
                 "alt": "Un salon aux murs terre cuite, traversé par l'ombre d'un claustra"
               },
               "theme-03": {
-                "caption": "Noyer, laiton et lampe ambrée.",
-                "alt": "Un salon au plafond en bois, avec un fauteuil lounge et un canapé orange"
+                "caption": "Velours rouille et lampe ambrée.",
+                "alt": "Une pièce tamisée avec un fauteuil en velours rouille, une table basse ronde et une suspension"
               },
               "theme-04": {
                 "caption": "Carrelage sang-de-bœuf et laiton patiné.",
@@ -818,7 +818,7 @@
               },
               "tiles": {
                 "caption": "Les liens de contact sont posés comme un mur carrelé.",
-                "alt": "Un mur de carreaux émaillés verts"
+                "alt": "Un mur de salle de bain en petits carreaux émaillés verts"
               },
               "wood": {
                 "caption": "Les surfaces en teck du site sont des dégradés CSS qui suivent le fil d'une vraie planche.",
@@ -826,7 +826,7 @@
               },
               "paintChips": {
                 "caption": "Les chiffres des études de cas sont posés sur des échantillons de peinture, comme un nuancier de quincaillerie.",
-                "alt": "Une main qui tient un nuancier de peinture"
+                "alt": "Des cartes d'échantillons de couleur percées d'un trou, étalées sur une table"
               }
             }
           },

@@ -8,18 +8,18 @@ Preview URL pattern: `https://images.pexels.com/photos/<id>/pexels-photo-<id>.jp
 
 ## Published (`public/portfolio/refs/`)
 
-Re-encoded at 1000 px wide max, JPEG quality 78, metadata stripped. Credits checked on the Pexels photo pages on 2026-11-01.
+Re-encoded at 1000 px wide max, JPEG quality 78, metadata stripped. Credits checked on the Pexels photo pages on 2026-11-01; the chocolate, tiles, paint chips and both direction references were swapped in on 2026-11-02.
 
 | File | Source | Credit |
 |---|---|---|
 | `plaster.jpg` | Pexels 6615808 | Ksenia Chernaya |
 | `terracotta.jpg` | Pexels 9143738 | Moussa Idrissi |
-| `chocolate.jpg` | Pexels 18657168 | Stephen Leonardi |
+| `amber-room.jpg` | Pexels 39529310 | B.M Shah-e-mulk |
 | `oxblood.jpg` | Pexels 12805508 | Tiffany Christie Freeman |
 | `sunlight.jpg` | Pexels 36192529 | wal_ 172619 |
-| `tiles.jpg` | Pexels 19020592 | Sami Abdullah |
+| `green-mosaic.jpg` | Pexels 5860599 | Andrew Neel |
 | `wood.jpg` | Pexels 9654670 | Diana ✨ (shown as "Diana") |
-| `paint-chips.jpg` | Pexels 6474450 | Tima Miroshnichenko |
+| `colour-cards.jpg` | Pexels 19999591 | Olga Kovalski |
 | `pill-mirrors.jpg` | Pexels 37793333 | Shojol Islam |
 | `../directions/nelson-sideboard.jpg` | Pexels 5824515 | Charlotte May |
 | `../directions/magazine.jpg` | Pexels 4107145 | cottonbro studio |

@@ -27,10 +27,10 @@ export const ambiancePhotos: Record<ThemeId, Photo> = {
     credit: { pexels: 'Moussa Idrissi' },
   },
   'theme-03': {
-    src: '/portfolio/refs/chocolate.jpg',
+    src: '/portfolio/refs/amber-room.jpg',
     width: 1000,
-    height: 667,
-    credit: { pexels: 'Stephen Leonardi' },
+    height: 1777,
+    credit: { pexels: 'B.M Shah-e-mulk' },
   },
   'theme-04': {
     src: '/portfolio/refs/oxblood.jpg',
@@ -54,10 +54,10 @@ export const pairPhotos: Record<PairId, Photo> = {
     credit: 'public-domain',
   },
   tiles: {
-    src: '/portfolio/refs/tiles.jpg',
+    src: '/portfolio/refs/green-mosaic.jpg',
     width: 1000,
-    height: 1777,
-    credit: { pexels: 'Sami Abdullah' },
+    height: 1500,
+    credit: { pexels: 'Andrew Neel' },
   },
   wood: {
     src: '/portfolio/refs/wood.jpg',
@@ -66,10 +66,10 @@ export const pairPhotos: Record<PairId, Photo> = {
     credit: { pexels: 'Diana' },
   },
   paintChips: {
-    src: '/portfolio/refs/paint-chips.jpg',
+    src: '/portfolio/refs/colour-cards.jpg',
     width: 1000,
-    height: 667,
-    credit: { pexels: 'Tima Miroshnichenko' },
+    height: 1494,
+    credit: { pexels: 'Olga Kovalski' },
   },
 };
 

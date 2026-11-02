@@ -497,8 +497,8 @@
         "type": "Personal work",
         "tags": ["Next.js", "Design system"],
         "overview": {
-          "problem": "I wanted a portfolio I had designed and built myself, down to the error pages.",
-          "lead": "It started with a search for inspiration and four moodboards, before it became a website.",
+          "problem": "I wanted a portfolio I designed and coded myself, with a look of its own.",
+          "lead": "The look comes from the mid-century architecture photos I kept saving from my feed.",
           "paragraphs": [
             "I wanted one place that shows both sides of my work, the design and the code. It is written for recruiters and clients who have a few minutes: the projects, how I work, and a way to reach me.",
             "Every visual decision is made in a design folder first: moodboards, references, then HTML mockups to compare directions. A component only gets built once its direction is settled."
@@ -629,15 +629,11 @@
           "stack": [
             {
               "label": "Framework",
-              "items": ["Next.js 16", "React 19", "TypeScript"]
+              "items": ["Next.js 16", "React 19", "TypeScript", "next-intl"]
             },
             {
               "label": "Styling",
               "items": ["Tailwind CSS 4", "shadcn/ui", "CSS variables"]
-            },
-            {
-              "label": "Content",
-              "items": ["next-intl", "JSON"]
             },
             {
               "label": "Quality",
@@ -747,8 +743,8 @@
         "type": "Projet perso",
         "tags": ["Next.js", "Design system"],
         "overview": {
-          "problem": "Je voulais un portfolio dessiné et codé par moi, jusqu'aux pages d'erreur.",
-          "lead": "Tout a commencé par une recherche d'inspiration et quatre moodboards, avant de devenir un site web.",
+          "problem": "Je voulais un portfolio conçu et codé par moi, avec un style bien à lui.",
+          "lead": "Le style vient des photos d'architecture mid-century que j'enregistrais au fil de mes scrolls.",
           "paragraphs": [
             "Je voulais un seul endroit qui montre les deux côtés de mon travail, le design et le code. Il s'adresse aux recruteurs et aux clients qui ont quelques minutes : les projets, ma façon de travailler, et un moyen de me contacter.",
             "Chaque décision visuelle se prend d'abord dans un dossier design : moodboards, références, puis maquettes HTML pour comparer les pistes. Un composant n'est codé qu'une fois sa direction arrêtée."
@@ -879,15 +875,11 @@
           "stack": [
             {
               "label": "Framework",
-              "items": ["Next.js 16", "React 19", "TypeScript"]
+              "items": ["Next.js 16", "React 19", "TypeScript", "next-intl"]
             },
             {
               "label": "Style",
               "items": ["Tailwind CSS 4", "shadcn/ui", "CSS variables"]
-            },
-            {
-              "label": "Contenu",
-              "items": ["next-intl", "JSON"]
             },
             {
               "label": "Qualité",

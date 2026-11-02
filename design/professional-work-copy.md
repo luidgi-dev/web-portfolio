@@ -25,7 +25,7 @@ Facts used, from Luidgi on 2026-11-02: permanent contract since July 2024, hired
 **facts**
 - role: EN Developer in a team of about five · FR Développeur dans une équipe d'environ cinq
 - timeline: EN Since July 2024 · FR Depuis juillet 2024
-- users: EN Customer service, logistics, production · FR Service client, logistique, production
+- teams: EN Customer service, logistics, production · FR Service client, logistique, production
 - stack: EN Python, BigQuery, AppSheet, Google Cloud, Next.js, Supabase · FR Python, BigQuery, AppSheet, Google Cloud, Next.js, Supabase
 
 ---
@@ -44,7 +44,7 @@ Same shape for each project: problem, what I built, result.
   - FR : Une app AppSheet sur une base BigQuery alimentée par l'ERP. Le service client suit chaque selle de l'atelier à l'expédition, et récupère au passage le solde et l'adresse.
 - **result**
   - EN: 1,100+ orders in progress in one place, ~450 follow-ups closed a month.
-  - FR : Plus de 1 100 commandes en cours au même endroit, environ 450 relances traitées par mois.
+  - FR : Plus de 1 100 commandes en cours au même endroit, environ 450 relances traitées par mois.
 
 ### Customer messages and payment links
 
@@ -56,7 +56,7 @@ Same shape for each project: problem, what I built, result.
   - FR : Des jobs Python sur Cloud Run envoient le mail ou le SMS à chaque étape de la commande, avec un lien de paiement (Stripe, Alma, Nuvei).
 - **result**
   - EN: ~1,500 messages a month, none sent by hand.
-  - FR : Environ 1 500 messages par mois, aucun envoyé à la main.
+  - FR : Environ 1 500 messages par mois, aucun envoyé à la main.
 
 ### Rebuild in Next.js and Supabase
 

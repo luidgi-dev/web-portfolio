@@ -90,13 +90,13 @@
         "title": "App de suivi des expéditions",
         "problem": "Chaque selle était suivie dans un tableur, où l'on voyait mal où en était une commande et qui avait modifié quoi.",
         "built": "Une app AppSheet sur une base BigQuery alimentée par l'ERP. Le service client suit chaque selle de l'atelier à l'expédition, et récupère au passage le solde et l'adresse.",
-        "result": "Plus de 1 100 commandes en cours au même endroit, environ 450 relances traitées par mois."
+        "result": "Plus de 1 100 commandes en cours au même endroit, environ 450 relances traitées par mois."
       },
       {
         "title": "Messages clients et liens de paiement",
         "problem": "Les emails partaient à moitié à la main depuis l'ERP, les SMS entièrement à la main.",
         "built": "Des jobs Python sur Cloud Run envoient le mail ou le SMS à chaque étape de la commande, avec un lien de paiement (Stripe, Alma, Nuvei).",
-        "result": "Environ 1 500 messages par mois, aucun envoyé à la main."
+        "result": "Environ 1 500 messages par mois, aucun envoyé à la main."
       },
       {
         "title": "Refonte en Next.js et Supabase",

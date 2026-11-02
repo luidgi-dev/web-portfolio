@@ -56,7 +56,13 @@ export function ProfessionalWorkStudy({ content }: { content: ExperienceContent 
         {
           value: 'takeaways',
           label: 'tabTakeaways',
-          render: () => <Steps items={takeaways} className="sm:grid-cols-2" />,
+          render: (chapter) => (
+            <>
+              {/* Keeps the heading order (dialog h2, then h3) above the step titles. */}
+              <h3 className="sr-only">{chapter.name}</h3>
+              <Steps items={takeaways} className="sm:grid-cols-2" />
+            </>
+          ),
         },
       ]}
     />
@@ -77,13 +83,15 @@ function ProjectsChapter({ chapter, projects }: ProjectsChapterProps) {
     label: tHome(stat.label),
   }));
 
+  // Figures are numbered across the chapter, skipping projects without a flow.
+  const flows = projects.filter((project) => project.flow);
+
   return (
     <>
       <SectionLabel>{t('inNumbers')}</SectionLabel>
       <SampleChips items={stats} code={chapter.number} className="mt-3" />
-      {projects.map((project, index) => {
-        // Figures are numbered across the chapter, skipping projects without one.
-        const figure = toOrdinal(projects.slice(0, index).filter((item) => item.flow).length);
+      {projects.map((project) => {
+        const figure = toOrdinal(flows.indexOf(project));
 
         return (
           <article key={project.title} className="mt-12 border-t border-border pt-8">
@@ -103,7 +111,7 @@ function ProjectsChapter({ chapter, projects }: ProjectsChapterProps) {
             {project.flow ? (
               <div className="mt-8">
                 <Plate label={`${t('figureLabel')} ${figure}`} caption={project.flow.caption}>
-                  <FlowDiagram steps={project.flow.steps} code={figure} />
+                  <FlowDiagram steps={project.flow.steps} code={`F${figure}`} />
                 </Plate>
               </div>
             ) : null}

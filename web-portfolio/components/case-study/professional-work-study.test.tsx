@@ -75,10 +75,10 @@ describe('ProfessionalWorkStudy', () => {
         .getAllByRole('listitem')
         .map((step) => step.textContent)
     ).toEqual([
-      '02-AOrder step',
-      '02-BPython job on Cloud Run',
-      '02-CEmail or text message',
-      '02-DPayment link',
+      'F02-AOrder step',
+      'F02-BPython job on Cloud Run',
+      'F02-CEmail or text message',
+      'F02-DPayment link',
     ]);
   });
 

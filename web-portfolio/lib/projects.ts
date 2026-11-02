@@ -1,10 +1,9 @@
-import { hasLocale } from 'next-intl';
 import data from '@/content/projects.json';
-import { routing } from '@/i18n/routing';
+import { resolveLocale, type Locale } from '@/i18n/routing';
 import type { ThemeId } from '@/lib/themes';
 import { toOrdinal } from '@/lib/utils';
 
-export type Locale = (typeof routing.locales)[number];
+export type { Locale };
 
 export interface TitledItem {
   title: string;
@@ -126,7 +125,7 @@ export function getProject<Slug extends ProjectSlug>(slug: Slug, locale: string)
 
   return {
     meta,
-    content: content[hasLocale(routing.locales, locale) ? locale : routing.defaultLocale],
+    content: content[resolveLocale(locale)],
     number: toOrdinal(index),
   };
 }

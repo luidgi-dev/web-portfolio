@@ -1,0 +1,146 @@
+{
+  "en": {
+    "overview": {
+      "problem": "Shipment tracking, customer reminders, payment links: much of it ran on spreadsheets and manual sending.",
+      "lead": "I was hired as a no-code maker to build internal apps in AppSheet. Today I mostly write code: Python jobs, and a Next.js app on the way.",
+      "paragraphs": [
+        "We are about five developers, each working with a few teams. Mine are customer service and logistics, and production at times. I gather their needs, build the tools, train users on new versions, and keep everything running."
+      ],
+      "facts": {
+        "role": "Developer in a team of about five",
+        "timeline": "Since July 2024",
+        "teams": "Customer service, logistics, production",
+        "stack": "Python, BigQuery, AppSheet, Google Cloud, Next.js, Supabase"
+      }
+    },
+    "projects": [
+      {
+        "title": "Shipment tracking app",
+        "problem": "Each saddle was tracked in a spreadsheet, where it was hard to see where an order stood or who had changed what.",
+        "built": "An AppSheet app on a BigQuery base fed by the ERP. Customer service follows each saddle from the workshop to shipping, and collects the balance and the address along the way.",
+        "result": "1,100+ orders in progress in one place, ~450 follow-ups closed a month."
+      },
+      {
+        "title": "Customer messages and payment links",
+        "problem": "Emails went out half by hand from the ERP, text messages fully by hand.",
+        "built": "Python jobs on Cloud Run send the email or text at each step of the order, with a payment link (Stripe, Alma, Nuvei).",
+        "result": "~1,500 messages a month, none sent by hand."
+      },
+      {
+        "title": "Rebuild in Next.js and Supabase",
+        "problem": "AppSheet was quick to start with, but as usage grows it gets expensive and slow, and hard to tailor.",
+        "built": "I am moving shipment tracking into a larger internal app, in Next.js and Supabase, shared with production and logistics.",
+        "result": "It goes live in the first quarter of 2027. The app will be faster and cheaper to run, and its data will be shared with production."
+      }
+    ],
+    "method": {
+      "planning": {
+        "title": "How we plan",
+        "body": "Every quarter, the dev team ranks each department's requests and plans the next three months. Requests that come in between are shared out to balance the load. We track it all in Linear and work in sprints."
+      },
+      "delivery": {
+        "title": "How I ship",
+        "body": "I write tests, run them in CI, and deploy each job on Cloud Run as a Docker image. About a third of my time is monitoring: an order that did not get its email, a job that stopped. Claude Code agents check that my jobs ran and alert me when a sensitive one fails. Most bugs are fixed the same day."
+      },
+      "choices": {
+        "heading": "Why these tools",
+        "items": [
+          {
+            "title": "AppSheet",
+            "body": "Low-code and part of Google Workspace, quick to get a first app out. Its limits led to the rebuild."
+          },
+          {
+            "title": "BigQuery",
+            "body": "Made for large volumes and reporting, in the same Google stack as AppSheet."
+          },
+          {
+            "title": "Supabase",
+            "body": "Faster for the reads and writes of a live app, and it pairs well with Next.js."
+          }
+        ]
+      }
+    },
+    "takeaways": {
+      "learned": {
+        "title": "What I learned",
+        "body": "I come from a general engineering school (ESTIA), with some Python and Java. Here I learned the job end to end: the need, the spec, the code, tests, CI, deployment, maintenance."
+      },
+      "today": {
+        "title": "What I would do today",
+        "body": "I would start with code. With AI tools like Claude Code, custom code is quick to write and goes further on specific needs, which is why we are rebuilding."
+      }
+    }
+  },
+  "fr": {
+    "overview": {
+      "problem": "Suivi des expéditions, relances clients, liens de paiement : beaucoup de choses passaient par des tableurs et des envois à la main.",
+      "lead": "J'ai été recruté comme maker no-code pour faire des apps internes sur AppSheet. Aujourd'hui j'écris surtout du code : des jobs Python, et une app Next.js en cours.",
+      "paragraphs": [
+        "On est environ cinq développeurs, chacun avec quelques équipes. Les miennes : le service client, la logistique, et parfois la production. Je recueille leurs besoins, je construis les outils, je forme les utilisateurs aux nouvelles versions et je m'assure que tout tourne."
+      ],
+      "facts": {
+        "role": "Développeur dans une équipe d'environ cinq",
+        "timeline": "Depuis juillet 2024",
+        "teams": "Service client, logistique, production",
+        "stack": "Python, BigQuery, AppSheet, Google Cloud, Next.js, Supabase"
+      }
+    },
+    "projects": [
+      {
+        "title": "App de suivi des expéditions",
+        "problem": "Chaque selle était suivie dans un tableur, où l'on voyait mal où en était une commande et qui avait modifié quoi.",
+        "built": "Une app AppSheet sur une base BigQuery alimentée par l'ERP. Le service client suit chaque selle de l'atelier à l'expédition, et récupère au passage le solde et l'adresse.",
+        "result": "Plus de 1 100 commandes en cours au même endroit, environ 450 relances traitées par mois."
+      },
+      {
+        "title": "Messages clients et liens de paiement",
+        "problem": "Les emails partaient à moitié à la main depuis l'ERP, les SMS entièrement à la main.",
+        "built": "Des jobs Python sur Cloud Run envoient le mail ou le SMS à chaque étape de la commande, avec un lien de paiement (Stripe, Alma, Nuvei).",
+        "result": "Environ 1 500 messages par mois, aucun envoyé à la main."
+      },
+      {
+        "title": "Refonte en Next.js et Supabase",
+        "problem": "AppSheet a permis de démarrer vite, mais avec l'usage il devient cher, lent, et difficile à adapter.",
+        "built": "Je migre le suivi des expéditions dans une app interne plus large, en Next.js et Supabase, partagée avec la production et la logistique.",
+        "result": "Elle sera en service au premier trimestre 2027, plus rapide et moins chère à faire tourner, avec des données communes à la production."
+      }
+    ],
+    "method": {
+      "planning": {
+        "title": "Comment on planifie",
+        "body": "Chaque trimestre, l'équipe dev classe les demandes de chaque service et planifie les trois mois suivants. Celles qui arrivent entre-temps sont réparties pour équilibrer la charge. On suit tout dans Linear et on travaille en sprints."
+      },
+      "delivery": {
+        "title": "Comment je livre",
+        "body": "J'écris des tests, je les fais tourner en CI, et je déploie chaque job sur Cloud Run en image Docker. Environ un tiers de mon temps, c'est du monitoring : une commande qui n'a pas reçu son mail, un job qui s'est arrêté. Des agents Claude Code vérifient que mes jobs ont tourné et m'alertent quand un job sensible plante. La plupart des bugs sont corrigés dans la journée."
+      },
+      "choices": {
+        "heading": "Pourquoi ces outils",
+        "items": [
+          {
+            "title": "AppSheet",
+            "body": "Low-code et intégré à Google Workspace, rapide pour sortir une première app. Ses limites ont mené à la refonte."
+          },
+          {
+            "title": "BigQuery",
+            "body": "Fait pour les gros volumes et le reporting, dans le même écosystème Google qu'AppSheet."
+          },
+          {
+            "title": "Supabase",
+            "body": "Plus rapide pour les lectures et écritures d'une app au quotidien, et il s'associe bien à Next.js."
+          }
+        ]
+      }
+    },
+    "takeaways": {
+      "learned": {
+        "title": "Ce que j'ai appris",
+        "body": "Je viens d'une école d'ingénieur généraliste (ESTIA), avec des bases en Python et Java. Ici, j'ai appris le métier de bout en bout : le besoin, la spec, le code, les tests, la CI, le déploiement, la maintenance."
+      },
+      "today": {
+        "title": "Ce que je ferais aujourd'hui",
+        "body": "Je partirais directement sur du code. Avec des outils d'IA comme Claude Code, le sur-mesure est rapide à écrire et va plus loin sur les besoins spécifiques, et c'est pour ça qu'on refait l'app."
+      }
+    }
+  }
+}

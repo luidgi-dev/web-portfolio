@@ -27,7 +27,7 @@ interface CaseStudyModalProps {
 }
 
 // Makes the whole card the trigger of the case study modal; the card needs
-// `relative` and `interactive`.
+// `interactive` (BentoCard is already `relative`).
 export function CaseStudyModal({ openLabel, children, ...content }: CaseStudyModalProps) {
   const t = useTranslations('HomePage');
 

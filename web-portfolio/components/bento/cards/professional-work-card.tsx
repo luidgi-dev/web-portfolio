@@ -28,7 +28,6 @@ export async function ProfessionalWorkCard() {
       interactive
       label={t('professionalWorkLabel')}
       labelStyle="chip"
-      className="relative"
     >
       <div className="flex h-full flex-col" data-testid="professional-work-card">
         <h2 className="font-display text-xl font-bold tracking-tight md:text-2xl">

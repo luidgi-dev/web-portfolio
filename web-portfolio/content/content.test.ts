@@ -157,7 +157,9 @@ describe('content/experience.json', () => {
   it('cites the same figures as the card in every locale', () => {
     // Digits only: FR groups thousands with a no-break space.
     const figuresIn = (text: string) =>
-      (text.match(/\d(?:[\d,.\s]*\d)?/g) ?? []).map((figure) => Number(figure.replace(/\D/g, '')));
+      (text.match(/\d{1,3}(?:[,\s]\d{3})*/g) ?? []).map((figure) =>
+        Number(figure.replace(/\D/g, ''))
+      );
     const byValue = (a: number, b: number) => a - b;
     const cited = experienceStats
       .slice(0, 3)

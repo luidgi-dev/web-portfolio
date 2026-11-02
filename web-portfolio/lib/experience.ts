@@ -27,7 +27,7 @@ export interface ExperienceContent {
     delivery: TitledItem;
     choices: { heading: string; items: TitledItem[] };
   };
-  // What I learned, then what I would do today, as one numbered list.
+  // Shown as one numbered list.
   takeaways: TitledItem[];
 }
 

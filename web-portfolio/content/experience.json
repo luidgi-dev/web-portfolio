@@ -2,9 +2,9 @@
   "en": {
     "overview": {
       "problem": "Orders were tracked in spreadsheets, and reminders with payment links went out partly by hand.",
-      "lead": "I build the tools that customer service and logistics use every day. I started in no-code with AppSheet and now write most of them in Python and Next.js.",
+      "lead": "I build the tools that customer service and logistics use every day, mostly in Python and Next.js.",
       "paragraphs": [
-        "We are about six developers, each working with a few teams. Mine are customer service and logistics, and production at times. I gather their needs, build the tools, train users on new versions, and keep everything running."
+        "I gather their needs, train users on each new version, and keep everything running. We are about six developers, each working with a few teams."
       ],
       "facts": {
         "role": "Developer in a team of about six",
@@ -100,9 +100,9 @@
   "fr": {
     "overview": {
       "problem": "Les commandes étaient suivies dans des tableurs, et les relances avec lien de paiement partaient en partie à la main.",
-      "lead": "Je construis les outils que le service client et la logistique utilisent au quotidien. J'ai commencé en no-code avec AppSheet, et j'en écris aujourd'hui la plupart en Python et Next.js.",
+      "lead": "Je construis les outils que le service client et la logistique utilisent au quotidien, surtout en Python et Next.js.",
       "paragraphs": [
-        "On est environ six développeurs, chacun avec quelques équipes. Les miennes : le service client, la logistique, et parfois la production. Je recueille leurs besoins, je construis les outils, je forme les utilisateurs aux nouvelles versions et je m'assure que tout tourne."
+        "Je recueille leurs besoins, je forme les utilisateurs à chaque nouvelle version et je m'assure que tout tourne. On est environ six développeurs, chacun avec quelques équipes."
       ],
       "facts": {
         "role": "Développeur dans une équipe d'environ six",

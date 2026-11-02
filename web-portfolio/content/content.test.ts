@@ -8,7 +8,7 @@ import {
   pairPhotos,
 } from '@/components/case-study/portfolio-visuals';
 import { routing } from '@/i18n/routing';
-import { experience, getExperience } from '@/lib/experience';
+import { experience, experienceStats, getExperience } from '@/lib/experience';
 import { getProject, projects, type ProjectSlug } from '@/lib/projects';
 import enMessages from '@/messages/en.json';
 import frMessages from '@/messages/fr.json';
@@ -150,6 +150,25 @@ describe('content/experience.json', () => {
 
     for (const locale of routing.locales) {
       expect(techOf(locale)).toEqual(techOf(routing.defaultLocale));
+    }
+  });
+
+  // The first two projects quote the orders, messages and follow-ups figures.
+  it('cites the same figures as the card in every locale', () => {
+    // Digits only: FR groups thousands with a no-break space.
+    const figuresIn = (text: string) =>
+      (text.match(/\d{1,3}(?:[,\s]\d{3})*/g) ?? []).map((figure) =>
+        Number(figure.replace(/\D/g, ''))
+      );
+    const byValue = (a: number, b: number) => a - b;
+    const cited = experienceStats
+      .slice(0, 3)
+      .map((stat) => stat.value)
+      .sort(byValue);
+
+    for (const locale of routing.locales) {
+      const results = experience[locale].projects.slice(0, 2).map((project) => project.result);
+      expect(results.flatMap(figuresIn).sort(byValue)).toEqual(cited);
     }
   });
 });

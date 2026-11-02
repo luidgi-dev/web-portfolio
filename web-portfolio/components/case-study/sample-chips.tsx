@@ -1,9 +1,15 @@
-import { materialClass, swatchClass } from '@/components/case-study/swatch';
-import type { Stat } from '@/lib/projects';
+import { itemCode, materialClass, swatchClass } from '@/components/case-study/swatch';
 import { cn } from '@/lib/utils';
 
+// A Stat from the case study content, or a figure without a note.
+interface Chip {
+  value: string;
+  label: string;
+  note?: string;
+}
+
 interface SampleChipsProps {
-  items: Stat[];
+  items: Chip[];
   /** Printed before the chip letter, e.g. the chapter number: 04-A, 04-B… */
   code: string;
   className?: string;
@@ -27,7 +33,7 @@ export function SampleChips({ items, code, className }: SampleChipsProps) {
             className="absolute top-2.5 left-4 font-mono text-[9px] tracking-[0.15em] text-foreground/70"
             aria-hidden="true"
           >
-            {code}-{String.fromCharCode(65 + index)}
+            {itemCode(code, index)}
           </span>
           <dt className="order-2 mt-2 font-mono text-[9px] tracking-[0.12em] uppercase">
             {item.label}
@@ -35,9 +41,11 @@ export function SampleChips({ items, code, className }: SampleChipsProps) {
           <dd className="order-1 mt-auto font-display text-4xl leading-none font-bold tracking-tight">
             {item.value}
           </dd>
-          <dd className="order-3 mt-3 border-t border-foreground/25 pt-2 font-mono text-[8px] tracking-[0.15em] text-foreground/75 uppercase">
-            {item.note}
-          </dd>
+          {item.note ? (
+            <dd className="order-3 mt-3 border-t border-foreground/25 pt-2 font-mono text-[8px] tracking-[0.15em] text-foreground/75 uppercase">
+              {item.note}
+            </dd>
+          ) : null}
         </div>
       ))}
     </dl>

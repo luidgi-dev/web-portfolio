@@ -7,6 +7,8 @@ export interface ExperienceProject {
   problem: string;
   built: string;
   result: string;
+  // A generic drawing of the flow, with no internal names.
+  flow?: { caption: string; steps: string[] };
 }
 
 // Professional work prose for one locale. Its chapters differ from a case
@@ -25,10 +27,26 @@ export interface ExperienceContent {
     delivery: TitledItem;
     choices: { heading: string; items: TitledItem[] };
   };
-  takeaways: {
-    learned: TitledItem;
-    today: TitledItem;
-  };
+  // Shown as one numbered list.
+  takeaways: TitledItem[];
+}
+
+// Counts as numbers so each locale gets its own separator (1,100 in EN, 1 100 in FR).
+// The card and the detail modal both read them; labels are HomePage messages.
+export const experienceStats = [
+  { value: 1100, suffix: '+', label: 'professionalStatOrders' },
+  { value: 1500, prefix: '~', label: 'professionalStatMessages' },
+  { value: 450, prefix: '~', label: 'professionalStatTodos' },
+  { value: 4, label: 'professionalStatBrands' },
+] as const;
+
+export type ExperienceStat = (typeof experienceStats)[number];
+
+// Prefix and suffix around the number formatted for the locale: ~1,500, 1,100+.
+export function formatStat(stat: ExperienceStat, formatNumber: (value: number) => string) {
+  const prefix = 'prefix' in stat ? stat.prefix : '';
+  const suffix = 'suffix' in stat ? stat.suffix : '';
+  return `${prefix}${formatNumber(stat.value)}${suffix}`;
 }
 
 // The annotation is what makes tsc validate content/experience.json.

@@ -4,26 +4,26 @@ Approved on 2026-11-02, to be reread on the page. EN and FR are written separate
 
 Confidentiality rules: the employer stays unnamed ("a high-end saddle maker"); the ERP stays "the ERP"; no money figures (order value, savings, payment link amounts); no screenshots, only generic diagrams drawn from scratch. The card figures are kept: they are global volumes, not money.
 
-Facts used, from Luidgi on 2026-11-02: permanent contract since July 2024, hired as a no-code maker; about 5 developers, each with preferred internal clients; ~30% of the time spent on monitoring; rebuild in use from Q1 2027. Card figures: 1,100+ orders in progress, ~1,500 messages a month, ~450 follow-ups closed a month in the tracking app, 4 brands on 2 sites (EU and US).
+Facts used, from Luidgi on 2026-11-02: permanent contract since July 2024, hired as a no-code maker; about 6 developers, each with preferred internal clients; ~30% of the time spent on monitoring; rebuild in use from Q1 2027. Card figures: 1,100+ orders in progress, ~1,500 messages a month, ~450 follow-ups closed a month in the tracking app, 4 brands on 2 sites (EU and US).
 
 ---
 
 ## 01 · Overview
 
 **problem**
-- EN: Shipment tracking, customer reminders, payment links: much of it ran on spreadsheets and manual sending.
-- FR : Suivi des expéditions, relances clients, liens de paiement : beaucoup de choses passaient par des tableurs et des envois à la main.
+- EN: Orders were tracked in spreadsheets, and reminders with payment links went out partly by hand.
+- FR : Les commandes étaient suivies dans des tableurs, et les relances avec lien de paiement partaient en partie à la main.
 
 **lead**
-- EN: I was hired as a no-code maker to build internal apps in AppSheet. Today I mostly write code: Python jobs, and a Next.js app on the way.
-- FR : J'ai été recruté comme maker no-code pour faire des apps internes sur AppSheet. Aujourd'hui j'écris surtout du code : des jobs Python, et une app Next.js en cours.
+- EN: I build the tools that customer service and logistics use every day, mostly in Python and Next.js.
+- FR : Je construis les outils que le service client et la logistique utilisent au quotidien, surtout en Python et Next.js.
 
 **paragraphs**
-1. EN: We are about five developers, each working with a few teams. Mine are customer service and logistics, and production at times. I gather their needs, build the tools, train users on new versions, and keep everything running.
-   FR : On est environ cinq développeurs, chacun avec quelques équipes. Les miennes : le service client, la logistique, et parfois la production. Je recueille leurs besoins, je construis les outils, je forme les utilisateurs aux nouvelles versions et je m'assure que tout tourne.
+1. EN: I gather their needs, train users on each new version, and keep everything running. We are about six developers, each working with a few teams.
+   FR : Je recueille leurs besoins, je forme les utilisateurs à chaque nouvelle version et je m'assure que tout tourne. On est environ six développeurs, chacun avec quelques équipes.
 
 **facts**
-- role: EN Developer in a team of about five · FR Développeur dans une équipe d'environ cinq
+- role: EN Developer in a team of about six · FR Développeur dans une équipe d'environ six
 - timeline: EN Since July 2024 · FR Depuis juillet 2024
 - teams: EN Customer service, logistics, production · FR Service client, logistique, production
 - stack: EN Python, BigQuery, AppSheet, Google Cloud, Next.js, Supabase · FR Python, BigQuery, AppSheet, Google Cloud, Next.js, Supabase
@@ -71,8 +71,14 @@ Same shape for each project: problem, what I built, result.
   - FR : Elle sera en service au premier trimestre 2027, plus rapide et moins chère à faire tourner, avec des données communes à la production.
 
 **diagrams** (drawn in LUI-153, generic, no internal names)
-1. Shipment tracking: ERP → BigQuery → tracking app → the team updates status, balance, address.
-2. Customer messages: order step → Python job on Cloud Run → email or text message → payment link.
+1. Shipment tracking
+   - caption: EN Shipment tracking: from the ERP to the customer service team. · FR Suivi des expéditions : de l'ERP au service client.
+   - steps EN: ERP › BigQuery › Tracking app › Customer service updates status, balance and address
+   - steps FR : ERP › BigQuery › App de suivi › Le service client met à jour le statut, le solde et l'adresse
+2. Customer messages
+   - caption: EN Customer messages: from an order step to the payment link. · FR Messages clients : d'une étape de commande au lien de paiement.
+   - steps EN: Order step › Python job on Cloud Run › Email or text message › Payment link
+   - steps FR : Étape de commande › Job Python sur Cloud Run › Email ou SMS › Lien de paiement
 
 ---
 
@@ -112,11 +118,26 @@ Same shape for each project: problem, what I built, result.
 - EN: I come from a general engineering school (ESTIA), with some Python and Java. Here I learned the job end to end: the need, the spec, the code, tests, CI, deployment, maintenance.
 - FR : Je viens d'une école d'ingénieur généraliste (ESTIA), avec des bases en Python et Java. Ici, j'ai appris le métier de bout en bout : le besoin, la spec, le code, les tests, la CI, le déploiement, la maintenance.
 
+**learned.points** (the modal lists learned, these two points, then today as four numbered items)
+1. EN Working with business teams: Customer service and logistics describe a need in their own words. I learned to turn their requests into a spec, then train them on each new version.
+   FR Travailler avec les équipes métier : Le service client et la logistique décrivent un besoin avec leurs mots. J'ai appris à transformer leurs demandes en spec, puis à les former à chaque nouvelle version.
+2. EN Running what I ship: A job that stops means a customer without their payment link. That is why every sensitive job now has checks and an alert, and why a third of my time goes to monitoring.
+   FR Faire tourner ce que je livre : Un job qui s'arrête, c'est un client qui ne reçoit pas son lien de paiement. C'est pour ça que chaque job sensible a maintenant des vérifications et une alerte, et qu'un tiers de mon temps va au monitoring.
+
 **today.heading**: EN What I would do today · FR Ce que je ferais aujourd'hui
 
 **today.body**
 - EN: I would start with code. With AI tools like Claude Code, custom code is quick to write and goes further on specific needs, which is why we are rebuilding.
 - FR : Je partirais directement sur du code. Avec des outils d'IA comme Claude Code, le sur-mesure est rapide à écrire et va plus loin sur les besoins spécifiques, et c'est pour ça qu'on refait l'app.
+
+---
+
+## Modal labels (LUI-153)
+
+- kicker: EN Professional work · Permanent role · FR Expérience professionnelle · CDI
+- open label (screen readers): EN Open the professional work details · FR Ouvrir le détail de l'expérience professionnelle
+- tabs: EN Overview, Projects, Method, Takeaways · FR Aperçu, Projets, Méthode, Bilan
+- facts: EN Teams · FR Équipes. Stack reuses the existing `CaseStudy.stack` label (Stack · Stack technique).
 
 ---
 

@@ -58,3 +58,7 @@ export const themeIds = themes.map((theme) => theme.id);
 export function isThemeId(value: string): value is ThemeId {
   return themeIds.includes(value as ThemeId);
 }
+
+export function themeName(theme: ThemeMeta, locale: string) {
+  return locale === 'fr' ? theme.nameFr : theme.nameEn;
+}

@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { useTheme } from '@/components/theme-provider';
-import { themes } from '@/lib/themes';
+import { themeName, themes } from '@/lib/themes';
 import { cn } from '@/lib/utils';
 
 export function ThemeSelector() {
@@ -18,7 +18,7 @@ export function ThemeSelector() {
     >
       {themes.map((theme) => {
         const isActive = themeId === theme.id;
-        const label = locale === 'fr' ? theme.nameFr : theme.nameEn;
+        const label = themeName(theme, locale);
 
         return (
           <button

@@ -1,5 +1,8 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
+import { CaseStudyCta, CaseStudyModal } from '@/components/bento/case-study-modal';
+import { PortfolioCaseStudy } from '@/components/case-study/portfolio-case-study';
+import { getProject } from '@/lib/projects';
 import { cn } from '@/lib/utils';
 
 // Spans of the home grid, in DOM order: the map is the page itself, this card lit up.
@@ -18,11 +21,23 @@ const PAGE_MAP = [
 ];
 
 export async function PortfolioCard() {
-  const t = await getTranslations('HomePage');
+  const [t, tCaseStudy, locale] = await Promise.all([
+    getTranslations('HomePage'),
+    getTranslations('CaseStudy'),
+    getLocale(),
+  ]);
+  const { meta, content, number } = getProject('portfolio', locale);
 
   return (
-    <BentoCard colSpan={1} rowSpan={2} label={t('portfolioType')} labelStyle="chip">
-      <div className="flex h-full flex-col" data-testid="portfolio-card">
+    <BentoCard
+      colSpan={1}
+      rowSpan={2}
+      interactive
+      label={content.type}
+      labelStyle="chip"
+      className="relative overflow-hidden"
+    >
+      <div className="relative flex h-full flex-col" data-testid="portfolio-card">
         <div
           role="img"
           aria-label={t('portfolioMapLabel')}
@@ -37,25 +52,29 @@ export async function PortfolioCard() {
           ))}
         </div>
         <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={t('projectTagsLabel')}>
-          {(t.raw('portfolioTags') as string[]).map((tag) => (
+          {content.tags.map((tag) => (
             <li key={tag}>
               <span className="bento-chip">{tag}</span>
             </li>
           ))}
         </ul>
-        <h2 className="mt-4 font-display text-xl font-bold tracking-tight">
-          {t('portfolioTitle')}
-        </h2>
+        <h2 className="mt-4 font-display text-xl font-bold tracking-tight">{content.title}</h2>
         <p className="mt-2 font-sans text-sm font-semibold tracking-tight text-foreground/90">
-          {t('portfolioTagline')}
+          {content.tagline}
         </p>
         <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-foreground/90">
-          {t('portfolioSummary')}
+          {content.summary}
         </p>
-        <p className="mt-4 font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
-          {t('portfolioSoon')}
-        </p>
+        <CaseStudyCta />
       </div>
+      <CaseStudyModal
+        openLabel={t('portfolioOpenLabel')}
+        title={content.title}
+        kicker={tCaseStudy('kicker', { number, type: content.type })}
+        description={content.tagline}
+      >
+        <PortfolioCaseStudy meta={meta} content={content} />
+      </CaseStudyModal>
     </BentoCard>
   );
 }

@@ -40,22 +40,20 @@ export function BuildLogChapter({ chapter, buildLog, evidence }: BuildLogChapter
               {paragraph}
             </p>
           ))}
+          <PullQuote className="mt-10">{buildLog.story.quote}</PullQuote>
         </div>
-        <div className="grid content-start gap-8">
-          <div className="grid gap-5 rounded-[4px] border border-border p-5">
-            {(['before', 'after'] as const).map((key) => (
-              <div key={key} className="grid gap-3">
-                <p className="text-sm">
-                  <span className="mr-2 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
-                    {t(key)}
-                  </span>
-                  {buildLog.story[key]}
-                </p>
-                {evidence[key]}
-              </div>
-            ))}
-          </div>
-          <PullQuote>{buildLog.story.quote}</PullQuote>
+        <div className="grid content-start gap-5 rounded-[4px] border border-border p-5">
+          {(['before', 'after'] as const).map((key) => (
+            <div key={key} className="grid gap-3">
+              <p className="text-sm">
+                <span className="mr-2 font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
+                  {t(key)}
+                </span>
+                {buildLog.story[key]}
+              </p>
+              {evidence[key]}
+            </div>
+          ))}
         </div>
       </div>
     </>

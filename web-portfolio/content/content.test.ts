@@ -1,6 +1,12 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import {
+  ambiancePhotos,
+  directionShots,
+  evidenceShots,
+  pairPhotos,
+} from '@/components/case-study/portfolio-visuals';
 import { routing } from '@/i18n/routing';
 import { getProject, projects, type ProjectSlug } from '@/lib/projects';
 import enMessages from '@/messages/en.json';
@@ -75,25 +81,34 @@ describe('content/projects.json', () => {
       }
     });
 
-    it('captions every figure in every locale', () => {
-      const ids = meta.figures.map((figure) => figure.id).sort();
-
-      for (const locale of routing.locales) {
-        expect(Object.keys(content[locale].product.figures).sort()).toEqual(ids);
-      }
-    });
-
-    it('points to screens that exist under public/', () => {
-      const sources = meta.figures.flatMap((figure) => [figure.src.light, figure.src.dark]);
-
-      for (const src of sources) {
-        expect(existsSync(path.join(process.cwd(), 'public', src)), src).toBe(true);
-      }
-    });
-
     it('links to an https URL', () => {
       expect(new URL(meta.url).protocol).toBe('https:');
     });
+  });
+});
+
+describe('figures', () => {
+  it('captions every Strive screen in every locale', () => {
+    const { meta, content } = projects.strive;
+    const ids = meta.figures.map((figure) => figure.id).sort();
+
+    for (const locale of routing.locales) {
+      expect(Object.keys(content[locale].product.figures).sort()).toEqual(ids);
+    }
+  });
+
+  it('points to images that exist under public/', () => {
+    const sources = [
+      ...projects.strive.meta.figures.flatMap((figure) => [figure.src.light, figure.src.dark]),
+      ...[ambiancePhotos, pairPhotos, evidenceShots].flatMap((photos) =>
+        Object.values(photos).map((photo) => photo.src)
+      ),
+      ...Object.values(directionShots).flatMap((shot) => [shot.reference.src, shot.mockup.src]),
+    ];
+
+    for (const src of sources) {
+      expect(existsSync(path.join(process.cwd(), 'public', src)), src).toBe(true);
+    }
   });
 });
 

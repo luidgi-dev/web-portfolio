@@ -1,0 +1,131 @@
+import data from '@/content/projects.json';
+import { resolveLocale, type Locale } from '@/i18n/routing';
+import type { ThemeId } from '@/lib/themes';
+import { toOrdinal } from '@/lib/utils';
+
+export type { Locale };
+
+export interface TitledItem {
+  title: string;
+  body: string;
+}
+
+export interface Stat {
+  value: string;
+  label: string;
+  note: string;
+}
+
+export interface ProjectFigure {
+  id: string;
+  width: number;
+  height: number;
+  src: { light: string; dark: string };
+}
+
+export interface ProjectMeta {
+  url: string;
+  year: number;
+  figures: ProjectFigure[];
+}
+
+// Case study prose for one locale, shared by every project. Chapters are fixed
+// keys, not a discriminated array: JSON imports widen string literals, so tsc
+// could not check a union.
+export interface ProjectContent {
+  title: string;
+  tagline: string;
+  summary: string;
+  type: string;
+  tags: string[];
+  overview: {
+    problem: string;
+    lead: string;
+    paragraphs: string[];
+    pillars: { heading: string; items: TitledItem[] };
+    facts: { role: string; timeline: string; platform: string; status: string };
+  };
+  engineering: {
+    intro: string;
+    numbers: Stat[];
+    stack: { label: string; items: string[] }[];
+    pipeline: { heading: string; steps: TitledItem[] };
+    decisions: TitledItem[];
+  };
+  buildLog: {
+    stats: Stat[];
+    story: { heading: string; paragraphs: string[]; before: string; after: string; quote: string };
+    results: string[];
+    lessons: TitledItem[];
+  };
+}
+
+// Chapter 02 differs per project, so each slug gets its own content type.
+export interface StriveContent extends ProjectContent {
+  product: {
+    figures: Record<string, { alt: string; caption: string }>;
+    insights: {
+      heading: string;
+      body: string;
+      caption: string;
+      cards: { kind: string; title: string; body: string; period: string }[];
+    };
+    features: string[];
+  };
+}
+
+// An image with its caption and alt text; the file itself lives in code.
+export interface Illustrated {
+  caption: string;
+  alt: string;
+}
+
+export type PairId = 'sunlight' | 'bauhaus' | 'tiles' | 'wood' | 'paintChips';
+export type DirectionId = 'nelson' | 'caseStudyHouse' | 'brassMirror';
+
+// A mockup and the reference photo it came from.
+export interface Direction extends Illustrated {
+  referenceAlt: string;
+}
+
+interface IllustratedSection<Id extends string, Item = Illustrated> {
+  heading: string;
+  body: string;
+  items: Record<Id, Item>;
+}
+
+export interface PortfolioContent extends ProjectContent {
+  design: {
+    references: { heading: string; body: string };
+    ambiances: IllustratedSection<ThemeId>;
+    pairs: IllustratedSection<PairId>;
+    dropped: IllustratedSection<DirectionId, Direction>;
+  };
+}
+
+interface ContentBySlug {
+  strive: StriveContent;
+  portfolio: PortfolioContent;
+}
+
+export interface Project<Content extends ProjectContent = ProjectContent> {
+  meta: ProjectMeta;
+  content: Record<Locale, Content>;
+}
+
+export type ProjectSlug = keyof typeof data;
+
+// The annotation is what makes tsc validate content/projects.json, and a slug
+// without an entry in ContentBySlug fails here.
+export const projects: { [Slug in ProjectSlug]: Project<ContentBySlug[Slug]> } = data;
+
+export function getProject<Slug extends ProjectSlug>(slug: Slug, locale: string) {
+  const { meta, content }: Project<ContentBySlug[Slug]> = projects[slug];
+  const index = Object.keys(projects).indexOf(slug);
+
+  return {
+    meta,
+    content: content[resolveLocale(locale)],
+    number: toOrdinal(index),
+  };
+}

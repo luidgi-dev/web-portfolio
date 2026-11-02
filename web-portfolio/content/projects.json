@@ -1,0 +1,987 @@
+{
+  "strive": {
+    "meta": {
+      "url": "https://striveapp.cc",
+      "year": 2026,
+      "figures": [
+        {
+          "id": "rhythm",
+          "width": 840,
+          "height": 1440,
+          "src": {
+            "light": "/strive/screens/rhythm-light.png",
+            "dark": "/strive/screens/rhythm-dark.png"
+          }
+        },
+        {
+          "id": "arc",
+          "width": 840,
+          "height": 1440,
+          "src": {
+            "light": "/strive/screens/arc-light.png",
+            "dark": "/strive/screens/arc-dark.png"
+          }
+        },
+        {
+          "id": "chat",
+          "width": 840,
+          "height": 1440,
+          "src": {
+            "light": "/strive/screens/chat-light.png",
+            "dark": "/strive/screens/chat-dark.png"
+          }
+        },
+        {
+          "id": "circle",
+          "width": 840,
+          "height": 1824,
+          "src": {
+            "light": "/strive/screens/circle-light.png",
+            "dark": "/strive/screens/circle-dark.png"
+          }
+        }
+      ]
+    },
+    "content": {
+      "en": {
+        "title": "Strive",
+        "tagline": "Find your rhythm.",
+        "summary": "A habit tracker I built for myself, now live in English and French. Most of what I know about shipping a product alone, I learned on it.",
+        "type": "Personal work",
+        "tags": ["AI", "PWA", "Lifestyle"],
+        "overview": {
+          "problem": "Streaks punish a single missed day.",
+          "lead": "Strive tracks momentum instead.",
+          "paragraphs": [
+            "I wanted to build one application alone, end to end: visual direction, database, deployment. The subject came from my notes app, where I was already tracking my habits by hand.",
+            "An AI coach turns numbers the database has already computed into weekly insights, and small circles of up to eight people share progress without a leaderboard."
+          ],
+          "pillars": {
+            "heading": "How it works",
+            "items": [
+              {
+                "title": "Weekly targets",
+                "body": "Each ritual has a weekly target, say 4 times out of 7, so a missed day doesn't cost the week."
+              },
+              {
+                "title": "Quick logging",
+                "body": "One tap, or a sentence or voice message to the AI coach."
+              },
+              {
+                "title": "A momentum score",
+                "body": "It rises as you log and drops slowly when you skip. Each ritual shows its last twelve weeks."
+              }
+            ]
+          },
+          "facts": {
+            "role": "Solo, end to end: product, design, code, AI, deployment",
+            "timeline": "March to July 2026, maintained since",
+            "platform": "Installable web app (PWA), English and French",
+            "status": "Live, version 1.0"
+          }
+        },
+        "product": {
+          "figures": {
+            "rhythm": {
+              "alt": "Strive Today screen with three rituals, their weekly progress and momentum status",
+              "caption": "Rhythm. Today's rituals, each logged in one tap."
+            },
+            "arc": {
+              "alt": "Ritual detail with a Strong momentum status, a twelve-week curve and the current week",
+              "caption": "The Arc. Twelve weeks of one ritual, rest days included."
+            },
+            "chat": {
+              "alt": "My Strive chat logging a voice message, asking which ritual to log and showing weekly momentum",
+              "caption": "My Strive. Logging by sentence or voice, with an undo."
+            },
+            "circle": {
+              "alt": "Circle detail with a nudge, three members and their shared rituals for the week",
+              "caption": "Circles. A few shared rituals, nudges, no leaderboard."
+            }
+          },
+          "insights": {
+            "heading": "What your data shows",
+            "body": "Premium adds weekly and monthly cards that point out patterns in your own data. The numbers come from database queries, and the AI only writes the sentence around them.",
+            "caption": "Two Insight cards, with example data.",
+            "cards": [
+              {
+                "kind": "Correlation",
+                "title": "Sleep and Sport move together.",
+                "body": "In weeks you log Sleep 5+ days, Sport completion rises 24%.",
+                "period": "Last 8 weeks"
+              },
+              {
+                "kind": "Strength",
+                "title": "Read 30 min is your anchor.",
+                "body": "Logged 82% of weeks, your steadiest ritual.",
+                "period": "Last 12 weeks"
+              }
+            ]
+          },
+          "features": [
+            "Opt-in push reminders, three a day at most",
+            "English and French, light and dark",
+            "Installable as a PWA on iOS and Android",
+            "A demo account, reset every night"
+          ]
+        },
+        "engineering": {
+          "intro": "Next.js 16 on Vercel, Supabase for Postgres and auth, Gemini through the Vercel AI SDK. Most of the logic sits in Postgres, and the model only writes sentences.",
+          "numbers": [
+            {
+              "value": "17/17",
+              "label": "tables behind Row Level Security",
+              "note": "Scope · every table"
+            },
+            {
+              "value": "0",
+              "label": "stored momentum values, views compute them",
+              "note": "Instead · SQL views"
+            },
+            {
+              "value": "5",
+              "label": "AI chat tools, none destructive",
+              "note": "Scope · log, create, read"
+            },
+            {
+              "value": "21.7k",
+              "label": "lines of TypeScript",
+              "note": "Excluding · tests"
+            }
+          ],
+          "stack": [
+            {
+              "label": "App",
+              "items": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "next-intl"]
+            },
+            {
+              "label": "Data",
+              "items": ["Supabase", "PostgreSQL", "Row Level Security", "pg_cron"]
+            },
+            {
+              "label": "AI",
+              "items": ["Vercel AI SDK", "Gemini 2.5 Flash"]
+            },
+            {
+              "label": "Ops",
+              "items": ["Vercel", "Sentry", "Web Push", "Vitest"]
+            }
+          ],
+          "pipeline": {
+            "heading": "From a log to an insight",
+            "steps": [
+              {
+                "title": "Log",
+                "body": "A tap, a sentence or a voice message. The chat matches loose wording to the right ritual."
+              },
+              {
+                "title": "Compute",
+                "body": "Postgres views derive momentum and the weekly facts. Nothing is stored twice."
+              },
+              {
+                "title": "Phrase",
+                "body": "Gemini receives the computed facts and writes a headline and one sentence."
+              },
+              {
+                "title": "Show",
+                "body": "The app renders a card. Facts below a confidence threshold never reach the model."
+              }
+            ]
+          },
+          "decisions": [
+            {
+              "title": "Momentum lives in SQL views",
+              "body": "It has no table and no column. Views derive it from the logs, so a retroactive edit can't leave a stale score behind, and \"never starts over\" stays true by construction."
+            },
+            {
+              "title": "Gemini only writes the text",
+              "body": "The chat works through five narrow tools, and Insights are calculated in TypeScript before Gemini writes a word."
+            },
+            {
+              "title": "Per-user isolation in Postgres",
+              "body": "Row Level Security on every user table, the user ID read from the server session and never from the request, no destructive tool exposed to the AI, and a per-user credit refunded when a call fails."
+            }
+          ]
+        },
+        "buildLog": {
+          "stats": [
+            {
+              "value": "~100",
+              "label": "hours, evenings and weekends",
+              "note": "Method · commit timestamps"
+            },
+            {
+              "value": "610",
+              "label": "commits",
+              "note": "Source · git"
+            },
+            {
+              "value": "100",
+              "label": "merged pull requests",
+              "note": "Source · GitHub"
+            },
+            {
+              "value": "36",
+              "label": "days with commits",
+              "note": "Peak · May and June"
+            }
+          ],
+          "story": {
+            "heading": "Rebuilding momentum twelve days after launch",
+            "paragraphs": [
+              "Momentum was the answer to streaks, and my first implementation reintroduced the reset anyway. It was computed on the calendar week, so every Monday it started over.",
+              "It also erred the other way: after two idle weeks, a single Monday log read as one out of one and scored Strong. I moved the status to a rolling window sized to each ritual's cadence, seven days for daily and weekly rituals, thirty for monthly ones. Version one had been live for twelve days."
+            ],
+            "before": "Calendar week: momentum starts over every Monday.",
+            "after": "Rolling seven days: the last week always counts.",
+            "quote": "My fix for streaks had a weekly reset built in."
+          },
+          "results": [
+            "Live and feature complete at v1.0, in my own daily use: 293 logs across 15 rituals over 94 days.",
+            "In a synthetic beta, three of three AI personas put \"momentum over streaks\" in their own words without being told, and logged by typing a sentence on the first try.",
+            "Visitors from the US, Brazil, Japan, Norway and Canada with no marketing at all, one of them referred by ChatGPT.",
+            "One Sentry issue in three months, traced to clock skew between two Supabase services rather than app code."
+          ],
+          "lessons": [
+            {
+              "title": "Product decisions drove the technical ones",
+              "body": "Momentum is a view, the AI never computes a number, the window rolls. None of these started as an engineering preference."
+            },
+            {
+              "title": "AI helped most where I argued with it",
+              "body": "I treated every first proposal as a draft to push against. Several screens exist in their current form because I rejected three versions and said why."
+            },
+            {
+              "title": "Write the test that could fail",
+              "body": "One test asserting that a single log after two idle weeks is not Strong would have caught momentum v1 before it shipped."
+            },
+            {
+              "title": "Test real users as seriously as personas",
+              "body": "A synthetic study with three AI personas got a protocol and a severity scale. The test with real people was a link sent to friends. Next time, I'd do it the other way around."
+            }
+          ]
+        }
+      },
+      "fr": {
+        "title": "Strive",
+        "tagline": "Trouve ton rythme.",
+        "summary": "Un tracker d'habitudes construit pour moi, aujourd'hui en ligne en français et en anglais. L'essentiel de ce que je sais sur le fait de sortir un produit seul, je l'ai appris dessus.",
+        "type": "Travail personnel",
+        "tags": ["IA", "PWA", "Lifestyle"],
+        "overview": {
+          "problem": "Les séries punissent un seul jour manqué.",
+          "lead": "Strive suit plutôt un momentum.",
+          "paragraphs": [
+            "Je voulais construire une application seul, de bout en bout : direction visuelle, base de données, déploiement. Le sujet est venu de mon appli de notes, où je suivais déjà mes habitudes à la main.",
+            "Un coach IA transforme des chiffres déjà calculés par la base en insights hebdomadaires, et de petits cercles de huit personnes au plus partagent leur progression sans classement."
+          ],
+          "pillars": {
+            "heading": "Comment ça marche",
+            "items": [
+              {
+                "title": "Des objectifs par semaine",
+                "body": "Chaque rituel a un objectif hebdomadaire, par exemple 4 fois sur 7 : un jour manqué ne fait pas perdre la semaine."
+              },
+              {
+                "title": "Un enregistrement rapide",
+                "body": "Un geste, ou une phrase (écrite ou vocale) au coach IA."
+              },
+              {
+                "title": "Un score de momentum",
+                "body": "Il monte quand vous enregistrez et baisse doucement quand vous sautez un jour. Chaque rituel affiche ses douze dernières semaines."
+              }
+            ]
+          },
+          "facts": {
+            "role": "Solo, de bout en bout : produit, design, code, IA, déploiement",
+            "timeline": "De mars à juillet 2026, maintenu depuis",
+            "platform": "Application web installable (PWA), en anglais et en français",
+            "status": "En ligne, version 1.0"
+          }
+        },
+        "product": {
+          "figures": {
+            "rhythm": {
+              "alt": "Écran Aujourd'hui de Strive avec trois rituels, leur progression de la semaine et leur statut de momentum",
+              "caption": "Rhythm. Les rituels du jour, chacun enregistré d'un geste."
+            },
+            "arc": {
+              "alt": "Détail d'un rituel avec un momentum Strong, une courbe sur douze semaines et la semaine en cours",
+              "caption": "The Arc. Douze semaines d'un rituel, jours de repos compris."
+            },
+            "chat": {
+              "alt": "Chat My Strive qui enregistre un message vocal, demande quel rituel choisir et affiche le momentum de la semaine",
+              "caption": "My Strive. Enregistrer par une phrase ou à la voix, avec annulation possible."
+            },
+            "circle": {
+              "alt": "Détail d'un cercle avec un encouragement, trois membres et leurs rituels partagés de la semaine",
+              "caption": "Circles. Quelques rituels partagés, des encouragements, aucun classement."
+            }
+          },
+          "insights": {
+            "heading": "Ce que montrent vos données",
+            "body": "Premium ajoute des cartes hebdomadaires et mensuelles qui repèrent des tendances dans vos propres données. Les chiffres viennent de requêtes en base, l'IA écrit seulement la phrase autour.",
+            "caption": "Deux cartes Insights, avec des données d'exemple.",
+            "cards": [
+              {
+                "kind": "Corrélation",
+                "title": "Sommeil et Sport avancent ensemble.",
+                "body": "Les semaines où vous enregistrez Sommeil au moins 5 jours, Sport progresse de 24 %.",
+                "period": "8 dernières semaines"
+              },
+              {
+                "kind": "Point fort",
+                "title": "Lecture 30 min est votre pilier.",
+                "body": "Enregistré 82 % des semaines, votre rituel le plus régulier.",
+                "period": "12 dernières semaines"
+              }
+            ]
+          },
+          "features": [
+            "Rappels push activables, trois par jour au plus",
+            "Anglais et français, clair et sombre",
+            "Installable en PWA sur iOS et Android",
+            "Un compte de démo, réinitialisé chaque nuit"
+          ]
+        },
+        "engineering": {
+          "intro": "Next.js 16 sur Vercel, Supabase pour Postgres et l'authentification, Gemini via le Vercel AI SDK. L'essentiel de la logique vit dans Postgres, le modèle ne fait qu'écrire des phrases.",
+          "numbers": [
+            {
+              "value": "17/17",
+              "label": "tables protégées par Row Level Security",
+              "note": "Périmètre · toutes les tables"
+            },
+            {
+              "value": "0",
+              "label": "valeur de momentum stockée, des vues la calculent",
+              "note": "À la place · des vues SQL"
+            },
+            {
+              "value": "5",
+              "label": "outils pour le chat IA, aucun destructif",
+              "note": "Périmètre · noter, créer, lire"
+            },
+            {
+              "value": "21,7 k",
+              "label": "lignes de TypeScript",
+              "note": "Hors · tests"
+            }
+          ],
+          "stack": [
+            {
+              "label": "Application",
+              "items": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "next-intl"]
+            },
+            {
+              "label": "Données",
+              "items": ["Supabase", "PostgreSQL", "Row Level Security", "pg_cron"]
+            },
+            {
+              "label": "IA",
+              "items": ["Vercel AI SDK", "Gemini 2.5 Flash"]
+            },
+            {
+              "label": "Exploitation",
+              "items": ["Vercel", "Sentry", "Web Push", "Vitest"]
+            }
+          ],
+          "pipeline": {
+            "heading": "D'un enregistrement à un insight",
+            "steps": [
+              {
+                "title": "Enregistrer",
+                "body": "Un geste, une phrase ou un message vocal. Le chat retrouve le bon rituel même quand la formulation est approximative."
+              },
+              {
+                "title": "Calculer",
+                "body": "Des vues Postgres dérivent le momentum et les faits de la semaine. Rien n'est stocké en double."
+              },
+              {
+                "title": "Formuler",
+                "body": "Gemini reçoit les faits calculés et écrit un titre et une phrase."
+              },
+              {
+                "title": "Afficher",
+                "body": "L'app affiche une carte. Les faits sous un seuil de confiance n'atteignent jamais le modèle."
+              }
+            ]
+          },
+          "decisions": [
+            {
+              "title": "Le momentum vit dans des vues SQL",
+              "body": "Il n'a ni table ni colonne. Des vues le dérivent des enregistrements, donc une modification rétroactive ne laisse jamais de score périmé, et « ne repart jamais de zéro » reste vrai par construction."
+            },
+            {
+              "title": "Gemini n'écrit que le texte",
+              "body": "Le chat passe par cinq outils ciblés, et les insights sont calculés en TypeScript avant que Gemini n'écrive un mot."
+            },
+            {
+              "title": "Isolation par utilisateur dans Postgres",
+              "body": "Row Level Security sur chaque table utilisateur, l'identifiant lu dans la session serveur et jamais dans la requête, aucun outil destructif exposé à l'IA, et un crédit par utilisateur remboursé quand un appel échoue."
+            }
+          ]
+        },
+        "buildLog": {
+          "stats": [
+            {
+              "value": "~100",
+              "label": "heures, soirs et week-ends",
+              "note": "Méthode · horodatage des commits"
+            },
+            {
+              "value": "610",
+              "label": "commits",
+              "note": "Source · git"
+            },
+            {
+              "value": "100",
+              "label": "pull requests fusionnées",
+              "note": "Source · GitHub"
+            },
+            {
+              "value": "36",
+              "label": "jours avec des commits",
+              "note": "Pic · mai et juin"
+            }
+          ],
+          "story": {
+            "heading": "Refaire le momentum douze jours après la mise en ligne",
+            "paragraphs": [
+              "Le momentum devait remplacer les séries, et ma première implémentation a réintroduit la remise à zéro. Il était calculé sur la semaine calendaire, donc il repartait de zéro chaque lundi.",
+              "Il se trompait aussi dans l'autre sens : après deux semaines d'inactivité, un seul enregistrement le lundi comptait comme un sur un et obtenait Strong. J'ai basculé le statut sur une fenêtre glissante calée sur la cadence de chaque rituel, sept jours pour les rituels quotidiens et hebdomadaires, trente pour les mensuels. La première version était en ligne depuis douze jours."
+            ],
+            "before": "Semaine calendaire : le momentum repart de zéro chaque lundi.",
+            "after": "Sept jours glissants : la dernière semaine compte toujours.",
+            "quote": "Ma solution aux séries avait une remise à zéro hebdomadaire intégrée."
+          },
+          "results": [
+            "En ligne et complète en v1.0, dans mon usage quotidien : 293 enregistrements sur 15 rituels en 94 jours.",
+            "Lors d'une bêta synthétique, les trois personas IA ont reformulé « le momentum plutôt que les séries » sans qu'on le leur explique, et ont enregistré un rituel en tapant une phrase dès le premier essai.",
+            "Des visiteurs aux États-Unis, au Brésil, au Japon, en Norvège et au Canada sans aucun marketing, dont un envoyé par ChatGPT.",
+            "Un seul incident Sentry en trois mois, dû à un décalage d'horloge entre deux services Supabase, plutôt qu'au code de l'app."
+          ],
+          "lessons": [
+            {
+              "title": "Le produit a guidé la technique",
+              "body": "Le momentum est une vue, l'IA ne calcule jamais un chiffre, la fenêtre glisse. Aucun de ces choix n'est parti d'une préférence d'ingénieur."
+            },
+            {
+              "title": "L'IA m'a le plus servi quand je la contredisais",
+              "body": "J'ai traité chaque première proposition comme un brouillon à challenger. Plusieurs écrans existent sous leur forme actuelle parce que j'ai refusé trois versions en expliquant pourquoi."
+            },
+            {
+              "title": "Écrire le test qui peut échouer",
+              "body": "Un seul test vérifiant qu'un enregistrement après deux semaines d'inactivité n'est pas Strong aurait bloqué la première version du momentum avant sa mise en ligne."
+            },
+            {
+              "title": "Tester les vrais utilisateurs aussi sérieusement que les personas",
+              "body": "Une étude synthétique sur trois personas IA a eu droit à un protocole et à une échelle de sévérité. Le test avec de vraies personnes, lui, s'est résumé à un lien envoyé à des amis. La prochaine fois, je ferai l'inverse."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "portfolio": {
+    "meta": {
+      "url": "https://github.com/luidgi-dev/web-portfolio",
+      "year": 2026,
+      "figures": []
+    },
+    "content": {
+      "en": {
+        "title": "This portfolio",
+        "tagline": "A bento grid with a design system of its own.",
+        "summary": "From moodboards to production: design tokens, four mid-century palettes, English and French, tested and shipped through CI.",
+        "type": "Personal work",
+        "tags": ["Next.js", "Design system"],
+        "overview": {
+          "problem": "I wanted a portfolio I designed and coded myself, with a look of its own.",
+          "lead": "The look comes from the mid-century architecture photos I kept saving from my feed.",
+          "paragraphs": [
+            "I wanted one place that shows both sides of my work, the design and the code. It is written for recruiters and clients who have a few minutes: the projects, how I work, and a way to reach me.",
+            "Every visual decision is made in a design folder first: moodboards, references, then HTML mockups to compare directions. A component only gets built once its direction is settled."
+          ],
+          "pillars": {
+            "heading": "How it is built",
+            "items": [
+              {
+                "title": "Design first",
+                "body": "Moodboards and HTML mockups come before any component, so directions are compared side by side."
+              },
+              {
+                "title": "Four ambiances",
+                "body": "The same components run in four color themes. Each theme is a set of CSS variables on the page."
+              },
+              {
+                "title": "Typed content",
+                "body": "Case studies live in one JSON file in English and French. TypeScript checks its shape, and tests check both languages match."
+              }
+            ]
+          },
+          "facts": {
+            "role": "Solo: design, code, and copy in English and French",
+            "timeline": "Since July 2026, updated as I go",
+            "platform": "Website, English and French, four ambiances",
+            "status": "Live, open source"
+          }
+        },
+        "design": {
+          "references": {
+            "heading": "The references",
+            "body": "The direction comes from mid-century interiors: teak and walnut furniture, brass, glazed tiles, Bauhaus posters, and warm afternoon light."
+          },
+          "ambiances": {
+            "heading": "Four ambiances",
+            "body": "Two light themes and two dark ones, each taken from a real interior. You can switch from the home page; the swatches below show all four at once.",
+            "items": {
+              "theme-01": {
+                "caption": "Whitewashed walls, linen, sage green.",
+                "alt": "A white plastered arch in an empty room"
+              },
+              "theme-02": {
+                "caption": "Sand plaster and terracotta.",
+                "alt": "A living room with terracotta walls crossed by the shadow of a lattice"
+              },
+              "theme-03": {
+                "caption": "Rust velvet and an amber lamp.",
+                "alt": "A dim room with a rust velvet armchair, a round low table and a pendant lamp"
+              },
+              "theme-04": {
+                "caption": "Oxblood tiles and aged brass.",
+                "alt": "Deep red tiles lit by globe lamps"
+              }
+            }
+          },
+          "pairs": {
+            "heading": "From reference to component",
+            "body": "Each photo sits next to the component it led to, running live in the ambiance you picked.",
+            "items": {
+              "sunlight": {
+                "caption": "The hero card keeps the light of a perforated concrete wall and leaves the wall out.",
+                "alt": "Sunlight through a perforated concrete wall, in black and white"
+              },
+              "bauhaus": {
+                "caption": "The 404 page is drawn as a printed poster, with the shapes of the 1923 Bauhaus exhibition.",
+                "alt": "The poster of the 1923 Bauhaus exhibition, by Joost Schmidt"
+              },
+              "tiles": {
+                "caption": "The contact links are laid out like a tiled wall.",
+                "alt": "A bathroom wall of small green glazed tiles"
+              },
+              "wood": {
+                "caption": "The teak surfaces on the site are CSS gradients that follow the grain of a real plank.",
+                "alt": "A dark wooden plank with a knot"
+              },
+              "paintChips": {
+                "caption": "The numbers in the case studies sit on paint chips, like a sample card from a hardware store.",
+                "alt": "Colour sample cards with a punched hole, spread on a table"
+              }
+            }
+          },
+          "dropped": {
+            "heading": "Directions I dropped",
+            "body": "I compared three directions for the project window in an HTML mockup: a Nelson sideboard, a Case Study House and a brass pill mirror. I dropped the mirror because its arched top looked like a mistake to anyone who didn't know it.",
+            "items": {
+              "nelson": {
+                "caption": "Nelson sideboard: a teak header and drawer-front tabs.",
+                "alt": "Mockup of the project window with a teak header and drawer-front tabs",
+                "referenceAlt": "A walnut sideboard with long drawer pulls"
+              },
+              "caseStudyHouse": {
+                "caption": "Case Study House, the direction I kept.",
+                "alt": "Mockup of the project window framed like a print, with numbered chapters",
+                "referenceAlt": "A hand turning the pages of an architecture magazine"
+              },
+              "brassMirror": {
+                "caption": "Brass pill mirror: an arched brass frame.",
+                "alt": "Mockup of the project window inside an arched brass frame",
+                "referenceAlt": "Arched mirrors on a terracotta wall"
+              }
+            }
+          }
+        },
+        "engineering": {
+          "intro": "A Next.js 16 app with the App Router, Server Components by default, deployed on Vercel from GitHub.",
+          "numbers": [
+            {
+              "value": "4",
+              "label": "ambiances",
+              "note": "two light, two dark"
+            },
+            {
+              "value": "2",
+              "label": "languages",
+              "note": "English and French"
+            },
+            {
+              "value": "81",
+              "label": "tests",
+              "note": "Vitest, run on every pull request"
+            },
+            {
+              "value": "20",
+              "label": "merged pull requests",
+              "note": "since July 2026"
+            }
+          ],
+          "stack": [
+            {
+              "label": "Framework",
+              "items": ["Next.js 16", "React 19", "TypeScript", "next-intl"]
+            },
+            {
+              "label": "Styling",
+              "items": ["Tailwind CSS 4", "shadcn/ui", "CSS variables"]
+            },
+            {
+              "label": "Quality",
+              "items": ["Vitest", "ESLint", "Prettier", "Husky"]
+            },
+            {
+              "label": "Delivery",
+              "items": ["GitHub Actions", "Vercel"]
+            }
+          ],
+          "pipeline": {
+            "heading": "From moodboard to production",
+            "steps": [
+              {
+                "title": "Design folder",
+                "body": "Moodboards and references."
+              },
+              {
+                "title": "HTML mockup",
+                "body": "Directions side by side, with the real tokens."
+              },
+              {
+                "title": "Component",
+                "body": "Built once the direction is settled."
+              },
+              {
+                "title": "CI and deploy",
+                "body": "Lint, typecheck, tests, then Vercel."
+              }
+            ]
+          },
+          "decisions": [
+            {
+              "title": "Themes are a class on the page",
+              "body": "Each ambiance is a class on the html element that sets CSS variables, so components never know which theme is active."
+            },
+            {
+              "title": "Content checked by TypeScript",
+              "body": "The case studies are JSON, typed so that a missing field or a wrong shape fails the build."
+            },
+            {
+              "title": "Copy rules as a test",
+              "body": "A test reads every string in both languages and fails on long dashes, placeholders and buzzwords."
+            }
+          ]
+        },
+        "buildLog": {
+          "stats": [
+            {
+              "value": "10",
+              "label": "copy patterns removed",
+              "note": "listed in the October 2026 audit"
+            },
+            {
+              "value": "4",
+              "label": "moodboards",
+              "note": "one per ambiance"
+            },
+            {
+              "value": "3",
+              "label": "modal directions compared",
+              "note": "one kept"
+            }
+          ],
+          "story": {
+            "heading": "The audit",
+            "paragraphs": [
+              "In October 2026 I reviewed the site with fresh eyes, and it still looked generated in one click. It had no purple, no emoji and no long dashes, yet the rhythm of the copy and the decorations gave it away.",
+              "I listed ten patterns, from a single stressed word in italics to slogan headings with a full stop, and rewrote each string. Decorations had to come from a real object in the references, so the generic circles were removed.",
+              "Each pattern went into the project rules with a before and after, and the ones a machine can catch went into a test."
+            ],
+            "before": "The first moodboard, with its hero line",
+            "after": "The hero today",
+            "quote": "My rules covered words, and the problem was in the rhythm."
+          },
+          "results": [
+            "Live in English and French",
+            "Four ambiances",
+            "Custom error pages",
+            "The Strive case study",
+            "This case study"
+          ],
+          "lessons": [
+            {
+              "title": "A reference must read without its caption",
+              "body": "If it needs the backstory, rework it or drop it."
+            },
+            {
+              "title": "Compare in HTML first",
+              "body": "Directions side by side with the real tokens, before touching components."
+            },
+            {
+              "title": "Name the patterns",
+              "body": "A banned-word list misses rhythm and structure, so each pattern gets an example."
+            },
+            {
+              "title": "Decoration comes from a real material",
+              "body": "Each ornament on the site points to a photo in the references."
+            }
+          ]
+        }
+      },
+      "fr": {
+        "title": "Ce portfolio",
+        "tagline": "Une grille bento avec son propre design system.",
+        "summary": "Des moodboards à la mise en ligne : design tokens, quatre palettes mid-century, anglais et français, testé et livré via CI.",
+        "type": "Projet perso",
+        "tags": ["Next.js", "Design system"],
+        "overview": {
+          "problem": "Je voulais un portfolio conçu et codé par moi, avec un style bien à lui.",
+          "lead": "Le style vient des photos d'architecture mid-century que j'enregistrais au fil de mes scrolls.",
+          "paragraphs": [
+            "Je voulais un seul endroit qui montre les deux côtés de mon travail, le design et le code. Il s'adresse aux recruteurs et aux clients qui ont quelques minutes : les projets, ma façon de travailler, et un moyen de me contacter.",
+            "Chaque décision visuelle se prend d'abord dans un dossier design : moodboards, références, puis maquettes HTML pour comparer les pistes. Un composant n'est codé qu'une fois sa direction arrêtée."
+          ],
+          "pillars": {
+            "heading": "Comment il est construit",
+            "items": [
+              {
+                "title": "Le design d'abord",
+                "body": "Moodboards et maquettes HTML passent avant les composants, pour comparer les pistes côte à côte."
+              },
+              {
+                "title": "Quatre ambiances",
+                "body": "Les mêmes composants tournent dans quatre thèmes de couleurs. Chaque thème est un jeu de variables CSS sur la page."
+              },
+              {
+                "title": "Un contenu typé",
+                "body": "Les études de cas tiennent dans un fichier JSON, en anglais et en français. TypeScript vérifie sa structure, et les tests vérifient que les deux langues correspondent."
+              }
+            ]
+          },
+          "facts": {
+            "role": "Seul : design, code, et textes en anglais et en français",
+            "timeline": "Depuis juillet 2026, mis à jour au fil de l'eau",
+            "platform": "Site web, anglais et français, quatre ambiances",
+            "status": "En ligne, code ouvert"
+          }
+        },
+        "design": {
+          "references": {
+            "heading": "Les références",
+            "body": "La direction vient des intérieurs mid-century : meubles en teck et en noyer, laiton, carrelage émaillé, affiches Bauhaus et lumière chaude d'après-midi."
+          },
+          "ambiances": {
+            "heading": "Quatre ambiances",
+            "body": "Deux thèmes clairs et deux sombres, chacun tiré d'un vrai intérieur. On passe de l'un à l'autre depuis la page d'accueil ; les nuanciers ci-dessous les montrent tous les quatre.",
+            "items": {
+              "theme-01": {
+                "caption": "Murs chaulés, lin, vert sauge.",
+                "alt": "Une arche en plâtre blanc dans une pièce vide"
+              },
+              "theme-02": {
+                "caption": "Enduit sable et terre cuite.",
+                "alt": "Un salon aux murs terre cuite, traversé par l'ombre d'un claustra"
+              },
+              "theme-03": {
+                "caption": "Velours rouille et lampe ambrée.",
+                "alt": "Une pièce tamisée avec un fauteuil en velours rouille, une table basse ronde et une suspension"
+              },
+              "theme-04": {
+                "caption": "Carrelage sang-de-bœuf et laiton patiné.",
+                "alt": "Un carrelage rouge sombre éclairé par des lampes globe"
+              }
+            }
+          },
+          "pairs": {
+            "heading": "De la référence au composant",
+            "body": "Chaque photo est posée à côté du composant qui en est sorti, affiché en direct dans l'ambiance choisie.",
+            "items": {
+              "sunlight": {
+                "caption": "La carte d'accueil garde la lumière d'un mur de claustras, sans le mur.",
+                "alt": "La lumière du soleil à travers un mur de béton ajouré, en noir et blanc"
+              },
+              "bauhaus": {
+                "caption": "La page 404 est dessinée comme une affiche imprimée, avec les formes de l'exposition Bauhaus de 1923.",
+                "alt": "L'affiche de l'exposition Bauhaus de 1923, par Joost Schmidt"
+              },
+              "tiles": {
+                "caption": "Les liens de contact sont posés comme un mur carrelé.",
+                "alt": "Un mur de salle de bain en petits carreaux émaillés verts"
+              },
+              "wood": {
+                "caption": "Les surfaces en teck du site sont des dégradés CSS qui suivent le fil d'une vraie planche.",
+                "alt": "Une planche de bois sombre avec un nœud"
+              },
+              "paintChips": {
+                "caption": "Les chiffres des études de cas sont posés sur des échantillons de peinture, comme un nuancier de quincaillerie.",
+                "alt": "Des cartes d'échantillons de couleur percées d'un trou, étalées sur une table"
+              }
+            }
+          },
+          "dropped": {
+            "heading": "Les pistes abandonnées",
+            "body": "J'ai comparé trois pistes pour la fenêtre des projets dans une maquette HTML : un buffet Nelson, une Case Study House et un miroir pilule en laiton. J'ai abandonné le miroir, car son arche passait pour une erreur auprès de ceux qui ne le connaissaient pas.",
+            "items": {
+              "nelson": {
+                "caption": "Buffet Nelson : un bandeau en teck et des onglets en façades de tiroir.",
+                "alt": "Maquette de la fenêtre projet avec un bandeau en teck et des onglets en façades de tiroir",
+                "referenceAlt": "Un buffet en noyer avec de longues poignées de tiroir"
+              },
+              "caseStudyHouse": {
+                "caption": "Case Study House, la piste retenue.",
+                "alt": "Maquette de la fenêtre projet encadrée comme un tirage, avec des chapitres numérotés",
+                "referenceAlt": "Une main qui tourne les pages d'un magazine d'architecture"
+              },
+              "brassMirror": {
+                "caption": "Miroir pilule en laiton : un cadre en arche.",
+                "alt": "Maquette de la fenêtre projet dans un cadre en laiton en arche",
+                "referenceAlt": "Des miroirs en arche sur un mur terre cuite"
+              }
+            }
+          }
+        },
+        "engineering": {
+          "intro": "Une app Next.js 16 avec l'App Router, des Server Components par défaut, déployée sur Vercel depuis GitHub.",
+          "numbers": [
+            {
+              "value": "4",
+              "label": "ambiances",
+              "note": "deux claires, deux sombres"
+            },
+            {
+              "value": "2",
+              "label": "langues",
+              "note": "anglais et français"
+            },
+            {
+              "value": "81",
+              "label": "tests",
+              "note": "Vitest, lancés à chaque pull request"
+            },
+            {
+              "value": "20",
+              "label": "pull requests fusionnées",
+              "note": "depuis juillet 2026"
+            }
+          ],
+          "stack": [
+            {
+              "label": "Framework",
+              "items": ["Next.js 16", "React 19", "TypeScript", "next-intl"]
+            },
+            {
+              "label": "Style",
+              "items": ["Tailwind CSS 4", "shadcn/ui", "CSS variables"]
+            },
+            {
+              "label": "Qualité",
+              "items": ["Vitest", "ESLint", "Prettier", "Husky"]
+            },
+            {
+              "label": "Livraison",
+              "items": ["GitHub Actions", "Vercel"]
+            }
+          ],
+          "pipeline": {
+            "heading": "Du moodboard à la production",
+            "steps": [
+              {
+                "title": "Dossier design",
+                "body": "Moodboards et références."
+              },
+              {
+                "title": "Maquette HTML",
+                "body": "Les pistes côte à côte, avec les vrais tokens."
+              },
+              {
+                "title": "Composant",
+                "body": "Codé une fois la piste choisie."
+              },
+              {
+                "title": "CI et déploiement",
+                "body": "Lint, typecheck, tests, puis Vercel."
+              }
+            ]
+          },
+          "decisions": [
+            {
+              "title": "Les thèmes sont une classe sur la page",
+              "body": "Chaque ambiance est une classe sur l'élément html qui définit des variables CSS : les composants ne savent jamais quel thème est actif."
+            },
+            {
+              "title": "Un contenu vérifié par TypeScript",
+              "body": "Les études de cas sont en JSON, typé pour qu'un champ manquant ou une mauvaise structure fasse échouer le build."
+            },
+            {
+              "title": "Les règles d'écriture en test",
+              "body": "Un test lit chaque texte dans les deux langues et échoue sur les tirets longs, les textes provisoires et les mots creux."
+            }
+          ]
+        },
+        "buildLog": {
+          "stats": [
+            {
+              "value": "10",
+              "label": "tics d'écriture retirés",
+              "note": "relevés lors de l'audit d'octobre 2026"
+            },
+            {
+              "value": "4",
+              "label": "moodboards",
+              "note": "un par ambiance"
+            },
+            {
+              "value": "3",
+              "label": "pistes de modale comparées",
+              "note": "une retenue"
+            }
+          ],
+          "story": {
+            "heading": "L'audit",
+            "paragraphs": [
+              "En octobre 2026, j'ai relu le site avec un œil neuf, et il avait toujours l'air généré en un clic. Pas de violet, pas d'emoji, pas de tirets longs, et pourtant le rythme des textes et les décors le trahissaient.",
+              "J'ai relevé dix tournures, du mot isolé en italique au titre-slogan avec un point final, puis réécrit chaque texte. Les décors devaient venir d'un vrai objet des références : les cercles génériques ont disparu.",
+              "Chaque tournure est entrée dans les règles du projet avec un avant et un après, et celles qu'une machine peut détecter sont entrées dans un test."
+            ],
+            "before": "Le premier moodboard et sa phrase d'accroche",
+            "after": "L'accueil aujourd'hui",
+            "quote": "Mes règles portaient sur les mots, et le problème venait du rythme."
+          },
+          "results": [
+            "En ligne en anglais et en français",
+            "Quatre ambiances",
+            "Pages d'erreur sur mesure",
+            "L'étude de cas Strive",
+            "Cette étude de cas"
+          ],
+          "lessons": [
+            {
+              "title": "Une référence doit se lire sans sa légende",
+              "body": "Si elle a besoin de son histoire, on la retravaille ou on la retire."
+            },
+            {
+              "title": "Comparer en HTML d'abord",
+              "body": "Les pistes côte à côte avec les vrais tokens, avant de toucher aux composants."
+            },
+            {
+              "title": "Nommer les tournures",
+              "body": "Une liste de mots interdits rate le rythme et la structure, alors chaque tournure a son exemple."
+            },
+            {
+              "title": "Le décor vient d'une vraie matière",
+              "body": "Chaque ornement du site renvoie à une photo des références."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

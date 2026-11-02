@@ -10,6 +10,56 @@ A running log of things I learn while building this project. Short entries, newe
 
 ## Entries
 
+### 2026-10-31: npm ci fails on CI when the lockfile comes from a newer npm (npm, ci, node)
+
+CI failed with "Missing: @swc/helpers@0.5.23 from lock file" while everything worked locally. Cause: the Mac runs Node 24 (npm 11), which no longer writes optional peer dependencies such as `@swc/helpers` into the lockfile; the CI ran Node 22 (npm 10), which still expects them in `npm ci`. Reproduce locally with `npx npm@10 ci --dry-run`.
+
+Fix: same Node major everywhere: `node-version` in the CI workflow and `"engines": { "node": "24.x" }` in `package.json` (Vercel reads it). Regenerating the lock with npm 10 doesn't last: the next local `npm install` removes the entry again.
+
+Takeaway: when `npm ci` fails only on CI, compare npm versions before touching dependencies.
+
+### 2026-10-31: AI-assisted copy and visuals have recognizable tells (copy, design, ai, process)
+
+An audit (LUI-178) showed the site still read as "generated in one click" despite the hygiene rules (no purple, no emoji, no em dash). The tells are patterns, not words, so a banned-word list never catches them.
+
+Copy tells, with what we had and what replaced it:
+
+| Tell | Before | After |
+|---|---|---|
+| One stressed word, often in italics | Building software people *actually* use. | I build apps people use every day. |
+| Staccato fragments | You missed one day. The streak resets. You quit. | Streaks punish a single missed day. |
+| "X, not Y" contrast | Momentum, not streaks / in the database, not in the model | A momentum score / Most of the logic sits in Postgres |
+| Slogan heading with a full stop | Your history, understood. | What your data shows |
+| Clever symmetrical sentence | I had rebuilt the problem I was solving, inside the feature named after the solution. | My fix for streaks had a weekly reset built in. |
+| Closing aphorism | That is backwards. / A tracker that invents your history is worthless. | Next time, I'd do it the other way around. / (removed) |
+| Triad of abstract nouns | combining engineering, product thinking and modern development workflows | Web apps, internal tools and automation in Python and TypeScript |
+| "Let's" CTA | Let's build something useful. | A project or an opportunity in mind? Write to me. |
+| Resume-speak qualities | Cross-functional, End-to-end delivery | Data workflows, Google Cloud |
+| Design-doc voice in metadata | Mid-Century Modern portfolio showcasing digital craft... | Web apps, automation and internal tools by Luidgi Joseph... |
+
+Visual tells: `// LABEL` kickers in tiny mono caps with 0.4em tracking on every card, name set as a widely tracked logotype, generic concentric SVG ornaments, the "premium atmosphere" stack (grain + radial glow + backdrop blur), one radius and one heading recipe everywhere. Avoiding Space Grotesk and purple is not enough: Playfair + DM Sans + bento + grain is the newer generated look.
+
+What did not work: replacing a punchy line with a long explanatory one. Titles stay short; the detail moves to the body text. Short is fine, fragments and stressed words are the tell.
+
+How to guide Claude so it avoids them:
+
+- Name the patterns, not words: "no stressed keyword, no staccato fragments, no 'X, not Y', no slogan headings with a full stop, no closing aphorism, no triad of abstract nouns, no 'Let's'".
+- Ask for concrete nouns and numbers from the real project (stack, team, counts) instead of qualities.
+- Ask for 2 options per string with the before shown, and review in the browser: length problems only show on the page.
+- Write FR natively, not as a translation of the EN structure.
+- For visuals: decoration must come from a real object or material in `design/inspirations`, vary treatments instead of one recipe per element, one atmosphere effect at most.
+
+Takeaway: generated copy is detected by its rhythm and structure, so the guardrail is a list of patterns with examples, applied before the copy reaches a component.
+
+### 2026-09-27 — Design references must read without their caption; compare them in HTML (design, process)
+
+While designing the project modal, I explored three mid-century directions (Nelson sideboard, Case Study House, brass pill mirror) and mixed pieces between them.
+
+- In this project, a reference that is too niche, or that only makes sense once you know where it comes from, needs rethinking. The brass mirror's arched top looked like an inconsistency to anyone who doesn't know the mirror. Keep what a new visitor gets without the backstory; reformulate or drop the rest.
+- To iterate on a design, a standalone HTML mockup beats building in the app: directions side by side, switchable themes, real tokens linked, no churn in components. The good directions came from brainstorming while rereading `design/` (moodboards, inspirations), so keeping that folder complete pays off in the quality of the ideas.
+
+Takeaway: a reference has to survive without its caption, and directions get compared in HTML (`design/mockups/`) before any component is written.
+
 ### 2026-07-04 — Vercel: Framework Preset must be set explicitly (vercel, deploy, nextjs)
 
 The build "succeeded" on Vercel but every route returned 404 — including `/en`, not just `/`. Cause: **Framework Preset was set to `Other`**, so Vercel treated the output as plain static files and never applied the Next.js routing manifest (redirects, middleware/proxy, SSG routes). A green deploy that 404s everywhere = wrong preset, not a code bug.

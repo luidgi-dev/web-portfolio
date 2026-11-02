@@ -10,6 +10,9 @@
 @import './styles/utilities/materials.css';
 @import './styles/utilities/textures.css';
 
+/* Dark themes. Keep in sync with `colorScheme` in lib/themes. */
+@custom-variant dark (&:where(.theme-03, .theme-03 *, .theme-04, .theme-04 *));
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

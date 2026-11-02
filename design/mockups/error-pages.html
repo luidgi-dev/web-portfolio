@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en" class="theme-03" data-code="404" data-option="1" data-lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Error pages (mockup)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Real site tokens, linked (not copied) so the mockup follows the app. -->
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/tokens/themes.css" />
+    <style>
+      :root {
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-sans: 'DM Sans', system-ui, sans-serif;
+        --font-mono: 'DM Mono', 'Courier New', monospace;
+      }
+
+      /* Mockup-only colors per code, picked from each ambiance's documented accents.
+         404 = brass/honey + olive (calm, something is missing), 500 = the ambiance's red family (something broke).
+         They would become --error-* tokens in themes.css. */
+      .theme-01 {
+        --e404-a: #a07840;
+        --e404-b: #7a9070;
+        --e500-a: #b84030;
+        --e500-b: #c4b090;
+      }
+      .theme-02 {
+        --e404-a: #d4892a;
+        --e404-b: #5a6b30;
+        --e500-a: #a03020;
+        --e500-b: #c4472a;
+      }
+      .theme-03 {
+        --e404-a: #c8963e;
+        --e404-b: #4a5828;
+        --e500-a: #b05a3a;
+        --e500-b: #9b6240;
+      }
+      .theme-04 {
+        --e404-a: #c08030;
+        --e404-b: #384020;
+        --e500-a: #922828;
+        --e500-b: #5a1818;
+      }
+
+      html[data-code='404'] .page {
+        --c-a: var(--e404-a);
+        --c-b: var(--e404-b);
+      }
+      html[data-code='500'] .page,
+      html[data-code='global'] .page {
+        --c-a: var(--e500-a);
+        --c-b: var(--e500-b);
+      }
+      .page {
+        --c-c: var(--art-arc);
+        --c-bg: var(--art-bg);
+        --c-ink: var(--art-divider);
+        --tile: var(--c-b);
+      }
+      html[data-code='500'] .page,
+      html[data-code='global'] .page {
+        --tile: var(--c-a);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html {
+        transition: background-color 0.5s ease;
+      }
+      body {
+        min-height: 100vh;
+        background: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+
+      /* ── Toolbar ── */
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem 2rem;
+        max-width: 1280px;
+        margin: 0 auto 2.5rem;
+      }
+      .toolbar h1 {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+      }
+      .toolbar p {
+        margin-top: 0.35rem;
+        color: var(--muted-foreground);
+        font-size: 0.9rem;
+        max-width: 64ch;
+        line-height: 1.55;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 1.5rem;
+      }
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .control-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted-foreground);
+      }
+      .segmented {
+        display: flex;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--card);
+      }
+      .segmented button {
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        color: var(--muted-foreground);
+      }
+      .segmented button[aria-pressed='true'] {
+        background: var(--primary);
+        color: var(--primary-foreground);
+      }
+
+      /* ── Direction sections ── */
+      .direction {
+        max-width: 1280px;
+        margin: 0 auto 4rem;
+      }
+      .direction-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1rem 1.5rem;
+        align-items: end;
+        margin-bottom: 1rem;
+      }
+      .direction-head h2 {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+      }
+      .direction-head h2 span {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        color: var(--muted-foreground);
+        margin-right: 0.6rem;
+        vertical-align: middle;
+      }
+      .direction-head p {
+        margin-top: 0.4rem;
+        color: var(--muted-foreground);
+        font-size: 0.875rem;
+        line-height: 1.55;
+        max-width: 72ch;
+      }
+      .sources {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .sources figure {
+        width: 64px;
+        text-align: center;
+      }
+      .sources img {
+        display: block;
+        width: 64px;
+        height: 84px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+      }
+      .sources figcaption {
+        margin-top: 0.25rem;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--muted-foreground);
+      }
+      .global-note {
+        display: none;
+        max-width: 1280px;
+        margin: -1.5rem auto 2rem;
+        font-size: 0.85rem;
+        color: var(--muted-foreground);
+      }
+      html[data-code='global'] .global-note {
+        display: block;
+      }
+
+      /* ── Browser frames (desktop + mobile) ── */
+      .frames {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        align-items: flex-start;
+      }
+      .frame {
+        border: 1px solid var(--border-strong, var(--border));
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--background);
+        color: var(--foreground);
+        box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.45);
+      }
+      .frame.desktop {
+        flex: 1 1 760px;
+        max-width: 880px;
+      }
+      .frame.mobile {
+        flex: 0 0 360px;
+      }
+      .frame .bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--card);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--muted-foreground);
+      }
+      .frame .bar i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--border-strong, var(--border));
+      }
+
+      /* ── Error page (shared layout) ── */
+      .page {
+        container-type: inline-size;
+      }
+      .frame.desktop .page {
+        min-height: 560px;
+      }
+      .frame.mobile .page {
+        min-height: 720px;
+      }
+      .page-inner {
+        display: grid;
+        gap: 1.75rem;
+        padding: 1.25rem;
+      }
+      @container (min-width: 620px) {
+        .page-inner {
+          grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+          align-items: center;
+          gap: 3rem;
+          padding: 2.5rem 3rem;
+          min-height: 560px;
+        }
+      }
+      .text h3 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: clamp(1.9rem, 6cqi, 2.8rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+      .text .body {
+        margin-top: 1rem;
+        max-width: 40ch;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--muted-foreground);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 1.75rem;
+        margin-top: 1.5rem;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 44px;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: color-mix(in oklab, var(--foreground) 80%, transparent);
+        text-decoration: none;
+      }
+      .cta b {
+        font-weight: 400;
+      }
+      .cta:hover {
+        color: var(--primary);
+      }
+      .text h3 em {
+        font-style: italic;
+        color: var(--primary);
+      }
+      .cta span {
+        transition: transform 0.2s ease;
+      }
+      .cta:hover span {
+        transform: translateX(4px);
+      }
+      .cta.retry {
+        display: none;
+      }
+      html[data-code='500'] .cta.retry,
+      html[data-code='global'] .cta.retry {
+        display: inline-flex;
+      }
+
+      /* ── A · Bauhaus poster ── */
+      /* A printed sheet: near-square corners so it doesn't share the cards' radius. */
+      .poster {
+        position: relative;
+        border-radius: 2px;
+        overflow: hidden;
+        background: var(--c-bg);
+        border: 1px solid var(--border);
+        aspect-ratio: 3 / 4;
+        max-height: 520px;
+        width: 100%;
+        justify-self: center;
+        display: grid;
+        grid-template-rows: 1fr auto;
+      }
+      .frame.mobile .poster {
+        aspect-ratio: 1 / 1;
+      }
+      .poster svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .poster footer {
+        padding: 0.6rem 1rem 0.7rem;
+        border-top: 2px solid var(--c-ink);
+      }
+      .poster footer code {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--muted-foreground);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* ── B · Tile wall ── */
+      .wall {
+        --grout: color-mix(in oklab, var(--foreground) 16%, var(--background));
+        position: relative;
+        border-radius: 1rem;
+        overflow: hidden;
+        background: var(--grout);
+        padding: 5px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 5px;
+        align-content: center;
+        aspect-ratio: 3 / 4;
+        max-height: 520px;
+        width: 100%;
+      }
+      .frame.mobile .wall {
+        aspect-ratio: 4 / 3;
+      }
+      .tile {
+        position: relative;
+        aspect-ratio: 3 / 5;
+        border-radius: 3px;
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.2), transparent 38%, transparent 62%, rgba(0, 0, 0, 0.22)),
+          color-mix(in oklab, var(--tile), var(--tint) var(--v));
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+      /* Capsule relief pressed into each tile, as on the green wall (image-17). */
+      .tile::after {
+        content: '';
+        position: absolute;
+        inset: 14% 20%;
+        border-radius: 999px;
+        background: color-mix(in oklab, var(--tile), black 8%);
+        box-shadow:
+          inset 1.5px 1.5px 0 rgba(0, 0, 0, 0.28),
+          inset -1px -1px 0 rgba(255, 255, 255, 0.2);
+      }
+      /* 404: the tile is gone, the combed adhesive shows. */
+      .tile.missing {
+        background:
+          repeating-linear-gradient(
+            -12deg,
+            transparent 0 5px,
+            color-mix(in oklab, var(--foreground) 10%, transparent) 5px 7px
+          ),
+          color-mix(in oklab, var(--foreground) 22%, var(--background));
+        box-shadow:
+          inset 0 4px 8px rgba(0, 0, 0, 0.4),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+        display: grid;
+        place-items: center;
+      }
+      .tile.missing::after {
+        display: none;
+      }
+      .tile.missing b {
+        font-family: var(--font-mono);
+        font-weight: 400;
+        font-size: 10px;
+        color: var(--muted-foreground);
+        transform: rotate(-4deg);
+      }
+      .tile svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      /* Only one state is visible per code. */
+      html[data-code='404'] .tile.cracked svg,
+      html:not([data-code='404']) .tile.missing b {
+        display: none;
+      }
+      html:not([data-code='404']) .tile.missing {
+        /* Back to a regular tile when the code is not 404. */
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.2), transparent 38%, transparent 62%, rgba(0, 0, 0, 0.22)),
+          color-mix(in oklab, var(--tile), var(--tint) var(--v));
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+      html:not([data-code='404']) .tile.missing::after {
+        display: block;
+      }
+      .wall .ref {
+        position: absolute;
+        right: 10px;
+        bottom: 8px;
+        z-index: 2;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: color-mix(in oklab, var(--background) 85%, transparent);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--muted-foreground);
+      }
+
+      .notes {
+        margin-top: 1rem;
+        display: grid;
+        gap: 0.35rem;
+        font-size: 0.85rem;
+        line-height: 1.55;
+        color: var(--muted-foreground);
+        max-width: 90ch;
+        padding-left: 1.1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="toolbar">
+      <div>
+        <h1>Error pages</h1>
+        <p>
+          Direction A kept, pass 2: the LUI-178 tells are gone (colored italic keyword, mono kicker above the heading,
+          footer title repeating the heading, card radius on the poster). Each code keeps its own colors from the
+          ambiance: brass and olive for 404, the red family for 500. "Before" shows the pass 1 copy.
+        </p>
+      </div>
+      <div class="controls">
+        <div class="control-group">
+          <span class="control-label">Ambiance</span>
+          <div class="segmented" id="theme">
+            <button data-theme="theme-01">01</button>
+            <button data-theme="theme-02">02</button>
+            <button data-theme="theme-03" aria-pressed="true">03</button>
+            <button data-theme="theme-04">04</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Code</span>
+          <div class="segmented" id="code">
+            <button data-value="404" aria-pressed="true">404</button>
+            <button data-value="500">500</button>
+            <button data-value="global">Global</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Copy</span>
+          <div class="segmented" id="option">
+            <button data-value="0">Before</button>
+            <button data-value="1" aria-pressed="true">Option 1</button>
+            <button data-value="2">Option 2</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Lang</span>
+          <div class="segmented" id="lang">
+            <button data-value="en" aria-pressed="true">EN</button>
+            <button data-value="fr">FR</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <p class="global-note">
+      Global error replaces the root layout, so the theme provider and the visitor's choice are gone: the frames are
+      pinned to ambiance 03 whatever the switch says. Copy is static English.
+    </p>
+
+    <!-- Shared text block -->
+    <template id="tpl-text">
+      <div class="text">
+        <h3 data-slot="title"></h3>
+        <p class="body" data-slot="body"></p>
+        <div class="actions">
+          <button class="cta retry"><b data-slot="retry"></b><span>→</span></button>
+          <a class="cta" href="#"><b data-slot="home"></b><span>→</span></a>
+        </div>
+      </div>
+    </template>
+
+    <!-- A · Poster: the code is drawn with Bauhaus shapes, each digit a 96 × 150 cell. -->
+    <template id="tpl-a">
+      <figure class="poster">
+        <svg viewBox="0 0 360 380" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+          <rect width="360" height="380" fill="var(--c-bg)" />
+          <circle cx="300" cy="380" r="120" fill="var(--c-c)" opacity="0.85" />
+          <rect x="0" y="300" width="150" height="80" fill="var(--c-b)" />
+          <line x1="180" y1="230" x2="180" y2="380" stroke="var(--c-ink)" stroke-width="3" />
+          <circle cx="92" cy="268" r="18" fill="var(--c-ink)" />
+          <g data-slot="digits"></g>
+        </svg>
+        <footer>
+          <code data-slot="ref"></code>
+        </footer>
+      </figure>
+    </template>
+
+    <!-- B · Tile wall: 404 has a missing tile, 500 a cracked one. -->
+    <template id="tpl-b">
+      <div class="wall" aria-hidden="true">
+        <code class="ref" data-slot="ref"></code>
+      </div>
+    </template>
+
+    <!-- A · Bauhaus poster -->
+    <section class="direction">
+      <div class="direction-head">
+        <div>
+          <h2><span>A</span>Bauhaus exhibition poster</h2>
+          <p>
+            The code is built from the same shapes as the bento's Bauhaus art (half discs, bars, a dividing rule), with
+            a printed footer like the exhibition poster. Each code is a poster of the same series in another
+            colorway, as the Panton posters do. The footer carries the requested path (404) or the error reference
+            (500), so the decoration also does a job.
+          </p>
+        </div>
+        <div class="sources">
+          <figure><img src="../inspirations/image-27.png" alt="" /><figcaption>27</figcaption></figure>
+          <figure><img src="../inspirations/image-22.png" alt="" /><figcaption>22</figcaption></figure>
+          <figure><img src="../inspirations/image-26.png" alt="" /><figcaption>26</figcaption></figure>
+        </div>
+      </div>
+      <div class="frames" data-dir="a"></div>
+      <ul class="notes">
+        <li>Plus: reuses the --art-* family, cheap to build (one SVG with three digit symbols: 4, 0, 5).</li>
+        <li>Risk: the digits are the illustration, so it stays close to the "big 404" pattern. The shapes and the footer have to carry it.</li>
+      </ul>
+    </section>
+
+    <!-- B · Missing tile -->
+    <section class="direction">
+      <div class="direction-head">
+        <div>
+          <h2><span>B</span>Missing tile (set aside)</h2>
+          <p>
+            A glazed tile wall with the capsule relief of the green bathroom. On 404 one tile is gone and the combed
+            adhesive shows where it was. On 500 a tile is cracked. The idea changes with the code, the color follows
+            it: olive tiles for 404, the ambiance's red tiles for 500.
+          </p>
+        </div>
+        <div class="sources">
+          <figure><img src="../inspirations/image-17.png" alt="" /><figcaption>17</figcaption></figure>
+          <figure><img src="../inspirations/image-12.png" alt="" /><figcaption>12</figcaption></figure>
+          <figure><img src="../inspirations/image-13.png" alt="" /><figcaption>13</figcaption></figure>
+        </div>
+      </div>
+      <div class="frames" data-dir="b"></div>
+      <ul class="notes">
+        <li>Plus: tells the story without the number, and the tiles are a strong part of the moodboards.</li>
+        <li>Risk: a regular grid can read as a generated pattern. The glaze, the color drift per tile and the relief have to sell the ceramic.</li>
+      </ul>
+    </section>
+
+    <script>
+      // Copy options per code: [before, option 1, option 2]. Global error is static English.
+      const COPY = {
+        en: {
+          404: {
+            title: ['This page <em>doesn’t exist</em>', 'This page doesn’t exist', 'Page not found'],
+            body: [
+              'The link may be out of date or mistyped. The projects are still on the homepage.',
+              'The link may be out of date or mistyped. The projects are still on the homepage.',
+              'The address may contain a typo, or the page has moved. The rest of the site is on the homepage.',
+            ],
+            retry: 'Try again',
+            home: 'Back to the homepage',
+            ref: '/en/does-not-exist',
+          },
+          500: {
+            title: ['This page <em>failed</em> to load', 'This page failed to load', 'Something went wrong on this page'],
+            body: [
+              'An unexpected error stopped it. You can try again or go back to the homepage.',
+              'An unexpected error stopped it. You can try again or go back to the homepage.',
+              'Try loading it again. If it still fails, the rest of the site is on the homepage.',
+            ],
+            retry: 'Try again',
+            home: 'Back to the homepage',
+            ref: 'Ref. 3f9a2c1e',
+          },
+        },
+        fr: {
+          404: {
+            title: ['Cette page <em>n’existe pas</em>', 'Cette page n’existe pas', 'Page introuvable'],
+            body: [
+              'Le lien est peut-être ancien ou mal saisi. Les projets sont toujours sur la page d’accueil.',
+              'Le lien est peut-être ancien ou mal saisi. Les projets sont toujours sur la page d’accueil.',
+              'L’adresse contient peut-être une faute, ou la page a changé de place. Le reste du site est sur la page d’accueil.',
+            ],
+            retry: 'Réessayer',
+            home: 'Retour à l’accueil',
+            ref: '/fr/page-inexistante',
+          },
+          500: {
+            title: ['Cette page <em>n’a pas pu</em> se charger', 'Cette page n’a pas pu se charger', 'Un problème est survenu sur cette page'],
+            body: [
+              'Une erreur inattendue l’a interrompue. Vous pouvez réessayer ou revenir à l’accueil.',
+              'Une erreur inattendue l’a interrompue. Vous pouvez réessayer ou revenir à l’accueil.',
+              'Essayez de la recharger. Si l’erreur persiste, le reste du site est accessible depuis l’accueil.',
+            ],
+            retry: 'Réessayer',
+            home: 'Retour à l’accueil',
+            ref: 'Réf. 3f9a2c1e',
+          },
+        },
+      };
+
+      const SVG = 'http://www.w3.org/2000/svg';
+      // Digit shapes in a 96 × 150 cell. Colors come from the per-code variables.
+      const DIGITS = {
+        4: `<rect x="62" y="0" width="26" height="150" fill="var(--c-b)"/>
+            <path d="M62 0 L62 100 L0 100 Z" fill="var(--c-a)"/>
+            <rect x="0" y="100" width="96" height="14" fill="var(--c-ink)"/>`,
+        0: `<rect x="0" y="0" width="96" height="150" rx="48" fill="var(--c-a)"/>
+            <path d="M0 48 A48 48 0 0 1 96 48 Z" fill="var(--c-c)"/>
+            <rect x="30" y="30" width="36" height="90" rx="18" fill="var(--c-bg)"/>`,
+        o: `<rect x="0" y="0" width="96" height="150" rx="48" fill="var(--c-a)"/>
+            <path d="M0 102 A48 48 0 0 0 96 102 Z" fill="var(--c-b)"/>
+            <rect x="30" y="30" width="36" height="90" rx="18" fill="var(--c-bg)"/>`,
+        5: `<rect x="0" y="0" width="96" height="24" fill="var(--c-b)"/>
+            <rect x="0" y="0" width="26" height="80" fill="var(--c-b)"/>
+            <rect x="0" y="60" width="44" height="24" fill="var(--c-a)"/>
+            <path d="M44 60 A45 45 0 0 1 44 150 Z" fill="var(--c-a)"/>
+            <rect x="0" y="126" width="44" height="24" fill="var(--c-a)"/>
+            <path d="M44 84 A21 21 0 0 1 44 126 Z" fill="var(--c-bg)"/>`,
+      };
+      const SEQUENCE = { 404: ['4', '0', '4'], 500: ['5', '0', 'o'], global: ['5', '0', 'o'] };
+
+      // Seeded so the tile drift stays the same between renders.
+      function rng(seed) {
+        return () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+      }
+      const CRACK = `<svg viewBox="0 0 30 50" preserveAspectRatio="none">
+          <polyline points="4,0 11,12 8,19 17,27 14,35 22,43 20,50" fill="none" stroke="rgba(0,0,0,0.55)" stroke-width="1.1"/>
+          <polyline points="5,0 12,12 9,19 18,27 15,35 23,43 21,50" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+          <polyline points="17,27 26,24 30,25" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="0.8"/>
+        </svg>`;
+
+      function buildWall(wall) {
+        const random = rng(7);
+        for (let i = 0; i < 30; i++) {
+          const tile = document.createElement('span');
+          tile.className = 'tile';
+          tile.style.setProperty('--v', `${Math.round(random() * 18)}%`);
+          tile.style.setProperty('--tint', random() > 0.5 ? 'white' : 'black');
+          if (i === 14) {
+            tile.classList.add('missing', 'cracked');
+            tile.innerHTML = `<b>404</b>${CRACK}`;
+          }
+          wall.append(tile);
+        }
+      }
+
+      for (const frames of document.querySelectorAll('.frames')) {
+        for (const kind of ['desktop', 'mobile']) {
+          const frame = document.createElement('div');
+          frame.className = `frame ${kind}`;
+          frame.innerHTML = `<div class="bar"><i></i><i></i><i></i><span data-slot="url"></span></div>
+            <div class="page"><div class="page-inner"></div></div>`;
+          const inner = frame.querySelector('.page-inner');
+          inner.append(document.getElementById(`tpl-${frames.dataset.dir}`).content.cloneNode(true));
+          inner.append(document.getElementById('tpl-text').content.cloneNode(true));
+          const wall = inner.querySelector('.wall');
+          if (wall) buildWall(wall);
+          frames.append(frame);
+        }
+      }
+
+      function render() {
+        const { code, option, lang } = document.documentElement.dataset;
+        const copy = code === 'global' ? COPY.en[500] : COPY[lang][code];
+        const fill = (slot, value, html = false) => {
+          for (const el of document.querySelectorAll(`[data-slot="${slot}"]`)) el[html ? 'innerHTML' : 'textContent'] = value;
+        };
+        fill('title', copy.title[option], true);
+        fill('body', copy.body[option]);
+        fill('retry', copy.retry);
+        fill('home', copy.home);
+        fill('ref', copy.ref);
+        fill('url', `luidgi.dev${code === '404' ? copy.ref : `/${lang}`}`);
+        const digits = SEQUENCE[code]
+          .map((d, i) => `<g transform="translate(${24 + i * 108} 56)">${DIGITS[d]}</g>`)
+          .join('');
+        for (const g of document.querySelectorAll('[data-slot="digits"]')) g.innerHTML = digits;
+        // Global error has no theme provider: pin the frames to the default ambiance.
+        for (const frames of document.querySelectorAll('.frames')) {
+          frames.className = code === 'global' ? 'frames theme-03' : 'frames';
+        }
+      }
+
+      function bindSegmented(id, apply) {
+        const group = document.getElementById(id);
+        group.addEventListener('click', (event) => {
+          const button = event.target.closest('button');
+          if (!button) return;
+          for (const b of group.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b === button));
+          apply(button);
+        });
+      }
+      bindSegmented('theme', (b) => {
+        document.documentElement.className = b.dataset.theme;
+      });
+      bindSegmented('option', (b) => {
+        document.documentElement.dataset.option = b.dataset.value;
+        render();
+      });
+      bindSegmented('lang', (b) => {
+        document.documentElement.dataset.lang = b.dataset.value;
+        render();
+      });
+      bindSegmented('code', (b) => {
+        document.documentElement.dataset.code = b.dataset.value;
+        render();
+      });
+
+      // Deep links: ?theme=theme-02&code=500
+      const params = new URLSearchParams(location.search);
+      if (params.get('theme')) document.querySelector(`#theme [data-theme="${params.get('theme')}"]`)?.click();
+      if (params.get('code')) document.querySelector(`#code [data-value="${params.get('code')}"]`)?.click();
+      render();
+    </script>
+  </body>
+</html>

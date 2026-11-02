@@ -1,14 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import { BauhausGeometryArt } from '@/components/bento/decor/bauhaus-geometry-art';
+import { BauhausFooterNav } from '@/components/bento/bauhaus-footer-nav';
 import { BentoCard } from '@/components/bento/bento-card';
-import { siteLinks } from '@/lib/site';
-import { cn } from '@/lib/utils';
 
 export async function BauhausGeometryCard() {
   const t = await getTranslations('HomePage');
 
   return (
-    <BentoCard colSpan={2} padded={false} className="min-h-[180px]">
+    <BentoCard colSpan={1} rowSpan={2} padded={false} className="min-h-[180px]">
       <div
         className="relative flex h-full min-h-[180px] flex-col"
         data-testid="bauhaus-geometry-card"
@@ -18,39 +17,10 @@ export async function BauhausGeometryCard() {
           aria-label={t('bauhausArtLabel')}
         />
         <div
-          className="relative mt-auto border-t border-border/50 bg-card/85 px-4 py-3 backdrop-blur-[2px]"
+          className="relative mt-auto border-t border-border/50 bg-card/90 px-4 py-0.5"
           aria-hidden="false"
         >
-          <nav
-            className="flex flex-wrap items-center gap-x-2 gap-y-1"
-            aria-label={t('bauhausNavLabel')}
-          >
-            <a
-              href={siteLinks.privacy}
-              className={cn(
-                'font-mono text-[9px] tracking-[0.18em] text-foreground/80 uppercase transition-colors hover:text-primary'
-              )}
-            >
-              {t('bauhausPrivacy')}
-            </a>
-            <span className="text-foreground/35" aria-hidden="true">
-              ·
-            </span>
-            <a
-              href={siteLinks.terms}
-              className={cn(
-                'font-mono text-[9px] tracking-[0.18em] text-foreground/80 uppercase transition-colors hover:text-primary'
-              )}
-            >
-              {t('bauhausTerms')}
-            </a>
-            <span className="text-foreground/35" aria-hidden="true">
-              ·
-            </span>
-            <span className="font-mono text-[9px] tracking-[0.18em] text-muted-foreground uppercase">
-              © 2026
-            </span>
-          </nav>
+          <BauhausFooterNav />
         </div>
       </div>
     </BentoCard>

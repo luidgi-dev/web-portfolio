@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en" class="theme-03" data-herotype="current">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hero ornaments (mockup)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Real site tokens and materials, linked (not copied) so the mockup follows the app. -->
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/tokens/themes.css" />
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/utilities/materials.css" />
+    <style>
+      :root {
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-sans: 'DM Sans', system-ui, sans-serif;
+        --font-mono: 'DM Mono', 'Courier New', monospace;
+      }
+
+      /* Mockup-only light and material values per ambiance. They would become tokens in themes.css. */
+      .theme-01 {
+        --lamp-metal: #a07840;
+        --lamp-light: rgba(255, 238, 196, 0.75);
+        --room-dim: rgba(42, 30, 14, 0.07);
+        --sun: rgba(255, 250, 236, 0.85);
+        --shade: rgba(42, 30, 14, 0.08);
+        --tile: #8a9a7c;
+        --glass-1: #e2a646;
+        --glass-2: #9a5a1c;
+      }
+      .theme-02 {
+        --lamp-metal: #8b6040;
+        --lamp-light: rgba(255, 226, 176, 0.7);
+        --room-dim: rgba(44, 20, 8, 0.08);
+        --sun: rgba(255, 246, 226, 0.85);
+        --shade: rgba(44, 20, 8, 0.09);
+        --tile: #b4572f;
+        --glass-1: #e09a3a;
+        --glass-2: #8e4a16;
+      }
+      .theme-03 {
+        --lamp-metal: #c8963e;
+        --lamp-light: rgba(255, 196, 120, 0.17);
+        --room-dim: rgba(0, 0, 0, 0.22);
+        --sun: rgba(255, 206, 140, 0.13);
+        --shade: rgba(0, 0, 0, 0.16);
+        --tile: #6b4520;
+        --glass-1: #e0a040;
+        --glass-2: #7a3e10;
+      }
+      .theme-04 {
+        --lamp-metal: #c08030;
+        --lamp-light: rgba(255, 180, 100, 0.15);
+        --room-dim: rgba(0, 0, 0, 0.28);
+        --sun: rgba(255, 190, 120, 0.11);
+        --shade: rgba(0, 0, 0, 0.2);
+        --tile: #5a1818;
+        --glass-1: #d08a30;
+        --glass-2: #6a2a0c;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html {
+        transition: background-color 0.5s ease;
+      }
+      body {
+        min-height: 100vh;
+        background: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+
+      /* ── Toolbar ── */
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem 2rem;
+        max-width: 1180px;
+        margin: 0 auto 2.5rem;
+      }
+      .toolbar h1 {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+      }
+      .toolbar p {
+        margin-top: 0.35rem;
+        color: var(--muted-foreground);
+        font-size: 0.9rem;
+        max-width: 60ch;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 1.5rem;
+      }
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .control-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted-foreground);
+      }
+      .segmented {
+        display: flex;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--card);
+      }
+      .segmented button {
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        color: var(--muted-foreground);
+      }
+      .segmented button[aria-pressed='true'] {
+        background: var(--primary);
+        color: var(--primary-foreground);
+      }
+
+      /* ── Direction sections ── */
+      .direction {
+        max-width: 1180px;
+        margin: 0 auto 3.5rem;
+      }
+      .direction-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1rem 1.5rem;
+        align-items: end;
+        margin-bottom: 1rem;
+      }
+      .direction-head h2 {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+      }
+      .direction-head h2 span {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        color: var(--muted-foreground);
+        margin-right: 0.6rem;
+        vertical-align: middle;
+      }
+      .direction-head p {
+        margin-top: 0.4rem;
+        color: var(--muted-foreground);
+        font-size: 0.875rem;
+        line-height: 1.55;
+        max-width: 68ch;
+      }
+      .sources {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .sources figure {
+        width: 64px;
+        text-align: center;
+      }
+      .sources img {
+        display: block;
+        width: 64px;
+        height: 84px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+      }
+      .sources figcaption {
+        margin-top: 0.25rem;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--muted-foreground);
+      }
+      .sources .outside {
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 84px;
+        border-radius: 6px;
+        border: 1px dashed var(--border-strong);
+        font-size: 10px;
+        line-height: 1.3;
+        color: var(--muted-foreground);
+        padding: 0.25rem;
+      }
+
+      /* ── Mini homepage: hero (2 cols) + contact + stack ── */
+      .grid {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-rows: auto auto;
+        }
+        .grid .hero {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+      }
+      .card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        background: var(--card);
+        padding: 1.25rem;
+      }
+      .card > .content {
+        position: relative;
+        z-index: 2;
+      }
+      .label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted-foreground);
+      }
+      .label .rule {
+        height: 1px;
+        flex: 1;
+        background: var(--border);
+      }
+      .label.chip {
+        gap: 0.5rem;
+      }
+      .label.chip i {
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        background: var(--primary);
+      }
+
+      .hero {
+        min-height: 340px;
+      }
+      .hero > .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        min-height: calc(340px - 2.5rem);
+      }
+      .hero .name {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--muted-foreground);
+      }
+      .hero h3 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        font-size: clamp(1.875rem, 4.2vw, 3rem);
+      }
+      .hero .desc {
+        margin-top: 1.25rem;
+        max-width: 36rem;
+        font-size: 1rem;
+        line-height: 1.65;
+        color: color-mix(in srgb, var(--foreground) 85%, transparent);
+      }
+      /* Lighter hero: smaller headline, narrower measure, so the ornament gets room. */
+      [data-herotype='lighter'] .hero h3 {
+        font-size: clamp(1.75rem, 3.2vw, 2.4rem);
+        max-width: 15ch;
+      }
+      [data-herotype='lighter'] .hero .desc {
+        max-width: 30rem;
+        font-size: 0.9375rem;
+      }
+
+      .contact h4 {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        line-height: 1.2;
+        max-width: 18ch;
+      }
+      .contact .links {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .contact .links span,
+      .stack .chips span {
+        padding: 0.3rem 0.65rem;
+        border: 1px solid var(--border-strong);
+        border-radius: 999px;
+        font-size: 0.75rem;
+      }
+      .stack .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      /* Ornament layers sit under the content. */
+      .orn {
+        position: absolute;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* ── A · Pendant lamp ── */
+      .a-room {
+        inset: 0;
+        /* Corners fall off a little so the pool reads as light, also on the light ambiances. */
+        background: radial-gradient(120% 90% at 62% 60%, transparent 45%, var(--room-dim));
+      }
+      .a-cone {
+        inset: 0;
+        background: linear-gradient(to bottom, var(--lamp-light), transparent 85%);
+        clip-path: polygon(68% 106px, 84% 106px, 100% 100%, 46% 100%);
+        opacity: 0.6;
+        filter: blur(6px);
+      }
+      .a-pool {
+        inset: 0;
+        background: radial-gradient(55% 45% at 72% 78%, var(--lamp-light), transparent 70%);
+      }
+      .a-lamp {
+        top: 0;
+        left: 76%;
+        translate: -50% 0;
+        width: 104px;
+        height: 112px;
+      }
+      .a-sconce {
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .a-sconce .glow {
+        position: absolute;
+        top: -30px;
+        right: 8%;
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(closest-side, var(--lamp-light), transparent);
+      }
+      .a-sconce svg {
+        position: absolute;
+        top: 22px;
+        right: calc(8% + 62px);
+      }
+
+      /* ── B · Grooved tile band ── */
+      .b-band {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 96px;
+        background-color: var(--tile);
+        box-shadow:
+          inset 6px 0 10px -6px rgb(0 0 0 / 0.45),
+          inset 1px 0 0 rgb(255 255 255 / 0.08);
+      }
+      .b-band svg,
+      .b-strip svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .b-strip {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 30px;
+        background-color: var(--tile);
+        box-shadow: inset 0 6px 8px -6px rgb(0 0 0 / 0.45);
+      }
+      .with-band > .content {
+        margin-right: 104px;
+      }
+      .with-strip > .content {
+        padding-bottom: 30px;
+      }
+
+      /* ── C · Breeze block sunlight ── */
+      .c-sun {
+        top: -40px;
+        right: -60px;
+        width: 78%;
+        height: 130%;
+        -webkit-mask-image: radial-gradient(70% 60% at 70% 35%, #000 30%, transparent 75%);
+        mask-image: radial-gradient(70% 60% at 70% 35%, #000 30%, transparent 75%);
+      }
+      .c-sun svg {
+        width: 100%;
+        height: 100%;
+        transform: skewX(-24deg) rotate(-6deg);
+        filter: blur(2.4px);
+      }
+      .c-sun.small {
+        top: -10px;
+        right: -30px;
+        width: 70%;
+        height: 140%;
+        opacity: 0.7;
+      }
+
+      /* ── D · Amber glass blocks ── */
+      .d-wall {
+        top: 1.25rem;
+        right: 1.25rem;
+        display: grid;
+        grid-template-columns: repeat(3, 40px);
+        gap: 3px;
+        padding: 3px;
+        border-radius: 6px;
+        background: color-mix(in srgb, var(--foreground) 18%, var(--card));
+      }
+      .d-wall i,
+      .d-single {
+        display: block;
+        height: 40px;
+        border-radius: 3px;
+        background:
+          radial-gradient(40% 30% at 30% 28%, rgb(255 255 255 / 0.35), transparent 70%),
+          radial-gradient(60% 50% at 70% 70%, rgb(0 0 0 / 0.18), transparent 70%),
+          linear-gradient(145deg, var(--glass-1), var(--glass-2));
+        box-shadow:
+          inset 0 0 0 3px rgb(255 255 255 / 0.12),
+          inset 0 0 8px rgb(0 0 0 / 0.35);
+      }
+      .d-wall i:nth-child(2n) {
+        background-position: 10px 6px, -8px 4px, 0 0;
+      }
+      .d-wall i:nth-child(3n) {
+        filter: brightness(1.08) saturate(1.1);
+      }
+      .d-spill {
+        top: -40px;
+        right: -40px;
+        width: 70%;
+        height: 85%;
+        background: radial-gradient(closest-side at 70% 30%, color-mix(in srgb, var(--glass-1) 22%, transparent), transparent);
+      }
+      .d-single {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+        width: 30px;
+        height: 30px;
+      }
+
+      footer {
+        max-width: 1180px;
+        margin: 0 auto;
+        color: var(--muted-foreground);
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Shared SVG defs: tile groove and breeze block patterns. -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <!-- One 48 x 96 repeat: an arch tile over a U tile, like image-12. -->
+        <pattern id="groove" width="48" height="96" patternUnits="userSpaceOnUse">
+          <rect width="48" height="96" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="1" />
+          <line x1="0" y1="48" x2="48" y2="48" stroke="rgba(0,0,0,0.22)" />
+          <!-- Highlight first, offset by 1px, then the groove itself: reads as cut into clay. -->
+          <path d="M13 49 V27 a11 11 0 0 1 22 0 V49" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="2" transform="translate(1 1)" />
+          <path d="M13 49 V27 a11 11 0 0 1 22 0 V49" fill="none" stroke="rgba(0,0,0,0.45)" stroke-width="2" />
+          <path d="M13 47 V69 a11 11 0 0 0 22 0 V47" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="2" transform="translate(1 1)" />
+          <path d="M13 47 V69 a11 11 0 0 0 22 0 V47" fill="none" stroke="rgba(0,0,0,0.45)" stroke-width="2" />
+        </pattern>
+        <pattern id="groove-small" width="24" height="48" patternUnits="userSpaceOnUse" patternTransform="rotate(90)">
+          <rect width="24" height="48" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="0.75" />
+          <path d="M6.5 25 V13.5 a5.5 5.5 0 0 1 11 0 V25" fill="none" stroke="rgba(0,0,0,0.45)" stroke-width="1.25" />
+          <path d="M6.5 23 V34.5 a5.5 5.5 0 0 0 11 0 V23" fill="none" stroke="rgba(0,0,0,0.45)" stroke-width="1.25" />
+        </pattern>
+        <!-- Breeze block opening: a round hole with four quarter holes at the corners. -->
+        <pattern id="breeze" width="64" height="64" patternUnits="userSpaceOnUse">
+          <rect width="64" height="64" fill="var(--shade)" />
+          <circle cx="32" cy="32" r="17" fill="var(--sun)" />
+          <circle cx="0" cy="0" r="10" fill="var(--sun)" />
+          <circle cx="64" cy="0" r="10" fill="var(--sun)" />
+          <circle cx="0" cy="64" r="10" fill="var(--sun)" />
+          <circle cx="64" cy="64" r="10" fill="var(--sun)" />
+        </pattern>
+        <linearGradient id="shade-metal" x1="0" x2="1">
+          <stop offset="0" stop-color="var(--lamp-metal)" stop-opacity="0.75" />
+          <stop offset="0.45" stop-color="var(--lamp-metal)" />
+          <stop offset="1" stop-color="var(--lamp-metal)" stop-opacity="0.6" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <header class="toolbar">
+      <div>
+        <h1>Hero ornaments</h1>
+        <p>
+          The baseline is today's hero, then four directions taken from a real object or a real light. Each one
+          shows the hero, plus Contact and Stack, to see how far it carries.
+        </p>
+      </div>
+      <div class="controls">
+        <div class="control-group">
+          <span class="control-label">Ambiance</span>
+          <div class="segmented" id="theme">
+            <button data-theme="theme-01">01</button>
+            <button data-theme="theme-02">02</button>
+            <button data-theme="theme-03" aria-pressed="true">03</button>
+            <button data-theme="theme-04">04</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Hero type</span>
+          <div class="segmented" id="herotype">
+            <button data-value="current" aria-pressed="true">Current</button>
+            <button data-value="lighter">Lighter</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <template id="hero-copy">
+      <p class="name">Luidgi JOSEPH</p>
+      <div>
+        <h3>I build simple apps for everyday problems.</h3>
+        <p class="desc">
+          Web apps, internal tools and automation in Python and TypeScript, from the idea to production. Most
+          projects here start with a problem I'd like to solve myself.
+        </p>
+      </div>
+    </template>
+    <template id="contact-copy">
+      <span class="label chip"><i></i>Get in touch</span>
+      <h4>A project or an opportunity in mind? Write to me.</h4>
+      <div class="links"><span>Email</span><span>LinkedIn</span><span>CV</span></div>
+    </template>
+    <template id="stack-copy">
+      <span class="label">Stack<span class="rule"></span></span>
+      <div class="chips">
+        <span>Python</span><span>TypeScript</span><span>Next.js</span><span>PostgreSQL</span><span>Google Cloud</span>
+      </div>
+    </template>
+
+    <!-- 0 · Baseline -->
+    <section class="direction">
+      <div class="direction-head">
+        <div>
+          <h2><span>00</span>Today</h2>
+          <p>Since the arcs, glow and radar left, the cards only differ by their text.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card hero"><div class="content" data-copy="hero"></div></article>
+        <article class="card contact"><div class="content" data-copy="contact"></div></article>
+        <article class="card stack"><div class="content" data-copy="stack"></div></article>
+      </div>
+    </section>
+
+    <!-- A · Pendant lamp -->
+    <section class="direction">
+      <div class="direction-head">
+        <div>
+          <h2><span>A</span>Pendant lamp over the headline</h2>
+          <p>
+            A tiered pendant hangs from the hero's top edge and lights the headline like a table. It brings back the
+            warm glow you liked, but now it has a source. Contact reuses the family as a small wall sconce; Stack
+            stays plain, so the light keeps a single role.
+          </p>
+        </div>
+        <div class="sources">
+          <figure><img src="../inspirations/image-9.png" alt="" /><figcaption>09</figcaption></figure>
+          <figure><img src="../inspirations/image-4.png" alt="" /><figcaption>04</figcaption></figure>
+          <figure><img src="../inspirations/image-11.png" alt="" /><figcaption>11</figcaption></figure>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card hero">
+          <div class="orn a-room"></div>
+          <div class="orn a-cone"></div>
+          <div class="orn a-pool"></div>
+          <svg class="orn a-lamp" viewBox="0 38 120 104" aria-hidden="true">
+            <line x1="60" y1="0" x2="60" y2="70" stroke="var(--lamp-metal)" stroke-width="1.5" />
+            <rect x="55" y="68" width="10" height="9" rx="2" fill="var(--lamp-metal)" />
+            <!-- Light leaking between the tiers, like the stacked shade of image-9. -->
+            <rect x="34" y="94" width="52" height="5" fill="var(--lamp-light)" />
+            <rect x="20" y="114" width="80" height="5" fill="var(--lamp-light)" />
+            <path d="M46 78 H74 L82 95 H38 Z" fill="url(#shade-metal)" />
+            <path d="M34 98 H86 L96 115 H24 Z" fill="url(#shade-metal)" />
+            <path d="M20 118 H100 L112 136 H8 Z" fill="url(#shade-metal)" />
+            <ellipse cx="60" cy="137" rx="16" ry="3" fill="var(--lamp-light)" />
+          </svg>
+          <div class="content" data-copy="hero"></div>
+        </article>
+        <article class="card contact">
+          <div class="orn a-sconce">
+            <div class="glow"></div>
+            <!-- Half-dome wall sconce, image-11. -->
+            <svg width="36" height="40" viewBox="0 0 36 40" aria-hidden="true">
+              <rect x="15" y="0" width="6" height="14" rx="2" fill="var(--lamp-metal)" />
+              <path d="M2 30 a16 16 0 0 1 32 0 Z" fill="url(#shade-metal)" />
+              <ellipse cx="18" cy="31" rx="13" ry="2.5" fill="var(--lamp-light)" />
+            </svg>
+          </div>
+          <div class="content" data-copy="contact"></div>
+        </article>
+        <article class="card stack"><div class="content" data-copy="stack"></div></article>
+      </div>
+    </section>
+
+    <!-- B · Grooved tile band -->
+    <section class="direction">
+      <div class="direction-head">
+        <div>
+          <h2><span>B</span>Grooved tile band</h2>
+          <p>
+            A column of clay tiles with U grooves is set into the hero's right edge, like a tiled wall next to the
+            text. The tile changes with the ambiance: sage glaze, terracotta, brown clay, oxblood. Contact gets a
+            thin strip of the same tile as a skirting. It's a material, not a light.
+          </p>
+        </div>
+        <div class="sources">
+          <figure><img src="../inspirations/image-12.png" alt="" /><figcaption>12</figcaption></figure>
+          <figure><img src="../inspirations/image-13.png" alt="" /><figcaption>13</figcaption></figure>
+          <figure><img src="../inspirations/image-10.png" alt="" /><figcaption>10</figcaption></figure>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card hero with-band">
+          <div class="orn b-band">
+            <svg aria-hidden="true"><rect width="100%" height="100%" fill="url(#groove)" /></svg>
+          </div>
+          <div class="content" data-copy="hero"></div>
+        </article>
+        <article class="card contact with-strip">
+          <div class="orn b-strip">
+            <svg aria-hidden="true"><rect width="100%" height="100%" fill="url(#groove-small)" /></svg>
+          </div>
+          <div class="content" data-copy="contact"></div>
+        </article>
+        <article class="card stack"><div class="content" data-copy="stack"></div></article>
+      </div>
+    </section>
+
+    <!-- C · Breeze block sunlight -->
+    <section class="direction">
+      <div class="direction-head">
+        <div>
+          <h2><span>C</span>Sunlight through a breeze block screen</h2>
+          <p>
+            Afternoon sun crosses a perforated concrete screen and lands on the hero as soft shapes. It's pure light,
+            with no object drawn. The screen comes from Palm Springs houses of the 1950s, outside our folder, but the
+            plaster rooms in sunlight (06 to 08) are the same mood. Stack gets a smaller patch.
+          </p>
+        </div>
+        <div class="sources">
+          <figure><img src="../inspirations/image-6.png" alt="" /><figcaption>06</figcaption></figure>
+          <figure><img src="../inspirations/image-7.png" alt="" /><figcaption>07</figcaption></figure>
+          <figure><span class="outside">Breeze block screens, 1950s</span><figcaption>outside</figcaption></figure>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card hero">
+          <div class="orn c-sun">
+            <svg aria-hidden="true"><rect x="-20%" y="-20%" width="140%" height="140%" fill="url(#breeze)" /></svg>
+          </div>
+          <div class="content" data-copy="hero"></div>
+        </article>
+        <article class="card contact"><div class="content" data-copy="contact"></div></article>
+        <article class="card stack">
+          <div class="orn c-sun small">
+            <svg aria-hidden="true"><rect x="-20%" y="-20%" width="140%" height="140%" fill="url(#breeze)" /></svg>
+          </div>
+          <div class="content" data-copy="stack"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- D · Amber glass blocks -->
+    <section class="direction">
+      <div class="direction-head">
+        <div>
+          <h2><span>D</span>Amber glass blocks</h2>
+          <p>
+            A small window of amber glass blocks in the hero's corner, lit from behind, spills a warm tint on the
+            card. Light and object in one, smaller than the lamp. Contact uses a single block as its mark.
+          </p>
+        </div>
+        <div class="sources">
+          <figure><img src="../inspirations/image-18.png" alt="" /><figcaption>18</figcaption></figure>
+          <figure><img src="../inspirations/image-19.png" alt="" /><figcaption>19</figcaption></figure>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card hero">
+          <div class="orn d-spill"></div>
+          <div class="orn d-wall" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="content" data-copy="hero"></div>
+        </article>
+        <article class="card contact">
+          <span class="orn d-single" aria-hidden="true"></span>
+          <div class="content" data-copy="contact"></div>
+        </article>
+        <article class="card stack"><div class="content" data-copy="stack"></div></article>
+      </div>
+    </section>
+
+    <footer>
+      Mockup only. Copy is today's, unchanged. The per-ambiance light and tile colors live at the top of this file
+      and would become tokens in <code>themes.css</code>.
+    </footer>
+
+    <script>
+      for (const slot of document.querySelectorAll('[data-copy]')) {
+        slot.append(document.getElementById(`${slot.dataset.copy}-copy`).content.cloneNode(true));
+      }
+      function bindSegmented(id, apply) {
+        const group = document.getElementById(id);
+        group.addEventListener('click', (event) => {
+          const button = event.target.closest('button');
+          if (!button) return;
+          for (const b of group.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b === button));
+          apply(button);
+        });
+      }
+      bindSegmented('theme', (b) => {
+        document.documentElement.className = b.dataset.theme;
+      });
+      bindSegmented('herotype', (b) => {
+        document.documentElement.dataset.herotype = b.dataset.value;
+      });
+    </script>
+  </body>
+</html>

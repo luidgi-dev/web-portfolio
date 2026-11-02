@@ -1,0 +1,1967 @@
+<!doctype html>
+<html lang="en" class="theme-03" data-dir="p3">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Case study blocks (mockup)</title>
+    <!-- Mockup rules sit below the site's @layer components, so reused site classes win. -->
+    <style>
+      @layer mockup, components;
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Real site tokens and materials, linked (not copied) so the mockup follows the app. -->
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/tokens/themes.css" />
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/utilities/textures.css" />
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/utilities/materials.css" />
+    <style>
+      @layer mockup {
+      :root {
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-sans: 'DM Sans', system-ui, sans-serif;
+        --font-mono: 'DM Mono', 'Courier New', monospace;
+        --font-strive: 'Sora', 'DM Sans', system-ui, sans-serif;
+        /* Palette slots, one per item in a set (figures, steps, stack groups). */
+        --c1: var(--chart-1);
+        --c2: var(--chart-2);
+        --c3: var(--chart-3);
+        --c4: var(--chart-5);
+        --ink: color-mix(in srgb, var(--foreground) 72%, transparent);
+        --line: color-mix(in srgb, var(--foreground) 55%, transparent);
+        --grout: color-mix(in srgb, var(--border-strong) 55%, var(--card));
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        min-height: 100vh;
+        padding: 32px 16px 140px;
+        background: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background-color 0.55s ease,
+          color 0.4s ease;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+      ul,
+      ol {
+        padding: 0;
+        list-style: none;
+      }
+
+      .mono {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--muted-foreground);
+      }
+      .display {
+        font-family: var(--font-display);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .body-sm {
+        font-size: 14px;
+        line-height: 1.6;
+        color: color-mix(in srgb, var(--foreground) 85%, transparent);
+      }
+
+      /* ---------- Case Study House frame (from the shipped modal) ---------- */
+      .frame {
+        position: relative;
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 40px 40px 48px;
+        border: 1px solid var(--border-strong);
+        border-radius: 16px;
+        background: var(--card);
+        box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.45);
+      }
+      .frame::before {
+        content: '';
+        position: absolute;
+        inset: 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        pointer-events: none;
+      }
+      .frame-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .frame-header h1 {
+        margin-top: 12px;
+        font-family: var(--font-strive);
+        font-size: 44px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      .frame-header p.tagline {
+        margin-top: 8px;
+        font-family: var(--font-strive);
+        font-weight: 600;
+        font-size: 18px;
+        color: color-mix(in srgb, var(--foreground) 80%, transparent);
+      }
+      .knob {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+      }
+      .tabs {
+        display: flex;
+        gap: 6px;
+        margin-top: 28px;
+        overflow-x: auto;
+        box-shadow: inset 0 -1px 0 var(--border-strong);
+      }
+      .tab {
+        flex-shrink: 0;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-bottom-color: var(--border-strong);
+        border-radius: 8px 8px 0 0;
+        background: color-mix(in srgb, var(--foreground) 4%, var(--card));
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--muted-foreground);
+        white-space: nowrap;
+      }
+      .tab b {
+        margin-right: 10px;
+        font-weight: 400;
+        color: var(--accent);
+      }
+      .tab[aria-current='true'] {
+        border-color: var(--border-strong);
+        border-bottom-color: var(--card);
+        background: var(--card);
+        color: var(--foreground);
+      }
+
+      /* ---------- Block gallery ---------- */
+      .block {
+        margin-top: 56px;
+        scroll-margin-top: 24px;
+      }
+      .block-intro {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px dashed var(--border-strong);
+      }
+      .block-intro h2 {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+      .variants {
+        display: grid;
+        gap: 36px;
+        margin-top: 24px;
+      }
+      .v {
+        position: relative;
+      }
+      html:is([data-dir='all'], [data-dir='p3']) .v {
+        padding-top: 26px;
+      }
+      html:is([data-dir='all'], [data-dir='p3']) .v::before {
+        content: attr(data-tag);
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      html[data-dir='a'] .v:not([data-v='a']),
+      html[data-dir='b'] .v:not([data-v='b']),
+      html[data-dir='c'] .v:not([data-v='c']),
+      html[data-dir='c2'] .v:not([data-v='c2']),
+      html[data-dir='c3'] .v:not([data-v='c3']),
+      html[data-dir='p3'] .v:not([data-v='p3']),
+      html[data-dir='all'] .v:is([data-v='a'], [data-v='b'], [data-v='p3']) {
+        display: none;
+      }
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+      @media (max-width: 760px) {
+        .frame {
+          padding: 28px 22px 32px;
+        }
+        .grid-4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      /* =========================================================
+         A. TILES: glazed ceramic wall
+         Refs: inspirations 12 to 18, home contact tiles, moodboard stack.
+         ========================================================= */
+      .a-wall {
+        display: grid;
+        gap: 5px;
+        padding: 5px;
+        border-radius: 6px;
+        background: var(--grout);
+      }
+      .a-tile {
+        --c: var(--c1);
+        position: relative;
+        border-radius: 3px;
+        background:
+          radial-gradient(120% 90% at 18% 8%, rgb(255 255 255 / 0.2), transparent 55%),
+          linear-gradient(160deg, transparent 60%, rgb(0 0 0 / 0.08)),
+          color-mix(in srgb, var(--c) 32%, var(--card));
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.22),
+          inset 0 -2px 5px rgb(0 0 0 / 0.18);
+      }
+      .a-figures {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .a-figure {
+        display: flex;
+        min-height: 150px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 18px;
+      }
+      .a-figure strong {
+        font-family: var(--font-display);
+        font-size: 44px;
+        line-height: 1;
+      }
+      .a-figure span {
+        color: color-mix(in srgb, var(--foreground) 75%, transparent);
+      }
+      .a-numtile {
+        display: inline-grid;
+        width: 40px;
+        height: 40px;
+        margin-right: 14px;
+        place-items: center;
+        vertical-align: middle;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        color: var(--foreground);
+      }
+      .a-heading {
+        display: flex;
+        align-items: center;
+        font-size: 26px;
+      }
+      .a-steps li {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+      /* U-arch relief, after the terracotta relief tiles (image-12). */
+      .a-arch {
+        display: grid;
+        width: 64px;
+        height: 80px;
+        padding-top: 14px;
+        place-items: start center;
+        border-radius: 32px 32px 3px 3px;
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        box-shadow:
+          inset 2px 2px 0 rgb(255 255 255 / 0.18),
+          inset -2px -2px 0 rgb(0 0 0 / 0.18),
+          0 0 0 5px var(--grout);
+      }
+      .a-steps h4 {
+        font-family: var(--font-display);
+        font-size: 19px;
+      }
+      .a-stack {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .a-stack .a-wall {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 10px;
+      }
+      .a-mono {
+        display: grid;
+        aspect-ratio: 1;
+        place-content: center;
+        gap: 4px;
+        text-align: center;
+      }
+      .a-mono b {
+        font-family: var(--font-display);
+        font-size: 20px;
+      }
+      .a-mono small {
+        font-family: var(--font-mono);
+        font-size: 7px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--foreground) 70%, transparent);
+      }
+      .a-days {
+        display: grid;
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+        gap: 4px;
+        padding: 4px;
+        border-radius: 5px;
+        background: var(--grout);
+      }
+      .a-day {
+        --c: var(--c2);
+        aspect-ratio: 1;
+        grid-row: 1;
+        border-radius: 2px;
+        background: color-mix(in srgb, var(--foreground) 6%, var(--card));
+        box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
+      }
+      .a-day.is-logged {
+        background:
+          radial-gradient(120% 90% at 20% 10%, rgb(255 255 255 / 0.3), transparent 55%),
+          color-mix(in srgb, var(--c) 70%, var(--card));
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.3),
+          inset 0 -2px 3px rgb(0 0 0 / 0.2);
+      }
+      .a-day.is-future {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px var(--border-strong);
+      }
+      /* Brass frame around the counted run of tiles. */
+      .a-window {
+        grid-row: 1;
+        margin: -4px;
+        border: 2px solid var(--accent);
+        border-radius: 4px;
+        box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 40%, transparent);
+        pointer-events: none;
+      }
+      .a-results li {
+        display: flex;
+        gap: 12px;
+        padding: 12px 0;
+        border-top: 1px solid var(--border);
+      }
+      .a-results .a-tile {
+        width: 14px;
+        height: 14px;
+        margin-top: 4px;
+        flex-shrink: 0;
+      }
+
+      /* =========================================================
+         B. DRAWING SET: Case Study House plans
+         Refs: architectural drawing conventions, the site's compass arcs.
+         ========================================================= */
+      .b-title {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--line);
+        box-shadow: 0 4px 0 -3px var(--line);
+      }
+      /* Section marker: circle split in two, drawing number over sheet number. */
+      .b-marker {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        grid-template-rows: 1fr 1fr;
+        place-items: center;
+        border: 1.5px solid var(--line);
+        border-radius: 50%;
+        background: linear-gradient(transparent calc(50% - 0.75px), var(--line) calc(50% - 0.75px) calc(50% + 0.75px), transparent calc(50% + 0.75px));
+        font-family: var(--font-mono);
+        font-size: 10px;
+        line-height: 1;
+      }
+      .b-marker b {
+        align-self: end;
+        padding-bottom: 3px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .b-marker i {
+        align-self: start;
+        padding-top: 3px;
+        font-style: normal;
+        color: var(--muted-foreground);
+      }
+      .b-title h3 {
+        font-size: 26px;
+      }
+      /* Title block: the ruled box in the corner of every sheet. */
+      .b-block {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border: 1.5px solid var(--line);
+        outline: 1px solid var(--border-strong);
+        outline-offset: 3px;
+      }
+      .b-stat {
+        padding: 10px 14px 14px;
+        border-right: 1px solid var(--border-strong);
+      }
+      .b-stat:has(+ .b-row) {
+        border-right: 0;
+      }
+      .b-block .b-row {
+        display: flex;
+        grid-column: 1 / -1;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 14px;
+        border-bottom: 1px solid var(--border-strong);
+      }
+      .b-block .b-row.is-foot {
+        border-top: 1px solid var(--border-strong);
+        border-bottom: 0;
+      }
+      .b-block strong {
+        display: block;
+        margin-top: 14px;
+        font-family: var(--font-display);
+        font-size: 38px;
+        line-height: 1;
+      }
+      .b-block .body-sm {
+        margin-top: 6px;
+        font-size: 12px;
+      }
+      /* Column grid: axis bubbles on top, dash-dot axis lines down. */
+      .b-axes {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+        border-top: 1px solid var(--line);
+        padding-top: 0;
+      }
+      .b-axes li {
+        position: relative;
+        padding: 58px 0 0 22px;
+      }
+      .b-axes li::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 1px;
+        background: repeating-linear-gradient(
+          to bottom,
+          var(--line) 0 10px,
+          transparent 10px 13px,
+          var(--line) 13px 15px,
+          transparent 15px 18px
+        );
+      }
+      .b-bubble {
+        position: absolute;
+        top: 12px;
+        left: -17px;
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border: 1.5px solid var(--line);
+        border-radius: 50%;
+        background: var(--card);
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+      .b-axes h4 {
+        font-family: var(--font-display);
+        font-size: 19px;
+      }
+      .b-axes .body-sm {
+        margin-top: 6px;
+      }
+      /* Legend with architectural hatches, one per group. */
+      .b-legend {
+        border: 1.5px solid var(--line);
+      }
+      .b-legend-head {
+        padding: 8px 14px;
+        border-bottom: 1px solid var(--border-strong);
+      }
+      .b-legend li {
+        display: grid;
+        grid-template-columns: 34px 90px 1fr;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+      }
+      .b-legend li:last-child {
+        border-bottom: 0;
+      }
+      .b-hatch {
+        width: 34px;
+        height: 22px;
+        border: 1px solid var(--line);
+        color: var(--line);
+      }
+      .b-hatch.is-diag {
+        background: repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 5px);
+      }
+      .b-hatch.is-cross {
+        background:
+          repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 6px),
+          repeating-linear-gradient(-45deg, currentColor 0 1px, transparent 1px 6px);
+      }
+      .b-hatch.is-dots {
+        background: radial-gradient(currentColor 1px, transparent 1.3px) 0 0 / 5px 5px;
+      }
+      .b-hatch.is-solid {
+        background: color-mix(in srgb, var(--line) 70%, transparent);
+      }
+      /* Dimension lines over a plan grid of days. */
+      .b-plan {
+        display: grid;
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+        row-gap: 10px;
+      }
+      .b-dim {
+        position: relative;
+        grid-row: 1;
+        height: 22px;
+        border-bottom: 1px solid var(--line);
+        text-align: center;
+      }
+      .b-dim::before,
+      .b-dim::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        width: 1px;
+        height: 12px;
+        background: var(--line);
+        transform: rotate(45deg);
+      }
+      .b-dim::before {
+        left: 0;
+      }
+      .b-dim::after {
+        right: 0;
+      }
+      .b-dim span {
+        position: relative;
+        top: -2px;
+        padding: 0 8px;
+        background: var(--card);
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .b-cell {
+        grid-row: 2;
+        display: grid;
+        height: 30px;
+        place-items: center;
+        border: 1px solid var(--border-strong);
+        border-left-width: 0;
+      }
+      .b-cell:first-of-type,
+      .b-cell.is-monday {
+        border-left-width: 1px;
+      }
+      .b-cell.is-monday {
+        border-left: 2px solid var(--line);
+      }
+      .b-cell i {
+        width: 9px;
+        height: 9px;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+      }
+      .b-cell.is-logged i {
+        background: var(--line);
+      }
+      .b-cell.is-future {
+        border-style: dashed;
+        opacity: 0.45;
+      }
+      .b-notes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 32px;
+        counter-reset: note;
+      }
+      .b-notes li {
+        display: grid;
+        grid-template-columns: 26px 1fr;
+        counter-increment: note;
+      }
+      .b-notes li::before {
+        content: counter(note) '.';
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--muted-foreground);
+      }
+
+      /* =========================================================
+         C. INTERIOR DESIGN GUIDE: MCM catalogue
+         Refs: image-3 (guide), image-5 (paint cards), moodboard capsules.
+         ========================================================= */
+      .c-band {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 8px 14px 8px 8px;
+        border-radius: 4px;
+        background: color-mix(in srgb, var(--primary) 14%, var(--card));
+      }
+      .c-badge {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        place-items: center;
+        border-radius: 3px;
+        /* Tinted rather than solid: a solid chip fails contrast on olive in dark themes. */
+        background: color-mix(in srgb, var(--c, var(--primary)) 32%, var(--card));
+        box-shadow: inset 0 0 0 1.5px var(--c, var(--primary));
+        color: var(--foreground);
+        font-family: var(--font-display);
+        font-size: 17px;
+        font-weight: 700;
+      }
+      .c-band h3 {
+        font-size: 24px;
+      }
+      /* Paint swatch cards, after image-5. */
+      .c-swatch {
+        --c: var(--c1);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: color-mix(in srgb, var(--foreground) 3%, var(--card));
+      }
+      .c-chip {
+        position: relative;
+        height: 70px;
+        background:
+          radial-gradient(120% 120% at 15% 0%, rgb(255 255 255 / 0.18), transparent 60%),
+          var(--c);
+      }
+      .c-chip::after {
+        content: attr(data-code);
+        position: absolute;
+        right: 10px;
+        bottom: 8px;
+        font-family: var(--font-mono);
+        font-size: 8px;
+        letter-spacing: 0.2em;
+        color: rgb(255 255 255 / 0.8);
+      }
+      .c-swatch-body {
+        padding: 14px 14px 10px;
+      }
+      .c-swatch strong {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 38px;
+        line-height: 1;
+      }
+      .c-swatch .mono {
+        display: block;
+        margin-top: 8px;
+        letter-spacing: 0.2em;
+      }
+      .c-spec {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid var(--border);
+        font-family: var(--font-mono);
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .c-spec span {
+        padding: 6px 14px;
+        color: var(--muted-foreground);
+      }
+      .c-spec span + span {
+        border-left: 1px solid var(--border);
+      }
+      .c-spec b {
+        display: block;
+        margin-top: 2px;
+        font-weight: 400;
+        color: var(--foreground);
+      }
+      .c-steps li {
+        padding: 16px;
+        border-radius: 6px;
+        background: color-mix(in srgb, var(--c) 9%, var(--card));
+      }
+      .c-steps .c-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .c-steps svg {
+        width: 34px;
+        height: 34px;
+        color: var(--c);
+      }
+      .c-steps h4 {
+        margin-top: 16px;
+        font-family: var(--font-display);
+        font-size: 19px;
+      }
+      .c-steps .body-sm {
+        margin-top: 6px;
+      }
+      /* Material capsules, after the moodboard's Matières row. */
+      .c-stack li {
+        display: grid;
+        grid-template-columns: 46px 1fr;
+        gap: 14px;
+      }
+      .c-capsule {
+        height: 128px;
+        border-radius: 999px;
+        background:
+          radial-gradient(90% 50% at 30% 18%, rgb(255 255 255 / 0.3), transparent 60%),
+          linear-gradient(180deg, color-mix(in srgb, var(--c) 85%, white), var(--c) 55%, color-mix(in srgb, var(--c) 75%, black));
+        box-shadow: inset 0 -6px 12px rgb(0 0 0 / 0.2);
+      }
+      .c-stack h4 {
+        font-family: var(--font-display);
+        font-size: 18px;
+      }
+      .c-stack p {
+        margin-top: 6px;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      .c-dots {
+        display: grid;
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+        padding: 6px 0;
+      }
+      .c-dot {
+        grid-row: 1;
+        display: grid;
+        place-items: center;
+        height: 28px;
+      }
+      .c-dot i {
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid var(--c2);
+        border-radius: 50%;
+      }
+      .c-dot.is-logged i {
+        background: var(--c2);
+      }
+      .c-dot.is-future i {
+        border-style: dashed;
+        opacity: 0.45;
+      }
+      .c-pill {
+        grid-row: 1;
+        border: 1.5px solid var(--c1);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--c1) 12%, transparent);
+      }
+      .c-results {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 32px;
+      }
+      .c-results li {
+        display: grid;
+        grid-template-columns: 14px 1fr;
+        gap: 12px;
+      }
+      .c-results li::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        margin-top: 4px;
+        border-radius: 50%;
+        background: var(--c);
+      }
+
+
+      /* =========================================================
+         C2 and C3. DESIGN GUIDE, MATERIAL (C3 is the quiet, single-hue take)
+         Refs: image-24 (sample chip), 23 (presentation board), 21 (catalog
+         sheet), 20 and 25 (numbered plates), 28 (printed pictograms), 29 (veneers).
+         ========================================================= */
+      .g {
+        --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .g.is-quiet {
+        --c1: var(--primary);
+        --c2: color-mix(in srgb, var(--primary) 75%, var(--foreground));
+        --c3: color-mix(in srgb, var(--primary) 70%, var(--card));
+        --c4: color-mix(in srgb, var(--primary) 85%, var(--background));
+      }
+      /* Materials: a tinted base mixed into the card keeps text contrast in all themes. */
+      .mat {
+        background-color: color-mix(in srgb, var(--c) 42%, var(--card));
+      }
+      .mat-linen {
+        background-image:
+          var(--grain),
+          repeating-linear-gradient(0deg, rgb(255 255 255 / 0.07) 0 1px, transparent 1px 3px),
+          repeating-linear-gradient(90deg, rgb(0 0 0 / 0.08) 0 1px, transparent 1px 4px);
+      }
+      .mat-wood {
+        background-image:
+          var(--grain),
+          repeating-linear-gradient(91deg, rgb(0 0 0 / 0.12) 0 1px, transparent 1px 6px, rgb(255 255 255 / 0.06) 6px 8px, transparent 8px 13px),
+          linear-gradient(90deg, rgb(0 0 0 / 0.08), transparent 30%, rgb(0 0 0 / 0.1) 70%, transparent);
+      }
+      .mat-leather {
+        background-image:
+          var(--grain),
+          radial-gradient(ellipse at 25% 30%, rgb(255 255 255 / 0.14), transparent 55%),
+          radial-gradient(ellipse at 75% 70%, rgb(0 0 0 / 0.2), transparent 50%),
+          repeating-linear-gradient(120deg, transparent 0 1px, rgb(0 0 0 / 0.05) 1px 2px);
+      }
+      .mat-brass {
+        background-image:
+          repeating-linear-gradient(90deg, rgb(255 255 255 / 0.07) 0 1px, transparent 1px 3px),
+          linear-gradient(145deg, rgb(255 255 255 / 0.28), transparent 40%, rgb(0 0 0 / 0.16) 70%, rgb(255 255 255 / 0.12));
+      }
+      .mat-glaze {
+        background-image:
+          radial-gradient(120% 90% at 20% 10%, rgb(255 255 255 / 0.3), transparent 55%),
+          var(--grain);
+      }
+
+      .g-band {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 10px 16px 10px 10px;
+        border-radius: 4px;
+        background: var(--grain), color-mix(in srgb, var(--primary) 12%, var(--card));
+      }
+      .g-band h3 {
+        flex: 1;
+        font-size: 24px;
+      }
+      /* Stamped plate: embossed edges, like an enamel or brass number plate. */
+      .g-stamp {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        place-items: center;
+        border-radius: 4px;
+        font-family: var(--font-display);
+        font-size: 19px;
+        font-weight: 700;
+        box-shadow:
+          inset 1px 1px 0 rgb(255 255 255 / 0.28),
+          inset -1px -1px 0 rgb(0 0 0 / 0.25),
+          0 1px 2px rgb(0 0 0 / 0.3);
+      }
+
+      /* Notched sample chips, after the Formica chip (image-24). */
+      .g-chips {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .g-chip {
+        position: relative;
+        display: flex;
+        min-height: 210px;
+        flex-direction: column;
+        padding: 34px 16px 14px;
+        border-radius: 12px;
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.12),
+          0 8px 16px -10px rgb(0 0 0 / 0.55);
+      }
+      .g-chip::before {
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        width: 12px;
+        height: 12px;
+        margin-left: -6px;
+        border-radius: 50%;
+        background: var(--card);
+        box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.45);
+      }
+      .g-code {
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.15em;
+        color: color-mix(in srgb, var(--foreground) 70%, transparent);
+      }
+      .g-chip strong {
+        margin-top: auto;
+        font-family: var(--font-display);
+        font-size: 42px;
+        line-height: 1;
+      }
+      .g-name {
+        margin-top: 8px;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+      .g-spec {
+        margin-top: 12px;
+        padding-top: 8px;
+        border-top: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
+        font-family: var(--font-mono);
+        font-size: 8px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--foreground) 75%, transparent);
+      }
+
+      /* Catalog sheet with printed pictograms (image-21, image-28). */
+      .g-sheet {
+        padding: 22px;
+        border-radius: 6px;
+        background: var(--grain), color-mix(in srgb, var(--primary) 14%, var(--card));
+      }
+      .g-catalog {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .g-plate {
+        display: grid;
+        height: 96px;
+        place-items: center;
+        border-radius: 14px;
+        background: var(--grain), color-mix(in srgb, var(--foreground) 86%, var(--c));
+        color: color-mix(in srgb, var(--c) 75%, var(--background));
+      }
+      .g-plate svg {
+        width: 52px;
+        height: 52px;
+      }
+      .g-catalog h4 {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 12px;
+        font-family: var(--font-display);
+        font-size: 19px;
+      }
+      .g-catalog h4 span {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        color: var(--muted-foreground);
+      }
+      .g-catalog .body-sm {
+        margin-top: 6px;
+      }
+
+      /* Material flat lay, after the presentation board (image-23). */
+      .g-board {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+        padding: 26px 20px 22px;
+        border-radius: 6px;
+        background: var(--grain), color-mix(in srgb, var(--foreground) 5%, var(--background));
+      }
+      .g-sample {
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 16px;
+        text-align: center;
+      }
+      .g-shape {
+        width: 96px;
+        height: 96px;
+        box-shadow: 0 8px 16px -8px rgb(0 0 0 / 0.5);
+      }
+      .shape-square {
+        border-radius: 4px;
+      }
+      .shape-hex {
+        clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%);
+      }
+      .shape-disc {
+        border-radius: 50%;
+      }
+      .shape-strip {
+        width: 60px;
+        border-radius: 3px;
+      }
+      .g-tag {
+        width: 100%;
+        max-width: 190px;
+        padding: 8px 10px 10px;
+        border: 1px solid var(--border-strong);
+        border-radius: 3px;
+        background: var(--card);
+      }
+      .g-tag b {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+      .g-tag span {
+        display: block;
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.6;
+        color: color-mix(in srgb, var(--foreground) 80%, transparent);
+      }
+
+      /* Paint chip strip with a die-cut window. */
+      .g-strip {
+        padding: 10px 10px 8px;
+        border-radius: 8px;
+        background: var(--grain), color-mix(in srgb, var(--foreground) 5%, var(--card));
+        box-shadow: 0 6px 14px -10px rgb(0 0 0 / 0.5);
+      }
+      .g-days {
+        display: grid;
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+        gap: 3px;
+      }
+      .g-day {
+        grid-row: 1;
+        height: 34px;
+        border-radius: 2px;
+        background: color-mix(in srgb, var(--c2) 14%, var(--card));
+      }
+      .g-day.is-logged {
+        background: var(--grain), color-mix(in srgb, var(--c2) 62%, var(--card));
+      }
+      .g-day.is-future {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px var(--border-strong);
+      }
+      .g-cut {
+        grid-row: 1;
+        margin: -5px -2px;
+        border: 2px solid color-mix(in srgb, var(--foreground) 70%, transparent);
+        border-radius: 4px;
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--foreground) 5%, var(--card));
+        pointer-events: none;
+      }
+      .g-strip-foot {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+      }
+
+      /* Numbered catalog captions (image-20, image-25). */
+      .g-captions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 32px;
+      }
+      .g-captions li {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 12px;
+        padding: 12px 0;
+        border-top: 1px solid var(--border-strong);
+      }
+      .g-no {
+        padding-top: 3px;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      @media (max-width: 760px) {
+        .g-chips,
+        .g-catalog,
+        .g-board {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .g-captions {
+          grid-template-columns: 1fr;
+        }
+      }
+
+
+      /* =========================================================
+         PASS 3. Consolidated page: kept choices, alternatives only where open.
+         New refs: image-30 (textile rhythm), 31 and 32 (labels, stamped numbers),
+         33 (editorial numbers).
+         ========================================================= */
+      /* H1 · Label holder: a brass frame with two screws around a paper label. */
+      .p-holder {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 10px;
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.3),
+          0 2px 6px -2px rgb(0 0 0 / 0.45);
+      }
+      .p-screw {
+        width: 11px;
+        height: 11px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background:
+          linear-gradient(45deg, transparent 44%, rgb(0 0 0 / 0.45) 44% 56%, transparent 56%),
+          radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.55), transparent 60%),
+          color-mix(in srgb, var(--accent) 70%, var(--card));
+        box-shadow: 0 1px 1px rgb(0 0 0 / 0.4);
+      }
+      .p-label {
+        padding: 10px 22px 12px;
+        border-radius: 5px;
+        background: var(--grain), color-mix(in srgb, var(--foreground) 5%, var(--background));
+        box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.25);
+      }
+      .p-label h3 {
+        margin-top: 4px;
+        font-size: 28px;
+      }
+      /* H2 · Archive label: double rule, stamped number, like a library label. */
+      .p-archive {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        padding: 14px 26px 14px 16px;
+        border: 2px solid var(--primary);
+        border-radius: 12px;
+        outline: 1px solid var(--primary);
+        outline-offset: -7px;
+        background: var(--grain), color-mix(in srgb, var(--primary) 6%, var(--card));
+      }
+      .p-archive h3 {
+        margin-top: 4px;
+        font-size: 28px;
+      }
+      .p-stamp {
+        display: grid;
+        width: 46px;
+        height: 46px;
+        flex-shrink: 0;
+        place-items: center;
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px var(--primary);
+        color: var(--primary);
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
+      }
+      /* H3 · Editorial number, after the annual report spreads (image-33). */
+      .p-editorial {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: end;
+        gap: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--border-strong);
+      }
+      .p-bignum {
+        font-family: var(--font-display);
+        font-size: 104px;
+        font-weight: 900;
+        line-height: 0.78;
+        color: var(--accent);
+      }
+      .p-editorial h3 {
+        margin-top: 6px;
+        font-size: 34px;
+        line-height: 1.05;
+      }
+
+      /* Numbered sequence: C1 cards, stamped numbers, pictograms that build up. */
+      .p-steps li {
+        padding: 16px;
+        border-radius: 6px;
+        background: var(--grain), color-mix(in srgb, var(--c) 10%, var(--card));
+      }
+      .p-steps .c-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .p-num {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border: 1.5px solid var(--c);
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--c) 10%, var(--card)), inset 0 0 0 4px var(--c);
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .p-picto {
+        color: var(--c);
+      }
+      .p-picto svg {
+        display: block;
+        width: 46px;
+        height: 46px;
+      }
+      .p-picto .k {
+        fill: color-mix(in srgb, var(--foreground) 80%, transparent);
+      }
+      .p-picto .m {
+        fill: color-mix(in srgb, var(--c) 55%, var(--card));
+      }
+      .p-picto .f {
+        fill: none;
+        stroke: color-mix(in srgb, var(--foreground) 80%, transparent);
+        stroke-width: 2;
+      }
+      .p-steps h4 {
+        margin-top: 16px;
+        font-family: var(--font-display);
+        font-size: 19px;
+      }
+      .p-steps .body-sm {
+        margin-top: 6px;
+      }
+
+      /* Stack: C1 capsules, now with material textures and a gloss. */
+      .p-capsule {
+        position: relative;
+        height: 128px;
+        overflow: hidden;
+        border-radius: 999px;
+        background-color: color-mix(in srgb, var(--c) 85%, var(--card));
+        box-shadow: inset 0 -6px 12px rgb(0 0 0 / 0.22);
+      }
+      .p-capsule::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(90% 45% at 32% 16%, rgb(255 255 255 / 0.3), transparent 60%),
+          linear-gradient(transparent 55%, rgb(0 0 0 / 0.18));
+      }
+
+      /* D2 · Textile band, after the mudcloth rows of stamped ovals (image-30). */
+      .p-textile {
+        padding: 8px 10px;
+        border-radius: 6px;
+        background:
+          repeating-linear-gradient(0deg, rgb(0 0 0 / 0.05) 0 1px, transparent 1px 3px),
+          var(--grain),
+          color-mix(in srgb, var(--c4) 16%, var(--card));
+      }
+      .p-ovals {
+        display: grid;
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+      }
+      .p-oval {
+        grid-row: 1;
+        display: grid;
+        height: 50px;
+        place-items: center;
+      }
+      .p-oval i {
+        width: 58%;
+        height: 36px;
+        border: 1.5px solid color-mix(in srgb, var(--foreground) 45%, transparent);
+        border-radius: 999px;
+      }
+      .p-oval.is-logged i {
+        border-color: transparent;
+        background: var(--grain), var(--c2);
+      }
+      .p-oval.is-future i {
+        border-style: dotted;
+        opacity: 0.5;
+      }
+      .p-stitch {
+        grid-row: 1;
+        margin: 0 -2px;
+        border: 2px dashed var(--c1);
+        border-radius: 14px;
+        pointer-events: none;
+      }
+      /* D4 · Editorial chart: a big ratio and bars, after image-33. */
+      .p-chart-row {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        align-items: end;
+        gap: 24px;
+      }
+      .p-ratio strong {
+        font-family: var(--font-display);
+        font-size: 58px;
+        font-weight: 900;
+        line-height: 0.85;
+      }
+      .p-ratio small {
+        font-size: 26px;
+        color: var(--muted-foreground);
+      }
+      .p-ratio .mono {
+        display: block;
+        margin-top: 8px;
+      }
+      .p-bars {
+        display: grid;
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+        grid-template-rows: 64px auto;
+        column-gap: 5px;
+        align-items: end;
+      }
+      .p-bar {
+        grid-row: 1;
+        height: 22%;
+        border-radius: 2px 2px 0 0;
+        background: color-mix(in srgb, var(--foreground) 22%, transparent);
+      }
+      .p-bar.is-logged {
+        height: 100%;
+        background: color-mix(in srgb, var(--foreground) 45%, transparent);
+      }
+      .p-bar.is-future {
+        height: 8%;
+        background: transparent;
+        box-shadow: inset 0 0 0 1px var(--border-strong);
+      }
+      .p-bar.is-counted {
+        background: var(--grain), var(--c2);
+      }
+      .p-bracket {
+        grid-row: 2;
+        margin-top: 8px;
+        padding-top: 6px;
+        border-top: 2px solid var(--c2);
+        text-align: center;
+      }
+
+
+      /* Sample chips carried to other blocks (the key figure chip is the shared thread). */
+      .p-hole::before {
+        content: '';
+        position: absolute;
+        top: 9px;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        margin-left: -5px;
+        border-radius: 50%;
+        background: var(--card);
+        box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.45);
+      }
+      .p-chiphead {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .p-minichip {
+        position: relative;
+        display: grid;
+        width: 60px;
+        height: 78px;
+        flex-shrink: 0;
+        align-items: end;
+        padding: 8px 10px;
+        border-radius: 9px;
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.12),
+          0 8px 14px -8px rgb(0 0 0 / 0.55);
+        font-family: var(--font-display);
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .p-chiphead h3 {
+        margin-top: 4px;
+        font-size: 36px;
+        line-height: 1.05;
+      }
+      .p-widechip {
+        position: relative;
+        display: grid;
+        max-width: 720px;
+        padding: 32px 22px 12px;
+        border-radius: 12px;
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.12),
+          0 8px 16px -10px rgb(0 0 0 / 0.55);
+      }
+      .p-widechip h3 {
+        font-size: 32px;
+      }
+      /* D5 · Chip chain: each day is a chip on a brass rod; counted chips are pulled out. */
+      .p-chain {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+        column-gap: 6px;
+        padding-top: 10px;
+      }
+      .p-chain::before {
+        content: '';
+        position: absolute;
+        top: 18px;
+        right: -8px;
+        left: -8px;
+        height: 3px;
+        border-radius: 2px;
+        background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 60%, white), var(--accent));
+      }
+      .p-daychip {
+        position: relative;
+        z-index: 1;
+        grid-row: 1;
+        height: 56px;
+        border-radius: 6px;
+        background-color: color-mix(in srgb, var(--foreground) 7%, var(--card));
+        box-shadow: 0 4px 8px -6px rgb(0 0 0 / 0.5);
+      }
+      .p-daychip.is-logged {
+        background-color: color-mix(in srgb, var(--c2) 70%, var(--card));
+      }
+      .p-daychip.is-future {
+        background: transparent;
+        box-shadow: none;
+        outline: 1px dashed var(--border-strong);
+        outline-offset: -1px;
+      }
+      /* Days outside the window stay on the rod, paler, but opaque so the rod stays behind. */
+      .p-daychip:not(.is-counted):not(.is-future) {
+        background-color: color-mix(in srgb, var(--foreground) 4%, var(--card));
+        box-shadow: none;
+      }
+      .p-daychip.is-logged:not(.is-counted) {
+        background-color: color-mix(in srgb, var(--c2) 30%, var(--card));
+      }
+      .p-daychip.is-counted {
+        transform: translateY(10px);
+        box-shadow: 0 12px 16px -8px rgb(0 0 0 / 0.6);
+      }
+      .p-chain .p-bracket {
+        margin-top: 18px;
+      }
+
+      /* Palette slot helpers. */
+      .is-c1 {
+        --c: var(--c1);
+      }
+      .is-c2 {
+        --c: var(--c2);
+      }
+      .is-c3 {
+        --c: var(--c3);
+      }
+      .is-c4 {
+        --c: var(--c4);
+      }
+
+      /* Momentum rows share one layout across directions. */
+      .momentum {
+        display: grid;
+        gap: 22px;
+      }
+      .momentum > div {
+        max-width: 640px;
+      }
+      .momentum p.body-sm {
+        margin-bottom: 10px;
+      }
+
+      /* ---------- Mockup controls (not part of the design) ---------- */
+      .toolbar {
+        position: fixed;
+        bottom: 12px;
+        left: 50%;
+        z-index: 70;
+        width: max-content;
+        max-width: calc(100vw - 24px);
+        padding: 8px 10px;
+        transform: translateX(-50%);
+        border: 1px solid var(--border-strong);
+        border-radius: 14px;
+        background: color-mix(in srgb, var(--card) 94%, transparent);
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .tb-caption {
+        max-width: 640px;
+        margin: 2px 4px 8px;
+        color: var(--muted-foreground);
+        letter-spacing: 0.06em;
+        line-height: 1.5;
+        text-transform: none;
+      }
+      .tb-row,
+      .tb-group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px;
+      }
+      .tb-row {
+        gap: 12px;
+      }
+      .toolbar button {
+        padding: 7px 9px;
+        border-radius: 8px;
+        letter-spacing: inherit;
+        text-transform: inherit;
+      }
+      .toolbar button:hover {
+        color: var(--primary);
+      }
+      .toolbar button[aria-pressed='true'] {
+        background: var(--primary);
+        color: var(--primary-foreground);
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="frame">
+      <header class="frame-header">
+        <div>
+          <p class="mono">Case study No. 01 · Personal work</p>
+          <h1>Strive</h1>
+          <p class="tagline">Find your rhythm.</p>
+        </div>
+        <span class="modal-knob knob" aria-hidden="true"></span>
+      </header>
+      <nav class="tabs" aria-label="Chapters (static)">
+        <span class="tab"><b>01</b>Overview</span>
+        <span class="tab"><b>02</b>Product</span>
+        <span class="tab" aria-current="true"><b>03</b>Engineering</span>
+        <span class="tab"><b>04</b>Build log</span>
+      </nav>
+
+      <!-- 1. Section heading -->
+      <section class="block" id="heading">
+        <div class="block-intro">
+          <h2>1 · Section heading</h2>
+          <p class="mono">Pillars, pipeline, story headings</p>
+        </div>
+        <div class="variants">
+          <div class="v" data-v="a" data-tag="A · Tiles">
+            <h3 class="display a-heading"><span class="a-tile a-numtile is-c2">03</span>From a log to an insight</h3>
+          </div>
+          <div class="v" data-v="b" data-tag="B · Drawing set">
+            <div class="b-title">
+              <span class="b-marker"><b>3</b><i>04</i></span>
+              <h3 class="display">From a log to an insight</h3>
+              <span class="mono">Sheet 03 of 04</span>
+            </div>
+          </div>
+          <div class="v" data-v="c" data-tag="C1 · Flat">
+            <div class="c-band">
+              <span class="c-badge">3</span>
+              <h3 class="display">From a log to an insight</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Key figures -->
+      <section class="block" id="figures">
+        <div class="block-intro">
+          <h2>2 · Key figures</h2>
+          <p class="mono">Build log numbers, engineering numbers</p>
+        </div>
+        <div class="variants">
+          <div class="v" data-v="a" data-tag="A · Tiles: glazed tiles on a grout grid">
+            <div class="a-wall a-figures">
+              <div class="a-tile a-figure is-c1"><strong>~100</strong><span class="mono">Hours, evenings and weekends</span></div>
+              <div class="a-tile a-figure is-c2"><strong>610</strong><span class="mono">Commits</span></div>
+              <div class="a-tile a-figure is-c3"><strong>100</strong><span class="mono">Merged pull requests</span></div>
+              <div class="a-tile a-figure is-c4"><strong>36</strong><span class="mono">Days with commits</span></div>
+            </div>
+          </div>
+          <div class="v" data-v="b" data-tag="B · Drawing set: title block">
+            <div class="b-block">
+              <div class="b-row"><span class="mono">Project · Strive</span><span class="mono">Drawn · L. Joseph</span><span class="mono">Sheet 04 / 04</span></div>
+              <div class="b-stat"><span class="mono">Hours</span><strong>~100</strong><p class="body-sm">Evenings and weekends</p></div>
+              <div class="b-stat"><span class="mono">Commits</span><strong>610</strong><p class="body-sm">Since March 2026</p></div>
+              <div class="b-stat"><span class="mono">Pull requests</span><strong>100</strong><p class="body-sm">Merged</p></div>
+              <div class="b-stat"><span class="mono">Active days</span><strong>36</strong><p class="body-sm">Days with commits</p></div>
+              <div class="b-row is-foot"><span class="mono">Source · git, GitHub, commit timestamps</span><span class="mono">Scale · 1 : 1</span></div>
+            </div>
+          </div>
+          <div class="v" data-v="c" data-tag="C1 · Flat: paint swatch cards">
+            <div class="grid-4">
+              <div class="c-swatch is-c1">
+                <div class="c-chip" data-code="No. 01"></div>
+                <div class="c-swatch-body"><strong>~100</strong><span class="mono">Hours, evenings and weekends</span></div>
+                <div class="c-spec"><span>Method<b>Commit gaps</b></span><span>Span<b>4 months</b></span></div>
+              </div>
+              <div class="c-swatch is-c2">
+                <div class="c-chip" data-code="No. 02"></div>
+                <div class="c-swatch-body"><strong>610</strong><span class="mono">Commits</span></div>
+                <div class="c-spec"><span>Source<b>git log</b></span><span>Since<b>Mar 2026</b></span></div>
+              </div>
+              <div class="c-swatch is-c3">
+                <div class="c-chip" data-code="No. 03"></div>
+                <div class="c-swatch-body"><strong>100</strong><span class="mono">Merged pull requests</span></div>
+                <div class="c-spec"><span>Source<b>GitHub</b></span><span>State<b>Merged</b></span></div>
+              </div>
+              <div class="c-swatch is-c4">
+                <div class="c-chip" data-code="No. 04"></div>
+                <div class="c-swatch-body"><strong>36</strong><span class="mono">Days with commits</span></div>
+                <div class="c-spec"><span>Source<b>git log</b></span><span>Peak<b>May and June</b></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Numbered sequence -->
+      <section class="block" id="steps">
+        <div class="block-intro">
+          <h2>3 · Numbered sequence</h2>
+          <p class="mono">Pillars, pipeline, decisions, lessons</p>
+        </div>
+        <div class="variants">
+          <div class="v" data-v="a" data-tag="A · Tiles: U-arch relief tiles">
+            <ol class="grid-4 a-steps" data-steps="a"></ol>
+          </div>
+          <div class="v" data-v="b" data-tag="B · Drawing set: column grid axes">
+            <ol class="b-axes" data-steps="b"></ol>
+          </div>
+          <div class="v" data-v="c" data-tag="C1 · Flat: badges and pictograms">
+            <ol class="grid-4 c-steps" data-steps="c"></ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Stack -->
+      <section class="block" id="stack">
+        <div class="block-intro">
+          <h2>4 · Stack</h2>
+          <p class="mono">Engineering</p>
+        </div>
+        <div class="variants">
+          <div class="v" data-v="a" data-tag="A · Tiles: monogram tiles, as in the moodboard">
+            <div class="a-stack" data-stack="a"></div>
+          </div>
+          <div class="v" data-v="b" data-tag="B · Drawing set: legend with hatches">
+            <div class="b-legend">
+              <p class="mono b-legend-head">Legend</p>
+              <ul data-stack="b"></ul>
+            </div>
+          </div>
+          <div class="v" data-v="c" data-tag="C1 · Flat: material capsules">
+            <ul class="grid-4 c-stack" data-stack="c"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Momentum diagram -->
+      <section class="block" id="momentum">
+        <div class="block-intro">
+          <h2>5 · Before / after diagram</h2>
+          <p class="mono">Build log, momentum rebuild</p>
+        </div>
+        <div class="variants">
+          <div class="v" data-v="a" data-tag="A · Tiles: glazed days, brass frame on the counted run">
+            <div class="momentum" data-momentum="a"></div>
+          </div>
+          <div class="v" data-v="b" data-tag="B · Drawing set: dimension lines over a plan grid">
+            <div class="momentum" data-momentum="b"></div>
+          </div>
+          <div class="v" data-v="c" data-tag="C1 · Flat: color chips, pill outline">
+            <div class="momentum" data-momentum="c"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Results -->
+      <section class="block" id="results">
+        <div class="block-intro">
+          <h2>6 · Short list</h2>
+          <p class="mono">Where it stands, also shipped</p>
+        </div>
+        <div class="variants">
+          <div class="v" data-v="a" data-tag="A · Tiles: tile bullets">
+            <ul class="a-results" data-results="a"></ul>
+          </div>
+          <div class="v" data-v="b" data-tag="B · Drawing set: general notes">
+            <p class="mono" style="margin-bottom: 12px">General notes</p>
+            <ol class="b-notes" data-results="b"></ol>
+          </div>
+          <div class="v" data-v="c" data-tag="C1 · Flat: accent dots">
+            <ul class="c-results" data-results="c"></ul>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <div class="toolbar" role="toolbar" aria-label="Mockup controls">
+      <p class="tb-caption" id="caption"></p>
+      <div class="tb-row">
+        <div class="tb-group">
+          <button type="button" data-dir="p3">Pass 3 · Page</button>
+          <button type="button" data-dir="all">All guide</button>
+          <button type="button" data-dir="c">C1 · Flat</button>
+          <button type="button" data-dir="c2">C2 · Material</button>
+          <button type="button" data-dir="c3">C3 · Quiet</button>
+        </div>
+        <div class="tb-group" title="Explored in pass 1, not retained">
+          <button type="button" data-dir="a">A</button>
+          <button type="button" data-dir="b">B</button>
+        </div>
+        <div class="tb-group">
+          <button type="button" data-theme="theme-01" title="Plâtre Blanc">01</button>
+          <button type="button" data-theme="theme-02" title="Sable Terracotta">02</button>
+          <button type="button" data-theme="theme-03" title="Chocolat Ambré">03</button>
+          <button type="button" data-theme="theme-04" title="Oxblood Nuit">04</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Real copy from web-portfolio/content/projects.json (EN).
+      const steps = [
+        { title: 'Log', body: 'A tap, a sentence or a voice message. The chat matches loose wording to the right ritual.' },
+        { title: 'Compute', body: 'Postgres views derive momentum and the weekly facts. Nothing is stored twice.' },
+        { title: 'Phrase', body: 'Gemini receives the computed facts and writes a headline and one sentence.' },
+        { title: 'Show', body: 'The app renders a card. Facts below a confidence threshold never reach the model.' },
+      ];
+      const stack = [
+        { label: 'App', hatch: 'diag', items: [['Nx', 'Next.js 16'], ['Re', 'React 19'], ['Ts', 'TypeScript'], ['Tw', 'Tailwind CSS v4'], ['In', 'next-intl']] },
+        { label: 'Data', hatch: 'cross', items: [['Sb', 'Supabase'], ['Pg', 'PostgreSQL'], ['Rl', 'Row Level Security'], ['Cr', 'pg_cron']] },
+        { label: 'AI', hatch: 'dots', items: [['Ai', 'Vercel AI SDK'], ['Gm', 'Gemini 2.5 Flash']] },
+        { label: 'Ops', hatch: 'solid', items: [['Vc', 'Vercel'], ['Se', 'Sentry'], ['Wp', 'Web Push'], ['Vt', 'Vitest']] },
+      ];
+      const results = [
+        'Live and feature complete at v1.0, in my own daily use: 293 logs across 15 rituals over 94 days.',
+        'In a synthetic beta, three of three AI personas put "momentum over streaks" in their own words without being told, and logged by typing a sentence on the first try.',
+        'Visitors from the US, Brazil, Japan, Norway and Canada with no marketing at all, one of them referred by ChatGPT.',
+        'One Sentry issue in three months, traced to clock skew between two Supabase services, not to app code.',
+      ];
+      const momentum = [
+        { key: 'Before', text: 'Calendar week: momentum starts over every Monday.', from: 7, dim: 'Since Monday' },
+        { key: 'After', text: 'Rolling seven days: the last week always counts.', from: 4, dim: '7 days' },
+      ];
+      const TODAY = 10;
+      const logged = [1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0];
+      const slots = ['is-c1', 'is-c2', 'is-c3', 'is-c4'];
+      const pictograms = [
+        '<svg viewBox="0 0 34 34"><path d="M3 24a14 14 0 0 1 28 0Z" fill="currentColor"/><rect x="3" y="27" width="28" height="4" fill="currentColor"/></svg>',
+        '<svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="17" cy="17" r="5" fill="currentColor"/></svg>',
+        '<svg viewBox="0 0 34 34"><rect x="4" y="4" width="10" height="26" fill="currentColor"/><circle cx="24" cy="12" r="7" fill="currentColor"/></svg>',
+        '<svg viewBox="0 0 34 34"><path d="M4 30V4a26 26 0 0 1 26 26Z" fill="currentColor"/></svg>',
+      ];
+      const ordinal = (i) => String(i + 1).padStart(2, '0');
+      const fill = (selector, html) => document.querySelectorAll(selector).forEach((el) => (el.innerHTML = html));
+
+      fill('[data-steps="a"]', steps.map((s, i) => `<li><span class="a-tile a-arch ${slots[i]}">${i + 1}</span><h4>${s.title}</h4><p class="body-sm">${s.body}</p></li>`).join(''));
+      fill('[data-steps="b"]', steps.map((s, i) => `<li><span class="b-bubble">${'ABCD'[i]}</span><h4>${s.title}</h4><p class="body-sm">${s.body}</p></li>`).join(''));
+      fill('[data-steps="c"]', steps.map((s, i) => `<li class="${slots[i]}"><div class="c-top"><span class="c-badge">${i + 1}</span>${pictograms[i]}</div><h4>${s.title}</h4><p class="body-sm">${s.body}</p></li>`).join(''));
+
+      fill('[data-stack="a"]', stack.map((g, i) => `<div><p class="mono">${g.label}</p><div class="a-wall">${g.items.map(([m, name]) => `<span class="a-tile a-mono ${slots[i]}"><b>${m}</b><small>${name}</small></span>`).join('')}</div></div>`).join(''));
+      fill('[data-stack="b"]', stack.map((g) => `<li><span class="b-hatch is-${g.hatch}"></span><span class="mono">${g.label}</span><span class="body-sm">${g.items.map(([, name]) => name).join(' · ')}</span></li>`).join(''));
+      fill('[data-stack="c"]', stack.map((g, i) => `<li class="${slots[i]}"><span class="c-capsule"></span><div><h4>${g.label}</h4><p>${g.items.map(([, name]) => name).join('<br>')}</p></div></li>`).join(''));
+
+      const rowLabel = (m) => `<p class="body-sm"><span class="mono" style="margin-right: 10px">${m.key}</span>${m.text}</p>`;
+      const state = (d) => (d > TODAY ? 'is-future' : logged[d] ? 'is-logged' : '');
+      const days = [...Array(14).keys()];
+      fill('[data-momentum="a"]', momentum.map((m) => `<div>${rowLabel(m)}<div class="a-days">${days.map((d) => `<span class="a-day ${state(d)}" style="grid-column: ${d + 1}"></span>`).join('')}<span class="a-window" style="grid-column: ${m.from + 1} / ${TODAY + 2}"></span></div></div>`).join(''));
+      fill('[data-momentum="b"]', momentum.map((m) => `<div>${rowLabel(m)}<div class="b-plan"><span class="b-dim" style="grid-column: ${m.from + 1} / ${TODAY + 2}"><span>${m.dim}</span></span>${days.map((d) => `<span class="b-cell ${state(d)} ${d === 7 ? 'is-monday' : ''}" style="grid-column: ${d + 1}"><i></i></span>`).join('')}</div></div>`).join(''));
+      fill('[data-momentum="c"]', momentum.map((m) => `<div>${rowLabel(m)}<div class="c-dots"><span class="c-pill" style="grid-column: ${m.from + 1} / ${TODAY + 2}"></span>${days.map((d) => `<span class="c-dot ${state(d)}" style="grid-column: ${d + 1}"><i></i></span>`).join('')}</div></div>`).join(''));
+
+      fill('[data-results="a"]', results.map((r, i) => `<li><span class="a-tile ${slots[i]}"></span><span class="body-sm">${r}</span></li>`).join(''));
+      fill('[data-results="b"]', results.map((r) => `<li><span class="body-sm">${r}</span></li>`).join(''));
+      fill('[data-results="c"]', results.map((r, i) => `<li class="${slots[i]}"><span class="body-sm">${r}</span></li>`).join(''));
+
+      // C2 and C3 share one markup; C3 only adds .is-quiet.
+      const icons = [
+        '<svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="28" r="18"/><path d="m20 28 6 6 11-12"/></svg>',
+        '<svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="28" cy="15" rx="15" ry="6"/><path d="M13 15v26c0 3.3 6.7 6 15 6s15-2.7 15-6V15"/><path d="M13 28c0 3.3 6.7 6 15 6s15-2.7 15-6"/></svg>',
+        '<svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13h36v23H27l-9 8v-8h-8z"/><path d="M18 21h20M18 28h12"/></svg>',
+        '<svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="11" width="36" height="34" rx="4"/><path d="M10 20h36M17 28h14M17 36h22"/></svg>',
+      ];
+      const chips = [
+        { code: '04-A', value: '~100', name: 'Hours, evenings and weekends', spec: 'Method · commit gaps', mat: 'linen' },
+        { code: '04-B', value: '610', name: 'Commits', spec: 'Source · git log', mat: 'wood' },
+        { code: '04-C', value: '100', name: 'Merged pull requests', spec: 'Source · GitHub', mat: 'leather' },
+        { code: '04-D', value: '36', name: 'Days with commits', spec: 'Peak · May and June', mat: 'brass' },
+      ];
+      const samples = [
+        { shape: 'square', mat: 'linen' },
+        { shape: 'hex', mat: 'glaze' },
+        { shape: 'disc', mat: 'brass' },
+        { shape: 'strip', mat: 'wood' },
+      ];
+      const counted = ['Counted since Monday', 'Counted over the last 7 days'];
+      const guideBlocks = {
+        heading: {
+          note: 'guide band, stamped plate',
+          html: () => `<div class="g-band"><span class="g-stamp mat mat-brass is-c2">3</span><h3 class="display">From a log to an insight</h3><span class="mono">Chapter 03</span></div>`,
+        },
+        figures: {
+          note: 'notched sample chips',
+          html: () => `<div class="g-chips">${chips.map((c, i) => `<div class="g-chip mat mat-${c.mat} ${slots[i]}"><span class="g-code">${c.code}</span><strong>${c.value}</strong><span class="g-name">${c.name}</span><span class="g-spec">${c.spec}</span></div>`).join('')}</div>`,
+        },
+        steps: {
+          note: 'catalog sheet, printed pictograms',
+          html: () => `<div class="g-sheet"><ol class="g-catalog">${steps.map((s, i) => `<li class="${slots[i]}"><span class="g-plate">${icons[i]}</span><h4><span>No. ${i + 1}</span>${s.title}</h4><p class="body-sm">${s.body}</p></li>`).join('')}</ol></div>`,
+        },
+        stack: {
+          note: 'material flat lay',
+          html: () => `<div class="g-board">${stack.map((g, i) => `<figure class="g-sample"><span class="g-shape shape-${samples[i].shape} mat mat-${samples[i].mat} ${slots[i]}"></span><figcaption class="g-tag"><b>${g.label}</b><span>${g.items.map(([, name]) => name).join('<br>')}</span></figcaption></figure>`).join('')}</div>`,
+        },
+        momentum: {
+          note: 'paint chip strip, die-cut window',
+          html: () => `<div class="momentum">${momentum.map((m, i) => `<div>${rowLabel(m)}<div class="g-strip"><div class="g-days">${days.map((d) => `<span class="g-day ${state(d)}" style="grid-column: ${d + 1}"></span>`).join('')}<span class="g-cut" style="grid-column: ${m.from + 1} / ${TODAY + 2}"></span></div><div class="g-strip-foot"><span class="mono">Strip 05-${'AB'[i]}</span><span class="mono">${counted[i]}</span></div></div></div>`).join('')}</div>`,
+        },
+        results: {
+          note: 'numbered catalog captions',
+          html: () => `<ol class="g-captions">${results.map((r, i) => `<li><span class="g-no">No. ${ordinal(i)}</span><span class="body-sm">${r}</span></li>`).join('')}</ol>`,
+        },
+      };
+      for (const [id, block] of Object.entries(guideBlocks)) {
+        const variants = document.querySelector(`#${id} .variants`);
+        variants.insertAdjacentHTML('beforeend', `<div class="v g" data-v="c2" data-tag="C2 · Material: ${block.note}">${block.html()}</div>`);
+        variants.insertAdjacentHTML('beforeend', `<div class="v g is-quiet" data-v="c3" data-tag="C3 · Quiet: ${block.note}">${block.html()}</div>`);
+      }
+
+      // Pass 3: kept choices, and alternatives only where the decision is open.
+      const pictos = [
+        '<svg viewBox="0 0 48 48"><rect class="k" x="23" y="4" width="2" height="38"/><circle cx="24" cy="18" r="8" fill="currentColor"/></svg>',
+        '<svg viewBox="0 0 48 48"><path class="m" d="M8 42a16 16 0 0 1 32 0Z"/><rect class="k" x="23" y="4" width="2" height="38"/><circle cx="24" cy="18" r="8" fill="currentColor"/></svg>',
+        '<svg viewBox="0 0 48 48"><path class="m" d="M8 42a16 16 0 0 1 32 0Z"/><rect class="k" x="23" y="4" width="2" height="38"/><circle cx="24" cy="18" r="8" fill="currentColor"/><rect class="k" x="4" y="32" width="10" height="10"/></svg>',
+        '<svg viewBox="0 0 48 48"><rect class="f" x="2" y="2" width="44" height="44" rx="3"/><path class="m" d="M10 40a14 14 0 0 1 28 0Z"/><rect class="k" x="23" y="8" width="2" height="32"/><circle cx="24" cy="19" r="7" fill="currentColor"/><rect class="k" x="8" y="31" width="8" height="9"/></svg>',
+      ];
+      const windowRatio = (from) => {
+        const counted = logged.slice(from, TODAY + 1);
+        return [counted.filter(Boolean).length, counted.length];
+      };
+      const pass3 = {
+        heading: [
+          ['H1 · Label holder: brass frame, two screws, paper label (image-31)', `<div class="p-holder mat mat-brass" style="--c: var(--accent)"><span class="p-screw"></span><div class="p-label"><span class="mono">Chapter 03 · Engineering</span><h3 class="display">From a log to an insight</h3></div><span class="p-screw"></span></div>`],
+          ['H2 · Archive label: double rule, stamped number (image-32)', `<div class="p-archive"><span class="p-stamp">3</span><div><span class="mono">Chapter 03 · Engineering</span><h3 class="display">From a log to an insight</h3></div></div>`],
+          ['H3 · Editorial number: big figure, title beside (image-33)', `<div class="p-editorial"><span class="p-bignum">03</span><div><span class="mono">Engineering</span><h3 class="display">From a log to an insight</h3></div></div>`],
+          ['H4 · C1 flat band, for reference', `<div class="c-band"><span class="c-badge">3</span><h3 class="display">From a log to an insight</h3></div>`],
+          ['H5 · Chip marker: the chapter number on a notched chip, big title beside', `<div class="p-chiphead"><span class="p-minichip p-hole mat mat-linen" style="--c: var(--primary)">03</span><div><span class="mono">Chapter 03 · Engineering</span><h3 class="display">From a log to an insight</h3></div></div>`],
+          ['H6 · Wide chip: the title printed on a sample chip', `<div class="p-widechip p-hole mat mat-linen" style="--c: var(--primary)"><span class="g-code">03-A</span><h3 class="display">From a log to an insight</h3><span class="g-spec">Chapter 03 · Engineering</span></div>`],
+        ],
+        figures: [['Kept · C2 notched sample chips', guideBlocks.figures.html()]],
+        steps: [
+          ['Kept · C1 cards, stamped numbers, pictograms that build up step by step', `<ol class="grid-4 p-steps">${steps.map((st, i) => `<li class="${slots[i]}"><div class="c-top"><span class="p-num">${i + 1}</span><span class="p-picto">${pictos[i]}</span></div><h4>${st.title}</h4><p class="body-sm">${st.body}</p></li>`).join('')}</ol>`],
+        ],
+        stack: [
+          ['Kept · C1 capsules, with material textures', `<ul class="grid-4 c-stack">${stack.map((g, i) => `<li class="${slots[i]}"><span class="p-capsule mat mat-${samples[i].mat === 'glaze' ? 'glaze' : samples[i].mat} ${slots[i]}"></span><div><h4>${g.label}</h4><p>${g.items.map(([, name]) => name).join('<br>')}</p></div></li>`).join('')}</ul>`],
+        ],
+        momentum: [
+          ['D1 · Paint chip strip, die-cut window (C2)', guideBlocks.momentum.html()],
+          ['D2 · Textile band: stamped ovals, stitched window (image-30)', `<div class="momentum">${momentum.map((m) => `<div>${rowLabel(m)}<div class="p-textile"><div class="p-ovals">${days.map((d) => `<span class="p-oval ${state(d)}" style="grid-column: ${d + 1}"><i></i></span>`).join('')}<span class="p-stitch" style="grid-column: ${m.from + 1} / ${TODAY + 2}"></span></div></div></div>`).join('')}</div>`],
+          ['D3 · Glazed tile run, brass frame (from A, in the guide palette)', `<div class="momentum">${momentum.map((m) => `<div>${rowLabel(m)}<div class="a-days">${days.map((d) => `<span class="a-day ${state(d)}" style="grid-column: ${d + 1}"></span>`).join('')}<span class="a-window" style="grid-column: ${m.from + 1} / ${TODAY + 2}"></span></div></div>`).join('')}</div>`],
+          ['D4 · Editorial chart: the counted ratio, then the days as bars (image-33)', `<div class="momentum">${momentum.map((m) => { const [n, total] = windowRatio(m.from); return `<div>${rowLabel(m)}<div class="p-chart-row"><div class="p-ratio"><strong>${n}<small>/${total}</small></strong><span class="mono">Days counted</span></div><div class="p-bars">${days.map((d) => `<span class="p-bar ${state(d)} ${d >= m.from && d <= TODAY ? 'is-counted' : ''}" style="grid-column: ${d + 1}"></span>`).join('')}<span class="p-bracket mono" style="grid-column: ${m.from + 1} / ${TODAY + 2}">${m.dim}</span></div></div></div>`; }).join('')}</div>`],
+        ],
+        results: [['Kept · numbered catalog captions, in line with the chip codes', guideBlocks.results.html()]],
+      };
+      pass3.momentum.push([
+        'D5 · Chip chain: each day is a chip on a brass rod, counted chips pulled out',
+        `<div class="momentum">${momentum.map((m) => `<div>${rowLabel(m)}<div class="p-chain">${days.map((d) => `<span class="p-daychip p-hole mat mat-linen is-c2 ${state(d)} ${d >= m.from && d <= TODAY ? 'is-counted' : ''}" style="grid-column: ${d + 1}"></span>`).join('')}<span class="p-bracket mono" style="grid-column: ${m.from + 1} / ${TODAY + 2}">${m.dim}</span></div></div>`).join('')}</div>`,
+      ]);
+      for (const [id, variants] of Object.entries(pass3)) {
+        const container = document.querySelector(`#${id} .variants`);
+        for (const [tag, html] of variants) {
+          container.insertAdjacentHTML('beforeend', `<div class="v g" data-v="p3" data-tag="${tag}">${html}</div>`);
+        }
+      }
+
+      // Controls and deep links, e.g. ?dir=p3&theme=theme-01&block=momentum
+      const THEMES = ['theme-01', 'theme-02', 'theme-03', 'theme-04'];
+      const CAPTIONS = {
+        p3: 'Pass 3 · Page: kept choices (C2 chips, reworked C1 sequence, textured capsules, catalog captions) and alternatives where open: 6 headings, 5 diagrams. H5, H6 and D5 carry the sample chip to other blocks.',
+        all: 'Design guide variants, stacked per block: C1 flat (pass 1), C2 material, C3 quiet. A and B were explored in pass 1 and set aside.',
+        a: 'A · Tiles: glazed ceramic wall, U-arch relief, monogram tiles, brass frame. Refs: inspirations 12 to 18, home contact tiles, moodboard stack.',
+        b: 'B · Drawing set: title block, column grid axes, legend with hatches, dimension lines. Refs: Case Study House plans, the site compass arcs.',
+        c: 'C1 · Flat (pass 1): section badges, paint swatch cards, material capsules, color chips. Refs: image-3, image-5, moodboard capsules.',
+        c2: 'C2 · Material: stamped plates, notched sample chips, catalog sheet with printed pictograms, material flat lay, paint chip strip. Refs: image-20, 21, 23, 24, 25, 28, 29.',
+        c3: 'C3 · Quiet: the C2 materials in tints of the primary hue only. The calmest option next to a busy home page.',
+      };
+      const root = document.documentElement;
+
+      function syncPressed() {
+        document.querySelectorAll('.toolbar [data-dir]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.dir === root.dataset.dir)));
+        document.querySelectorAll('.toolbar [data-theme]').forEach((b) => b.setAttribute('aria-pressed', String(root.classList.contains(b.dataset.theme))));
+        document.getElementById('caption').textContent = CAPTIONS[root.dataset.dir];
+      }
+      function setTheme(theme) {
+        root.classList.remove(...THEMES);
+        root.classList.add(theme);
+      }
+
+      document.querySelector('.toolbar').addEventListener('click', (e) => {
+        const button = e.target.closest('button');
+        if (!button) return;
+        if (button.dataset.dir) root.dataset.dir = button.dataset.dir;
+        if (button.dataset.theme) setTheme(button.dataset.theme);
+        syncPressed();
+      });
+
+      const params = new URLSearchParams(location.search);
+      if (CAPTIONS[params.get('dir')]) root.dataset.dir = params.get('dir');
+      if (THEMES.includes(params.get('theme'))) setTheme(params.get('theme'));
+      syncPressed();
+      if (params.get('block')) document.getElementById(params.get('block'))?.scrollIntoView();
+      // ?only=momentum shows a single block, handy to focus a decision.
+      if (params.get('only')) {
+        document.querySelectorAll('.block').forEach((block) => (block.hidden = block.id !== params.get('only')));
+      }
+    </script>
+  </body>
+</html>

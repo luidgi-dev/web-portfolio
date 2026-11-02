@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en" class="theme-03">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Professional work card and flow diagrams (mockup)</title>
+    <!-- Mockup rules sit below the site's @layer components, so reused site classes win. -->
+    <style>
+      @layer mockup, components;
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&family=Playfair+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Real site tokens and materials, linked (not copied) so the mockup follows the app. -->
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/tokens/themes.css" />
+    <link rel="stylesheet" href="../../web-portfolio/app/styles/utilities/materials.css" />
+    <style>
+      @layer mockup {
+        :root {
+          --font-display: 'Playfair Display', Georgia, serif;
+          --font-sans: 'DM Sans', system-ui, sans-serif;
+          --font-mono: 'DM Mono', 'Courier New', monospace;
+        }
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+          margin: 0;
+        }
+        body {
+          padding: 32px 16px 120px;
+          background: var(--background);
+          color: var(--foreground);
+          font-family: var(--font-sans);
+          -webkit-font-smoothing: antialiased;
+        }
+        ul,
+        ol {
+          padding: 0;
+          list-style: none;
+        }
+        main {
+          display: grid;
+          gap: 56px;
+          max-width: 1040px;
+          margin: 0 auto;
+        }
+        .mono {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--muted-foreground);
+        }
+        .variant-tag {
+          margin-bottom: 12px;
+        }
+        .variant-tag b {
+          color: var(--foreground);
+          font-weight: 500;
+        }
+        h1.page {
+          font-family: var(--font-display);
+          font-size: 28px;
+        }
+
+        /* Bento card shell, as in components/bento/bento-card.tsx. */
+        .card {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          max-width: 660px;
+          min-height: 470px;
+          padding: 24px;
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          background: var(--card);
+          cursor: pointer;
+          transition: border-color 0.2s ease;
+        }
+        .card:hover {
+          border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+        }
+        .card-label {
+          margin-bottom: 14px;
+        }
+        .card h2 {
+          font-family: var(--font-display);
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+        }
+        .intro,
+        .case p {
+          margin-top: 10px;
+          font-size: 14px;
+          line-height: 1.6;
+          color: color-mix(in srgb, var(--foreground) 90%, transparent);
+        }
+        .cases {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          margin-top: 20px;
+        }
+        .stats {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          margin-top: auto;
+          padding-top: 16px;
+          border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+        }
+        .stats dd {
+          font-family: var(--font-display);
+          font-size: 24px;
+          font-weight: 700;
+        }
+        .stats dt {
+          margin-top: 4px;
+          font-size: 11px;
+          line-height: 1.35;
+          color: var(--muted-foreground);
+        }
+        .stats div {
+          display: flex;
+          flex-direction: column-reverse;
+        }
+        .cta {
+          display: inline-flex;
+          gap: 8px;
+          margin-top: 16px;
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: color-mix(in srgb, var(--foreground) 80%, transparent);
+        }
+        .card:hover .cta {
+          color: var(--primary);
+        }
+
+        /* Current: left bar and tech chip. */
+        .v0 .case {
+          padding-left: 12px;
+          border-left: 2px solid color-mix(in srgb, var(--primary) 50%, transparent);
+        }
+        .v0 .case .bento-chip {
+          margin-top: 12px;
+        }
+
+        /* A · Hairlines: a rule above each case, status as a mono line with a dot. */
+        .vA .case {
+          padding-top: 12px;
+          border-top: 1px solid var(--border);
+        }
+        .vA .status {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 12px;
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--muted-foreground);
+        }
+        .vA .status::before {
+          content: '';
+          width: 6px;
+          height: 6px;
+          border-radius: 9999px;
+          background: var(--primary);
+        }
+
+        /* B · Stamped: the case numbers in the stamp used by case study steps, status in plain text. */
+        .vB .case {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          column-gap: 12px;
+        }
+        .vB .stamp-number {
+          --swatch: var(--primary);
+          width: 2rem;
+          height: 2rem;
+          font-size: 0.9rem;
+        }
+        .vB .case p {
+          margin-top: 6px;
+        }
+        .vB .status {
+          margin-top: 8px;
+          font-size: 13px;
+          color: var(--muted-foreground);
+        }
+        .vB .status b {
+          font-weight: 500;
+          color: var(--foreground);
+        }
+
+        /* C · Brass plaque: hairline between the cases, the rebuild engraved on a small plaque. */
+        .vC .cases {
+          gap: 0;
+        }
+        .vC .case + .case {
+          padding-left: 20px;
+          border-left: 1px solid var(--border);
+        }
+        .vC .case:first-child {
+          padding-right: 20px;
+        }
+        .vC .plaque {
+          display: inline-block;
+          margin-top: 12px;
+          padding: 6px 10px;
+          border: 1px solid color-mix(in srgb, var(--foreground) 22%, transparent);
+          border-radius: 3px;
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          box-shadow:
+            inset 0 1px 0 rgb(255 255 255 / 0.2),
+            inset 0 -1px 0 rgb(0 0 0 / 0.15);
+        }
+
+        /* Flow diagrams, shown inside a modal-like panel. */
+        .panel {
+          padding: 28px;
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          background: var(--card);
+        }
+        .project h3 {
+          font-family: var(--font-display);
+          font-size: 26px;
+          font-weight: 700;
+        }
+        .project .rows {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          margin-top: 14px;
+        }
+        .project .rows p {
+          margin-top: 6px;
+          font-size: 14px;
+          line-height: 1.55;
+        }
+        .plate {
+          margin-top: 24px;
+          padding: 20px;
+          border: 1px solid var(--border);
+          border-radius: 4px;
+        }
+        .plate figcaption {
+          display: flex;
+          gap: 10px;
+          margin-top: 16px;
+          padding-top: 10px;
+          border-top: 1px solid var(--border);
+          font-size: 13px;
+          color: var(--muted-foreground);
+        }
+
+        /* D1 · Chip strip: each step on a sample chip, arrows between. */
+        .d1 {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 28px;
+        }
+        .d1 li {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          min-height: 128px;
+          padding: 30px 12px 12px;
+        }
+        .d1 li + li::after {
+          content: '→';
+          position: absolute;
+          top: 50%;
+          left: -22px;
+          translate: 0 -50%;
+          color: var(--muted-foreground);
+        }
+        .d1 .code {
+          position: absolute;
+          top: 9px;
+          left: 12px;
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.12em;
+          color: color-mix(in srgb, var(--foreground) 70%, transparent);
+        }
+        .d1 .text {
+          margin-top: auto;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 1.35;
+        }
+
+        /* D2 · Line: stamped stations on one rule, text under each. */
+        .d2 {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          background: linear-gradient(var(--border-strong), var(--border-strong)) no-repeat 0 18px / 100% 1px;
+        }
+        .d2 li {
+          display: grid;
+          justify-items: start;
+          gap: 12px;
+        }
+        .d2 .stamp-number {
+          background: var(--card);
+        }
+        .d2 .text {
+          font-size: 14px;
+          line-height: 1.4;
+        }
+
+        /* D3 · Shipping tags: each step on a tag with its eyelet, a dashed string through them. Refs: image-31, image-32. */
+        .d3 {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 18px;
+          background: repeating-linear-gradient(90deg, var(--border-strong) 0 6px, transparent 6px 10px) no-repeat 0 50% / 100% 1px;
+        }
+        .d3 li {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          min-height: 92px;
+          padding: 12px 12px 12px 34px;
+          clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+          box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+        }
+        .d3 li::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 12px;
+          width: 10px;
+          height: 10px;
+          translate: 0 -50%;
+          border-radius: 9999px;
+          background: var(--card);
+          box-shadow:
+            0 0 0 2px color-mix(in srgb, var(--chart-5) 70%, var(--foreground)),
+            inset 0 1px 2px rgb(0 0 0 / 0.4);
+        }
+        .d3 .code {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.12em;
+          color: color-mix(in srgb, var(--foreground) 70%, transparent);
+        }
+        .d3 .text {
+          margin-top: auto;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 1.35;
+        }
+
+        /* D4 · Saddle stitch: leather labels with a stitched edge, joined by a stitched seam. Refs: image-31 (stitched leather label). */
+        .d4 {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 22px;
+          align-items: stretch;
+        }
+        .d4 li {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          min-height: 96px;
+          padding: 14px 14px 12px;
+          border-radius: 8px;
+          outline: 1px dashed color-mix(in srgb, var(--foreground) 45%, transparent);
+          outline-offset: -6px;
+          box-shadow:
+            inset 0 1px 0 rgb(255 255 255 / 0.1),
+            0 6px 12px -10px rgb(0 0 0 / 0.5);
+        }
+        .d4 li + li::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: -22px;
+          width: 22px;
+          height: 6px;
+          translate: 0 -50%;
+          background: repeating-linear-gradient(
+            120deg,
+            transparent 0 3px,
+            color-mix(in srgb, var(--foreground) 55%, transparent) 3px 5px,
+            transparent 5px 7px
+          );
+        }
+        .d4 .code {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.12em;
+          color: color-mix(in srgb, var(--foreground) 70%, transparent);
+        }
+        .d4 .text {
+          margin-top: auto;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 1.35;
+        }
+
+        @media (max-width: 720px) {
+          .cases,
+          .project .rows,
+          .d1,
+          .d2,
+          .d3,
+          .d4 {
+            grid-template-columns: 1fr;
+          }
+          .d3 {
+            background-position: 17px 0;
+            background-size: 1px 100%;
+            background-image: repeating-linear-gradient(180deg, var(--border-strong) 0 6px, transparent 6px 10px);
+          }
+          .d4 li + li::after {
+            top: -22px;
+            left: 50%;
+            width: 6px;
+            height: 22px;
+            translate: -50% 0;
+            background: repeating-linear-gradient(
+              30deg,
+              transparent 0 3px,
+              color-mix(in srgb, var(--foreground) 55%, transparent) 3px 5px,
+              transparent 5px 7px
+            );
+          }
+          .stats {
+            grid-template-columns: 1fr 1fr;
+          }
+          .vC .case + .case {
+            padding: 16px 0 0;
+            border-left: 0;
+            border-top: 1px solid var(--border);
+          }
+          .d1 li + li::after {
+            content: '↓';
+            top: -24px;
+            left: 50%;
+            translate: -50% 0;
+          }
+          .d2 {
+            background-position: 18px 0;
+            background-size: 1px 100%;
+          }
+          .d2 li {
+            grid-template-columns: auto 1fr;
+            align-items: center;
+          }
+        }
+
+        .toolbar {
+          position: fixed;
+          right: 16px;
+          bottom: 16px;
+          display: flex;
+          gap: 6px;
+          padding: 8px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          background: var(--card);
+        }
+        .toolbar button {
+          padding: 6px 10px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: none;
+          color: inherit;
+          font: 11px var(--font-mono);
+          cursor: pointer;
+        }
+        .toolbar button[aria-pressed='true'] {
+          background: var(--primary);
+          color: var(--primary-foreground);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 class="page">Professional work: card and flow diagrams</h1>
+
+      <template id="card">
+        <article class="card">
+          <p class="mono card-label">Professional work</p>
+          <h2>Apps and internal tools for business teams</h2>
+          <p class="intro">
+            Apps and automations for a high-end saddle maker, in Python on Google Cloud, since
+            July 2024.
+          </p>
+          <div class="cases">
+            <section class="case">
+              <span class="stamp-number" aria-hidden="true">1</span>
+              <div>
+                <h3 class="mono">Customer service · Shipment tracking</h3>
+                <p>
+                  Tracks each saddle from the workshop to shipping, while the team collects the
+                  balance and the address. Python, BigQuery, AppSheet.
+                </p>
+                <span class="bento-chip">Rebuilding in Next.js and Supabase</span>
+                <p class="status">Rebuilding in Next.js and Supabase</p>
+                <span class="plaque material material-brass swatch-primary"
+                  >Rebuilding in Next.js and Supabase</span
+                >
+              </div>
+            </section>
+            <section class="case">
+              <span class="stamp-number" aria-hidden="true">2</span>
+              <div>
+                <h3 class="mono">Automation · Customer messages</h3>
+                <p>
+                  Python jobs on Cloud Run that email and text customers with payment links
+                  (Stripe, Alma, Nuvei).
+                </p>
+              </div>
+            </section>
+          </div>
+          <dl class="stats">
+            <div><dt>orders in progress</dt><dd>1,100+</dd></div>
+            <div><dt>messages a month</dt><dd>~1,500</dd></div>
+            <div><dt>follow-ups closed a month</dt><dd>~450</dd></div>
+            <div><dt>brands on 2 sites, EU and US</dt><dd>4</dd></div>
+          </dl>
+          <p class="cta"><span>See how it works</span><span>→</span></p>
+        </article>
+      </template>
+
+      <section data-card="v0">
+        <p class="mono variant-tag"><b>Current</b> · left bar and tech chip</p>
+      </section>
+      <section data-card="vA">
+        <p class="mono variant-tag">
+          <b>A · Hairlines</b> · a rule above each case, the rebuild as a status line with a dot
+        </p>
+      </section>
+      <section data-card="vB">
+        <p class="mono variant-tag">
+          <b>B · Stamped</b> · numbered like the case study steps, the rebuild in plain text
+        </p>
+      </section>
+      <section data-card="vC">
+        <p class="mono variant-tag">
+          <b>C · Brass plaque</b> · a hairline between the cases, the rebuild on a small plaque
+        </p>
+      </section>
+
+      <template id="project">
+        <article class="panel project">
+          <h3>Customer messages and payment links</h3>
+          <div class="rows">
+            <div>
+              <p class="mono">Problem</p>
+              <p>Emails went out half by hand from the ERP, text messages fully by hand.</p>
+            </div>
+            <div>
+              <p class="mono">Built</p>
+              <p>
+                Python jobs on Cloud Run send the email or text at each step of the order, with a
+                payment link (Stripe, Alma, Nuvei).
+              </p>
+            </div>
+            <div>
+              <p class="mono">Result</p>
+              <p>~1,500 messages a month, none sent by hand.</p>
+            </div>
+          </div>
+          <figure class="plate">
+            <ol class="flow"></ol>
+            <figcaption>
+              <span class="mono">Fig. 02</span>
+              Customer messages: from an order step to the payment link.
+            </figcaption>
+          </figure>
+        </article>
+      </template>
+
+      <section data-flow="d1">
+        <p class="mono variant-tag">
+          <b>D1 · Chip strip</b> · each step on a sample chip, like the key figures
+        </p>
+      </section>
+      <section data-flow="d3">
+        <p class="mono variant-tag">
+          <b>D3 · Shipping tags</b> · each step on a tag with its eyelet, a string through them
+        </p>
+      </section>
+      <section data-flow="d4">
+        <p class="mono variant-tag">
+          <b>D4 · Saddle stitch</b> · leather labels with a stitched edge, joined by a seam
+        </p>
+      </section>
+      <section data-flow="d2">
+        <p class="mono variant-tag">
+          <b>D2 · Line</b> · stamped stations on one rule, quieter next to the text
+        </p>
+      </section>
+    </main>
+
+    <div class="toolbar" role="toolbar" aria-label="Theme">
+      <button type="button" data-theme="theme-01">01</button>
+      <button type="button" data-theme="theme-02">02</button>
+      <button type="button" data-theme="theme-03">03</button>
+      <button type="button" data-theme="theme-04">04</button>
+    </div>
+
+    <script>
+      const STEPS = ['Order step', 'Python job on Cloud Run', 'Email or text message', 'Payment link'];
+      const SWATCHES = ['swatch-1', 'swatch-2', 'swatch-3', 'swatch-4'];
+      const MATERIALS = ['material-linen', 'material-wood', 'material-leather', 'material-brass'];
+
+      // Each card variant keeps only the markup it uses.
+      const KEEP = {
+        v0: ['.bento-chip'],
+        vA: ['.status'],
+        vB: ['.stamp-number', '.status'],
+        vC: ['.plaque'],
+      };
+      const OPTIONAL = ['.bento-chip', '.status', '.plaque', '.stamp-number'];
+      document.querySelectorAll('[data-card]').forEach((section) => {
+        const variant = section.dataset.card;
+        const card = document.getElementById('card').content.cloneNode(true);
+        card.querySelector('.card').classList.add(variant);
+        OPTIONAL.filter((sel) => !KEEP[variant].includes(sel)).forEach((sel) =>
+          card.querySelectorAll(sel).forEach((node) => node.remove())
+        );
+        if (variant === 'vB') {
+          card.querySelector('.status').innerHTML = '<b>In progress:</b> rebuild in Next.js and Supabase';
+        }
+        section.append(card);
+      });
+
+      document.querySelectorAll('[data-flow]').forEach((section) => {
+        const variant = section.dataset.flow;
+        const project = document.getElementById('project').content.cloneNode(true);
+        const list = project.querySelector('.flow');
+        list.classList.add(variant);
+        STEPS.forEach((step, index) => {
+          const item = document.createElement('li');
+          const code = `<span class="code" aria-hidden="true">02-${'ABCD'[index]}</span><span class="text">${step}</span>`;
+          if (variant === 'd1') {
+            item.className = `sample-chip material ${SWATCHES[index]} ${MATERIALS[index]}`;
+            item.innerHTML = code;
+          } else if (variant === 'd3') {
+            item.className = `material material-linen ${SWATCHES[index]}`;
+            item.innerHTML = code;
+          } else if (variant === 'd4') {
+            item.className = `material material-leather ${SWATCHES[index]}`;
+            item.innerHTML = code;
+          } else {
+            item.className = SWATCHES[index];
+            item.innerHTML = `<span class="stamp-number" aria-hidden="true">${index + 1}</span><span class="text">${step}</span>`;
+          }
+          list.append(item);
+        });
+        section.append(project);
+      });
+
+      const root = document.documentElement;
+      const THEMES = ['theme-01', 'theme-02', 'theme-03', 'theme-04'];
+      function syncPressed() {
+        document
+          .querySelectorAll('.toolbar button')
+          .forEach((b) => b.setAttribute('aria-pressed', String(root.classList.contains(b.dataset.theme))));
+      }
+      document.querySelector('.toolbar').addEventListener('click', (e) => {
+        const button = e.target.closest('button');
+        if (!button) return;
+        root.classList.remove(...THEMES);
+        root.classList.add(button.dataset.theme);
+        syncPressed();
+      });
+      syncPressed();
+    </script>
+  </body>
+</html>

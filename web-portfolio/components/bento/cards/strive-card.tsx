@@ -1,25 +1,27 @@
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
-import { BentoLink } from '@/components/bento/bento-link';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
-import { siteLinks } from '@/lib/site';
-import { striveTags } from '@/lib/strive';
+import { CaseStudyCta, CaseStudyModal } from '@/components/bento/case-study-modal';
+import { StriveCaseStudy } from '@/components/case-study/strive-case-study';
+import { getProject } from '@/lib/projects';
 
 export async function StriveCard() {
-  const t = await getTranslations('HomePage');
+  const [t, tCaseStudy, locale] = await Promise.all([
+    getTranslations('HomePage'),
+    getTranslations('CaseStudy'),
+    getLocale(),
+  ]);
+  const { meta, content, number } = getProject('strive', locale);
 
   return (
     <BentoCard
       colSpan={1}
       rowSpan={2}
-      label={t('striveLabel')}
+      interactive
+      label={content.type}
+      labelStyle="chip"
       className="relative overflow-hidden"
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-1"
-        style={{ background: 'var(--project-gradient)' }}
-        aria-hidden="true"
-      />
       <div className="relative flex h-full flex-col" data-testid="strive-card">
         <div className="flex items-start justify-between gap-3">
           <Image
@@ -31,31 +33,37 @@ export async function StriveCard() {
           />
           <ul
             className="flex max-w-[5.5rem] flex-wrap justify-end gap-1.5"
-            aria-label={t('striveTagsLabel')}
+            aria-label={t('projectTagsLabel')}
           >
-            {striveTags.map((tag) => (
+            {content.tags.map((tag) => (
               <li key={tag}>
                 <span className="bento-chip">{tag}</span>
               </li>
             ))}
           </ul>
         </div>
-        <h2 className="font-strive mt-4 text-xl font-bold tracking-tight">{t('striveTitle')}</h2>
+        <h2 className="font-strive mt-4 text-xl font-bold tracking-tight">{content.title}</h2>
         <p className="mt-2 font-strive text-sm font-semibold tracking-tight text-foreground/90">
-          {t('striveTagline')}
+          {content.tagline}
         </p>
         <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-foreground/90">
-          {t('striveDescription')}
+          {content.summary}
         </p>
         <p className="mt-3 font-mono text-[9px] tracking-wider text-muted-foreground uppercase">
-          {t('striveAvailability')}
+          {t('striveAvailability', { host: new URL(meta.url).host })}
         </p>
-        <div className="mt-4">
-          <BentoLink href={siteLinks.strive} external>
-            {t('striveCta')}
-          </BentoLink>
-        </div>
+        <CaseStudyCta />
       </div>
+      <CaseStudyModal
+        openLabel={t('striveOpenLabel')}
+        title={content.title}
+        kicker={tCaseStudy('kicker', { number, type: content.type })}
+        description={content.tagline}
+        titleClassName="font-strive"
+        descriptionClassName="font-strive font-semibold not-italic"
+      >
+        <StriveCaseStudy meta={meta} content={content} />
+      </CaseStudyModal>
     </BentoCard>
   );
 }

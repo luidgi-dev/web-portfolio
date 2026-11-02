@@ -10,7 +10,7 @@ import frMessages from '@/messages/fr.json';
 vi.mock('@/components/bento/cards/hero-card', () => ({
   HeroCard: () => (
     <section data-testid="hero-card">
-      <h1>Building software people actually use.</h1>
+      <h1>I build simple apps for everyday problems.</h1>
     </section>
   ),
 }));
@@ -49,6 +49,10 @@ vi.mock('@/components/bento/cards/professional-work-card', () => ({
   ),
 }));
 
+vi.mock('@/components/bento/cards/portfolio-card', () => ({
+  PortfolioCard: () => <section data-testid="portfolio-card">This portfolio</section>,
+}));
+
 vi.mock('@/components/bento/cards/bauhaus-geometry-card', () => ({
   BauhausGeometryCard: () => <section data-testid="bauhaus-geometry-card">Geometry</section>,
 }));
@@ -76,7 +80,10 @@ describe('HomePageContent', () => {
     renderHomePage('en', enMessages);
 
     expect(
-      screen.getByRole('heading', { level: 1, name: /Building software people actually use/i })
+      screen.getByRole('heading', {
+        level: 1,
+        name: /I build simple apps for everyday problems/i,
+      })
     ).toBeInTheDocument();
   });
 
@@ -99,6 +106,7 @@ describe('HomePageContent', () => {
     expect(screen.getByTestId('theme-card')).toBeInTheDocument();
     expect(screen.getByTestId('atelier-card')).toBeInTheDocument();
     expect(screen.getByTestId('professional-work-card')).toBeInTheDocument();
+    expect(screen.getByTestId('portfolio-card')).toBeInTheDocument();
     expect(screen.getByTestId('bauhaus-geometry-card')).toBeInTheDocument();
   });
 

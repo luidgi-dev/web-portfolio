@@ -4,8 +4,8 @@
  *
  * Apply .theme-01 | .theme-02 | .theme-03 | .theme-04 on <html>.
  * Shadcn components read the standard tokens automatically.
- * Extended tokens (--glow-color, --ornament-color, etc.) are consumed
- * by WarmAmbientGlow, decoration components, and future MCM art blocks.
+ * Extended tokens (--glow-color-strong, --sunlight, --ornament-color, etc.) are consumed
+ * by the modal backdrop, decoration components, and future MCM art blocks.
  *
  * Theme scale (light → dark):
  *   01 · Plâtre Blanc      light   Mediterranean white plaster, sage, linen
@@ -53,8 +53,9 @@
   --chart-4: #c4b090;
   --chart-5: #b84030;
 
-  --glow-color: rgba(107, 128, 96, 0.12);
   --glow-color-strong: rgba(107, 128, 96, 0.22);
+  --sunlight: rgba(255, 250, 236, 0.8);
+  --sunlight-shade: rgba(42, 30, 14, 0.05);
   --ornament-color: #6b8060;
   --card-frosted: rgba(244, 239, 230, 0.9);
   --teak-overlay: rgba(107, 128, 96, 0.08);
@@ -66,8 +67,6 @@
   --tech-bg-end: #d4ccbf;
   --tech-text: #6b5a3e;
   --tech-border: rgba(107, 128, 96, 0.22);
-  --hero-arc-color: #6b8060;
-  --hero-arc-opacity: 0.07;
   --art-bg: #eae4d8;
   --art-circle-1: #a07840;
   --art-circle-2: #6b8060;
@@ -76,6 +75,10 @@
   --art-block-bold: #c4b090;
   --art-divider: #2a1e0e;
   --art-rule: #6b8060;
+  --error-404-a: #a07840;
+  --error-404-b: #7a9070;
+  --error-500-a: #b84030;
+  --error-500-b: #c4b090;
   --material-atelier-bg: #7a9070;
   --material-atelier-stripe-1: rgba(107, 128, 96, 0.92);
   --material-atelier-stripe-2: rgba(90, 110, 82, 0.88);
@@ -124,8 +127,9 @@
   --chart-4: #8b6040;
   --chart-5: #a03020;
 
-  --glow-color: rgba(196, 71, 42, 0.1);
   --glow-color-strong: rgba(196, 71, 42, 0.2);
+  --sunlight: rgba(255, 246, 226, 0.8);
+  --sunlight-shade: rgba(44, 20, 8, 0.06);
   --ornament-color: #c4472a;
   --card-frosted: rgba(245, 234, 216, 0.9);
   --teak-overlay: rgba(196, 71, 42, 0.06);
@@ -137,8 +141,6 @@
   --tech-bg-end: #d9ccaf;
   --tech-text: #7a5c3a;
   --tech-border: rgba(196, 71, 42, 0.18);
-  --hero-arc-color: #c4472a;
-  --hero-arc-opacity: 0.07;
   --art-bg: #ede0c8;
   --art-circle-1: #c4472a;
   --art-circle-2: #d4892a;
@@ -147,6 +149,10 @@
   --art-block-bold: #a03020;
   --art-divider: #2c1408;
   --art-rule: #c4472a;
+  --error-404-a: #d4892a;
+  --error-404-b: #5a6b30;
+  --error-500-a: #a03020;
+  --error-500-b: #c4472a;
   --material-atelier-bg: #c4472a;
   --material-atelier-stripe-1: rgba(196, 71, 42, 0.95);
   --material-atelier-stripe-2: rgba(154, 53, 32, 0.88);
@@ -195,8 +201,9 @@
   --chart-4: #9b6240;
   --chart-5: #b05a3a;
 
-  --glow-color: rgba(200, 150, 62, 0.12);
   --glow-color-strong: rgba(200, 150, 62, 0.24);
+  --sunlight: rgba(255, 206, 140, 0.13);
+  --sunlight-shade: rgba(0, 0, 0, 0.16);
   --ornament-color: #c8963e;
   --card-frosted: rgba(39, 22, 8, 0.85);
   --teak-overlay: rgba(200, 150, 62, 0.05);
@@ -208,8 +215,6 @@
   --tech-bg-end: #271608;
   --tech-text: #a08060;
   --tech-border: rgba(200, 150, 62, 0.16);
-  --hero-arc-color: #c8963e;
-  --hero-arc-opacity: 0.065;
   --art-bg: #342010;
   --art-circle-1: #d4892a;
   --art-circle-2: #c8963e;
@@ -218,6 +223,10 @@
   --art-block-bold: #9b6240;
   --art-divider: #150a02;
   --art-rule: #c8963e;
+  --error-404-a: #c8963e;
+  --error-404-b: #4a5828;
+  --error-500-a: #b05a3a;
+  --error-500-b: #9b6240;
   --material-atelier-bg: #4a3020;
   --material-atelier-stripe-1: rgba(200, 150, 62, 0.88);
   --material-atelier-stripe-2: rgba(155, 98, 64, 0.92);
@@ -266,8 +275,9 @@
   --chart-4: #782020;
   --chart-5: #5a1818;
 
-  --glow-color: rgba(146, 40, 40, 0.15);
   --glow-color-strong: rgba(146, 40, 40, 0.28);
+  --sunlight: rgba(255, 190, 120, 0.11);
+  --sunlight-shade: rgba(0, 0, 0, 0.2);
   --ornament-color: #922828;
   --card-frosted: rgba(22, 6, 6, 0.88);
   --teak-overlay: rgba(146, 40, 40, 0.06);
@@ -279,8 +289,6 @@
   --tech-bg-end: #200c0c;
   --tech-text: #8b5c48;
   --tech-border: rgba(146, 40, 40, 0.22);
-  --hero-arc-color: #922828;
-  --hero-arc-opacity: 0.065;
   --art-bg: #200c0c;
   --art-circle-1: #922828;
   --art-circle-2: #c08030;
@@ -289,6 +297,10 @@
   --art-block-bold: #782020;
   --art-divider: #0c0202;
   --art-rule: #922828;
+  --error-404-a: #c08030;
+  --error-404-b: #384020;
+  --error-500-a: #922828;
+  --error-500-b: #5a1818;
   --material-atelier-bg: #5a1818;
   --material-atelier-stripe-1: rgba(146, 40, 40, 0.92);
   --material-atelier-stripe-2: rgba(90, 24, 24, 0.95);

@@ -1,41 +1,10 @@
-import { DM_Mono, DM_Sans, Playfair_Display, Sora } from 'next/font/google';
-import '../globals.css';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { FilmNoiseOverlay } from '@/components/film-noise-overlay';
+import { DocumentShell } from '@/components/document-shell';
 import { ThemeProvider } from '@/components/theme-provider';
 import { routing } from '@/i18n/routing';
-
-const playfairDisplay = Playfair_Display({
-  variable: '--font-playfair-display',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['700', '900'],
-});
-
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['300', '400', '500'],
-});
-
-const dmMono = DM_Mono({
-  variable: '--font-dm-mono',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400'],
-});
-
-const sora = Sora({
-  variable: '--font-sora',
-  subsets: ['latin', 'latin-ext'],
-  weight: ['600', '700'],
-});
-
-export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'Mid-Century Modern portfolio showcasing digital craft and experience design.',
-};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -45,6 +14,16 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Omit<Props, 'children'>): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
@@ -57,16 +36,10 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${playfairDisplay.variable} ${dmSans.variable} ${dmMono.variable} ${sora.variable} theme-03 h-full antialiased`}
-    >
-      <body className="flex min-h-full flex-col">
-        <FilmNoiseOverlay />
-        <ThemeProvider>
-          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <DocumentShell lang={locale}>
+      <ThemeProvider>
+        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+      </ThemeProvider>
+    </DocumentShell>
   );
 }

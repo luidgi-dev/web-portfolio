@@ -27,6 +27,7 @@ export async function ProfessionalWorkCard() {
       rowSpan={2}
       interactive
       label={t('professionalWorkLabel')}
+      labelStyle="chip"
       className="relative"
     >
       <div className="flex h-full flex-col" data-testid="professional-work-card">

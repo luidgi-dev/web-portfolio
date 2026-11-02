@@ -8,7 +8,7 @@ const contactItems = [
   { href: siteLinks.linkedin, label: 'LinkedIn', icon: LinkedInIcon, external: true },
   { href: siteLinks.github, label: 'GitHub', icon: GitHubIcon, external: true },
   { href: siteLinks.email, labelKey: 'contactEmail' as const, icon: Mail, external: false },
-  { href: siteLinks.cv, labelKey: 'contactCv' as const, icon: FileDown, external: false },
+  { href: siteLinks.cv, labelKey: 'contactCv' as const, icon: FileDown, external: true },
 ];
 
 // The contact links laid out as a tiled wall, shared by the contact card and the

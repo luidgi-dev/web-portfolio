@@ -21,7 +21,7 @@
     "professionalCase1Body": "Suit chaque selle de l'atelier à l'expédition, pendant que l'équipe récupère solde et adresse. Python, BigQuery, AppSheet.",
     "professionalCase1Badge": "Refonte en Next.js et Supabase",
     "professionalCase2Label": "Automatisation · Relances clients",
-    "professionalCase2Body": "Cloud Functions qui écrivent aux clients par mail et SMS, avec liens de paiement (Stripe, Alma, Nuvei).",
+    "professionalCase2Body": "Jobs Python sur Cloud Run qui écrivent aux clients par mail et SMS, avec liens de paiement (Stripe, Alma, Nuvei).",
     "professionalStatsLabel": "Chiffres clés",
     "professionalStatOrders": "commandes en cours",
     "professionalStatMessages": "messages par mois",

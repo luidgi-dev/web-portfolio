@@ -1,4 +1,4 @@
-import { swatchClass } from '@/components/case-study/swatch';
+import { itemCode, swatchClass } from '@/components/case-study/swatch';
 import { cn } from '@/lib/utils';
 
 interface FlowDiagramProps {
@@ -11,7 +11,7 @@ interface FlowDiagramProps {
 // carries the sequence for screen readers; the seams are decoration.
 export function FlowDiagram({ steps, code }: FlowDiagramProps) {
   return (
-    <ol className="stitch-seam grid gap-[1.375rem] md:auto-cols-fr md:grid-flow-col">
+    <ol className="stitch-seam grid md:auto-cols-fr md:grid-flow-col">
       {steps.map((step, index) => (
         <li
           key={step}
@@ -24,7 +24,7 @@ export function FlowDiagram({ steps, code }: FlowDiagramProps) {
             className="font-mono text-[9px] tracking-[0.12em] text-foreground/70"
             aria-hidden="true"
           >
-            {code}-{String.fromCharCode(65 + index)}
+            {itemCode(code, index)}
           </span>
           <span className="mt-auto pt-3 text-sm leading-snug font-medium">{step}</span>
         </li>

@@ -1,4 +1,4 @@
-import { materialClass, swatchClass } from '@/components/case-study/swatch';
+import { itemCode, materialClass, swatchClass } from '@/components/case-study/swatch';
 import { cn } from '@/lib/utils';
 
 // A Stat from the case study content, or a figure without a note.
@@ -33,7 +33,7 @@ export function SampleChips({ items, code, className }: SampleChipsProps) {
             className="absolute top-2.5 left-4 font-mono text-[9px] tracking-[0.15em] text-foreground/70"
             aria-hidden="true"
           >
-            {code}-{String.fromCharCode(65 + index)}
+            {itemCode(code, index)}
           </span>
           <dt className="order-2 mt-2 font-mono text-[9px] tracking-[0.12em] uppercase">
             {item.label}

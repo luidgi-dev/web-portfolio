@@ -6,6 +6,10 @@ import { toOrdinal } from '@/lib/utils';
 
 export type Locale = (typeof routing.locales)[number];
 
+export function resolveLocale(locale: string): Locale {
+  return hasLocale(routing.locales, locale) ? locale : routing.defaultLocale;
+}
+
 export interface TitledItem {
   title: string;
   body: string;
@@ -126,7 +130,7 @@ export function getProject<Slug extends ProjectSlug>(slug: Slug, locale: string)
 
   return {
     meta,
-    content: content[hasLocale(routing.locales, locale) ? locale : routing.defaultLocale],
+    content: content[resolveLocale(locale)],
     number: toOrdinal(index),
   };
 }

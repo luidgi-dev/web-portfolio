@@ -8,6 +8,7 @@ import {
   pairPhotos,
 } from '@/components/case-study/portfolio-visuals';
 import { routing } from '@/i18n/routing';
+import { experience, getExperience } from '@/lib/experience';
 import { getProject, projects, type ProjectSlug } from '@/lib/projects';
 import enMessages from '@/messages/en.json';
 import frMessages from '@/messages/fr.json';
@@ -123,6 +124,43 @@ describe('getProject', () => {
 
   it('falls back to the default locale', () => {
     expect(getProject('strive', 'de').content).toBe(projects.strive.content.en);
+  });
+});
+
+describe('content/experience.json', () => {
+  it('has content for every locale and nothing else', () => {
+    expect(Object.keys(experience).sort()).toEqual([...routing.locales].sort());
+  });
+
+  it('has the same shape in every locale', () => {
+    for (const locale of routing.locales) {
+      expect(shapeOf(experience[locale])).toEqual(shapeOf(experience[routing.defaultLocale]));
+    }
+  });
+
+  it('has complete copy with no dash, placeholder or buzzword', () => {
+    expect(copyIssues(experience)).toEqual([]);
+  });
+
+  it('keeps tech names identical across locales', () => {
+    const techOf = (locale: (typeof routing.locales)[number]) => [
+      experience[locale].overview.facts.stack,
+      ...experience[locale].method.choices.items.map((item) => item.title),
+    ];
+
+    for (const locale of routing.locales) {
+      expect(techOf(locale)).toEqual(techOf(routing.defaultLocale));
+    }
+  });
+});
+
+describe('getExperience', () => {
+  it('resolves the locale content', () => {
+    expect(getExperience('fr')).toBe(experience.fr);
+  });
+
+  it('falls back to the default locale', () => {
+    expect(getExperience('de')).toBe(experience.en);
   });
 });
 

@@ -1,5 +1,6 @@
 import { getFormatter, getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
+import { experienceStats } from '@/lib/experience';
 
 const CASES = [
   {
@@ -8,14 +9,6 @@ const CASES = [
     badge: 'professionalCase1Badge',
   },
   { label: 'professionalCase2Label', body: 'professionalCase2Body' },
-] as const;
-
-// Counts as numbers so each locale gets its own separator (1,100 in EN, 1 100 in FR).
-const STATS = [
-  { value: 1100, suffix: '+', label: 'professionalStatOrders' },
-  { value: 1500, prefix: '~', label: 'professionalStatMessages' },
-  { value: 450, prefix: '~', label: 'professionalStatTodos' },
-  { value: 4, label: 'professionalStatBrands' },
 ] as const;
 
 export async function ProfessionalWorkCard() {
@@ -47,7 +40,7 @@ export async function ProfessionalWorkCard() {
           aria-label={t('professionalStatsLabel')}
           className="mt-auto grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border/60 pt-4 md:grid-cols-4"
         >
-          {STATS.map((stat) => (
+          {experienceStats.map((stat) => (
             <div key={stat.label} className="flex flex-col-reverse">
               <dt className="mt-1 font-sans text-[11px] leading-snug text-muted-foreground">
                 {t(stat.label)}

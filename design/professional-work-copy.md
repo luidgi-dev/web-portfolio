@@ -71,8 +71,14 @@ Same shape for each project: problem, what I built, result.
   - FR : Elle sera en service au premier trimestre 2027, plus rapide et moins chère à faire tourner, avec des données communes à la production.
 
 **diagrams** (drawn in LUI-153, generic, no internal names)
-1. Shipment tracking: ERP → BigQuery → tracking app → the team updates status, balance, address.
-2. Customer messages: order step → Python job on Cloud Run → email or text message → payment link.
+1. Shipment tracking
+   - caption: EN Shipment tracking: from the ERP to the customer service team. · FR Suivi des expéditions : de l'ERP au service client.
+   - steps EN: ERP › BigQuery › Tracking app › Customer service updates status, balance and address
+   - steps FR : ERP › BigQuery › App de suivi › Le service client met à jour le statut, le solde et l'adresse
+2. Customer messages
+   - caption: EN Customer messages: from an order step to the payment link. · FR Messages clients : d'une étape de commande au lien de paiement.
+   - steps EN: Order step › Python job on Cloud Run › Email or text message › Payment link
+   - steps FR : Étape de commande › Job Python sur Cloud Run › Email ou SMS › Lien de paiement
 
 ---
 
@@ -117,6 +123,15 @@ Same shape for each project: problem, what I built, result.
 **today.body**
 - EN: I would start with code. With AI tools like Claude Code, custom code is quick to write and goes further on specific needs, which is why we are rebuilding.
 - FR : Je partirais directement sur du code. Avec des outils d'IA comme Claude Code, le sur-mesure est rapide à écrire et va plus loin sur les besoins spécifiques, et c'est pour ça qu'on refait l'app.
+
+---
+
+## Modal labels (LUI-153)
+
+- kicker: EN Professional work · Permanent role · FR Expérience professionnelle · CDI
+- open label (screen readers): EN Open the professional work details · FR Ouvrir le détail de l'expérience professionnelle
+- tabs: EN Overview, Projects, Method, Takeaways · FR Aperçu, Projets, Méthode, Bilan
+- facts: EN Teams · FR Équipes. Stack reuses the existing `CaseStudy.stack` label (Stack · Stack technique).
 
 ---
 

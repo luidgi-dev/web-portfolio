@@ -16,7 +16,7 @@
     "portfolioOpenLabel": "Open the case study of this portfolio",
     "professionalWorkLabel": "Professional work",
     "professionalWorkTitle": "Apps and internal tools for business teams",
-    "professionalWorkIntro": "Apps and automations for a high-end saddle maker, in Python on Google Cloud, since July 2024.",
+    "professionalWorkIntro": "Apps and automations for a high-end saddle maker, since July 2024.",
     "professionalOpenLabel": "Open the professional work details",
     "professionalCase1Label": "Customer service · Shipment tracking",
     "professionalCase1Body": "Tracks each saddle from the workshop to shipping, while the team collects the balance and the address. Python, BigQuery, AppSheet.",

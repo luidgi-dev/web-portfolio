@@ -27,10 +27,8 @@ export interface ExperienceContent {
     delivery: TitledItem;
     choices: { heading: string; items: TitledItem[] };
   };
-  takeaways: {
-    learned: TitledItem & { points: TitledItem[] };
-    today: TitledItem;
-  };
+  // What I learned, then what I would do today, as one numbered list.
+  takeaways: TitledItem[];
 }
 
 // Counts as numbers so each locale gets its own separator (1,100 in EN, 1 100 in FR).

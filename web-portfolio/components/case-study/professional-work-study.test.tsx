@@ -94,15 +94,16 @@ describe('ProfessionalWorkStudy', () => {
     }
   });
 
-  it('lists what I learned under its summary', () => {
+  it('numbers the four takeaways', () => {
     renderStudy();
 
     const panel = openChapter('Takeaways');
-    const { learned } = experience.en.takeaways;
-    for (const point of learned.points) {
-      expect(within(panel).getByRole('heading', { name: point.title })).toBeInTheDocument();
-      expect(within(panel).getByText(point.body)).toBeInTheDocument();
-    }
+    const items = within(panel).getAllByRole('listitem');
+    expect(items).toHaveLength(4);
+    experience.en.takeaways.forEach((item, index) => {
+      expect(within(items[index]).getByText(String(index + 1))).toBeInTheDocument();
+      expect(within(items[index]).getByRole('heading', { name: item.title })).toBeInTheDocument();
+    });
   });
 
   it('renders in French with French number formatting', () => {

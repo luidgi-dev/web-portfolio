@@ -16,7 +16,7 @@
     "portfolioOpenLabel": "Ouvrir l'étude de cas de ce portfolio",
     "professionalWorkLabel": "Travail professionnel",
     "professionalWorkTitle": "Des applis et des outils internes pour les équipes métier",
-    "professionalWorkIntro": "Applications et automatisations pour un sellier haut de gamme, en Python sur Google Cloud, depuis juillet 2024.",
+    "professionalWorkIntro": "Applications et automatisations pour un sellier haut de gamme, depuis juillet 2024.",
     "professionalOpenLabel": "Ouvrir le détail de l'expérience professionnelle",
     "professionalCase1Label": "Service client · Suivi des expéditions",
     "professionalCase1Body": "Suit chaque selle de l'atelier à l'expédition, pendant que l'équipe récupère solde et adresse. Python, BigQuery, AppSheet.",

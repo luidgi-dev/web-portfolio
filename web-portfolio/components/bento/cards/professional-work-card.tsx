@@ -1,6 +1,8 @@
-import { getFormatter, getTranslations } from 'next-intl/server';
+import { getFormatter, getLocale, getTranslations } from 'next-intl/server';
 import { BentoCard } from '@/components/bento/bento-card';
-import { experienceStats } from '@/lib/experience';
+import { CaseStudyCta, CaseStudyModal } from '@/components/bento/case-study-modal';
+import { ProfessionalWorkStudy } from '@/components/case-study/professional-work-study';
+import { experienceStats, formatStat, getExperience } from '@/lib/experience';
 
 const CASES = [
   {
@@ -12,10 +14,21 @@ const CASES = [
 ] as const;
 
 export async function ProfessionalWorkCard() {
-  const [t, format] = await Promise.all([getTranslations('HomePage'), getFormatter()]);
+  const [t, tCaseStudy, format, locale] = await Promise.all([
+    getTranslations('HomePage'),
+    getTranslations('CaseStudy'),
+    getFormatter(),
+    getLocale(),
+  ]);
 
   return (
-    <BentoCard colSpan={2} rowSpan={2} label={t('professionalWorkLabel')}>
+    <BentoCard
+      colSpan={2}
+      rowSpan={2}
+      interactive
+      label={t('professionalWorkLabel')}
+      className="relative"
+    >
       <div className="flex h-full flex-col" data-testid="professional-work-card">
         <h2 className="font-display text-xl font-bold tracking-tight md:text-2xl">
           {t('professionalWorkTitle')}
@@ -46,14 +59,21 @@ export async function ProfessionalWorkCard() {
                 {t(stat.label)}
               </dt>
               <dd className="font-display text-2xl font-bold tracking-tight">
-                {'prefix' in stat ? stat.prefix : null}
-                {format.number(stat.value)}
-                {'suffix' in stat ? stat.suffix : null}
+                {formatStat(stat, (value) => format.number(value))}
               </dd>
             </div>
           ))}
         </dl>
+        <CaseStudyCta />
       </div>
+      <CaseStudyModal
+        openLabel={t('professionalOpenLabel')}
+        title={t('professionalWorkTitle')}
+        kicker={tCaseStudy('workKicker')}
+        description={t('professionalWorkIntro')}
+      >
+        <ProfessionalWorkStudy content={getExperience(locale)} />
+      </CaseStudyModal>
     </BentoCard>
   );
 }

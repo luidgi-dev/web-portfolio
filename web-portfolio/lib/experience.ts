@@ -42,6 +42,15 @@ export const experienceStats = [
   { value: 4, label: 'professionalStatBrands' },
 ] as const;
 
+export type ExperienceStat = (typeof experienceStats)[number];
+
+// Prefix and suffix around the number formatted for the locale: ~1,500, 1,100+.
+export function formatStat(stat: ExperienceStat, formatNumber: (value: number) => string) {
+  const prefix = 'prefix' in stat ? stat.prefix : '';
+  const suffix = 'suffix' in stat ? stat.suffix : '';
+  return `${prefix}${formatNumber(stat.value)}${suffix}`;
+}
+
 // The annotation is what makes tsc validate content/experience.json.
 export const experience: Record<Locale, ExperienceContent> = data;
 

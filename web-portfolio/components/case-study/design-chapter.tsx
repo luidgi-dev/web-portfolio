@@ -19,6 +19,9 @@ import type { DirectionId, PairId, PortfolioContent, Stat } from '@/lib/projects
 import { themeName, themes } from '@/lib/themes';
 import { cn, toOrdinal } from '@/lib/utils';
 
+// A reference and what it led to, side by side with mats of the same height.
+const pairRow = 'grid gap-5 md:grid-cols-2';
+
 // Read from inside each ambiance's own theme class, so all four palettes show at once.
 const swatchTokens = ['bg-background', 'bg-card', 'bg-secondary', 'bg-primary', 'bg-accent'];
 
@@ -57,14 +60,14 @@ export function DesignChapter({ chapter, design, chips }: DesignChapterProps) {
       // ErrorPoster is a figure of its own; the plate caption already describes it.
       component: (
         <div aria-hidden="true">
-          <ErrorPoster code="404" reference="/404" />
+          <ErrorPoster code="404" reference="/404" className="h-full md:max-h-none" />
         </div>
       ),
     },
     tiles: {
       frame: 'aspect-[4/3]',
       component: (
-        <div className="rounded-[2px] border border-border bg-card p-4">
+        <div className="grid rounded-[2px] border border-border bg-card p-4">
           <ContactTiles />
         </div>
       ),
@@ -75,9 +78,7 @@ export function DesignChapter({ chapter, design, chips }: DesignChapterProps) {
     },
     paintChips: {
       frame: 'aspect-[4/3]',
-      component: (
-        <SampleChips items={chips.items.slice(0, 2)} code={chips.code} className="md:grid-cols-2" />
-      ),
+      component: <SampleChips items={chips.items} code={chips.code} className="md:grid-cols-2" />,
     },
   };
   // Keys come from code, so the order and the set of figures are the same in every locale.
@@ -133,8 +134,8 @@ export function DesignChapter({ chapter, design, chips }: DesignChapterProps) {
         <p className={cn('mt-6 max-w-3xl', bodyText)}>{pairs.body}</p>
         <div className="mt-8 grid gap-10">
           {pairIds.map((id, index) => (
-            <div key={id} className="grid items-start gap-5 md:grid-cols-2">
-              <Plate label={figureLabel(index * 2)} caption={credit(pairPhotos[id])}>
+            <div key={id} className={pairRow}>
+              <Plate paired label={figureLabel(index * 2)} caption={credit(pairPhotos[id])}>
                 <PhotoFrame
                   photo={pairPhotos[id]}
                   alt={pairs.items[id].alt}
@@ -142,7 +143,7 @@ export function DesignChapter({ chapter, design, chips }: DesignChapterProps) {
                   sizes="(min-width: 768px) 40vw, 90vw"
                 />
               </Plate>
-              <Plate label={figureLabel(index * 2 + 1)} caption={pairs.items[id].caption}>
+              <Plate paired label={figureLabel(index * 2 + 1)} caption={pairs.items[id].caption}>
                 {live[id].component}
               </Plate>
             </div>

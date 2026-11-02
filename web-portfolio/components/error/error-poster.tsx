@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 export type ErrorCode = '404' | '500';
 
@@ -49,14 +50,20 @@ interface ErrorPosterProps {
   code: ErrorCode;
   /** Printed in the footer: the requested path or the error reference. */
   reference?: string;
+  className?: string;
 }
 
 /** A printed Bauhaus exhibition poster with the status code drawn in shapes. */
-export function ErrorPoster({ code, reference }: ErrorPosterProps) {
+export function ErrorPoster({ code, reference, className }: ErrorPosterProps) {
   const palette = { a: `var(--error-${code}-a)`, b: `var(--error-${code}-b)` };
 
   return (
-    <figure className="grid aspect-square w-full grid-rows-[1fr_auto] overflow-hidden rounded-[2px] border border-border bg-(--art-bg) md:aspect-[3/4] md:max-h-[520px]">
+    <figure
+      className={cn(
+        'grid aspect-square w-full grid-rows-[1fr_auto] overflow-hidden rounded-[2px] border border-border bg-(--art-bg) md:aspect-[3/4] md:max-h-[520px]',
+        className
+      )}
+    >
       <svg
         viewBox="0 0 360 380"
         preserveAspectRatio="xMidYMin slice"

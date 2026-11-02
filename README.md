@@ -5,7 +5,7 @@ in English and French. Each project card opens a full screen case study.
 
 The look comes from Mid-Century Modern interiors of the 1950s to the 1970s: teak,
 cognac leather, brass, plaster, breeze blocks and Bauhaus posters. The visitor picks one
-of four rooms, and the whole site takes its colors.
+of four rooms, and the whole site takes its colors. Amber Chocolate is the default.
 
 <table>
   <tr>
@@ -17,7 +17,7 @@ of four rooms, and the whole site takes its colors.
   <tr>
     <td align="center"><sub>01 · White Plaster</sub></td>
     <td align="center"><sub>02 · Terracotta Sand</sub></td>
-    <td align="center"><sub>03 · Amber Chocolate (default)</sub></td>
+    <td align="center"><sub>03 · Amber Chocolate</sub></td>
     <td align="center"><sub>04 · Oxblood Night</sub></td>
   </tr>
 </table>

@@ -1,5 +1,6 @@
 import data from '@/content/experience.json';
-import { resolveLocale, type Locale, type TitledItem } from '@/lib/projects';
+import { resolveLocale, type Locale } from '@/i18n/routing';
+import type { TitledItem } from '@/lib/projects';
 
 export interface ExperienceProject {
   title: string;

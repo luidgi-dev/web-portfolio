@@ -1,14 +1,9 @@
-import { hasLocale } from 'next-intl';
 import data from '@/content/projects.json';
-import { routing } from '@/i18n/routing';
+import { resolveLocale, type Locale } from '@/i18n/routing';
 import type { ThemeId } from '@/lib/themes';
 import { toOrdinal } from '@/lib/utils';
 
-export type Locale = (typeof routing.locales)[number];
-
-export function resolveLocale(locale: string): Locale {
-  return hasLocale(routing.locales, locale) ? locale : routing.defaultLocale;
-}
+export type { Locale };
 
 export interface TitledItem {
   title: string;

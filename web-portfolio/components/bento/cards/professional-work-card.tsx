@@ -38,23 +38,28 @@ export async function ProfessionalWorkCard() {
         </p>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           {CASES.map((item) => (
-            <article key={item.label} className="border-l-2 border-primary/50 pl-3">
+            <article key={item.label} className="border-t border-border pt-3">
               <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
                 {t(item.label)}
               </h3>
               <p className="mt-2 font-sans text-sm leading-relaxed text-foreground/90">
                 {t(item.body)}
               </p>
-              {'badge' in item ? <span className="bento-chip mt-3">{t(item.badge)}</span> : null}
+              {'badge' in item ? (
+                <p className="mt-3 flex items-center gap-2 font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
+                  <span className="size-1.5 shrink-0 rounded-full bg-primary" aria-hidden="true" />
+                  {t(item.badge)}
+                </p>
+              ) : null}
             </article>
           ))}
         </div>
         <dl
           aria-label={t('professionalStatsLabel')}
-          className="mt-auto grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border/60 pt-4 md:grid-cols-4"
+          className="mt-auto mb-2 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border/60 pt-4 md:grid-cols-4"
         >
           {experienceStats.map((stat) => (
-            <div key={stat.label} className="flex flex-col-reverse">
+            <div key={stat.label} className="flex flex-col-reverse justify-end">
               <dt className="mt-1 font-sans text-[11px] leading-snug text-muted-foreground">
                 {t(stat.label)}
               </dt>

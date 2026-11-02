@@ -586,19 +586,18 @@
             "items": {
               "nelson": {
                 "caption": "Nelson sideboard: a teak header and drawer-front tabs.",
-                "alt": "Mockup of the project window with a teak header and drawer-front tabs"
+                "alt": "Mockup of the project window with a teak header and drawer-front tabs",
+                "referenceAlt": "A walnut sideboard with long drawer pulls"
               },
               "caseStudyHouse": {
                 "caption": "Case Study House, the direction I kept.",
-                "alt": "Mockup of the project window framed like a print, with numbered chapters"
+                "alt": "Mockup of the project window framed like a print, with numbered chapters",
+                "referenceAlt": "A hand turning the pages of an architecture magazine"
               },
               "brassMirror": {
                 "caption": "Brass pill mirror: an arched brass frame.",
-                "alt": "Mockup of the project window inside an arched brass frame"
-              },
-              "pillMirrors": {
-                "caption": "The reference behind the mirror.",
-                "alt": "Arched mirrors on a terracotta wall"
+                "alt": "Mockup of the project window inside an arched brass frame",
+                "referenceAlt": "Arched mirrors on a terracotta wall"
               }
             }
           }
@@ -837,19 +836,18 @@
             "items": {
               "nelson": {
                 "caption": "Buffet Nelson : un bandeau en teck et des onglets en façades de tiroir.",
-                "alt": "Maquette de la fenêtre projet avec un bandeau en teck et des onglets en façades de tiroir"
+                "alt": "Maquette de la fenêtre projet avec un bandeau en teck et des onglets en façades de tiroir",
+                "referenceAlt": "Un buffet en noyer avec de longues poignées de tiroir"
               },
               "caseStudyHouse": {
                 "caption": "Case Study House, la piste retenue.",
-                "alt": "Maquette de la fenêtre projet encadrée comme un tirage, avec des chapitres numérotés"
+                "alt": "Maquette de la fenêtre projet encadrée comme un tirage, avec des chapitres numérotés",
+                "referenceAlt": "Une main qui tourne les pages d'un magazine d'architecture"
               },
               "brassMirror": {
                 "caption": "Miroir pilule en laiton : un cadre en arche.",
-                "alt": "Maquette de la fenêtre projet dans un cadre en laiton en arche"
-              },
-              "pillMirrors": {
-                "caption": "La référence derrière le miroir.",
-                "alt": "Des miroirs en arche sur un mur terre cuite"
+                "alt": "Maquette de la fenêtre projet dans un cadre en laiton en arche",
+                "referenceAlt": "Des miroirs en arche sur un mur terre cuite"
               }
             }
           }

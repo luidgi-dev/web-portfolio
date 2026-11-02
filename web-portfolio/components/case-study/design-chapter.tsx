@@ -154,26 +154,36 @@ export function DesignChapter({ chapter, design, chips }: DesignChapterProps) {
       <div className="mt-12">
         <SectionLabel>{dropped.heading}</SectionLabel>
         <p className={cn('mt-3 max-w-3xl', bodyText)}>{dropped.body}</p>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {directionIds.map((id, index) => (
-            <Plate
-              key={id}
-              label={figureLabel(pairIds.length * 2 + index)}
-              caption={
-                <Captioned
+        <div className="mt-8 grid gap-10">
+          {directionIds.map((id, index) => {
+            const { reference, mockup } = directionShots[id];
+            const figureIndex = (pairIds.length + index) * 2;
+
+            return (
+              <div key={id} className={pairRow}>
+                <Plate paired label={figureLabel(figureIndex)} caption={credit(reference)}>
+                  <PhotoFrame
+                    photo={reference}
+                    alt={dropped.items[id].referenceAlt}
+                    className="aspect-[16/11]"
+                    sizes="(min-width: 768px) 40vw, 90vw"
+                  />
+                </Plate>
+                <Plate
+                  paired
+                  label={figureLabel(figureIndex + 1)}
                   caption={dropped.items[id].caption}
-                  credit={credit(directionShots[id])}
-                />
-              }
-            >
-              <PhotoFrame
-                photo={directionShots[id]}
-                alt={dropped.items[id].alt}
-                className="aspect-[16/11]"
-                sizes="(min-width: 640px) 45vw, 90vw"
-              />
-            </Plate>
-          ))}
+                >
+                  <PhotoFrame
+                    photo={mockup}
+                    alt={dropped.items[id].alt}
+                    className="aspect-[16/11]"
+                    sizes="(min-width: 768px) 40vw, 90vw"
+                  />
+                </Plate>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
@@ -205,7 +215,7 @@ function PhotoFrame({ photo, alt, className, sizes }: PhotoFrameProps) {
         width={photo.width}
         height={photo.height}
         sizes={sizes}
-        className="size-full object-cover"
+        className={cn('size-full object-cover', photo.position)}
       />
     </div>
   );

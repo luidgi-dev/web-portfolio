@@ -82,12 +82,17 @@ export interface Illustrated {
 }
 
 export type PairId = 'sunlight' | 'bauhaus' | 'tiles' | 'wood' | 'paintChips';
-export type DirectionId = 'nelson' | 'caseStudyHouse' | 'brassMirror' | 'pillMirrors';
+export type DirectionId = 'nelson' | 'caseStudyHouse' | 'brassMirror';
 
-interface IllustratedSection<Id extends string> {
+// A mockup and the reference photo it came from.
+export interface Direction extends Illustrated {
+  referenceAlt: string;
+}
+
+interface IllustratedSection<Id extends string, Item = Illustrated> {
   heading: string;
   body: string;
-  items: Record<Id, Illustrated>;
+  items: Record<Id, Item>;
 }
 
 export interface PortfolioContent extends ProjectContent {
@@ -95,7 +100,7 @@ export interface PortfolioContent extends ProjectContent {
     references: { heading: string; body: string };
     ambiances: IllustratedSection<ThemeId>;
     pairs: IllustratedSection<PairId>;
-    dropped: IllustratedSection<DirectionId>;
+    dropped: IllustratedSection<DirectionId, Direction>;
   };
 }
 

@@ -7,6 +7,8 @@ export interface Photo {
   height: number;
   // Screenshots of my own work carry no credit.
   credit?: { pexels: string } | 'public-domain';
+  // Where the cover crop anchors when the subject sits off-center.
+  position?: 'object-bottom';
 }
 
 // Files and credits of the Design chapter; captions and alt text live in
@@ -71,15 +73,35 @@ export const pairPhotos: Record<PairId, Photo> = {
   },
 };
 
-export const directionShots: Record<DirectionId, Photo> = {
-  nelson: { src: '/portfolio/directions/nelson.jpg', width: 1000, height: 688 },
-  caseStudyHouse: { src: '/portfolio/directions/case-study-house.jpg', width: 1000, height: 688 },
-  brassMirror: { src: '/portfolio/directions/brass-mirror.jpg', width: 1000, height: 688 },
-  pillMirrors: {
-    src: '/portfolio/refs/pill-mirrors.jpg',
-    width: 1000,
-    height: 1500,
-    credit: { pexels: 'Shojol Islam' },
+// Each mockup next to the reference it came from.
+export const directionShots: Record<DirectionId, { reference: Photo; mockup: Photo }> = {
+  nelson: {
+    reference: {
+      src: '/portfolio/directions/nelson-sideboard.jpg',
+      width: 1000,
+      height: 1500,
+      credit: { pexels: 'Charlotte May' },
+      position: 'object-bottom',
+    },
+    mockup: { src: '/portfolio/directions/nelson.jpg', width: 1000, height: 688 },
+  },
+  caseStudyHouse: {
+    reference: {
+      src: '/portfolio/directions/magazine.jpg',
+      width: 1000,
+      height: 750,
+      credit: { pexels: 'cottonbro studio' },
+    },
+    mockup: { src: '/portfolio/directions/case-study-house.jpg', width: 1000, height: 688 },
+  },
+  brassMirror: {
+    reference: {
+      src: '/portfolio/refs/pill-mirrors.jpg',
+      width: 1000,
+      height: 1500,
+      credit: { pexels: 'Shojol Islam' },
+    },
+    mockup: { src: '/portfolio/directions/brass-mirror.jpg', width: 1000, height: 688 },
   },
 };
 

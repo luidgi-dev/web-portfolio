@@ -100,9 +100,10 @@ describe('figures', () => {
   it('points to images that exist under public/', () => {
     const sources = [
       ...projects.strive.meta.figures.flatMap((figure) => [figure.src.light, figure.src.dark]),
-      ...[ambiancePhotos, pairPhotos, directionShots, evidenceShots].flatMap((photos) =>
+      ...[ambiancePhotos, pairPhotos, evidenceShots].flatMap((photos) =>
         Object.values(photos).map((photo) => photo.src)
       ),
+      ...Object.values(directionShots).flatMap((shot) => [shot.reference.src, shot.mockup.src]),
     ];
 
     for (const src of sources) {

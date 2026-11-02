@@ -82,14 +82,16 @@ describe('PortfolioCaseStudy', () => {
     expect(within(panel).getByText('03-A')).toBeInTheDocument();
   });
 
-  it('shows the three dropped directions next to the mirror reference', () => {
+  it('shows each dropped direction next to the reference it came from', () => {
     renderCaseStudy();
 
     const panel = openChapter('Design');
     const { dropped } = content.en.design;
     expect(within(panel).getByRole('heading', { name: dropped.heading })).toBeInTheDocument();
     for (const direction of Object.values(dropped.items)) {
-      expect(within(panel).getByRole('img', { name: direction.alt })).toBeInTheDocument();
+      const mockup = within(panel).getByRole('img', { name: direction.alt });
+      const row = mockup.closest('figure')!.parentElement!;
+      expect(within(row).getByRole('img', { name: direction.referenceAlt })).toBeInTheDocument();
     }
   });
 

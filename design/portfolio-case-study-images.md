@@ -21,6 +21,8 @@ Re-encoded at 1000 px wide max, JPEG quality 78, metadata stripped. Credits chec
 | `wood.jpg` | Pexels 9654670 | Diana ✨ (shown as "Diana") |
 | `paint-chips.jpg` | Pexels 6474450 | Tima Miroshnichenko |
 | `pill-mirrors.jpg` | Pexels 37793333 | Shojol Islam |
+| `../directions/nelson-sideboard.jpg` | Pexels 5824515 | Charlotte May |
+| `../directions/magazine.jpg` | Pexels 4107145 | cottonbro studio |
 | `bauhaus-poster.jpg` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Joost_Schmidt_Bauhausausstellung_1923.jpg) | Joost Schmidt, 1923, public domain (Public Domain Mark 1.0; the author died in 1948) |
 
 ## Shortlist

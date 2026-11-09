@@ -1,5 +1,7 @@
 # web-portfolio
 
+Live at [luidgi.dev](https://luidgi.dev).
+
 My personal site: a single bento page that presents my work as a software engineer,
 in English and French. Each project card opens a full screen case study.
 

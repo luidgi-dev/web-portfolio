@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { DocumentShell } from '@/components/document-shell';
 import { ThemeProvider } from '@/components/theme-provider';
 import { routing } from '@/i18n/routing';
+import { localeAlternates, SITE_URL } from '@/lib/site';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -20,8 +21,10 @@ export async function generateMetadata({ params }: Omit<Props, 'children'>): Pro
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: t('title'),
     description: t('description'),
+    alternates: hasLocale(routing.locales, locale) ? localeAlternates(locale) : undefined,
   };
 }
 
